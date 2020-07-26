@@ -1,0 +1,45 @@
+<xml>
+
+<files id='haxe'>
+  <section if="windows">
+    <compilerflag value="-I${LINC_PHYSX_PATH}lib/Windows/include" />
+    <compilerflag value="-DNDEBUG" />
+    <!-- <copy to="bin" from="lib/Windows/dll/" /> -->
+  </section>
+
+  <compilerflag value="-I${LINC_PHYSX_PATH}src/linc/include" />
+  <file name="${LINC_PHYSX_PATH}src/linc/include/ExtCpuWorkerThreadHx.cpp" />
+  <file name="${LINC_PHYSX_PATH}src/linc/include/ExtDefaultCpuDispatcherHx.cpp" />
+</files>
+
+<target id="haxe">
+  <section if="windows">
+    <libpath name="${LINC_PHYSX_PATH}lib/Windows/lib"/>
+    <lib name="LowLevel_static_64.lib" />
+    <lib name="LowLevelAABB_static_64.lib" />
+    <lib name="LowLevelDynamics_static_64.lib" />
+    <lib name="PhysX_64.lib" />
+    <lib name="PhysXCharacterKinematic_static_64.lib" />
+    <lib name="PhysXCommon_64.lib" />
+    <lib name="PhysXCooking_64.lib" />
+    <lib name="PhysXExtensions_static_64.lib" />
+    <lib name="PhysXFoundation_64.lib" />
+    <lib name="PhysXPvdSDK_static_64.lib" />
+    <lib name="PhysXTask_static_64.lib" />
+    <lib name="PhysXVehicle_static_64.lib" />
+    <lib name="SceneQuery_static_64.lib" />
+    <lib name="SimulationController_static_64.lib" />
+  </section>
+</target>
+
+<section if="windows">
+  <copyFile name="glut32.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysX_64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysXCommon_64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysXCooking_64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysXDevice64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysXFoundation_64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+  <copyFile name="PhysXGpu_64.dll" from="${LINC_PHYSX_PATH}lib/Windows/dll" />
+</section>
+
+</xml>
