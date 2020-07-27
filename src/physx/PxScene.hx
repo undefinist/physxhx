@@ -1,5 +1,6 @@
 package physx;
 
+import physx.PxSimulationEventCallback;
 import physx.pvd.PxPvdSceneClient;
 import physx.PxBroadPhase;
 import physx.PxActor;
@@ -792,7 +793,11 @@ extern class PxScene
 
     @see PxSimulationFilterShader PxSimulationFilterCallback
     */
-//function resetFiltering(PxRigidActor& actor, PxShape*const* shapes, PxU32 shapeCount):void;
+    inline function resetFilteringX(actor:PxRigidActor, shapes:Array<PxShape>):Void
+    {
+        _resetFilteringX(actor, cpp.Pointer.ofArray(shapes), shapes.length);
+    }
+    @:native("resetFiltering") private function _resetFilteringX(actor:PxRigidActor, shapes:cpp.ConstPointer<PxShape>, shapeCount:PxU32):Void;
 
     /**
     \brief Gets the pair filtering mode for kinematic-kinematic pairs.
@@ -942,14 +947,21 @@ extern class PxScene
     After calling this function and processing the contact streams, call fetchResultsFinish(). Note that writes to the simulation are not
     permitted between the start of fetchResultsStart() and the end of fetchResultsFinish().
 
-    \param[in] block When set to true will block until results are available.
-    \param[out] contactPairs an array of pointers to contact pair headers
-    \param[out] nbContactPairs the number of contact pairs
-    \return True if the results have been fetched.
+    @param block When set to true will block until results are available.
+    @return Contact pairs and number of pairs if results have been fetched, otherwise returns `null`.
 
     @see simulate() checkResults() fetchResults() fetchResultsFinish()
     */
-//function fetchResultsStart(const PxContactPairHeader*& contactPairs, PxU32& nbContactPairs, bool block = false):bool;
+    inline function fetchResultsStart(block:Bool = false):{contactPairs:cpp.ConstPointer<PxContactPairHeader>, nbContactPairs:PxU32}
+    {
+        var p:cpp.ConstPointer<PxContactPairHeader> = null;
+        var n:PxU32 = 0;
+        if(_fetchResultsStart(p, n, block))
+            return { contactPairs: p, nbContactPairs: n };
+        else
+            return null;
+    }
+    @:native("fetchResultsStart") private function _fetchResultsStart(contactPairs:cpp.Reference<cpp.ConstPointer<PxContactPairHeader>>, nbContactPairs:cpp.Reference<PxU32>, block:Bool = false):Bool;
 
 
     /**
@@ -1132,7 +1144,13 @@ extern class PxScene
 
     @see PxSimulationStatistics
     */
-//function getSimulationStatistics(stats:PxSimulationStatistics):Void;
+    inline function getSimulationStatistics():PxSimulationStatistics
+    {
+        var stats:PxSimulationStatistics = null;
+        _getSimulationStatistics(stats);
+        return stats;
+    }
+    @:native("getSimulationStatistics") private function _getSimulationStatistics(stats:cpp.Reference<PxSimulationStatistics>):Void;
 	
 	
 	//@}

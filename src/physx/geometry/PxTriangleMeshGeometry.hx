@@ -1,27 +1,32 @@
 package physx.geometry;
 
-// /**
-// \brief Flags controlling the simulated behavior of the triangle mesh geometry.
+import physx.common.PxCoreUtilityTypes;
 
-// Used in ::PxMeshGeometryFlags.
-// */
-// struct PxMeshGeometryFlag
-// {
-// 	enum Enum
-// 	{
-// 		eDOUBLE_SIDED = (1<<1)	//!< Meshes with this flag set are treated as double-sided.
-// 								//!< This flag is currently only used for raycasts and sweeps (it is ignored for overlap queries).
-// 								//!< For detailed specifications of this flag for meshes and heightfields please refer to the Geometry Query section of the user guide.
-// 	};
-// };
+/**
+\brief Flags controlling the simulated behavior of the triangle mesh geometry.
 
-// /**
-// \brief collection of set bits defined in PxMeshGeometryFlag.
+Used in ::PxMeshGeometryFlags.
+*/
+extern enum abstract PxMeshGeometryFlag(PxMeshGeometryFlagImpl)
+{
+    /**
+     * Meshes with this flag set are treated as double-sided.
+     * This flag is currently only used for raycasts and sweeps (it is ignored for overlap queries).
+     * For detailed specifications of this flag for meshes and heightfields please refer to the Geometry Query section of the user guide.
+     */
+    @:native("physx::PxMeshGeometryFlag::eDOUBLE_SIDED") var eDOUBLE_SIDED;
+}
 
-// @see PxMeshGeometryFlag
-// */
-// typedef PxFlags<PxMeshGeometryFlag::Enum,PxU8> PxMeshGeometryFlags;
-// PX_FLAGS_OPERATORS(PxMeshGeometryFlag::Enum,PxU8)
+@:include("geometry/PxTriangleMeshGeometry.h")
+@:native("physx::PxMeshGeometryFlags")
+private extern class PxMeshGeometryFlagImpl {}
+
+/**
+\brief collection of set bits defined in PxMeshGeometryFlag.
+
+@see PxMeshGeometryFlag
+*/
+extern abstract PxMeshGeometryFlags(PxMeshGeometryFlag) from PxMeshGeometryFlag to PxMeshGeometryFlag {}
 
 /**
 \brief Triangle mesh geometry class.
@@ -34,57 +39,77 @@ The vertices of the mesh in geometry (or shape) space is the
 PxMeshScale::toMat33() transform, multiplied by the vertex space vertices 
 in the PxConvexMesh object.
 */
-@:include("geometry/PxTriangleMeshGeometry.h")
-@:native("physx::PxTriangleMeshGeometry")
-extern class PxTriangleMeshGeometry extends PxGeometry
+@:forward
+@:forwardStatics
+extern abstract PxTriangleMeshGeometry(PxTriangleMeshGeometryData)
 {
+    /**
+     * Constructor.
+     * @param mesh Mesh pointer. May be NULL, though this will not make the object valid for shape construction.
+     * @param scaling Scale factor.
+     * @param flags Mesh flags.
+     * @see `PxTriangleMeshGeometry.empty()`
+     * @see `PxTriangleMeshGeometry.create()`
+     */
+    inline function new(mesh:PxTriangleMesh, scaling:PxMeshScale, flags:PxMeshGeometryFlags)
+    {
+        this = PxTriangleMeshGeometryData.create(mesh, scaling, flags);
+    }
 
+    /**
+     * Default constructor.
+     *
+     * Creates an empty object with a NULL mesh and identity scale.
+     */
+    static inline function empty():PxTriangleMeshGeometry
+    {
+        return cast PxTriangleMeshGeometryData.create();
+    }
 }
 
-// class PxTriangleMeshGeometry : public PxGeometry 
-// {
-// public:
-// 	/**
-// 	\brief Default constructor.
+@:include("geometry/PxTriangleMeshGeometry.h")
+@:native("physx::PxTriangleMeshGeometry")
+@:structAccess
+private extern class PxTriangleMeshGeometryData extends PxGeometry
+{
+    /**
+     * The scaling transformation.
+     */
+    var scale:PxMeshScale;
+    /**
+     * Mesh flags.
+     */
+    var meshFlags:PxMeshGeometryFlags;
+    /**
+     * Padding for mesh flags.
+     */
+    var paddingFromFlags:PxPadding3;
+    /**
+     * A reference to the mesh object.
+     */
+    var triangleMesh:PxTriangleMesh;
 
-// 	Creates an empty object with a NULL mesh and identity scale.
-// 	*/
-// 	PX_INLINE PxTriangleMeshGeometry() : 
-// 		PxGeometry	(PxGeometryType::eTRIANGLEMESH), 
-// 		triangleMesh(NULL)
-// 	{}
+    /**
+    \brief Returns true if the geometry is valid.
 
-// 	/**
-// 	\brief Constructor.
-// 	\param[in] mesh		Mesh pointer. May be NULL, though this will not make the object valid for shape construction.
-// 	\param[in] scaling	Scale factor.
-// 	\param[in] flags	Mesh flags.
-// 	\
-// 	*/
-// 	PX_INLINE PxTriangleMeshGeometry(	PxTriangleMesh* mesh, 
-// 										const PxMeshScale& scaling = PxMeshScale(), 
-// 										PxMeshGeometryFlags flags = PxMeshGeometryFlags()) :
-// 		PxGeometry	(PxGeometryType::eTRIANGLEMESH), 
-// 		scale		(scaling), 
-// 		meshFlags	(flags), 
-// 		triangleMesh(mesh) 
-// 	{}
+    \return  True if the current settings are valid for shape creation.
 
-// 	/**
-// 	\brief Returns true if the geometry is valid.
+    \note A valid triangle mesh has a positive scale value in each direction (scale.scale.x > 0, scale.scale.y > 0, scale.scale.z > 0).
+    It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a triangle mesh that has zero extents in any direction.
 
-// 	\return  True if the current settings are valid for shape creation.
+    @see PxRigidActor::createShape, PxPhysics::createShape
+    */
+    function isValid():Bool;
 
-// 	\note A valid triangle mesh has a positive scale value in each direction (scale.scale.x > 0, scale.scale.y > 0, scale.scale.z > 0).
-// 	It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a triangle mesh that has zero extents in any direction.
-
-// 	@see PxRigidActor::createShape, PxPhysics::createShape
-// 	*/
-// 	PX_INLINE bool isValid() const;
-
-// public:
-// 	PxMeshScale			scale;				//!< The scaling transformation.
-// 	PxMeshGeometryFlags	meshFlags;			//!< Mesh flags.
-// 	PxPadding<3>		paddingFromFlags;	//!< padding for mesh flags
-// 	PxTriangleMesh*		triangleMesh;		//!< A reference to the mesh object.
-// };
+    /**
+	 * Constructor. 
+     * @param mesh Mesh pointer. May be NULL, though this will not make the object valid for shape construction. 
+     * @param scaling Scale factor. Default `PxMeshScale.identity()`.
+     * @param flags Mesh flags. Default `0`.
+	 */
+    @:native("physx::PxTriangleMeshGeometry")
+    @:overload(function():PxTriangleMeshGeometryData {})
+    @:overload(function(mesh:PxTriangleMesh):PxTriangleMeshGeometryData {})
+    @:overload(function(mesh:PxTriangleMesh, scaling:PxMeshScale):PxTriangleMeshGeometryData {})
+    static function create(mesh:PxTriangleMesh, scaling:PxMeshScale, flags:PxMeshGeometryFlags):PxTriangleMeshGeometryData;
+}

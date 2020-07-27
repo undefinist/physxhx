@@ -774,6 +774,9 @@ class PxSimulationEventCallbackHx
     // }
 }
 
+/**
+ * Assign with a Haxe class that extends `PxSimulationEventCallbackHx`.
+ */
 abstract PxSimulationEventCallback(PxSimulationEventCallbackNative)
 {
     inline function new(native:PxSimulationEventCallbackNative)
@@ -781,8 +784,8 @@ abstract PxSimulationEventCallback(PxSimulationEventCallbackNative)
         this = native;
     }
 
-    @:from
-    static function from(haxeDelegate:PxSimulationEventCallbackHx) {
+    @:from static function from(haxeDelegate:PxSimulationEventCallbackHx)
+    {
         return new PxSimulationEventCallback(cast haxeDelegate._native);
     }
 }

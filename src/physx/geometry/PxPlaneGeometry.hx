@@ -13,52 +13,27 @@ To generate a PxTransform from a PxPlane, use PxTransformFromPlaneEquation.
 
 @see PxShape.setGeometry() PxShape.getPlaneGeometry() PxTransformFromPlaneEquation 
 */
+@:forward
+extern abstract PxPlaneGeometry(PxPlaneGeometryData) from PxPlaneGeometryData to PxPlaneGeometryData
+{
+    inline function new()
+    {
+        this = cast PxPlaneGeometryData.create();
+    }
+}
+
 @:include("geometry/PxPlaneGeometry.h")
 @:native("physx::PxPlaneGeometry")
-extern class PxPlaneGeometry extends PxGeometry
+@:structAccess
+private extern class PxPlaneGeometryData extends PxGeometry
 {
+    @:native("physx::PxPlaneGeometry")
+    static function create():PxPlaneGeometry;
 
+	/**
+	\brief Returns true if the geometry is valid.
+
+	\return True if the current settings are valid
+	*/
+	function isValid():Bool;
 }
-// class PxPlaneGeometry : public PxGeometry 
-// {
-// public:
-// 	PX_INLINE PxPlaneGeometry() :	PxGeometry(PxGeometryType::ePLANE) {}
-
-// 	/**
-// 	\brief Returns true if the geometry is valid.
-
-// 	\return True if the current settings are valid
-// 	*/
-// 	PX_INLINE bool isValid() const;
-// };
-
-
-// PX_INLINE bool PxPlaneGeometry::isValid() const
-// {
-// 	if (mType != PxGeometryType::ePLANE)
-// 		return false;
-
-// 	return true;
-// }
-
-
-// /** \brief creates a transform from a plane equation, suitable for an actor transform for a PxPlaneGeometry
-
-// \param[in] plane the desired plane equation
-// \return a PxTransform which will transform the plane PxPlane(1,0,0,0) to the specified plane
-// */
-
-// PX_FOUNDATION_API PxTransform PxTransformFromPlaneEquation(const PxPlane& plane);
-
-// /** \brief creates a plane equation from a transform, such as the actor transform for a PxPlaneGeometry
-
-// \param[in] transform the transform
-// \return the plane
-// */
-
-
-// PX_INLINE PxPlane PxPlaneEquationFromTransform(const PxTransform& transform)
-// {
-// 	return transform.transform(PxPlane(1.f,0.f,0.f,0.f));
-// }
-

@@ -423,55 +423,51 @@ extern class PxFilterObject
 
 
 /**
-\brief Filter shader to specify handling of collision pairs.
-
-Collision filtering is a mechanism to specify how a pair of potentially colliding objects should be processed by the
-simulation. A pair of objects is potentially colliding if the bounding volumes of the two objects overlap.
-In short, a collision filter decides whether a collision pair should get processed, temporarily ignored or discarded.
-If a collision pair should get processed, the filter can additionally specify how it should get processed, for instance,
-whether contacts should get resolved, which callbacks should get invoked or which reports should be sent etc.
-
-\note A default implementation of a filter shader is provided in the PhysX extensions library, see #PxDefaultSimulationFilterShader.
-
-@see PxSceneDesc.filterShader PxSimulationFilterCallback
-*/
-
-/**
-\brief Filter method to specify how a pair of potentially colliding objects should be processed.
-
-Return the PxFilterFlag flags and set the PxPairFlag flags to define what the simulation should do with the given collision pair.
-
-This methods gets called when:
-\li The bounding volumes of two objects start to overlap.
-\li The bounding volumes of two objects overlap and the filter data or filter attributes of one of the objects changed
-\li A re-filtering was forced through resetFiltering() (see #PxScene::resetFiltering())
-\li Filtering is requested in scene queries
-
-\note Certain pairs of objects are always ignored and this method does not get called. This is the case for the
-following pairs:
-
-\li Pair of static rigid actors
-\li A static rigid actor and a kinematic actor (unless one is a trigger or if explicitly enabled through PxPairFilteringMode::eKEEP)
-\li Two kinematic actors (unless one is a trigger or if explicitly enabled through PxPairFilteringMode::eKEEP)
-\li Two jointed rigid bodies and the joint was defined to disable collision
-\li Two articulation links if connected through an articulation joint
-
-\note This is a performance critical method and should be stateless. You should neither access external objects 
-from within this method nor should you call external methods that are not inlined. If you need a more complex
-logic to filter a collision pair then use the filter callback mechanism for this pair (see #PxSimulationFilterCallback,
-#PxFilterFlag::eCALLBACK, #PxFilterFlag::eNOTIFY).
-
-\param[in] attributes0 The filter attribute of the first object
-\param[in] filterData0 The custom filter data of the first object
-\param[in] attributes1 The filter attribute of the second object
-\param[in] filterData1 The custom filter data of the second object
-\param[out] pairFlags Flags giving additional information on how an accepted pair should get processed
-\param[in] constantBlock The constant global filter data (see #PxSceneDesc.filterShaderData)
-\param[in] constantBlockSize Size of the global filter data (see #PxSceneDesc.filterShaderDataSize)
-\return Filter flags defining whether the pair should be discarded, temporarily ignored, processed and whether the
-filter callback should get invoked for this pair.
-
-@see PxSimulationFilterCallback PxFilterData PxFilterObjectAttributes PxFilterFlag PxFilterFlags PxPairFlag PxPairFlags
+ * **You need to use meta tag `@:unreflective`, write a static function with this signature, and use cpp.Callable.fromStaticFunction()**
+ * 
+ * Filter method to specify how a pair of potentially colliding objects should be processed.
+ * 
+ * Collision filtering is a mechanism to specify how a pair of potentially colliding objects should be processed by the
+ * simulation. A pair of objects is potentially colliding if the bounding volumes of the two objects overlap.
+ * In short, a collision filter decides whether a collision pair should get processed, temporarily ignored or discarded.
+ * If a collision pair should get processed, the filter can additionally specify how it should get processed, for instance,
+ * whether contacts should get resolved, which callbacks should get invoked or which reports should be sent etc.
+ * 
+ * **Note**: A default implementation of a filter shader is provided in the PhysX extensions library, see `PxDefaultSimulationFilterShader`.
+ * 
+ * Return the PxFilterFlag flags and set the PxPairFlag flags to define what the simulation should do with the given collision pair.
+ * 
+ * This methods gets called when:
+ * - The bounding volumes of two objects start to overlap.
+ * - The bounding volumes of two objects overlap and the filter data or filter attributes of one of the objects changed
+ * - A re-filtering was forced through `resetFiltering()` (see `PxScene::resetFiltering()`)
+ * - Filtering is requested in scene queries
+ * 
+ * **Note**: Certain pairs of objects are always ignored and this method does not get called. This is the case for the
+ * following pairs:
+ * 
+ * - Pair of static rigid actors
+ * - A static rigid actor and a kinematic actor (unless one is a trigger or if explicitly enabled through `PxPairFilteringMode.eKEEP`)
+ * - Two kinematic actors (unless one is a trigger or if explicitly enabled through `PxPairFilteringMode.eKEEP`)
+ * - Two jointed rigid bodies and the joint was defined to disable collision
+ * - Two articulation links if connected through an articulation joint
+ * 
+ * **Note**: This is a performance critical method and should be stateless. You should neither access external objects 
+ * from within this method nor should you call external methods that are not inlined. If you need a more complex
+ * logic to filter a collision pair then use the filter callback mechanism for this pair (see `PxSimulationFilterCallback`,
+ * `PxFilterFlag.eCALLBACK`, `PxFilterFlag.eNOTIFY`).
+ * 
+ * @param attributes0 The filter attribute of the first object
+ * @param filterData0 The custom filter data of the first object
+ * @param attributes1 The filter attribute of the second object
+ * @param filterData1 The custom filter data of the second object
+ * @param pairFlags Flags giving additional information on how an accepted pair should get processed
+ * @param constantBlock The constant global filter data (see `PxSceneDesc.filterShaderData`)
+ * @param constantBlockSize Size of the global filter data (see `PxSceneDesc.filterShaderDataSize`)
+ * @return Filter flags defining whether the pair should be discarded, temporarily ignored, processed and whether the
+ * filter callback should get invoked for this pair.
+ * 
+ * @see PxSceneDesc.filterShader PxSimulationFilterCallback PxFilterData PxFilterObjectAttributes PxFilterFlag PxFilterFlags PxPairFlag PxPairFlags
 */
 typedef PxSimulationFilterShader = cpp.Callable<
     (attributes0:PxFilterObjectAttributes, filterData0:PxFilterData,

@@ -384,6 +384,22 @@ extern class PxgDynamicsMemoryConfig
 
 //#endif
 
+@:forward
+extern abstract PxSceneDesc(PxSceneDescData) 
+{
+	/**
+	constructor sets to default.
+
+	@param scale scale values for the tolerances in the scene, these must be the same values passed into
+	PxCreatePhysics(). The affected tolerances are bounceThresholdVelocity and frictionOffsetThreshold.
+
+	@see PxCreatePhysics() PxTolerancesScale bounceThresholdVelocity frictionOffsetThreshold
+	*/	
+	inline function new(scale:PxTolerancesScale)
+	{
+		this = cast PxSceneDescData.create(scale);
+	}
+}
 
 /**
 \brief Descriptor class for scenes. See #PxScene.
@@ -395,7 +411,7 @@ This struct must be initialized with the same PxTolerancesScale values used to i
 @:include("PxSceneDesc.h")
 @:native("physx::PxSceneDesc")
 @:structAccess
-extern class PxSceneDesc
+private extern class PxSceneDescData
 {
 	/**
 	\brief Gravity vector.

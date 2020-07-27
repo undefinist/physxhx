@@ -51,6 +51,13 @@ private extern class PxPlaneData
     @:overload(function(p0:PxVec3, p1:PxVec3, p2:PxVec3):PxPlaneData {})
     static function create(nx:cpp.Float32, ny:cpp.Float32, nz:cpp.Float32, distance:cpp.Float32):PxPlaneData;
 
+    /** 
+     * creates a plane equation from a transform, such as the actor transform for a PxPlaneGeometry
+     * @param transform the transform
+     * @return the plane
+     */
+    @:native("physx::PxPlaneEquationFromTransform") static function fromTransform(transform:PxTransform):PxPlane;
+
     /**
     \brief returns true if the two planes are exactly equal
     */

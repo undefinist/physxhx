@@ -9,9 +9,24 @@ import physx.foundation.PxSimpleTypes;
 The geometry of a box can be fully specified by its half extents.  This is the half of its width, height, and depth.
 \note The scaling of the box is expected to be baked into these values, there is no additional scaling parameter.
 */
+@:forward
+@:forwardStatics
+extern abstract PxBoxGeometry(PxBoxGeometryData) from PxBoxGeometryData to PxBoxGeometryData
+{
+	/**
+	 * Constructor to initialize half extents from scalar parameters.
+	 * @see `PxBoxGeometry.create()`
+	 */
+	inline function new(hx:PxReal = 0, hy:PxReal = 0, hz:PxReal = 0)
+	{
+		this = PxBoxGeometryData.create(hx, hy, hz);
+	}
+}
+
 @:include("geometry/PxBoxGeometry.h")
 @:native("physx::PxBoxGeometry")
-extern class PxBoxGeometry extends PxGeometry
+@:structAccess
+private extern class PxBoxGeometryData extends PxGeometry
 {
 	var halfExtents:PxVec3;
 

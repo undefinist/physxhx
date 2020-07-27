@@ -1,6 +1,5 @@
 package;
 
-import cpp.Callable;
 import physx.PxFiltering;
 import physx.PxFoundation;
 import physx.PxMaterial;
@@ -149,12 +148,12 @@ class Test
     
         gPhysics = PxPhysics.create(PX_PHYSICS_VERSION, gFoundation, new PxTolerancesScale(), true, gPvd);
     
-        var sceneDesc = PxSceneDesc.create(gPhysics.getTolerancesScale());
+        var sceneDesc = new PxSceneDesc(gPhysics.getTolerancesScale());
         sceneDesc.gravity = new PxVec3(0, -9.81, 0);
 
-        gDispatcher = PxDefaultCpuDispatcher.create(2);
+        gDispatcher = PxDefaultCpuDispatcher.create(4);
         sceneDesc.cpuDispatcher	= gDispatcher;
-        sceneDesc.filterShader	= Callable.fromStaticFunction(contactReportFilterShader);
+        sceneDesc.filterShader = cpp.Callable.fromStaticFunction(contactReportFilterShader);
         sceneDesc.simulationEventCallback = gSimulationCallback;
         
         gScene = gPhysics.createScene(sceneDesc);
@@ -177,6 +176,9 @@ class Test
             stackZ -= 10.0;
             createStack(new PxTransform(new PxVec3(0, 0, stackZ), PxQuat.identity()), 10, 2.0);
         }
+
+        var test = PxTransform.fromSegment(PxVec3.zero(), PxVec3.zero());
+        var test = PxTransform.fromSegment(PxVec3.zero(), PxVec3.zero(), 100);
         
         createDynamic(new PxTransform(new PxVec3(0,40,100), PxQuat.identity()), new PxSphereGeometry(10), new PxVec3(0,-50,-100));
     }

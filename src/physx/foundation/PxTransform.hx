@@ -1,5 +1,7 @@
 package physx.foundation;
 
+import physx.foundation.PxSimpleTypes.PxReal;
+
 /*!
 \brief class representing a rigid euclidean transform as a quaternion and a vector
 */
@@ -15,7 +17,7 @@ extern abstract PxTransform(PxTransformData)
 
     /**
      * Construct from position and orientation.
-     * For alternative constructors, see `PxTransform.create()`, `PxTransform.identity()` & `PxTransform.fromMatrix()`.
+     * For alternative constructors, see `PxTransform.create()`, `PxTransform.identity()`, `PxTransform.fromMatrix()` & `PxTransform.fromPlaneEquation()`.
      */
     inline function new(p0:PxVec3, q0:PxQuat)
     {
@@ -118,4 +120,31 @@ private extern class PxTransformData
 	\brief returns true if all elems are finite (not NAN or INF, etc.)
 	*/
     function isFinite():Bool;
+
+
+    
+    /**
+     * Creates a transform from a plane equation, suitable for an actor transform for a PxPlaneGeometry
+     * @param plane the desired plane equation
+     * @return a PxTransform which will transform the plane PxPlane(1,0,0,0) to the specified plane
+    */
+    @:include("geometry/PxPlaneGeometry.h")
+    @:native("physx::PxTransformFromPlaneEquation")
+    static function fromPlaneEquation(plane:PxPlane):PxTransform;
+
+    /** 
+     * Creates a transform from the endpoints of a segment, suitable for an actor transform for a PxCapsuleGeometry
+     * @param p0 one end of major axis of the capsule
+     * @param p1 the other end of the axis of the capsule
+     * @param halfHeight the halfHeight of the capsule. This parameter is optional.
+     * @return A PxTransform which will transform the vector (1,0,0) to the capsule axis shrunk by the halfHeight
+     */
+    inline static function fromSegment(p0:PxVec3, p1:PxVec3, ?halfHeight:Null<PxReal>):PxTransform
+    {
+        return _fromSegment(p0, p1, cpp.Pointer.fromHandle(halfHeight));
+    }
+
+    @:include("geometry/PxCapsuleGeometry.h")
+    @:native("physx::PxTransformFromSegment")
+    private static function _fromSegment(p0:PxVec3, p1:PxVec3, halfHeight:cpp.Pointer<PxReal>):PxTransform;
 }

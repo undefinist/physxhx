@@ -18,6 +18,20 @@ extern enum abstract PxGeometryType(PxGeometryTypeImpl)
     @:native("physx::PxGeometryType::eHEIGHTFIELD") var eHEIGHTFIELD;
     // @:native("physx::PxGeometryType::eGEOMETRY_COUNT") var eGEOMETRY_COUNT;	//!< internal use only!
     // @:native("physx::PxGeometryType::eINVALID") var eINVALID;		    //!< internal use only!
+
+    @:to inline function toInt():Int
+    {
+        return switch(cast this) 
+        {
+            case eSPHERE: 1;
+            case ePLANE: 2;
+            case eCAPSULE: 3;
+            case eBOX: 4;
+            case eCONVEXMESH: 5;
+            case eTRIANGLEMESH: 6;
+            case eHEIGHTFIELD: 7;
+        }
+    }
 }
 
 @:include("geometry/PxGeometry.h")

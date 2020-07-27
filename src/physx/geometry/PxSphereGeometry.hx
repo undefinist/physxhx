@@ -9,7 +9,6 @@ Spheres are defined by their radius.
 \note The scaling of the sphere is expected to be baked into this value, there is no additional scaling parameter.
 */
 @:forward
-@:forwardStatics
 extern abstract PxSphereGeometry(PxSphereGeometryData) from PxSphereGeometryData to PxSphereGeometryData
 {
     inline function new(ir:PxReal = 0)
