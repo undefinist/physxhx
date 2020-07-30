@@ -2,7 +2,6 @@ package;
 
 import physx.PxQueryReport.PxRaycastBuffer;
 import physx.PxQueryReport.PxRaycastHit;
-import cpp.ConstPointer;
 import physx.PxQueryReport.PxAgain;
 import physx.PxQueryReport.PxRaycastCallbackHx;
 import physx.PxFiltering;
@@ -18,6 +17,7 @@ import physx.common.PxTolerancesScale;
 import physx.extensions.PxDefaultAllocator;
 import physx.extensions.PxDefaultCpuDispatcher;
 import physx.extensions.PxDefaultErrorCallback;
+import physx.extensions.PxDefaultSimulationFilterShader;
 import physx.extensions.PxRigidBodyExt;
 import physx.extensions.PxSimpleFactory;
 import physx.foundation.PxPlane;
@@ -64,7 +64,7 @@ class SimulationCallback extends PxSimulationEventCallbackHx
 class RaycastCallback extends PxRaycastCallbackHx
 {
     public function new() { super(); }
-    override function processTouches(buffer:ConstPointer<PxRaycastHit>, nbHits:PxU32):PxAgain {
+    override function processTouches(buffer:cpp.ConstPointer<PxRaycastHit>, nbHits:PxU32):PxAgain {
         return super.processTouches(buffer, nbHits);
     }
 }
@@ -166,6 +166,7 @@ class Test
 
         gDispatcher = PxDefaultCpuDispatcher.create(4);
         sceneDesc.cpuDispatcher	= gDispatcher;
+        //sceneDesc.filterShader = PxDefaultSimulationFilterShader.func;
         sceneDesc.filterShader = cpp.Callable.fromStaticFunction(contactReportFilterShader);
         sceneDesc.simulationEventCallback = gSimulationCallback;
         

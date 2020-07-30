@@ -1,8 +1,4 @@
 -p ../src
 -main Main
--lib hxcpp-debug-server
 -cpp bin
 -D HXCPP_M64
--D HXCPP_DEBUGGER
--D HXCPP_CHECK_POINTER
---debug

@@ -37,7 +37,7 @@ extern class PxFoundation
     /**
     Sets mask of errors to report.
     */
-    public function setErrorLevel(mask:PxErrorCode = eMASK_ALL):Void;
+    public function setErrorLevel(mask:PxErrorCode):Void;
 
     /**
     Retrieves mask of errors to be reported.
