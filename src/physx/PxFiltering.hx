@@ -330,12 +330,31 @@ extern abstract PxFilterFlags(PxFilterFlag) from PxFilterFlag to PxFilterFlag {}
 
 @see PxShape.setSimulationFilterData() PxShape.getSimulationFilterData()  PxSimulationFilterShader PxSimulationFilterCallback
 */
+@:forward
+extern abstract PxFilterData(PxFilterDataData)
+{
+    inline function new(w0:PxU32, w1:PxU32, w2:PxU32, w3:PxU32)
+    {
+        this = PxFilterDataData.create(w0, w1, w2, w3);
+    }
+    static inline function zero():PxFilterData
+    {
+        return null;
+    }
+}
+
 @:include("PxFiltering.h")
 @:native("physx::PxFilterData")
 @:structAccess
-extern class PxFilterData
+private extern class PxFilterDataData
 {
+    var word0:PxU32;
+    var word1:PxU32;
+    var word2:PxU32;
+    var word3:PxU32;
 
+    function setToDefault():Void;
+    @:native("physx::PxFilterData") static function create(w0:PxU32, w1:PxU32, w2:PxU32, w3:PxU32):PxFilterDataData;
 }
 
 

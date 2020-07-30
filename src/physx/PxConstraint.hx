@@ -167,9 +167,9 @@ extern class PxConstraint extends PxBase
     \param[in] linear the linear break threshold
     \param[in] angular the angular break threshold
     */
-   function setBreakForce(linear:PxReal, angular:PxReal):Void;
-   
-   @:native("getBreakForce") private function _getBreakForce(linear:cpp.Reference<PxReal>, angular:cpp.Reference<PxReal>):Void;
+    function setBreakForce(linear:PxReal, angular:PxReal):Void;
+
+    @:native("getBreakForce") private function _getBreakForce(linear:cpp.Reference<PxReal>, angular:cpp.Reference<PxReal>):Void;
     /**
     \brief Retrieve the constraint break force and torque thresholds
     */

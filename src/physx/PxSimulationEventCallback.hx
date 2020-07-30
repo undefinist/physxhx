@@ -469,6 +469,7 @@ extern class PxContactPair
 
     //PxU32					internalData[2];	// For internal use only
 
+    private function _extractContacts(userBuffer:cpp.Pointer<PxContactPairPoint>, bufferSize:PxU32):PxU32;
     /**
     \brief Extracts the contact points from the stream and stores them in a convenient format.
     
@@ -483,7 +484,6 @@ extern class PxContactPair
         _extractContacts(cpp.Pointer.ofArray(arr), contactCount);
         return arr;
     }
-    private function _extractContacts(userBuffer:cpp.Pointer<PxContactPairPoint>, bufferSize:PxU32):PxU32;
 
     /**
     \brief Helper method to clone the contact pair and copy the contact data stream into a user buffer.
@@ -573,12 +573,8 @@ extern class PxConstraintInfo
 
 
 
-@:include("physx/PxSimulationEventCallbackHx.h")
 @:native("::cpp::Reference<physx::PxSimulationEventCallbackNative>")
-private extern class PxSimulationEventCallbackNative
-{
-    var hxHandle:PxSimulationEventCallbackHx;
-}
+private extern class PxSimulationEventCallbackNative {}
 
 /**
 \brief An interface class that the user can implement in order to receive simulation events.
@@ -622,7 +618,7 @@ void PxSimulationEventCallbackNative::onAdvance(const PxRigidBody*const* bodyBuf
 ")
 class PxSimulationEventCallbackHx
 {
-    @:allow(physx.PxSimulationEventCallback)
+    @:allow(physx.PxSimulationEventCallback) @:noCompletion
     private var _native:PxSimulationEventCallbackNative;
     
     function new()
@@ -651,7 +647,7 @@ class PxSimulationEventCallbackHx
 	@see PxConstraint PxConstraintDesc.linearBreakForce PxConstraintDesc.angularBreakForce
 	*/
     public function onConstraintBreak(constraints:Array<PxConstraintInfo>):Void {}
-    @:noCompletion @:noDoc final private function _onConstraintBreak(constraints:cpp.Pointer<PxConstraintInfo>, count:PxU32):Void
+    final private function _onConstraintBreak(constraints:cpp.Pointer<PxConstraintInfo>, count:PxU32):Void
     {
         onConstraintBreak(constraints.toUnmanagedArray(count));
     }
@@ -673,7 +669,7 @@ class PxSimulationEventCallbackHx
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
     public function onWake(actors:Array<PxActor>):Void {}
-    @:noCompletion @:noDoc final private function _onWake(actors:cpp.Pointer<PxActor>, count:PxU32):Void
+    final private function _onWake(actors:cpp.Pointer<PxActor>, count:PxU32):Void
     {
         onWake(actors.toUnmanagedArray(count));
     }
@@ -696,7 +692,7 @@ class PxSimulationEventCallbackHx
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
     public function onSleep(actors:Array<PxActor>):Void {}
-    @:noCompletion @:noDoc final private function _onSleep(actors:cpp.Pointer<PxActor>, count:PxU32):Void
+    final private function _onSleep(actors:cpp.Pointer<PxActor>, count:PxU32):Void
     {
         onSleep(actors.toUnmanagedArray(count));
     }
@@ -718,7 +714,7 @@ class PxSimulationEventCallbackHx
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxContactPair PxPairFlag PxSimulationFilterShader PxSimulationFilterCallback
 	*/
 	public function onContact(pairHeader:PxContactPairHeader, pairs:Array<PxContactPair>):Void {}
-    @:noCompletion @:noDoc final private function _onContact(pairHeader:PxContactPairHeader, pairs:cpp.Pointer<PxContactPair>, nbPairs:PxU32):Void
+    final private function _onContact(pairHeader:PxContactPairHeader, pairs:cpp.Pointer<PxContactPair>, nbPairs:PxU32):Void
     {
         onContact(pairHeader, pairs.toUnmanagedArray(nbPairs));
     }
@@ -737,7 +733,7 @@ class PxSimulationEventCallbackHx
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxPairFlag PxSimulationFilterShader PxShapeFlag PxShape.setFlag()
 	*/
     public function onTrigger(pairs:Array<PxTriggerPair>):Void {}
-    @:noCompletion @:noDoc final private function _onTrigger(pairs:cpp.Pointer<PxTriggerPair>, count:PxU32):Void
+    final private function _onTrigger(pairs:cpp.Pointer<PxTriggerPair>, count:PxU32):Void
     {
         onTrigger(pairs.toUnmanagedArray(count));
     }
@@ -768,7 +764,7 @@ class PxSimulationEventCallbackHx
 	// @see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxRigidBodyFlag::eENABLE_POSE_INTEGRATION_PREVIEW
 	// */
     // public function onAdvance(bodyBuffer:Array<PxRigidBodyConst>, poseBuffer:Array<PxTransformConst>):Void {}
-    // @:noCompletion @:noDoc final private function _onAdvance(bodyBuffer:cpp.ConstPointer<PxRigidBodyConst>, poseBuffer:cpp.ConstPointer<PxTransform>, count:PxU32):Void
+    // final private function _onAdvance(bodyBuffer:cpp.ConstPointer<PxRigidBodyConst>, poseBuffer:cpp.ConstPointer<PxTransform>, count:PxU32):Void
     // {
     //     onAdvance(bodyBuffer, poseBuffer, count);
     // }
@@ -777,15 +773,10 @@ class PxSimulationEventCallbackHx
 /**
  * Assign with a Haxe class that extends `PxSimulationEventCallbackHx`.
  */
-abstract PxSimulationEventCallback(PxSimulationEventCallbackNative)
+@:noCompletion extern abstract PxSimulationEventCallback(PxSimulationEventCallbackNative)
 {
-    inline function new(native:PxSimulationEventCallbackNative)
+    @:from static inline function from(hxHandle:PxSimulationEventCallbackHx):PxSimulationEventCallback
     {
-        this = native;
-    }
-
-    @:from static function from(haxeDelegate:PxSimulationEventCallbackHx)
-    {
-        return new PxSimulationEventCallback(cast haxeDelegate._native);
+        return hxHandle == null ? null : cast hxHandle._native;
     }
 }

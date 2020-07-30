@@ -356,8 +356,7 @@ extern class PxShape extends PxBase
 //@}
 /************************************************************************************************/
 
-	@:native("setMaterials")
-	extern private function _setMaterials(materials:cpp.RawPointer<cpp.RawConstPointer<PxMaterial>>, materialCount:PxU16):Void;
+	@:native("setMaterials") private function _setMaterials(materials:cpp.RawPointer<cpp.RawConstPointer<PxMaterial>>, materialCount:PxU16):Void;
 	/**
 	\brief Assigns material(s) to the shape.
 	
@@ -571,7 +570,6 @@ extern class PxShape extends PxBase
 	*/
 	function isExclusive():Bool;
 
-	@:native("setName") private function _setName(name:cpp.ConstCharStar):Void;
 	/**
 	\brief Sets a name string for the object that can be retrieved with #getName().
 	
@@ -584,22 +582,15 @@ extern class PxShape extends PxBase
 
 	@see getName()
 	*/
-	inline function setName(name:String):Void
-	{
-		_setName(name);
-	}
+	function setName(name:String):Void;
 
-	@:native("getName") private function _getName():cpp.ConstCharStar;
 	/**
 	\brief retrieves the name string set with setName().
 	\return The name associated with the shape.
 
 	@see setName()
 	*/
-	inline function getName():String
-	{
-		return _getName();
-	}
+	function getName():String;
 
 /************************************************************************************************/
 

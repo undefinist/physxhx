@@ -1,13 +1,16 @@
 package physx;
 
-import physx.PxSimulationEventCallback;
-import physx.pvd.PxPvdSceneClient;
-import physx.PxBroadPhase;
+import physx.foundation.PxTransform;
+import physx.geometry.PxGeometry;
 import physx.PxActor;
+import physx.PxBroadPhase;
 import physx.PxClient.PxClientID;
 import physx.PxFiltering;
+import physx.PxQueryFiltering;
+import physx.PxQueryReport;
 import physx.PxRigidActor;
 import physx.PxSceneDesc;
+import physx.PxSimulationEventCallback;
 import physx.common.PxCollection;
 import physx.common.PxRenderBuffer;
 import physx.cudamanager.PxCudaContextManager;
@@ -15,6 +18,7 @@ import physx.foundation.PxBounds3;
 import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxVec3;
 import physx.geometry.PxBVHStructure;
+import physx.pvd.PxPvdSceneClient;
 import physx.task.PxCpuDispatcher;
 import physx.task.PxTask;
 
@@ -25,12 +29,22 @@ For the time being only three settings are permitted:
 (1, 1), (0, 1), and (1, 0).
 
 @see getDominanceGroup() PxDominanceGroup PxScene::setDominanceGroupPair()
-*/	
-@:keep @:structAccess
-@:native("physx::PxDominanceGroupPair")
-extern class PxDominanceGroupPair
+*/
+@:forward
+extern abstract PxDominanceGroupPair(PxDominanceGroupPairData)
 {
-    public function new(a:PxU8, b:PxU8);
+    inline function new(a:PxU8, b:PxU8)
+    {
+        this = PxDominanceGroupPairData.create(a, b);
+    }
+}
+
+@:include("PxScene.h")
+@:native("physx::PxDominanceGroupPair")
+@:structAccess
+private extern class PxDominanceGroupPairData
+{
+    @:native("physx::PxDominanceGroupPair") static function create(a:PxU8, b:PxU8):PxDominanceGroupPairData;
     var dominance0:PxU8;
     var dominance1:PxU8;
 }
@@ -73,34 +87,38 @@ private extern class PxActorTypeFlagImpl {}
 extern abstract PxActorTypeFlags(PxActorTypeFlag) from PxActorTypeFlag to PxActorTypeFlag {}
 
 /**
-\brief single hit cache for scene queries.
-
-If a cache object is supplied to a scene query, the cached actor/shape pair is checked for intersection first.
-\note Filters are not executed for the cached shape.
-\note If intersection is found, the hit is treated as blocking.
-\note Typically actor and shape from the last PxHitCallback.block query result is used as a cached actor/shape pair.
-\note Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
-\note Cache is only used if no touch buffer was provided, for single nearest blocking hit queries and queries using eANY_HIT flag.
-\note if non-zero touch buffer was provided, cache will be ignored
-
-\note It is the user's responsibility to ensure that the shape and actor are valid, so care must be taken
-when deleting shapes to invalidate cached references.
-
-The faceIndex field is an additional hint for a mesh or height field which is not currently used.
-
-@see PxScene.raycast
+ * Initialize with `= null`.
+ * 
+ * Single hit cache for scene queries.
+ * 
+ * If a cache object is supplied to a scene query, the cached actor/shape pair is checked for intersection first.
+ * \note Filters are not executed for the cached shape.
+ * \note If intersection is found, the hit is treated as blocking.
+ * \note Typically actor and shape from the last PxHitCallback.block query result is used as a cached actor/shape pair.
+ * \note Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
+ * \note Cache is only used if no touch buffer was provided, for single nearest blocking hit queries and queries using eANY_HIT flag.
+ * \note if non-zero touch buffer was provided, cache will be ignored
+ * 
+ * \note It is the user's responsibility to ensure that the shape and actor are valid, so care must be taken
+ * when deleting shapes to invalidate cached references.
+ * 
+ * The faceIndex field is an additional hint for a mesh or height field which is not currently used.
+ * 
+ * @see PxScene.raycast
 */
-@:native("physx::PxQueryCache")
+@:include("PxScene.h")
+@:native("::cpp::Struct<physx::PxQueryCache>")
 extern class PxQueryCache
 {
     /**
-    \brief constructor sets to default 
-    */
-    public function new(s:cpp.Pointer<PxShape>, findex:PxU32);
-    
-    var shape:cpp.Pointer<PxShape>;         //!< Shape to test for intersection first
-    var actor:cpp.Pointer<PxRigidActor>;    //!< Actor to which the shape belongs
-    var faceIndex:PxU32;                    //!< Triangle index to test first - NOT CURRENTLY SUPPORTED
+     * Shape to test for intersection first
+     */
+    var shape:PxShape;
+    /**
+     * Actor to which the shape belongs
+     */
+    var actor:PxRigidActor;
+    //var faceIndex:PxU32; //!< Triangle index to test first - NOT CURRENTLY SUPPORTED
 }
 
 
@@ -779,6 +797,7 @@ extern class PxScene
     */
     function resetFiltering(actor:PxActor):Void;
 
+    @:native("resetFiltering") private function _resetFilteringX(actor:PxRigidActor, shapes:cpp.ConstPointer<PxShape>, shapeCount:PxU32):Void;
     /**
     \brief Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.
     
@@ -797,7 +816,6 @@ extern class PxScene
     {
         _resetFilteringX(actor, cpp.Pointer.ofArray(shapes), shapes.length);
     }
-    @:native("resetFiltering") private function _resetFilteringX(actor:PxRigidActor, shapes:cpp.ConstPointer<PxShape>, shapeCount:PxU32):Void;
 
     /**
     \brief Gets the pair filtering mode for kinematic-kinematic pairs.
@@ -939,6 +957,7 @@ extern class PxScene
     function fetchResults(block:Bool = false, ?errorState:cpp.Pointer<PxU32>):Bool;
 
 
+    @:native("fetchResultsStart") private function _fetchResultsStart(contactPairs:cpp.Reference<cpp.ConstPointer<PxContactPairHeader>>, nbContactPairs:cpp.Reference<PxU32>, block:Bool = false):Bool;
     /**
     This call performs the first section of fetchResults (callbacks fired before swapBuffers), and returns a pointer to a 
     to the contact streams output by the simulation. It can be used to process contact pairs in parallel, which is often a limiting factor
@@ -961,7 +980,6 @@ extern class PxScene
         else
             return null;
     }
-    @:native("fetchResultsStart") private function _fetchResultsStart(contactPairs:cpp.Reference<cpp.ConstPointer<PxContactPairHeader>>, nbContactPairs:cpp.Reference<PxU32>, block:Bool = false):Bool;
 
 
     /**
@@ -1135,6 +1153,7 @@ extern class PxScene
     */
     function getRenderBuffer():PxRenderBuffer;
     
+    @:native("getSimulationStatistics") private function _getSimulationStatistics(stats:cpp.Reference<PxSimulationStatistics>):Void;
     /**
     \brief Call this method to retrieve statistics for the current simulation step.
 
@@ -1150,513 +1169,517 @@ extern class PxScene
         _getSimulationStatistics(stats);
         return stats;
     }
-    @:native("getSimulationStatistics") private function _getSimulationStatistics(stats:cpp.Reference<PxSimulationStatistics>):Void;
-	
-	
-	//@}
-	//////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    //@}
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// @name Scene Query
-	//
-	//@{
+    // @name Scene Query
+    //
+    //@{
 
-	/**
-	\brief Return the value of PxSceneDesc::staticStructure that was set when creating the scene with PxPhysics::createScene
+    /**
+    \brief Return the value of PxSceneDesc::staticStructure that was set when creating the scene with PxPhysics::createScene
 
-	@see PxSceneDesc::staticStructure, PxPhysics::createScene
-	*/
-	function getStaticStructure():PxPruningStructureType;
+    @see PxSceneDesc::staticStructure, PxPhysics::createScene
+    */
+    function getStaticStructure():PxPruningStructureType;
 
-	/**
-	\brief Return the value of PxSceneDesc::dynamicStructure that was set when creating the scene with PxPhysics::createScene
+    /**
+    \brief Return the value of PxSceneDesc::dynamicStructure that was set when creating the scene with PxPhysics::createScene
 
-	@see PxSceneDesc::dynamicStructure, PxPhysics::createScene
-	*/
-	function getDynamicStructure():PxPruningStructureType;
+    @see PxSceneDesc::dynamicStructure, PxPhysics::createScene
+    */
+    function getDynamicStructure():PxPruningStructureType;
 
-	/**
-	\brief Flushes any changes to the scene query representation.
+    /**
+    \brief Flushes any changes to the scene query representation.
 
-	This method updates the state of the scene query representation to match changes in the scene state.
+    This method updates the state of the scene query representation to match changes in the scene state.
 
-	By default, these changes are buffered until the next query is submitted. Calling this function will not change
-	the results from scene queries, but can be used to ensure that a query will not perform update work in the course of 
-	its execution.
-	
-	A thread performing updates will hold a write lock on the query structure, and thus stall other querying threads. In multithread
-	scenarios it can be useful to explicitly schedule the period where this lock may be held for a significant period, so that
-	subsequent queries issued from multiple threads will not block.
-	
-	*/
-	function flushQueryUpdates():Void;
+    By default, these changes are buffered until the next query is submitted. Calling this function will not change
+    the results from scene queries, but can be used to ensure that a query will not perform update work in the course of 
+    its execution.
+    
+    A thread performing updates will hold a write lock on the query structure, and thus stall other querying threads. In multithread
+    scenarios it can be useful to explicitly schedule the period where this lock may be held for a significant period, so that
+    subsequent queries issued from multiple threads will not block.
+    
+    */
+    function flushQueryUpdates():Void;
 
-	// /**
-	// \brief Creates a BatchQuery object. 
+    // /**
+    // \brief Creates a BatchQuery object. 
 
-	// Scene queries like raycasts, overlap tests and sweeps are batched in this object and are then executed at once. See #PxBatchQuery.
+    // Scene queries like raycasts, overlap tests and sweeps are batched in this object and are then executed at once. See #PxBatchQuery.
 
-	// \deprecated The batched query feature has been deprecated in PhysX version 3.4
+    // \deprecated The batched query feature has been deprecated in PhysX version 3.4
 
-	// \param[in] desc The descriptor of scene query. Scene Queries need to register a callback. See #PxBatchQueryDesc.
+    // \param[in] desc The descriptor of scene query. Scene Queries need to register a callback. See #PxBatchQueryDesc.
 
-	// @see PxBatchQuery PxBatchQueryDesc
-	// */
-	// PX_DEPRECATED virtual	PxBatchQuery*		createBatchQuery(const PxBatchQueryDesc& desc) = 0;
+    // @see PxBatchQuery PxBatchQueryDesc
+    // */
+    // PX_DEPRECATED virtual	PxBatchQuery*		createBatchQuery(const PxBatchQueryDesc& desc) = 0;
 
-	/**
-	\brief Sets the rebuild rate of the dynamic tree pruning structures.
+    /**
+    \brief Sets the rebuild rate of the dynamic tree pruning structures.
 
-	\param[in] dynamicTreeRebuildRateHint Rebuild rate of the dynamic tree pruning structures.
+    \param[in] dynamicTreeRebuildRateHint Rebuild rate of the dynamic tree pruning structures.
 
-	@see PxSceneDesc.dynamicTreeRebuildRateHint getDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
-	*/
-	function setDynamicTreeRebuildRateHint(dynamicTreeRebuildRateHint:PxU32):Void;
+    @see PxSceneDesc.dynamicTreeRebuildRateHint getDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
+    */
+    function setDynamicTreeRebuildRateHint(dynamicTreeRebuildRateHint:PxU32):Void;
 
-	/**
-	\brief Retrieves the rebuild rate of the dynamic tree pruning structures.
+    /**
+    \brief Retrieves the rebuild rate of the dynamic tree pruning structures.
 
-	\return The rebuild rate of the dynamic tree pruning structures.
+    \return The rebuild rate of the dynamic tree pruning structures.
 
-	@see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
-	*/
-	function getDynamicTreeRebuildRateHint():Void;
+    @see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
+    */
+    function getDynamicTreeRebuildRateHint():Void;
 
-	/**
-	\brief Forces dynamic trees to be immediately rebuilt.
+    /**
+    \brief Forces dynamic trees to be immediately rebuilt.
 
-	\param[in] rebuildStaticStructure	True to rebuild the dynamic tree containing static objects
-	\param[in] rebuildDynamicStructure	True to rebuild the dynamic tree containing dynamic objects
+    \param[in] rebuildStaticStructure	True to rebuild the dynamic tree containing static objects
+    \param[in] rebuildDynamicStructure	True to rebuild the dynamic tree containing dynamic objects
 
-	@see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() getDynamicTreeRebuildRateHint()
-	*/
-	function forceDynamicTreeRebuild(rebuildStaticStructure:Bool, rebuildDynamicStructure:Bool):Void;
+    @see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() getDynamicTreeRebuildRateHint()
+    */
+    function forceDynamicTreeRebuild(rebuildStaticStructure:Bool, rebuildDynamicStructure:Bool):Void;
 
-	/**
-	\brief Sets scene query update mode	
+    /**
+    \brief Sets scene query update mode	
 
-	\param[in] updateMode	Scene query update mode.
+    \param[in] updateMode	Scene query update mode.
 
-	@see PxSceneQueryUpdateMode::Enum
-	*/
-	function setSceneQueryUpdateMode(updateMode:PxSceneQueryUpdateMode):Void;
+    @see PxSceneQueryUpdateMode::Enum
+    */
+    function setSceneQueryUpdateMode(updateMode:PxSceneQueryUpdateMode):Void;
 
-	/**
-	\brief Gets scene query update mode	
+    /**
+    \brief Gets scene query update mode	
 
-	\return Current scene query update mode.
+    \return Current scene query update mode.
 
-	@see PxSceneQueryUpdateMode::Enum
-	*/
-	function getSceneQueryUpdateMode():PxSceneQueryUpdateMode;
+    @see PxSceneQueryUpdateMode::Enum
+    */
+    function getSceneQueryUpdateMode():PxSceneQueryUpdateMode;
 
-	/**
-	\brief Executes scene queries update tasks.
-	This function will refit dirty shapes within the pruner and will execute a task to build a new AABB tree, which is
-	build on a different thread. The new AABB tree is built based on the dynamic tree rebuild hint rate. Once
-	the new tree is ready it will be commited in next fetchQueries call, which must be called after.
+    /**
+    \brief Executes scene queries update tasks.
+    This function will refit dirty shapes within the pruner and will execute a task to build a new AABB tree, which is
+    build on a different thread. The new AABB tree is built based on the dynamic tree rebuild hint rate. Once
+    the new tree is ready it will be commited in next fetchQueries call, which must be called after.
 
-	\note If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
-	using this function.
+    \note If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
+    using this function.
 
-	\param[in] completionTask if non-NULL, this task will have its refcount incremented in sceneQueryUpdate(), then
-	decremented when the scene is ready to have fetchQueries called. So the task will not run until the
-	application also calls removeReference().
-	\param[in] controlSimulation if true, the scene controls its PxTaskManager simulation state. Default `true`. Leave
+    \param[in] completionTask if non-NULL, this task will have its refcount incremented in sceneQueryUpdate(), then
+    decremented when the scene is ready to have fetchQueries called. So the task will not run until the
+    application also calls removeReference().
+    \param[in] controlSimulation if true, the scene controls its PxTaskManager simulation state. Default `true`. Leave
     true unless the application is calling the PxTaskManager start/stopSimulation() methods itself.
 
-	@see PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED
-	*/
-	@:overload(function(?completionTask:PxBaseTask):Void {})
-	function sceneQueriesUpdate(?completionTask:PxBaseTask, controlSimulation:Bool):Void;
+    @see PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED
+    */
+    @:overload(function(?completionTask:PxBaseTask):Void {})
+    function sceneQueriesUpdate(?completionTask:PxBaseTask, controlSimulation:Bool):Void;
 
-	/**
-	\brief This checks to see if the scene queries update has completed.
+    /**
+    \brief This checks to see if the scene queries update has completed.
 
-	This does not cause the data available for reading to be updated with the results of the scene queries update, it is simply a status check.
-	The bool will allow it to either return immediately or block waiting for the condition to be met so that it can return true
-	
-	\param[in] block When set to true will block until the condition is met.
-	\return True if the results are available.
+    This does not cause the data available for reading to be updated with the results of the scene queries update, it is simply a status check.
+    The bool will allow it to either return immediately or block waiting for the condition to be met so that it can return true
+    
+    \param[in] block When set to true will block until the condition is met.
+    \return True if the results are available.
 
-	@see sceneQueriesUpdate() fetchResults()
-	*/
-	function checkQueries(block:Bool = false):Bool;
+    @see sceneQueriesUpdate() fetchResults()
+    */
+    function checkQueries(block:Bool = false):Bool;
 
-	/**
-	This method must be called after sceneQueriesUpdate. It will wait for the scene queries update to finish. If the user makes an illegal scene queries update call, 
-	the SDK will issue an error	message.
+    /**
+    This method must be called after sceneQueriesUpdate. It will wait for the scene queries update to finish. If the user makes an illegal scene queries update call, 
+    the SDK will issue an error	message.
 
-	If a new AABB tree build finished, then during fetchQueries the current tree within the pruning structure is swapped with the new tree. 
+    If a new AABB tree build finished, then during fetchQueries the current tree within the pruning structure is swapped with the new tree. 
 
-	\param[in] block When set to true will block until the condition is met, which is tree built task must finish running.
-	*/
-	function fetchQueries(block:Bool = false):Bool;
-
-	/**
-	\brief Performs a raycast against objects in the scene, returns results in a PxRaycastBuffer object
-	or via a custom user callback implementation inheriting from PxRaycastCallback.
-
-	\note	Touching hits are not ordered.
-	\note	Shooting a ray from within an object leads to different results depending on the shape type. Please check the details in user guide article SceneQuery. User can ignore such objects by employing one of the provided filter mechanisms.
-
-	\param[in] origin		Origin of the ray.
-	\param[in] unitDir		Normalized direction of the ray.
-	\param[in] distance		Length of the ray. Has to be in the [0, inf) range.
-	\param[out] hitCall		Raycast hit buffer or callback object used to report raycast hits.
-	\param[in] hitFlags		Specifies which properties per hit should be computed and returned via the hit callback.
-	\param[in] filterData	Filtering data passed to the filter shader. See #PxQueryFilterData #PxBatchQueryPreFilterShader, #PxBatchQueryPostFilterShader
-	\param[in] filterCall	Custom filtering logic (optional). Only used if the corresponding #PxQueryFlag flags are set. If NULL, all hits are assumed to be blocking.
-	\param[in] cache		Cached hit shape (optional). Ray is tested against cached shape first. If no hit is found the ray gets queried against the scene.
-							Note: Filtering is not executed for a cached shape if supplied; instead, if a hit is found, it is assumed to be a blocking hit.
-							Note: Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
-
-	\return True if any touching or blocking hits were found or any hit was found in case PxQueryFlag::eANY_HIT was specified.
-
-	@see PxRaycastCallback PxRaycastBuffer PxQueryFilterData PxQueryFilterCallback PxQueryCache PxRaycastHit PxQueryFlag PxQueryFlag::eANY_HIT
-	*/
-// virtual bool				raycast(
-//                                 const PxVec3& origin, const PxVec3& unitDir, const PxReal distance,
-//                                 PxRaycastCallback& hitCall, PxHitFlags hitFlags = PxHitFlags(PxHitFlag::eDEFAULT),
-//                                 const PxQueryFilterData& filterData = PxQueryFilterData(), PxQueryFilterCallback* filterCall = NULL,
-//                                 const PxQueryCache* cache = NULL) const = 0;
-
-	/**
-	\brief Performs a sweep test against objects in the scene, returns results in a PxSweepBuffer object
-	or via a custom user callback implementation inheriting from PxSweepCallback.
-	
-	\note	Touching hits are not ordered.
-	\note	If a shape from the scene is already overlapping with the query shape in its starting position,
-			the hit is returned unless eASSUME_NO_INITIAL_OVERLAP was specified.
-
-	\param[in] geometry		Geometry of object to sweep (supported types are: box, sphere, capsule, convex).
-	\param[in] pose			Pose of the sweep object.
-	\param[in] unitDir		Normalized direction of the sweep.
-	\param[in] distance		Sweep distance. Needs to be in [0, inf) range and >0 if eASSUME_NO_INITIAL_OVERLAP was specified. Will be clamped to PX_MAX_SWEEP_DISTANCE.
-	\param[out] hitCall		Sweep hit buffer or callback object used to report sweep hits.
-	\param[in] hitFlags		Specifies which properties per hit should be computed and returned via the hit callback.
-	\param[in] filterData	Filtering data and simple logic.
-	\param[in] filterCall	Custom filtering logic (optional). Only used if the corresponding #PxQueryFlag flags are set. If NULL, all hits are assumed to be blocking.
-	\param[in] cache		Cached hit shape (optional). Sweep is performed against cached shape first. If no hit is found the sweep gets queried against the scene.
-							Note: Filtering is not executed for a cached shape if supplied; instead, if a hit is found, it is assumed to be a blocking hit.
-							Note: Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
-	\param[in] inflation	This parameter creates a skin around the swept geometry which increases its extents for sweeping. The sweep will register a hit as soon as the skin touches a shape, and will return the corresponding distance and normal.
-							Note: ePRECISE_SWEEP doesn't support inflation. Therefore the sweep will be performed with zero inflation.	
-	
-	\return True if any touching or blocking hits were found or any hit was found in case PxQueryFlag::eANY_HIT was specified.
-							
-
-	@see PxSweepCallback PxSweepBuffer PxQueryFilterData PxQueryFilterCallback PxSweepHit PxQueryCache
-	*/
-// virtual bool				sweep(const PxGeometry& geometry, const PxTransform& pose, const PxVec3& unitDir, const PxReal distance,
-//                                 PxSweepCallback& hitCall, PxHitFlags hitFlags = PxHitFlags(PxHitFlag::eDEFAULT),
-//                                 const PxQueryFilterData& filterData = PxQueryFilterData(), PxQueryFilterCallback* filterCall = NULL,
-//                                 const PxQueryCache* cache = NULL, const PxReal inflation = 0.f) const = 0;
+    \param[in] block When set to true will block until the condition is met, which is tree built task must finish running.
+    */
+    function fetchQueries(block:Bool = false):Bool;
 
 
-	/**
-	\brief Performs an overlap test of a given geometry against objects in the scene, returns results in a PxOverlapBuffer object
-	or via a custom user callback implementation inheriting from PxOverlapCallback.
-	
-	\note Filtering: returning eBLOCK from user filter for overlap queries will cause a warning (see #PxQueryHitType).
+    /**
+     * Performs a raycast against objects in the scene, returns results in a `PxRaycastBuffer` object
+     * or via a custom user callback implementation inheriting from `PxRaycastCallbackHx`.
+     * 
+     * **Note:** Touching hits are not ordered.
+     *           Shooting a ray from within an object leads to different results depending on the shape type.
+     *           Please check the details in user guide article SceneQuery. User can ignore such objects by employing one of the provided filter mechanisms.
+     * 
+     * @param [in]origin		Origin of the ray.
+     * @param [in]unitDir		Normalized direction of the ray.
+     * @param [in]distance		Length of the ray. Has to be in the [0, inf) range.
+     * @param [out]hitCall		Raycast hit buffer or callback object used to report raycast hits.
+     * @param [in]hitFlags		Default `PxHitFlag.eDEFAULT`. Specifies which properties per hit should be computed and returned via the hit callback.
+     * @param [in]filterData	Filtering data passed to the filter shader. See `PxQueryFilterData`, `PxBatchQueryPreFilterShader`, `PxBatchQueryPostFilterShader`
+     * @param [in]filterCall	Custom filtering logic (optional). Only used if the corresponding `PxQueryFlag` flags are set. If NULL, all hits are assumed to be blocking.
+     * @param [in]cache		Cached hit shape (optional). Ray is tested against cached shape first. If no hit is found the ray gets queried against the scene.
+     * 						Note: Filtering is not executed for a cached shape if supplied; instead, if a hit is found, it is assumed to be a blocking hit.
+     * 						Note: Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
+     * 
+     * @return True if any touching or blocking hits were found or any hit was found in case `PxQueryFlag.eANY_HIT` was specified.
+     * 
+     * @see PxRaycastCallback PxRaycastBuffer PxQueryFilterData PxQueryFilterCallback PxQueryCache PxRaycastHit PxQueryFlag PxQueryFlag.eANY_HIT 
+     */
+    @:overload(function(origin:PxVec3, unitDir:PxVec3, distance:PxReal,
+                        hitCall:PxRaycastCallback):Bool {})
+    function raycast(origin:PxVec3, unitDir:PxVec3, distance:PxReal,
+                     hitCall:PxRaycastCallback, hitFlags:PxHitFlags,
+                     filterData:PxQueryFilterData, ?filterCall:PxQueryFilterCallback,
+                     ?cache:cpp.ConstPointer<PxQueryCache>):Bool;
 
-	\param[in] geometry		Geometry of object to check for overlap (supported types are: box, sphere, capsule, convex).
-	\param[in] pose			Pose of the object.
-	\param[out] hitCall		Overlap hit buffer or callback object used to report overlap hits.
-	\param[in] filterData	Filtering data and simple logic. See #PxQueryFilterData #PxQueryFilterCallback
-	\param[in] filterCall	Custom filtering logic (optional). Only used if the corresponding #PxQueryFlag flags are set. If NULL, all hits are assumed to overlap.
 
-	\return True if any touching or blocking hits were found or any hit was found in case PxQueryFlag::eANY_HIT was specified.
+    /**
+     * Performs a sweep test against objects in the scene, returns results in a `PxSweepBuffer` object
+     * or via a custom user callback implementation inheriting from `PxSweepCallbackHx`.
+     * 
+     * **Note:** Touching hits are not ordered.
+     *           If a shape from the scene is already overlapping with the query shape in its starting position,
+     *           the hit is returned unless `eASSUME_NO_INITIAL_OVERLAP` was specified.
+     * 
+     * @param [in]geometry		Geometry of object to sweep (supported types are: box, sphere, capsule, convex).
+     * @param [in]pose			Pose of the sweep object.
+     * @param [in]unitDir		Normalized direction of the sweep.
+     * @param [in]distance		Sweep distance. Needs to be in [0, inf) range and >0 if `eASSUME_NO_INITIAL_OVERLAP` was specified. Will be clamped to `PX_MAX_SWEEP_DISTANCE`.
+     * @param [out]hitCall		Sweep hit buffer or callback object used to report sweep hits.
+     * @param [in]hitFlags		Default `PxHitFlag.eDEFAULT`. Specifies which properties per hit should be computed and returned via the hit callback.
+     * @param [in]filterData	Filtering data and simple logic.
+     * @param [in]filterCall	Custom filtering logic (optional). Only used if the corresponding `PxQueryFlag` flags are set. If NULL, all hits are assumed to be blocking.
+     * @param [in]cache 		Cached hit shape (optional). Sweep is performed against cached shape first. If no hit is found the sweep gets queried against the scene.
+     * 					    	Note: Filtering is not executed for a cached shape if supplied; instead, if a hit is found, it is assumed to be a blocking hit.
+     * 					    	Note: Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
+     * @param [in]inflation	    This parameter creates a skin around the swept geometry which increases its extents for sweeping.
+     *                          The sweep will register a hit as soon as the skin touches a shape, and will return the corresponding distance and normal.
+     * 						    Note: `ePRECISE_SWEEP` doesn't support inflation. Therefore the sweep will be performed with zero inflation.	
+     * 
+     * @return True if any touching or blocking hits were found or any hit was found in case `PxQueryFlag.eANY_HIT` was specified.
+     * 
+     * @see PxSweepCallback PxSweepBuffer PxQueryFilterData PxQueryFilterCallback PxSweepHit PxQueryCache
+     */
+    @:overload(function(geometry:PxGeometry, pose:PxTransform, unitDir:PxVec3, distance:PxReal,
+                        hitCall:PxRaycastCallback):Bool {})
+    function sweep(geometry:PxGeometry, pose:PxTransform, unitDir:PxVec3, distance:PxReal,
+                   hitCall:PxSweepCallback, hitFlags:PxHitFlags,
+                   filterData:PxQueryFilterData, ?filterCall:PxQueryFilterCallback,
+                   ?cache:cpp.ConstPointer<PxQueryCache>, inflation:PxReal = 0):Bool;
 
-	\note eBLOCK should not be returned from user filters for overlap(). Doing so will result in undefined behavior, and a warning will be issued.
-	\note If the PxQueryFlag::eNO_BLOCK flag is set, the eBLOCK will instead be automatically converted to an eTOUCH and the warning suppressed.
 
-	@see PxOverlapCallback PxOverlapBuffer PxHitFlags PxQueryFilterData PxQueryFilterCallback
-	*/
-// virtual bool				overlap(const PxGeometry& geometry, const PxTransform& pose, PxOverlapCallback& hitCall,
-//                                 const PxQueryFilterData& filterData = PxQueryFilterData(), PxQueryFilterCallback* filterCall = NULL
-//                                 ) const = 0;
+    /**
+     * Performs an overlap test of a given geometry against objects in the scene, returns results in a `PxOverlapBuffer` object
+     * or via a custom user callback implementation inheriting from `PxOverlapCallbackHx`.
+     * 
+     * **Note:** Filtering: returning `eBLOCK` from user filter for overlap queries will result in undefined behavior and cause a warning (see `PxQueryHitType`).
+     * 
+     * **Note:** If the `PxQueryFlag.eNO_BLOCK` flag is set, the `eBLOCK` will instead be automatically converted to an `eTOUCH` and the warning suppressed.
+     * 
+     * @param [in]geometry		Geometry of object to check for overlap (supported types are: box, sphere, capsule, convex).
+     * @param [in]pose			Pose of the object.
+     * @param [out]hitCall		Overlap hit buffer or callback object used to report overlap hits.
+     * @param [in]filterData	Filtering data and simple logic. See `PxQueryFilterData` `PxQueryFilterCallback`
+     * @param [in]filterCall	Custom filtering logic (optional). Only used if the corresponding `PxQueryFlag` flags are set. If NULL, all hits are assumed to overlap.
+     * 
+     * @return True if any touching or blocking hits were found or any hit was found in case `PxQueryFlag.eANY_HIT` was specified.
+     * 
+     * @see PxOverlapCallback PxOverlapBuffer PxHitFlags PxQueryFilterData PxQueryFilterCallback
+     */
+    @:overload(function(geometry:PxGeometry, pose:PxTransform, hitCall:PxSweepCallback):Bool {})
+    function overlap(geometry:PxGeometry, pose:PxTransform, hitCall:PxSweepCallback,
+                     filterData:PxQueryFilterData, ?filterCall:PxQueryFilterCallback):Bool;
 
 
-	/**
-	\brief Retrieves the scene's internal scene query timestamp, increased each time a change to the
-	static scene query structure is performed.
+    /**
+    \brief Retrieves the scene's internal scene query timestamp, increased each time a change to the
+    static scene query structure is performed.
 
-	\return scene query static timestamp
-	*/
+    \return scene query static timestamp
+    */
     function getSceneQueryStaticTimestamp():PxU32;
     
-	//@}
-	
+    //@}
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////
     
-	// @name Broad-phase
-	//
-	//@{
+    // @name Broad-phase
+    //
+    //@{
 
-	/**
-	\brief Returns broad-phase type.
+    /**
+    \brief Returns broad-phase type.
 
-	\return Broad-phase type
-	*/
-	function getBroadPhaseType():PxBroadPhaseType;
+    \return Broad-phase type
+    */
+    function getBroadPhaseType():PxBroadPhaseType;
 
-	/**
-	\brief Gets broad-phase caps.
+    /**
+    \brief Gets broad-phase caps.
 
-	\param[out]	caps	Broad-phase caps
-	\return True if success
-	*/
-	function getBroadPhaseCaps(caps:PxBroadPhaseCaps):Bool;
+    \param[out]	caps	Broad-phase caps
+    \return True if success
+    */
+    function getBroadPhaseCaps(caps:PxBroadPhaseCaps):Bool;
 
-	/**
-	\brief Returns number of regions currently registered in the broad-phase.
+    /**
+    \brief Returns number of regions currently registered in the broad-phase.
 
-	\return Number of regions
-	*/
-	function getNbBroadPhaseRegions():PxU32;
+    \return Number of regions
+    */
+    function getNbBroadPhaseRegions():PxU32;
 
-	/**
-	\brief Gets broad-phase regions.
+    /**
+    \brief Gets broad-phase regions.
 
-	\param[out]	userBuffer	Returned broad-phase regions
-	\param[in]	bufferSize	Size of userBuffer
-	\param[in]	startIndex	Index of first desired region, in [0 ; getNbRegions()[
-	\return Number of written out regions
-	*/
+    \param[out]	userBuffer	Returned broad-phase regions
+    \param[in]	bufferSize	Size of userBuffer
+    \param[in]	startIndex	Index of first desired region, in [0 ; getNbRegions()[
+    \return Number of written out regions
+    */
 //virtual	PxU32					getBroadPhaseRegions(PxBroadPhaseRegionInfo* userBuffer, PxU32 bufferSize, PxU32 startIndex=0) const	= 0;
 
-	/**
-	\brief Adds a new broad-phase region.
+    /**
+    \brief Adds a new broad-phase region.
 
-	Note that by default, objects already existing in the SDK that might touch this region will not be automatically
-	added to the region. In other words the newly created region will be empty, and will only be populated with new
-	objects when they are added to the simulation, or with already existing objects when they are updated.
+    Note that by default, objects already existing in the SDK that might touch this region will not be automatically
+    added to the region. In other words the newly created region will be empty, and will only be populated with new
+    objects when they are added to the simulation, or with already existing objects when they are updated.
 
-	It is nonetheless possible to override this default behavior and let the SDK populate the new region automatically
-	with already existing objects overlapping the incoming region. This has a cost though, and it should only be used
-	when the game can not guarantee that all objects within the new region will be added to the simulation after the
-	region itself.
+    It is nonetheless possible to override this default behavior and let the SDK populate the new region automatically
+    with already existing objects overlapping the incoming region. This has a cost though, and it should only be used
+    when the game can not guarantee that all objects within the new region will be added to the simulation after the
+    region itself.
 
-	\param[in]	region			User-provided region data
-	\param[in]	populateRegion	Automatically populate new region with already existing objects overlapping it
-	\return Handle for newly created region, or 0xffffffff in case of failure.
-	*/
-	function addBroadPhaseRegion(region:PxBroadPhaseRegion, populateRegion:Bool = false):PxU32;
+    \param[in]	region			User-provided region data
+    \param[in]	populateRegion	Automatically populate new region with already existing objects overlapping it
+    \return Handle for newly created region, or 0xffffffff in case of failure.
+    */
+    function addBroadPhaseRegion(region:PxBroadPhaseRegion, populateRegion:Bool = false):PxU32;
 
-	/**
-	\brief Removes a new broad-phase region.
+    /**
+    \brief Removes a new broad-phase region.
 
-	If the region still contains objects, and if those objects do not overlap any region any more, they are not
-	automatically removed from the simulation. Instead, the PxBroadPhaseCallback::onObjectOutOfBounds notification
-	is used for each object. Users are responsible for removing the objects from the simulation if this is the
-	desired behavior.
+    If the region still contains objects, and if those objects do not overlap any region any more, they are not
+    automatically removed from the simulation. Instead, the PxBroadPhaseCallback::onObjectOutOfBounds notification
+    is used for each object. Users are responsible for removing the objects from the simulation if this is the
+    desired behavior.
 
-	If the handle is invalid, or if a valid handle is removed twice, an error message is sent to the error stream.
+    If the handle is invalid, or if a valid handle is removed twice, an error message is sent to the error stream.
 
-	\param[in]	handle	Region's handle, as returned by PxScene::addBroadPhaseRegion.
-	\return True if success
-	*/
-	function removeBroadPhaseRegion(handle:PxU32):Bool;
+    \param[in]	handle	Region's handle, as returned by PxScene::addBroadPhaseRegion.
+    \return True if success
+    */
+    function removeBroadPhaseRegion(handle:PxU32):Bool;
 
-	//@}
+    //@}
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// @name Threads and Memory
+    // @name Threads and Memory
     //
-	//@{
+    //@{
 
-	/**
-	\brief Get the task manager associated with this scene
+    /**
+    \brief Get the task manager associated with this scene
 
-	\return the task manager associated with the scene
-	*/
+    \return the task manager associated with the scene
+    */
 //virtual PxTaskManager*			getTaskManager() const = 0;
 
 
-	/**
-	\brief Lock the scene for reading from the calling thread.
+    /**
+    \brief Lock the scene for reading from the calling thread.
 
-	When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockRead() must be 
-	called before any read calls are made on the scene.
+    When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockRead() must be 
+    called before any read calls are made on the scene.
 
-	Multiple threads may read at the same time, no threads may read while a thread is writing.
-	If a call to lockRead() is made while another thread is holding a write lock 
-	then the calling thread will be blocked until the writing thread calls unlockWrite().
+    Multiple threads may read at the same time, no threads may read while a thread is writing.
+    If a call to lockRead() is made while another thread is holding a write lock 
+    then the calling thread will be blocked until the writing thread calls unlockWrite().
 
-	\note Lock upgrading is *not* supported, that means it is an error to
-	call lockRead() followed by lockWrite().
+    \note Lock upgrading is *not* supported, that means it is an error to
+    call lockRead() followed by lockWrite().
 
-	\note Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
+    \note Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
 
-	\param file String representing the calling file, for debug purposes
-	\param line The source file line number, for debug purposes
-	*/
-	function lockRead(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
+    \param file String representing the calling file, for debug purposes
+    \param line The source file line number, for debug purposes
+    */
+    function lockRead(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
 
-	/** 
-	\brief Unlock the scene from reading.
+    /** 
+    \brief Unlock the scene from reading.
 
-	\note Each unlockRead() must be paired with a lockRead() from the same thread.
-	*/
-	function unlockRead():Void;
+    \note Each unlockRead() must be paired with a lockRead() from the same thread.
+    */
+    function unlockRead():Void;
 
-	/**
-	\brief Lock the scene for writing from this thread.
+    /**
+    \brief Lock the scene for writing from this thread.
 
-	When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockWrite() must be 
-	called before any write calls are made on the scene.
+    When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockWrite() must be 
+    called before any write calls are made on the scene.
 
-	Only one thread may write at a time and no threads may read while a thread is writing.
-	If a call to lockWrite() is made and there are other threads reading then the 
-	calling thread will be blocked until the readers complete.
+    Only one thread may write at a time and no threads may read while a thread is writing.
+    If a call to lockWrite() is made and there are other threads reading then the 
+    calling thread will be blocked until the readers complete.
 
-	Writers have priority. If a thread is blocked waiting to write then subsequent calls to 
-	lockRead() from other threads will be blocked until the writer completes.
+    Writers have priority. If a thread is blocked waiting to write then subsequent calls to 
+    lockRead() from other threads will be blocked until the writer completes.
 
-	\note If multiple threads are waiting to write then the thread that is first
-	granted access depends on OS scheduling.
+    \note If multiple threads are waiting to write then the thread that is first
+    granted access depends on OS scheduling.
 
-	\note Recursive locking is supported but each lockWrite() call must be paired 
-	with an unlockWrite().	
+    \note Recursive locking is supported but each lockWrite() call must be paired 
+    with an unlockWrite().	
 
-	\note If a thread has already locked the scene for writing then it may call
-	lockRead().
+    \note If a thread has already locked the scene for writing then it may call
+    lockRead().
 
-	\param file String representing the calling file, for debug purposes
-	\param line The source file line number, for debug purposes
-	*/
-	function lockWrite(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
+    \param file String representing the calling file, for debug purposes
+    \param line The source file line number, for debug purposes
+    */
+    function lockWrite(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
 
-	/**
-	\brief Unlock the scene from writing.
+    /**
+    \brief Unlock the scene from writing.
 
-	\note Each unlockWrite() must be paired with a lockWrite() from the same thread.
-	*/
-	function unlockWrite():Void;
-	
+    \note Each unlockWrite() must be paired with a lockWrite() from the same thread.
+    */
+    function unlockWrite():Void;
+    
 
-	/**
-	\brief set the cache blocks that can be used during simulate(). 
-	
-	Each frame the simulation requires memory to store contact, friction, and contact cache data. This memory is used in blocks of 16K.
-	Each frame the blocks used by the previous frame are freed, and may be retrieved by the application using PxScene::flushSimulation()
+    /**
+    \brief set the cache blocks that can be used during simulate(). 
+    
+    Each frame the simulation requires memory to store contact, friction, and contact cache data. This memory is used in blocks of 16K.
+    Each frame the blocks used by the previous frame are freed, and may be retrieved by the application using PxScene::flushSimulation()
 
-	This call will force allocation of cache blocks if the numBlocks parameter is greater than the currently allocated number
-	of blocks, and less than the max16KContactDataBlocks parameter specified at scene creation time.
+    This call will force allocation of cache blocks if the numBlocks parameter is greater than the currently allocated number
+    of blocks, and less than the max16KContactDataBlocks parameter specified at scene creation time.
 
-	\param[in] numBlocks The number of blocks to allocate.	
+    \param[in] numBlocks The number of blocks to allocate.	
 
-	@see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() getNbContactDataBlocksUsed getMaxNbContactDataBlocksUsed
-	*/
-	function setNbContactDataBlocks(numBlocks:PxU32):Void;
-	
+    @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() getNbContactDataBlocksUsed getMaxNbContactDataBlocksUsed
+    */
+    function setNbContactDataBlocks(numBlocks:PxU32):Void;
+    
 
-	/**
-	\brief get the number of cache blocks currently used by the scene 
+    /**
+    \brief get the number of cache blocks currently used by the scene 
 
-	This function may not be called while the scene is simulating
+    This function may not be called while the scene is simulating
 
-	\return the number of cache blocks currently used by the scene
+    \return the number of cache blocks currently used by the scene
 
-	@see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getMaxNbContactDataBlocksUsed()
-	*/
-	function getNbContactDataBlocksUsed():PxU32;
+    @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getMaxNbContactDataBlocksUsed()
+    */
+    function getNbContactDataBlocksUsed():PxU32;
 
-	/**
-	\brief get the maximum number of cache blocks used by the scene 
+    /**
+    \brief get the maximum number of cache blocks used by the scene 
 
-	This function may not be called while the scene is simulating
+    This function may not be called while the scene is simulating
 
-	\return the maximum number of cache blocks everused by the scene
+    \return the maximum number of cache blocks everused by the scene
 
-	@see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getNbContactDataBlocksUsed()
-	*/
-	function getMaxNbContactDataBlocksUsed():PxU32;
+    @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getNbContactDataBlocksUsed()
+    */
+    function getMaxNbContactDataBlocksUsed():PxU32;
 
 
-	/**
-	\brief Return the value of PxSceneDesc::contactReportStreamBufferSize that was set when creating the scene with PxPhysics::createScene
+    /**
+    \brief Return the value of PxSceneDesc::contactReportStreamBufferSize that was set when creating the scene with PxPhysics::createScene
 
-	@see PxSceneDesc::contactReportStreamBufferSize, PxPhysics::createScene
-	*/
-	function getContactReportStreamBufferSize():PxU32;
+    @see PxSceneDesc::contactReportStreamBufferSize, PxPhysics::createScene
+    */
+    function getContactReportStreamBufferSize():PxU32;
 
-	
-	/**
-	\brief Sets the number of actors required to spawn a separate rigid body solver thread.
+    
+    /**
+    \brief Sets the number of actors required to spawn a separate rigid body solver thread.
 
-	\param[in] solverBatchSize Number of actors required to spawn a separate rigid body solver thread.
+    \param[in] solverBatchSize Number of actors required to spawn a separate rigid body solver thread.
 
-	@see PxSceneDesc.solverBatchSize getSolverBatchSize()
-	*/
-	function setSolverBatchSize(solverBatchSize:PxU32):Void;
+    @see PxSceneDesc.solverBatchSize getSolverBatchSize()
+    */
+    function setSolverBatchSize(solverBatchSize:PxU32):Void;
 
-	/**
-	\brief Retrieves the number of actors required to spawn a separate rigid body solver thread.
+    /**
+    \brief Retrieves the number of actors required to spawn a separate rigid body solver thread.
 
-	\return Current number of actors required to spawn a separate rigid body solver thread.
+    \return Current number of actors required to spawn a separate rigid body solver thread.
 
-	@see PxSceneDesc.solverBatchSize setSolverBatchSize()
-	*/
-	function getSolverBatchSize():PxU32;
+    @see PxSceneDesc.solverBatchSize setSolverBatchSize()
+    */
+    function getSolverBatchSize():PxU32;
 
-	/**
-	\brief Sets the number of articulations required to spawn a separate rigid body solver thread.
+    /**
+    \brief Sets the number of articulations required to spawn a separate rigid body solver thread.
 
-	\param[in] solverBatchSize Number of articulations required to spawn a separate rigid body solver thread.
+    \param[in] solverBatchSize Number of articulations required to spawn a separate rigid body solver thread.
 
-	@see PxSceneDesc.solverBatchSize getSolverArticulationBatchSize()
-	*/
-	function setSolverArticulationBatchSize(solverBatchSize:PxU32):Void;
+    @see PxSceneDesc.solverBatchSize getSolverArticulationBatchSize()
+    */
+    function setSolverArticulationBatchSize(solverBatchSize:PxU32):Void;
 
-	/**
-	\brief Retrieves the number of articulations required to spawn a separate rigid body solver thread.
+    /**
+    \brief Retrieves the number of articulations required to spawn a separate rigid body solver thread.
 
-	\return Current number of articulations required to spawn a separate rigid body solver thread.
+    \return Current number of articulations required to spawn a separate rigid body solver thread.
 
-	@see PxSceneDesc.solverBatchSize setSolverArticulationBatchSize()
-	*/
-	function getSolverArticulationBatchSize():PxU32;
-	
+    @see PxSceneDesc.solverBatchSize setSolverArticulationBatchSize()
+    */
+    function getSolverArticulationBatchSize():PxU32;
+    
 
-	//@}
+    //@}
 
-	/**
-	\brief Returns the wake counter reset value.
+    /**
+    \brief Returns the wake counter reset value.
 
-	\return Wake counter reset value
+    \return Wake counter reset value
 
-	@see PxSceneDesc.wakeCounterResetValue
-	*/
-	function getWakeCounterResetValue():PxReal;
+    @see PxSceneDesc.wakeCounterResetValue
+    */
+    function getWakeCounterResetValue():PxReal;
 
-	/**
-	\brief Shift the scene origin by the specified vector.
+    /**
+    \brief Shift the scene origin by the specified vector.
 
-	The poses of all objects in the scene and the corresponding data structures will get adjusted to reflect the new origin location
-	(the shift vector will get subtracted from all object positions).
+    The poses of all objects in the scene and the corresponding data structures will get adjusted to reflect the new origin location
+    (the shift vector will get subtracted from all object positions).
 
-	\note It is the user's responsibility to keep track of the summed total origin shift and adjust all input/output to/from PhysX accordingly.
+    \note It is the user's responsibility to keep track of the summed total origin shift and adjust all input/output to/from PhysX accordingly.
 
-	\note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    \note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-	\note Make sure to propagate the origin shift to other dependent modules (for example, the character controller module etc.).
+    \note Make sure to propagate the origin shift to other dependent modules (for example, the character controller module etc.).
 
-	\note This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
+    \note This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
 
-	\param[in] shift Translation vector to shift the origin by.
-	*/
-	function shiftOrigin(shift:PxVec3):Void;
+    \param[in] shift Translation vector to shift the origin by.
+    */
+    function shiftOrigin(shift:PxVec3):Void;
 
-	/**
-	\brief Returns the Pvd client associated with the scene.
-	\return the client, NULL if no PVD supported.
-	*/
-	function getScenePvdClient():PxPvdSceneClient;
+    /**
+    \brief Returns the Pvd client associated with the scene.
+    \return the client, NULL if no PVD supported.
+    */
+    function getScenePvdClient():PxPvdSceneClient;
 
-	/**
-	 * User can assign this to whatever, usually to create a 1:1 relationship with a user object.
-	 */
-	var userData:physx.hx.PxUserData;
+    /**
+     * User can assign this to whatever, usually to create a 1:1 relationship with a user object.
+     */
+    var userData:physx.hx.PxUserData;
 }

@@ -1,5 +1,10 @@
 package;
 
+import physx.PxQueryReport.PxRaycastBuffer;
+import physx.PxQueryReport.PxRaycastHit;
+import cpp.ConstPointer;
+import physx.PxQueryReport.PxAgain;
+import physx.PxQueryReport.PxRaycastCallbackHx;
 import physx.PxFiltering;
 import physx.PxFoundation;
 import physx.PxMaterial;
@@ -46,13 +51,21 @@ class Main
 
 class SimulationCallback extends PxSimulationEventCallbackHx
 {
-    public function new() { super();}
+    public function new() { super(); }
     override function onContact(pairHeader:PxContactPairHeader, pairs:Array<PxContactPair>)
     {
         if(pairHeader.actor0.getName() == "Ball")
             trace((pairHeader.actor0.userData.stringLiteral));
         else if(pairHeader.actor1.getName() == "Ball")
             trace(pairHeader.actor1.userData);
+    }
+}
+
+class RaycastCallback extends PxRaycastCallbackHx
+{
+    public function new() { super(); }
+    override function processTouches(buffer:ConstPointer<PxRaycastHit>, nbHits:PxU32):PxAgain {
+        return super.processTouches(buffer, nbHits);
     }
 }
 
@@ -143,7 +156,7 @@ class Test
         gFoundation = PxFoundation.create(PX_PHYSICS_VERSION, gAllocator, gErrorCallback);
 
         gPvd = PxPvd.create(gFoundation);
-        var transport = PxPvdTransport.defaultPvdSocketTransportCreate("localhost", 5425, 1000);
+        var transport = PxPvdTransport.defaultPvdSocketTransportCreate("localhost", 5425, 10);
         gPvd.connect(transport, eALL);
     
         gPhysics = PxPhysics.create(PX_PHYSICS_VERSION, gFoundation, new PxTolerancesScale(), true, gPvd);
@@ -176,11 +189,16 @@ class Test
             stackZ -= 10.0;
             createStack(new PxTransform(new PxVec3(0, 0, stackZ), PxQuat.identity()), 10, 2.0);
         }
-
-        var test = PxTransform.fromSegment(PxVec3.zero(), PxVec3.zero());
-        var test = PxTransform.fromSegment(PxVec3.zero(), PxVec3.zero(), 100);
         
         createDynamic(new PxTransform(new PxVec3(0,40,100), PxQuat.identity()), new PxSphereGeometry(10), new PxVec3(0,-50,-100));
+
+        // Raycast should hit Ball
+        var buf = new PxRaycastBuffer();
+        if(gScene.raycast(new PxVec3(0, 40, 0), new PxVec3(0, 0, 1), 200, buf))
+        {
+            trace("Raycast hit: " + buf.block.actor.getName());
+        }
+        
     }
 
     public function stepPhysics()
@@ -196,6 +214,12 @@ class Test
         gScene.release();
         gDispatcher.release();
         gPhysics.release();
+        if(gPvd != null)
+        {
+            var transport = gPvd.getTransport();
+            gPvd.release();
+            transport.release();
+        }
         gFoundation.release();
         gSimulationCallback = null;
         cpp.vm.Gc.run(true); // should call gSimulationCallback._release
