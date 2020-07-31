@@ -57,23 +57,18 @@ private extern class PxDominanceGroupPairData
 
 @see PxScene::getActors(), PxScene::getNbActors()
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxActorTypeFlag", PxU16))
 extern enum abstract PxActorTypeFlag(PxActorTypeFlagImpl)
 {
     /**
     A static rigid body
     */
-    @:native("physx::PxActorTypeFlag::eRIGID_STATIC") var eRIGID_STATIC;
+    var eRIGID_STATIC = (1 << 0);
 
     /**
     A dynamic rigid body
     */
-    @:native("physx::PxActorTypeFlag::eRIGID_DYNAMIC") var eRIGID_DYNAMIC;
-
-    @:op(A | B)
-    private inline function or(flag:PxActorTypeFlag):PxActorTypeFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eRIGID_DYNAMIC = (1 << 1);
 }
 
 @:include("PxScene.h")

@@ -6,20 +6,21 @@ import physx.foundation.PxSimpleTypes;
 /**
 \brief Default color values used for debug rendering.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxDebugColor"))
 extern enum abstract PxDebugColor(PxDebugColorImpl)
 {
-    @:native("physx::PxDebugColor::eARGB_BLACK") var eARGB_BLACK;
-    @:native("physx::PxDebugColor::eARGB_RED") var eARGB_RED;
-    @:native("physx::PxDebugColor::eARGB_GREEN") var eARGB_GREEN;
-    @:native("physx::PxDebugColor::eARGB_BLUE") var eARGB_BLUE;
-    @:native("physx::PxDebugColor::eARGB_YELLOW") var eARGB_YELLOW;
-    @:native("physx::PxDebugColor::eARGB_MAGENTA") var eARGB_MAGENTA;
-    @:native("physx::PxDebugColor::eARGB_CYAN") var eARGB_CYAN;
-    @:native("physx::PxDebugColor::eARGB_WHITE") var eARGB_WHITE;
-    @:native("physx::PxDebugColor::eARGB_GREY") var eARGB_GREY;
-    @:native("physx::PxDebugColor::eARGB_DARKRED") var eARGB_DARKRED;
-    @:native("physx::PxDebugColor::eARGB_DARKGREEN") var eARGB_DARKGREEN;
-    @:native("physx::PxDebugColor::eARGB_DARKBLUE") var eARGB_DARKBLUE;
+    var eARGB_BLACK     = 0xff000000;
+    var eARGB_RED       = 0xffff0000;
+    var eARGB_GREEN     = 0xff00ff00;
+    var eARGB_BLUE      = 0xff0000ff;
+    var eARGB_YELLOW    = 0xffffff00;
+    var eARGB_MAGENTA   = 0xffff00ff;
+    var eARGB_CYAN      = 0xff00ffff;
+    var eARGB_WHITE     = 0xffffffff;
+    var eARGB_GREY      = 0xff808080;
+    var eARGB_DARKRED   = 0x88880000;
+    var eARGB_DARKGREEN = 0x88008800;
+    var eARGB_DARKBLUE  = 0x88000088;
 }
 
 @:include("common/PxRenderBuffer.h")

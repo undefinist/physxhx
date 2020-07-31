@@ -5,6 +5,7 @@ import physx.foundation.PxProfiler;
 /**
 \brief types of instrumentation that PVD can do.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPvdInstrumentationFlag", cpp.UInt8))
 extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
 {
     /**
@@ -15,7 +16,7 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
         performance and thus this flag should not be set if you want an accurate
         performance profile.
         */
-    @:native("physx::PxPvdInstrumentationFlag::eDEBUG") var eDEBUG;
+    var eDEBUG = 1 << 0;
 
     /**
         \brief Send profile information to PVD.
@@ -27,7 +28,7 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
         This flag works together with a PxCreatePhysics parameter.
         Using it allows the SDK to send profile events to PVD.
     */
-    @:native("physx::PxPvdInstrumentationFlag::ePROFILE") var ePROFILE;
+    var ePROFILE = 1 << 1;
 
     /**
         \brief Send memory information to PVD.
@@ -49,19 +50,13 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
         PVD will accurate information about the state of the memory system before the
         actual connection happened.
     */
-    @:native("physx::PxPvdInstrumentationFlag::eMEMORY") var eMEMORY;
+    var eMEMORY = 1 << 2;
 
-    @:native("physx::PxPvdInstrumentationFlag::eALL") var eALL;
-
-    @:op(A | B)
-    private inline function or(flag:PxPvdInstrumentationFlag):PxPvdInstrumentationFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eALL = (eDEBUG | ePROFILE | eMEMORY);
 }
 
 @:include("pvd/PxPvd.h")
-@:native("cpp::Struct<physx::PxPvdInstrumentationFlag::Enum, ::cpp::EnumHandler>")
+@:native("physx::PxPvdInstrumentationFlags>")
 private extern class PxPvdInstrumentationFlagImpl {}
 
 /**

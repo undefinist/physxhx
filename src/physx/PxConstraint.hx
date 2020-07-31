@@ -9,25 +9,31 @@ import physx.foundation.PxBase;
 
 \note eBROKEN is a read only flag
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxConstraintFlag", PxU16))
 extern enum abstract PxConstraintFlag(PxConstraintFlagImpl)
 {
-    @:native("physx::PxConstraintFlag::eBROKEN") var eBROKEN;			//!< whether the constraint is broken
-    @:native("physx::PxConstraintFlag::ePROJECT_TO_ACTOR0") var ePROJECT_TO_ACTOR0;			//!< whether actor1 should get projected to actor0 for this constraint (note: projection of a static/kinematic actor to a dynamic actor will be ignored)
-    @:native("physx::PxConstraintFlag::ePROJECT_TO_ACTOR1") var ePROJECT_TO_ACTOR1;			//!< whether actor0 should get projected to actor1 for this constraint (note: projection of a static/kinematic actor to a dynamic actor will be ignored)
-    @:native("physx::PxConstraintFlag::ePROJECTION") var ePROJECTION;	//!< whether the actors should get projected for this constraint (the direction will be chosen by PhysX)
-    @:native("physx::PxConstraintFlag::eCOLLISION_ENABLED") var eCOLLISION_ENABLED;			//!< whether contacts should be generated between the objects this constraint constrains
-    @:native("physx::PxConstraintFlag::eVISUALIZATION") var eVISUALIZATION;			//!< whether this constraint should be visualized, if constraint visualization is turned on
-    @:native("physx::PxConstraintFlag::eDRIVE_LIMITS_ARE_FORCES") var eDRIVE_LIMITS_ARE_FORCES;			//!< limits for drive strength are forces rather than impulses
-    @:native("physx::PxConstraintFlag::eIMPROVED_SLERP") var eIMPROVED_SLERP;			//!< perform preprocessing for improved accuracy on D6 Slerp Drive (this flag will be removed in a future release when preprocessing is no longer required)
-    @:native("physx::PxConstraintFlag::eDISABLE_PREPROCESSING") var eDISABLE_PREPROCESSING;			//!< suppress constraint preprocessing, intended for use with rowResponseThreshold. May result in worse solver accuracy for ill-conditioned constraints.
-    @:native("physx::PxConstraintFlag::eENABLE_EXTENDED_LIMITS") var eENABLE_EXTENDED_LIMITS;			//!< enables extended limit ranges for angular limits (e.g. limit values > PxPi or < -PxPi)
-    @:native("physx::PxConstraintFlag::eGPU_COMPATIBLE") var eGPU_COMPATIBLE;		//!< the constraint type is supported by gpu dynamic
-    
-    @:op(A | B)
-    private inline function or(flag:PxConstraintFlag):PxConstraintFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    /** whether the constraint is broken */
+    var eBROKEN                     = 1<<0;
+    /** whether actor1 should get projected to actor0 for this constraint (note: projection of a static/kinematic actor to a dynamic actor will be ignored) */
+    var ePROJECT_TO_ACTOR0          = 1<<1;
+    /** whether actor0 should get projected to actor1 for this constraint (note: projection of a static/kinematic actor to a dynamic actor will be ignored) */
+    var ePROJECT_TO_ACTOR1          = 1<<2;
+    /** whether the actors should get projected for this constraint (the direction will be chosen by PhysX) */
+    var ePROJECTION                 = ePROJECT_TO_ACTOR0 | ePROJECT_TO_ACTOR1;
+    /** whether contacts should be generated between the objects this constraint constrains */
+    var eCOLLISION_ENABLED          = 1<<3;
+    /** whether this constraint should be visualized, if constraint visualization is turned on */
+    var eVISUALIZATION              = 1<<4;
+    /** limits for drive strength are forces rather than impulses */
+    var eDRIVE_LIMITS_ARE_FORCES    = 1<<5;
+    /** perform preprocessing for improved accuracy on D6 Slerp Drive (this flag will be removed in a future release when preprocessing is no longer required) */
+    var eIMPROVED_SLERP             = 1<<7;
+    /** suppress constraint preprocessing, intended for use with rowResponseThreshold. May result in worse solver accuracy for ill-conditioned constraints. */
+    var eDISABLE_PREPROCESSING      = 1<<8;
+    /** enables extended limit ranges for angular limits (e.g. limit values > PxPi or < -PxPi) */
+    var eENABLE_EXTENDED_LIMITS     = 1<<9;
+    /** the constraint type is supported by gpu dynamic */
+    var eGPU_COMPATIBLE             = 1<<10;
 }
 
 @:include("PxConstraint.h")

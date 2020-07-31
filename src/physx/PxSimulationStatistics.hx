@@ -7,12 +7,13 @@ import physx.foundation.PxSimpleTypes.PxU32;
 \brief Different types of rigid body collision pair statistics.
 @see getRbPairStats
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxSimulationStatistics"))
 extern enum abstract RbPairStatsType(RbPairStatsTypeImpl)
 {
     /**
     \brief Shape pairs processed as discrete contact pairs for the current simulation step.
     */
-    @:native("physx::PxSimulationStatistics::eDISCRETE_CONTACT_PAIRS") var eDISCRETE_CONTACT_PAIRS;
+    var eDISCRETE_CONTACT_PAIRS;
 
     /**
     \brief Shape pairs processed as swept integration pairs for the current simulation step.
@@ -22,21 +23,21 @@ extern enum abstract RbPairStatsType(RbPairStatsTypeImpl)
 
     @see PxPairFlag::eDETECT_CCD_CONTACT,
     */
-    @:native("physx::PxSimulationStatistics::eCCD_PAIRS") var eCCD_PAIRS;
+    var eCCD_PAIRS;
 
     /**
     \brief Shape pairs processed with user contact modification enabled for the current simulation step.
 
     @see PxContactModifyCallback
     */
-    @:native("physx::PxSimulationStatistics::eMODIFIED_CONTACT_PAIRS") var eMODIFIED_CONTACT_PAIRS;
+    var eMODIFIED_CONTACT_PAIRS;
 
     /**
     \brief Trigger shape pairs processed for the current simulation step.
 
     @see PxShapeFlag::eTRIGGER_SHAPE
     */
-    @:native("physx::PxSimulationStatistics::eTRIGGER_PAIRS") var eTRIGGER_PAIRS;
+    var eTRIGGER_PAIRS;
 }
 
 @:include("PxSimulationStatistics.h")

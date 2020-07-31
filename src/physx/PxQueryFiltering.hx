@@ -8,44 +8,39 @@ import physx.PxFiltering.PxFilterData;
 
 @see PxQueryFilterData.flags
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxQueryFlag", physx.foundation.PxSimpleTypes.PxU16))
 extern enum abstract PxQueryFlag(PxQueryFlagImpl) 
 {
     /**
      * Traverse static shapes
      */
-    @:native("physx::PxQueryFlag::eSTATIC") var eSTATIC;
+    var eSTATIC = (1<<0);
     /**
      * Traverse dynamic shapes
      */
-    @:native("physx::PxQueryFlag::eDYNAMIC") var eDYNAMIC;
+    var eDYNAMIC = (1<<1);
     /**
      * Run the pre-intersection-test filter (see #PxQueryFilterCallback::preFilter())
      */
-    @:native("physx::PxQueryFlag::ePREFILTER") var ePREFILTER;
+    var ePREFILTER = (1<<2);
     /**
      * Run the post-intersection-test filter (see #PxQueryFilterCallback::postFilter())
      */
-    @:native("physx::PxQueryFlag::ePOSTFILTER") var ePOSTFILTER;
+    var ePOSTFILTER = (1<<3);
     /**
      * Abort traversal as soon as any hit is found and return it via callback.block.
      * Helps query performance. Both eTOUCH and eBLOCK hitTypes are considered hits with this flag.
      */
-    @:native("physx::PxQueryFlag::eANY_HIT") var eANY_HIT;
+    var eANY_HIT = (1<<4);
     /**
      * All hits are reported as touching. Overrides eBLOCK returned from user filters with eTOUCH.
      * This is also an optimization hint that may improve query performance.
      */
-    @:native("physx::PxQueryFlag::eNO_BLOCK") var eNO_BLOCK;
+    var eNO_BLOCK = (1<<5);
     // /**
     //  * Reserved for internal use
     //  */
-    // @:native("physx::PxQueryFlag::eRESERVED") var eRESERVED;
-    
-    @:op(A | B)
-    private inline function or(flag:PxQueryFlag):PxQueryFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    // var eRESERVED = (1<<15);
 }
 
 @:include("PxQueryFiltering.h")
@@ -77,20 +72,21 @@ only the closest hit of type eBLOCK is returned. All eTOUCH hits are discarded.
 
 @see PxQueryFilterCallback.preFilter PxQueryFilterCallback.postFilter PxScene.raycast PxScene.sweep PxScene.overlap
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxQueryHitType"))
 extern enum abstract PxQueryHitType(PxQueryHitTypeImpl) 
 {
     /**
      * the query should ignore this shape
      */
-    @:native("physx::PxQueryHitType::eNONE") var eNONE;
+    var eNONE = 0;
     /**
      * a hit on the shape touches the intersection geometry of the query but does not block it
      */
-    @:native("physx::PxQueryHitType::eTOUCH") var eTOUCH;
+    var eTOUCH = 1;
     /**
      * a hit on the shape blocks the query (does not block overlap queries)
      */
-    @:native("physx::PxQueryHitType::eBLOCK") var eBLOCK;
+    var eBLOCK = 2;
 }
 
 @:include("PxQueryFiltering.h")

@@ -7,16 +7,11 @@ typedef PxType = PxI16;
 /**
 Flags for PxBase.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxBaseFlag", PxU16))
 extern enum abstract PxBaseFlag(PxBaseFlagImpl)
 {
-    @:native("physx::PxBaseFlag::eOWNS_MEMORY") var eOWNS_MEMORY;
-	@:native("physx::PxBaseFlag::eIS_RELEASABLE") var eIS_RELEASABLE;
-	
-	@:op(A | B)
-    private inline function or(flag:PxBaseFlag):PxBaseFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eOWNS_MEMORY = (1<<0);
+	var eIS_RELEASABLE = (1<<1);
 }
 
 @:include("foundation/PxBase.h")

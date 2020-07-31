@@ -9,6 +9,7 @@ import physx.foundation.PxTransform;
 
 @see PxRigidBody.setRigidBodyFlag(), PxRigidBody.getRigidBodyFlags()
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxRigidBodyFlag", PxU8))
 extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 {
 	/**
@@ -32,7 +33,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 
 	@see PxRigidDynamic.setKinematicTarget()
 	*/
-	@:native("physx::PxRigidBodyFlag::eKINEMATIC") var eKINEMATIC;		//!< Enable kinematic mode for the body.
+	var eKINEMATIC = (1<<0);		//!< Enable kinematic mode for the body.
 
 	/**
 	\brief Use the kinematic target transform for scene queries.
@@ -43,7 +44,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 
 	@see PxRigidDynamic.setKinematicTarget()
 	*/
-	@:native("physx::PxRigidBodyFlag::eUSE_KINEMATIC_TARGET_FOR_SCENE_QUERIES") var eUSE_KINEMATIC_TARGET_FOR_SCENE_QUERIES;
+	var eUSE_KINEMATIC_TARGET_FOR_SCENE_QUERIES = (1<<1);
 
 	/**
 	\brief Enables swept integration for the actor.
@@ -55,7 +56,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 	\note kinematic actors are incompatible with CCD so this flag will be cleared automatically when raised on a kinematic actor
 
 	*/
-	@:native("physx::PxRigidBodyFlag::eENABLE_CCD") var eENABLE_CCD;		//!< Enable CCD for the body.
+	var eENABLE_CCD = (1<<2);		//!< Enable CCD for the body.
 
 	/**
 	\brief Enabled CCD in swept integration for the actor.
@@ -66,7 +67,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 
 	\note This flag requires PxRigidBodyFlag::eENABLE_CCD to be raised to have any effect.
 	*/
-	@:native("physx::PxRigidBodyFlag::eENABLE_CCD_FRICTION") var eENABLE_CCD_FRICTION;
+	var eENABLE_CCD_FRICTION = (1<<3);
 
 	/**
 	\brief Register a rigid body for reporting pose changes by the simulation at an early stage.
@@ -78,28 +79,22 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 
 	@see PxSimulationEventCallback::onAdvance()
 	*/
-	@:native("physx::PxRigidBodyFlag::eENABLE_POSE_INTEGRATION_PREVIEW") var eENABLE_POSE_INTEGRATION_PREVIEW;
+	var eENABLE_POSE_INTEGRATION_PREVIEW = (1<<4);
 
 	/**
 	\brief Register a rigid body to dynamicly adjust contact offset based on velocity. This can be used to achieve a CCD effect.
 	*/
-	@:native("physx::PxRigidBodyFlag::eENABLE_SPECULATIVE_CCD") var eENABLE_SPECULATIVE_CCD;
+	var eENABLE_SPECULATIVE_CCD = (1<<5);
 
 	/**
 	\brief Permit CCD to limit maxContactImpulse. This is useful for use-cases like a destruction system but can cause visual artefacts so is not enabled by default.
 	*/
-	@:native("physx::PxRigidBodyFlag::eENABLE_CCD_MAX_CONTACT_IMPULSE") var eENABLE_CCD_MAX_CONTACT_IMPULSE;
+	var eENABLE_CCD_MAX_CONTACT_IMPULSE = (1<<6);
 
 	/**
 	\brief Carries over forces/accelerations between frames, rather than clearning them
 	*/
-	@:native("physx::PxRigidBodyFlag::eRETAIN_ACCELERATIONS") var eRETAIN_ACCELERATIONS;
-
-	@:op(A | B)
-    private inline function or(flag:PxRigidBodyFlag):PxRigidBodyFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+	var eRETAIN_ACCELERATIONS = (1<<7);
 }
 
 @:include("PxRigidBody.h")

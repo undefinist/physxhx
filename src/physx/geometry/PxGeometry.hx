@@ -7,32 +7,20 @@ import physx.foundation.PxSimpleTypes;
 
 Used to distinguish the type of a ::PxGeometry object.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxGeometryType"))
 extern enum abstract PxGeometryType(PxGeometryTypeImpl)
 {
-    @:native("physx::PxGeometryType::eSPHERE") var eSPHERE;
-    @:native("physx::PxGeometryType::ePLANE") var ePLANE;
-    @:native("physx::PxGeometryType::eCAPSULE") var eCAPSULE;
-    @:native("physx::PxGeometryType::eBOX") var eBOX;
-    @:native("physx::PxGeometryType::eCONVEXMESH") var eCONVEXMESH;
-    @:native("physx::PxGeometryType::eTRIANGLEMESH") var eTRIANGLEMESH;
-    @:native("physx::PxGeometryType::eHEIGHTFIELD") var eHEIGHTFIELD;
-    // @:native("physx::PxGeometryType::eGEOMETRY_COUNT") var eGEOMETRY_COUNT;	//!< internal use only!
-    // @:native("physx::PxGeometryType::eINVALID") var eINVALID;		    //!< internal use only!
-
-    @:to inline function toInt():Int
-    {
-        return cast this;
-        // return switch(cast this) 
-        // {
-        //     case eSPHERE: 1;
-        //     case ePLANE: 2;
-        //     case eCAPSULE: 3;
-        //     case eBOX: 4;
-        //     case eCONVEXMESH: 5;
-        //     case eTRIANGLEMESH: 6;
-        //     case eHEIGHTFIELD: 7;
-        // }
-    }
+    var eSPHERE;
+    var ePLANE;
+    var eCAPSULE;
+    var eBOX;
+    var eCONVEXMESH;
+    var eTRIANGLEMESH;
+    var eHEIGHTFIELD;
+    /** internal use only! */
+    var eGEOMETRY_COUNT;
+    /** internal use only! */
+    //var eINVALID = -1;
 }
 
 @:include("geometry/PxGeometry.h")

@@ -5,24 +5,25 @@ package physx;
 
 @see PxRigidBody.addForce() PxRigidBody.addTorque()
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxForceMode"))
 extern enum abstract PxForceMode(PxForceModeImpl)
 {
 	/**
 	 * parameter has unit of mass * distance / time^2, i.e. a force
 	 */
-    @:native("physx::PxForceMode::eFORCE") var eFORCE;
+    var eFORCE;
     /**
      * parameter has unit of mass * distance / time
      */
-    @:native("physx::PxForceMode::eIMPULSE") var eIMPULSE;
+    var eIMPULSE;
 	/**
 	 * parameter has unit of distance / time, i.e. the effect is mass independent: a velocity change.
 	 */
-    @:native("physx::PxForceMode::eVELOCITY_CHANGE") var eVELOCITY_CHANGE;
+    var eVELOCITY_CHANGE;
 	/**
 	 * parameter has unit of distance / time^2, i.e. an acceleration. It gets treated just like a force except the mass is not divided out before integration.
 	 */
-	@:native("physx::PxForceMode::eACCELERATION") var eACCELERATION;
+	var eACCELERATION;
 }
 
 @:include("PxForceMode.h")

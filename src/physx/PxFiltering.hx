@@ -7,6 +7,7 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxPairFlags PxSimulationFilterShader.filter() PxSimulationFilterCallback
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPairFlag", PxU16))
 extern enum abstract PxPairFlag(PxPairFlagImpl)
 {
     /**
@@ -14,7 +15,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     \note Only takes effect if the colliding actors are rigid bodies.
     */
-    @:native("physx::PxPairFlag::eSOLVE_CONTACT") var eSOLVE_CONTACT;
+    var eSOLVE_CONTACT = (1<<0);
 
     /**
     \brief Call contact modification callback for this collision pair
@@ -23,7 +24,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxContactModifyCallback
     */
-    @:native("physx::PxPairFlag::eMODIFY_CONTACTS") var eMODIFY_CONTACTS;
+    var eMODIFY_CONTACTS = (1<<1);
 
     /**
     \brief Call contact report callback or trigger callback when this collision pair starts to be in contact.
@@ -39,7 +40,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_TOUCH_FOUND") var eNOTIFY_TOUCH_FOUND;
+    var eNOTIFY_TOUCH_FOUND = (1<<2);
 
     /**
     \brief Call contact report callback while this collision pair is in contact
@@ -59,7 +60,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS") var eNOTIFY_TOUCH_PERSISTS;
+    var eNOTIFY_TOUCH_PERSISTS = (1<<3);
 
     /**
     \brief Call contact report callback or trigger callback when this collision pair stops to be in contact
@@ -77,7 +78,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_TOUCH_LOST") var eNOTIFY_TOUCH_LOST;
+    var eNOTIFY_TOUCH_LOST = (1<<4);
 
     /**
     \brief Call contact report callback when this collision pair is in contact during CCD passes.
@@ -97,7 +98,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_TOUCH_CCD") var eNOTIFY_TOUCH_CCD;
+    var eNOTIFY_TOUCH_CCD = (1<<5);
 
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair exceeds one of the actor-defined force thresholds.
@@ -108,7 +109,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_THRESHOLD_FORCE_FOUND") var eNOTIFY_THRESHOLD_FORCE_FOUND;
+    var eNOTIFY_THRESHOLD_FORCE_FOUND = (1<<6);
 
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair continues to exceed one of the actor-defined force thresholds.
@@ -122,7 +123,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_THRESHOLD_FORCE_PERSISTS") var eNOTIFY_THRESHOLD_FORCE_PERSISTS;
+    var eNOTIFY_THRESHOLD_FORCE_PERSISTS = (1<<7);
 
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair falls below one of the actor-defined force thresholds (includes the case where this collision pair stops being in contact).
@@ -136,7 +137,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST") var eNOTIFY_THRESHOLD_FORCE_LOST;
+    var eNOTIFY_THRESHOLD_FORCE_LOST = (1<<8);
 
     /**
     \brief Provide contact points in contact reports for this collision pair.
@@ -147,14 +148,14 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxContactPair PxContactPair.extractContacts()
     */
-    @:native("physx::PxPairFlag::eNOTIFY_CONTACT_POINTS") var eNOTIFY_CONTACT_POINTS;
+    var eNOTIFY_CONTACT_POINTS = (1<<9);
 
     /**
     \brief This flag is used to indicate whether this pair generates discrete collision detection contacts. 
 
     \note Contacts are only responded to if eSOLVE_CONTACT is enabled.
     */
-    @:native("physx::PxPairFlag::eDETECT_DISCRETE_CONTACT") var eDETECT_DISCRETE_CONTACT;
+    var eDETECT_DISCRETE_CONTACT = (1<<10);
     
     /**
     \brief This flag is used to indicate whether this pair generates CCD contacts. 
@@ -168,7 +169,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     @see PxRigidBodyFlag::eENABLE_CCD
     @see PxSceneFlag::eENABLE_CCD
     */
-    @:native("physx::PxPairFlag::eDETECT_CCD_CONTACT") var eDETECT_CCD_CONTACT;
+    var eDETECT_CCD_CONTACT = (1<<11);
 
     /**
     \brief Provide pre solver velocities in contact reports for this collision pair.
@@ -182,7 +183,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     
     @see PxSimulationEventCallback.onContact(), PxContactPairVelocity, PxContactPairHeader.extraDataStream
     */
-    @:native("physx::PxPairFlag::ePRE_SOLVER_VELOCITY") var ePRE_SOLVER_VELOCITY;
+    var ePRE_SOLVER_VELOCITY = (1<<12);
     
     /**
     \brief Provide post solver velocities in contact reports for this collision pair.
@@ -192,7 +193,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     
     @see PxSimulationEventCallback.onContact(), PxContactPairVelocity, PxContactPairHeader.extraDataStream
     */
-    @:native("physx::PxPairFlag::ePOST_SOLVER_VELOCITY") var ePOST_SOLVER_VELOCITY;
+    var ePOST_SOLVER_VELOCITY = (1<<13);
     
     /**
     \brief Provide rigid body poses in contact reports for this collision pair.
@@ -208,28 +209,19 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     
     @see PxSimulationEventCallback.onContact(), PxContactPairPose, PxContactPairHeader.extraDataStream
     */
-    @:native("physx::PxPairFlag::eCONTACT_EVENT_POSE") var eCONTACT_EVENT_POSE;
+    var eCONTACT_EVENT_POSE = (1<<14);
 
-    //@:native("physx::PxPairFlag::eNEXT_FREE") var eNEXT_FREE;
+    //var eNEXT_FREE;
 
     /**
     \brief Provided default flag to do simple contact processing for this collision pair.
     */
-    @:native("physx::PxPairFlag::eCONTACT_DEFAULT") var eCONTACT_DEFAULT;
+    var eCONTACT_DEFAULT = eSOLVE_CONTACT | eDETECT_DISCRETE_CONTACT;
 
     /**
     \brief Provided default flag to get commonly used trigger behavior for this collision pair.
     */
-    @:native("physx::PxPairFlag::eTRIGGER_DEFAULT") var eTRIGGER_DEFAULT;
-    
-    @:op(A | B)
-    private inline function or(flag:PxPairFlag):PxPairFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
-    
-    @:from static inline function from(value:PxU16):PxPairFlag { return cast value; }
-    @:to inline function to():PxU16 { var ret:PxU16 = cast this; return ret; }
+    var eTRIGGER_DEFAULT = eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST | eDETECT_DISCRETE_CONTACT;
 }
 
 @:include("PxFiltering.h")
@@ -250,6 +242,7 @@ extern abstract PxPairFlags(PxPairFlag) from PxPairFlag to PxPairFlag {}
 
 @see PxFilterFlags PxSimulationFilterShader PxSimulationFilterCallback
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxFilterFlag", PxU16))
 extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 {
     /**
@@ -263,7 +256,7 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 
     @see PxScene::resetFiltering()
     */
-    @:native("physx::PxFilterFlag::eKILL") var eKILL;
+    var eKILL = (1<<0);
 
     /**
     \brief Ignore the collision pair as long as the bounding volumes of the pair objects overlap or until filtering relevant data changes for one of the collision objects.
@@ -276,14 +269,14 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 
     @see PxFilterData PxFilterObjectAttributes
     */
-    @:native("physx::PxFilterFlag::eSUPPRESS") var eSUPPRESS;
+    var eSUPPRESS = (1<<1);
 
     /**
     \brief Invoke the filter callback (#PxSimulationFilterCallback::pairFound()) for this collision pair.
 
     @see PxSimulationFilterCallback
     */
-    @:native("physx::PxFilterFlag::eCALLBACK") var eCALLBACK;
+    var eCALLBACK = (1<<2);
 
     /**
     \brief Track this collision pair with the filter callback mechanism.
@@ -294,9 +287,9 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 
     @see PxSimulationFilterCallback
     */
-    @:native("physx::PxFilterFlag::eNOTIFY") var eNOTIFY;
+    var eNOTIFY = (1<<3) | eCALLBACK;
 
-    /**
+    /** 
     \brief Provided default to get standard behavior:
 
     The application configure the pair's collision properties once when bounding volume overlap is found and
@@ -306,13 +299,7 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 
     The pair will not be killed or suppressed, so collision detection will be processed
     */
-    @:native("physx::PxFilterFlag::eDEFAULT") var eDEFAULT;
-
-    @:op(A | B)
-    private inline function or(flag:PxFilterFlag):PxFilterFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eDEFAULT = 0;
 }
 
 @:include("PxFiltering.h")
@@ -366,25 +353,26 @@ private extern class PxFilterDataData
 
 @see PxGetFilterObjectType()
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxFilterObjectType"))
 extern enum abstract PxFilterObjectType(PxFilterObjectTypeImpl)
 {
     /**
     \brief A static rigid body
     @see PxRigidStatic
     */
-    @:native("physx::PxFilterObjectType::eRIGID_STATIC") var eRIGID_STATIC;
+    var eRIGID_STATIC;
 
     /**
     \brief A dynamic rigid body
     @see PxRigidDynamic
     */
-    @:native("physx::PxFilterObjectType::eRIGID_DYNAMIC") var eRIGID_DYNAMIC;
+    var eRIGID_DYNAMIC;
 
     /**
     \brief An articulation
     @see PxArticulation
     */
-    @:native("physx::PxFilterObjectType::eARTICULATION") var eARTICULATION;
+    var eARTICULATION;
 
     //brief internal use only!
     //eMAX_TYPE_COUNT = 16,
@@ -683,6 +671,7 @@ class PxSimulationFilterCallbackHx
 
 
 
+@:build(physx.hx.PxEnumBuilder.build("physx::PxPairFilteringMode"))
 extern enum abstract PxPairFilteringMode(PxPairFilteringModeImpl)
 {
     /**
@@ -695,22 +684,22 @@ extern enum abstract PxPairFilteringMode(PxPairFilteringModeImpl)
 
     \note This mode is not mutable, and must be set in PxSceneDesc at scene creation.
     */
-    @:native("physx::PxPairFilteringMode::eKEEP") var eKEEP;
+    var eKEEP;
 
     /**
     Output pair from BP, create interaction marker. Can be later switched to regular interaction.
     */
-    @:native("physx::PxPairFilteringMode::eSUPPRESS") var eSUPPRESS;
+    var eSUPPRESS;
 
     /**
     Don't output pair from BP. Cannot be later switched to regular interaction, needs "resetFiltering" call.
     */
-    @:native("physx::PxPairFilteringMode::eKILL") var eKILL;
+    var eKILL;
 
     /**
     Default is eSUPPRESS for compatibility with previous PhysX versions.
     */
-    @:native("physx::PxPairFilteringMode::eDEFAULT") var eDEFAULT;
+    var eDEFAULT = eSUPPRESS;
 }
 
 @:include("PxFiltering.h")

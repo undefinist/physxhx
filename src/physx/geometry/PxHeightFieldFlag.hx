@@ -4,6 +4,7 @@ package physx.geometry;
 \brief Describes the format of height field samples.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldFormat"))
 extern enum abstract PxHeightFieldFormat(PxHeightFieldFormatImpl)
 {
     /**
@@ -26,7 +27,7 @@ extern enum abstract PxHeightFieldFormat(PxHeightFieldFormatImpl)
 
     @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
     */
-    @:native("physx::PxHeightFieldFormat::eS16_TM") var eS16_TM;
+    var eS16_TM = (1 << 0);
 }
 
 @:include("geometry/PxHeightFieldFlag.h")
@@ -37,6 +38,7 @@ private extern class PxHeightFieldFormatImpl {}
 \brief Determines the tessellation of height field cells.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldTessFlag"))
 extern enum abstract PxHeightFieldTessFlag(PxHeightFieldTessFlagImpl)
 {
     /**
@@ -78,7 +80,7 @@ extern enum abstract PxHeightFieldTessFlag(PxHeightFieldTessFlagImpl)
     
     @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
     */
-    @:native("physx::PxHeightFieldTessFlag::e0TH_VERTEX_SHARED") var e0TH_VERTEX_SHARED;
+    var e0TH_VERTEX_SHARED = (1 << 0);
 }
 
 @:include("geometry/PxHeightFieldFlag.h")
@@ -88,6 +90,7 @@ private extern class PxHeightFieldTessFlagImpl {}
 /**
 \brief Enum with flag values to be used in PxHeightFieldDesc.flags.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxHeightFieldFlag", physx.foundation.PxSimpleTypes.PxU16))
 extern enum abstract PxHeightFieldFlag(PxHeightFieldFlagImpl)
 {
     /**
@@ -100,11 +103,16 @@ extern enum abstract PxHeightFieldFlag(PxHeightFieldFlagImpl)
 
     @see PxHeightFieldDesc.flags
     */
-    @:native("physx::PxHeightFieldFlag::eNO_BOUNDARY_EDGES") var eNO_BOUNDARY_EDGES;
+    var eNO_BOUNDARY_EDGES = (1 << 0);
 }
 
 @:include("geometry/PxHeightFieldFlag.h")
 @:native("physx::PxHeightFieldFlags")
 private extern class PxHeightFieldFlagImpl {}
 
+/**
+\brief collection of set bits defined in PxHeightFieldFlag.
+
+@see PxHeightFieldFlag
+*/
 extern abstract PxHeightFieldFlags(PxHeightFieldFlag) from PxHeightFieldFlag to PxHeightFieldFlag {}

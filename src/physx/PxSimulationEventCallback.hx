@@ -13,12 +13,17 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxContactPairExtraDataItem.type
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxContactPairExtraDataType"))
 extern enum abstract PxContactPairExtraDataType(PxContactPairExtraDataTypeImpl)
 {
-    @:native("physx::PxContactPairExtraDataType::ePRE_SOLVER_VELOCITY") var ePRE_SOLVER_VELOCITY;	//!< see #PxContactPairVelocity
-    @:native("physx::PxContactPairExtraDataType::ePOST_SOLVER_VELOCITY") var ePOST_SOLVER_VELOCITY;	//!< see #PxContactPairVelocity
-    @:native("physx::PxContactPairExtraDataType::eCONTACT_EVENT_POSE") var eCONTACT_EVENT_POSE;	//!< see #PxContactPairPose
-    @:native("physx::PxContactPairExtraDataType::eCONTACT_PAIR_INDEX") var eCONTACT_PAIR_INDEX;  	//!< see #PxContactPairIndex
+    /** see `PxContactPairVelocity` */
+    var ePRE_SOLVER_VELOCITY;
+    /** see `PxContactPairVelocity` */
+    var ePOST_SOLVER_VELOCITY;
+    /** see `PxContactPairPose` */
+    var eCONTACT_EVENT_POSE;
+    /** see `PxContactPairIndex` */
+    var eCONTACT_PAIR_INDEX;
 }
 
 @:include("PxSimulationEventCallback.h")
@@ -153,16 +158,13 @@ extern class PxContactPairExtraDataIterator
 
 @see PxContactPairHeader
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxContactPairHeaderFlag", PxU16))
 extern enum abstract PxContactPairHeaderFlag(PxContactPairHeaderFlagImpl)
 {
-    @:native("physx::PxContactPairHeaderFlag::eREMOVED_ACTOR_0") var eREMOVED_ACTOR_0;			//!< The actor with index 0 has been removed from the scene.
-    @:native("physx::PxContactPairHeaderFlag::eREMOVED_ACTOR_1") var eREMOVED_ACTOR_1;			//!< The actor with index 1 has been removed from the scene.
-
-    @:op(A | B)
-    private inline function or(flag:PxContactPairHeaderFlag):PxContactPairHeaderFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    /** The actor with index 0 has been removed from the scene. */
+    var eREMOVED_ACTOR_0 = (1<<0);
+    /** The actor with index 1 has been removed from the scene. */
+    var eREMOVED_ACTOR_1 = (1<<1);
 }
 
 @:include("PxSimulationEventCallback.h")
@@ -251,17 +253,18 @@ extern class PxContactPairHeader
 
 @see PxContactPair
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxContactPairFlag", PxU16))
 extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 {
     /**
     \brief The shape with index 0 has been removed from the actor/scene.
     */
-    @:native("physx::PxContactPairFlag::eREMOVED_SHAPE_0") var eREMOVED_SHAPE_0;
+    var eREMOVED_SHAPE_0 = (1<<0);
 
     /**
     \brief The shape with index 1 has been removed from the actor/scene.
     */
-    @:native("physx::PxContactPairFlag::eREMOVED_SHAPE_1") var eREMOVED_SHAPE_1;
+    var eREMOVED_SHAPE_1 = (1<<1);
 
     /**
     \brief First actor pair contact.
@@ -270,14 +273,14 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 
     \note: This info is only available if #PxPairFlag::eNOTIFY_TOUCH_FOUND has been declared for the pair.
     */
-    @:native("physx::PxContactPairFlag::eACTOR_PAIR_HAS_FIRST_TOUCH") var eACTOR_PAIR_HAS_FIRST_TOUCH;
+    var eACTOR_PAIR_HAS_FIRST_TOUCH = (1<<2);
 
     /**
     \brief All contact between the actor pair was lost.
 
     All contact between the two actors has been lost, no shape pairs remain touching after the current simulation frame.
     */
-    @:native("physx::PxContactPairFlag::eACTOR_PAIR_LOST_TOUCH") var eACTOR_PAIR_LOST_TOUCH;
+    var eACTOR_PAIR_LOST_TOUCH = (1<<3);
 
     /**
     \brief Internal flag, used by #PxContactPair.extractContacts()
@@ -285,20 +288,14 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
     The applied contact impulses are provided for every contact point. 
     This is the case if #PxPairFlag::eSOLVE_CONTACT has been set for the pair.
     */
-    @:native("physx::PxContactPairFlag::eINTERNAL_HAS_IMPULSES") var eINTERNAL_HAS_IMPULSES;
+    var eINTERNAL_HAS_IMPULSES = (1<<4);
 
     /**
     \brief Internal flag, used by #PxContactPair.extractContacts()
 
     The provided contact point information is flipped with regards to the shapes of the contact pair. This mainly concerns the order of the internal triangle indices.
     */
-    @:native("physx::PxContactPairFlag::eINTERNAL_CONTACTS_ARE_FLIPPED") var eINTERNAL_CONTACTS_ARE_FLIPPED;
-    
-    @:op(A | B)
-    private inline function or(flag:PxContactPairFlag):PxContactPairFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eINTERNAL_CONTACTS_ARE_FLIPPED = (1<<5);
 }
 
 @:include("PxSimulationEventCallback.h")
@@ -505,17 +502,14 @@ extern class PxContactPair
 
 @see PxTriggerPair
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxTriggerPairFlag", PxU8))
 extern enum abstract PxTriggerPairFlag(PxTriggerPairFlagImpl)
 {
-    @:native("physx::PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER") var eREMOVED_SHAPE_TRIGGER;					//!< The trigger shape has been removed from the actor/scene.
-    @:native("physx::PxTriggerPairFlag::eREMOVED_SHAPE_OTHER") var eREMOVED_SHAPE_OTHER;					//!< The shape causing the trigger event has been removed from the actor/scene.
+    /** The trigger shape has been removed from the actor/scene. */
+    var eREMOVED_SHAPE_TRIGGER = (1<<0);
+    /** The shape causing the trigger event has been removed from the actor/scene. */
+    var eREMOVED_SHAPE_OTHER = (1<<1);
     //var eNEXT_FREE							= (1<<2);					//!< For internal use only.
-
-    @:op(A | B)
-    private inline function or(flag:PxTriggerPairFlag):PxTriggerPairFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
 }
 
 @:include("PxSimulationEventCallback.h")

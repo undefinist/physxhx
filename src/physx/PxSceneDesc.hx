@@ -29,13 +29,23 @@ objects, if no static objects are added, moved or removed after the scene has be
 created. If there is no such guarantee (e.g. when streaming parts of the world in and out),
 then the dynamic version is a better choice even for static objects.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxPruningStructureType"))
 extern enum abstract PxPruningStructureType(PxPruningStructureTypeImpl)
 {
-    @:native("physx::PxPruningStructureType::eNONE") var eNONE;					//!< Using a simple data structure
-    @:native("physx::PxPruningStructureType::eDYNAMIC_AABB_TREE") var eDYNAMIC_AABB_TREE;		//!< Using a dynamic AABB tree
-    @:native("physx::PxPruningStructureType::eSTATIC_AABB_TREE") var eSTATIC_AABB_TREE;		//!< Using a static AABB tree
+    /**
+     * Using a simple data structure
+     */
+    var eNONE;
+    /**
+     * Using a dynamic AABB tree
+     */
+    var eDYNAMIC_AABB_TREE;
+    /**
+     * Using a static AABB tree
+     */
+    var eSTATIC_AABB_TREE;
 
-    @:native("physx::PxPruningStructureType::eLAST") var eLAST;
+    var eLAST;
 }
 
 @:include("PxSceneDesc.h")
@@ -61,11 +71,21 @@ this means that refit will then occur during the first scene query following fet
 eCOMMIT_DISABLED_BUILD_DISABLED no further scene query work is executed. The scene queries update needs to be called manually, see PxScene::sceneQueriesUpdate.
 It is recommended to call PxScene::sceneQueriesUpdate right after fetchResults as the pruning structures are not updated. 
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxSceneQueryUpdateMode"))
 extern enum abstract PxSceneQueryUpdateMode(PxSceneQueryUpdateModeImpl)
 {
-    @:native("physx::PxSceneQueryUpdateMode::eBUILD_ENABLED_COMMIT_ENABLED") var eBUILD_ENABLED_COMMIT_ENABLED;		//!< Both scene query build and commit are executed.
-    @:native("physx::PxSceneQueryUpdateMode::eBUILD_ENABLED_COMMIT_DISABLED") var eBUILD_ENABLED_COMMIT_DISABLED;		//!< Scene query build only is executed.
-    @:native("physx::PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED") var eBUILD_DISABLED_COMMIT_DISABLED;		//!< No work is done, no update of scene queries
+    /**
+     * Both scene query build and commit are executed.
+     */
+    var eBUILD_ENABLED_COMMIT_ENABLED;
+    /**
+     * Scene query build only is executed.
+     */
+    var eBUILD_ENABLED_COMMIT_DISABLED;
+    /**
+     * No work is done, no update of scene queries
+     */
+    var eBUILD_DISABLED_COMMIT_DISABLED;
 }
 
 @:include("PxSceneDesc.h")
@@ -88,12 +108,25 @@ than patch friction for scenarios with many contact points.
 
 #PxFrictionType::eFRICTION_COUNT is the total numer of friction models supported by the SDK.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxFrictionType"))
 extern enum abstract PxFrictionType(PxFrictionTypeImpl)
 {
-    @:native("physx::PxFrictionType::ePATCH") var ePATCH;				//!< Select default patch-friction model.
-    @:native("physx::PxFrictionType::eONE_DIRECTIONAL") var eONE_DIRECTIONAL;	//!< Select one directional per-contact friction model.
-    @:native("physx::PxFrictionType::eTWO_DIRECTIONAL") var eTWO_DIRECTIONAL;	//!< Select two directional per-contact friction model.
-    @:native("physx::PxFrictionType::eFRICTION_COUNT") var eFRICTION_COUNT;		//!< The total number of friction models supported by the SDK.
+    /**
+     * Select default patch-friction model.
+     */
+    var ePATCH;
+    /**
+     * Select one directional per-contact friction model.
+     */
+    var eONE_DIRECTIONAL;
+    /**
+     * Select two directional per-contact friction model.
+     */
+    var eTWO_DIRECTIONAL;
+    /**
+     * The total number of friction models supported by the SDK.
+     */
+    var eFRICTION_COUNT;
 }
 
 @:include("PxSceneDesc.h")
@@ -108,10 +141,17 @@ private extern class PxFrictionTypeImpl {}
 
 #PxSolverType::eTGS selects a non linear iterative solver. This kind of solver can lead to improved convergence and handle large mass ratios, long chains and jointed systems better. It is slightly more expensive than the default solver and can introduce more energy to correct joint and contact errors.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxSolverType"))
 extern enum abstract PxSolverType(PxSolverTypeImpl)
 {
-    @:native("physx::PxSolverType::ePGS") var ePGS;			//!< Default Projected Gauss-Seidel iterative solver
-    @:native("physx::PxSolverType::eTGS") var eTGS;			//!< Temporal Gauss-Seidel solver
+    /**
+     * Default Projected Gauss-Seidel iterative solver
+     */
+    var ePGS;
+    /**
+     * Temporal Gauss-Seidel solver
+     */
+    var eTGS;
 }
 
 @:include("PxSceneDesc.h")
@@ -124,6 +164,7 @@ private extern class PxSolverTypeImpl {}
 
 @see PxScene
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxSceneFlag", PxU32))
 extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 {
     /**
@@ -138,7 +179,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default:</b> False
     */
-    @:native("physx::PxSceneFlag::eENABLE_ACTIVE_ACTORS") var eENABLE_ACTIVE_ACTORS;
+    var eENABLE_ACTIVE_ACTORS = (1 << 0);
 
     /**
     \brief Enables a second broad phase check after integration that makes it possible to prevent objects from tunneling through eachother.
@@ -152,7 +193,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     @see PxRigidBodyFlag::eENABLE_CCD, PxPairFlag::eDETECT_CCD_CONTACT, eDISABLE_CCD_RESWEEP
     */
-    @:native("physx::PxSceneFlag::eENABLE_CCD") var eENABLE_CCD;
+    var eENABLE_CCD = (1 << 1);
 
     /**
     \brief Enables a simplified swept integration strategy, which sacrifices some accuracy for improved performance.
@@ -173,7 +214,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     @see PxRigidBodyFlag::eENABLE_CCD, PxPairFlag::eDETECT_CCD_CONTACT, eENABLE_CCD
     */
-    @:native("physx::PxSceneFlag::eDISABLE_CCD_RESWEEP") var eDISABLE_CCD_RESWEEP;
+    var eDISABLE_CCD_RESWEEP = (1 << 2);
 
     /**
     \brief Enable adaptive forces to accelerate convergence of the solver. 
@@ -182,7 +223,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default:</b> false
     */
-    @:native("physx::PxSceneFlag::eADAPTIVE_FORCE") var eADAPTIVE_FORCE;
+    var eADAPTIVE_FORCE = (1 << 3);
 
     /**
     \brief Enable GJK-based distance collision detection system.
@@ -191,7 +232,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default:</b> true
     */
-    @:native("physx::PxSceneFlag::eENABLE_PCM") var eENABLE_PCM;
+    var eENABLE_PCM = (1 << 6);
 
     /**
     \brief Disable contact report buffer resize. Once the contact buffer is full, the rest of the contact reports will 
@@ -201,7 +242,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     
     <b>Default:</b> false
     */
-    @:native("physx::PxSceneFlag::eDISABLE_CONTACT_REPORT_BUFFER_RESIZE") var eDISABLE_CONTACT_REPORT_BUFFER_RESIZE;
+    var eDISABLE_CONTACT_REPORT_BUFFER_RESIZE = (1 << 7);
 
     /**
     \brief Disable contact cache.
@@ -213,7 +254,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default:</b> false
     */
-    @:native("physx::PxSceneFlag::eDISABLE_CONTACT_CACHE") var eDISABLE_CONTACT_CACHE;
+    var eDISABLE_CONTACT_CACHE = (1 << 8);
 
     /**
     \brief Require scene-level locking
@@ -230,7 +271,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     
     <b>Default:</b> false
     */
-    @:native("physx::PxSceneFlag::eREQUIRE_RW_LOCK") var eREQUIRE_RW_LOCK;
+    var eREQUIRE_RW_LOCK = (1 << 9);
 
     /**
     \brief Enables additional stabilization pass in solver
@@ -239,7 +280,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     Note that this flag is not mutable and must be set in PxSceneDesc at scene creation. Also, this is an experimental feature which does result in some loss of momentum.
     */
-    @:native("physx::PxSceneFlag::eENABLE_STABILIZATION") var eENABLE_STABILIZATION;
+    var eENABLE_STABILIZATION = (1 << 10);
 
     /**
     \brief Enables average points in contact manifolds
@@ -249,7 +290,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     Note that this flag is not mutable and must be set in PxSceneDesc at scene creation.
     */
-    @:native("physx::PxSceneFlag::eENABLE_AVERAGE_POINT") var eENABLE_AVERAGE_POINT;
+    var eENABLE_AVERAGE_POINT = (1 << 11);
 
     /**
     \brief Do not report kinematics in list of active actors.
@@ -263,7 +304,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default:</b> false
     */
-    @:native("physx::PxSceneFlag::eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS") var eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS;
+    var eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS = (1 << 12);
 
     /*\brief Enables the GPU dynamics pipeline
 
@@ -271,7 +312,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     Note that this flag is not mutable and must be set in PxSceneDesc at scene creation.
     */
-    @:native("physx::PxSceneFlag::eENABLE_GPU_DYNAMICS") var eENABLE_GPU_DYNAMICS;
+    var eENABLE_GPU_DYNAMICS = (1 << 13);
 
     /**
     \brief Provides improved determinism at the expense of performance. 
@@ -294,7 +335,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     <b>Default</b> false
     */
-    @:native("physx::PxSceneFlag::eENABLE_ENHANCED_DETERMINISM") var eENABLE_ENHANCED_DETERMINISM;
+    var eENABLE_ENHANCED_DETERMINISM = (1 << 14);
 
     /**
     \brief Controls processing friction in all solver iterations
@@ -310,15 +351,9 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     \note This flag only has effect with the default solver. The TGS solver always performs friction per-iteration.
     */
-    @:native("physx::PxSceneFlag::eENABLE_FRICTION_EVERY_ITERATION") var eENABLE_FRICTION_EVERY_ITERATION;
+    var eENABLE_FRICTION_EVERY_ITERATION = (1 << 15);
 
-    @:native("physx::PxSceneFlag::eMUTABLE_FLAGS") var eMUTABLE_FLAGS;
-
-    @:op(A | B)
-    private inline function or(flag:PxSceneFlag):PxSceneFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eMUTABLE_FLAGS = eENABLE_ACTIVE_ACTORS|eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS;
 }
 
 @:include("PxSceneDesc.h")

@@ -16,69 +16,61 @@ All these flags apply to both scene queries and geometry queries (PxGeometryQuer
 
 @see PxRaycastHit PxSweepHit PxOverlapHit PxScene.raycast PxScene.sweep PxScene.overlap PxGeometryQuery PxFindFaceIndex
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxHitFlag", PxU16))
 extern enum abstract PxHitFlag(PxHitFlagImpl) 
 {
     /**
      * "position" member of #PxQueryHit is valid
      */
-    @:native("physx::PxHitFlag::ePOSITION") var ePOSITION;
+    var ePOSITION = (1<<0);
     /**
      * "normal" member of #PxQueryHit is valid
      */
-    @:native("physx::PxHitFlag::eNORMAL") var eNORMAL;
+    var eNORMAL = (1<<1);
     /**
      * "u" and "v" barycentric coordinates of #PxQueryHit are valid. Not applicable to sweep queries.
      */
-    @:native("physx::PxHitFlag::eUV") var eUV;
+    var eUV = (1<<3);
     /**
      * Performance hint flag for sweeps when it is known upfront there's no initial overlap.
      * NOTE: using this flag may cause undefined results if shapes are initially overlapping.
      */
-    @:native("physx::PxHitFlag::eASSUME_NO_INITIAL_OVERLAP") var eASSUME_NO_INITIAL_OVERLAP;
+    var eASSUME_NO_INITIAL_OVERLAP = (1<<4);
     /**
      * Report all hits for meshes rather than just the first. Not applicable to sweep queries.
      */
-    @:native("physx::PxHitFlag::eMESH_MULTIPLE") var eMESH_MULTIPLE;
+    var eMESH_MULTIPLE = (1<<5);
     /**
      * Report any first hit for meshes. If neither eMESH_MULTIPLE nor eMESH_ANY is specified,
      * a single closest hit will be reported for meshes.
      */
-    @:native("physx::PxHitFlag::eMESH_ANY") var eMESH_ANY;
+    var eMESH_ANY = (1<<6);
     /**
      * Report hits with back faces of mesh triangles. Also report hits for raycast
      * originating on mesh surface and facing away from the surface normal. Not applicable to sweep queries.
      * Please refer to the user guide for heightfield-specific differences.
      */
-    @:native("physx::PxHitFlag::eMESH_BOTH_SIDES") var eMESH_BOTH_SIDES;
+    var eMESH_BOTH_SIDES = (1<<7);
     /**
      * Use more accurate but slower narrow phase sweep tests.
      * May provide better compatibility with PhysX 3.2 sweep behavior.
      */
-    @:native("physx::PxHitFlag::ePRECISE_SWEEP") var ePRECISE_SWEEP;
+    var ePRECISE_SWEEP = (1<<8);
     /**
      * Report the minimum translation depth, normal and contact point.
      */
-    @:native("physx::PxHitFlag::eMTD") var eMTD;
+    var eMTD = (1<<9);
     /**
      * "face index" member of #PxQueryHit is valid
      */
-    @:native("physx::PxHitFlag::eFACE_INDEX") var eFACE_INDEX;
+    var eFACE_INDEX = (1<<10);
+
+    var eDEFAULT = ePOSITION | eNORMAL | eFACE_INDEX;
+
     /**
-     * = `ePOSITION | eNORMAL | eFACE_INDEX`
-     */
-    @:native("physx::PxHitFlag::eDEFAULT") var eDEFAULT;
-    /**
-     * = `eMESH_MULTIPLE | eMESH_BOTH_SIDES | eASSUME_NO_INITIAL_OVERLAP | ePRECISE_SWEEP`
-     *
      * Only this subset of flags can be modified by pre-filter. Other modifications will be discarded.
      */
-    @:native("physx::PxHitFlag::eMODIFIABLE_FLAGS") var eMODIFIABLE_FLAGS;
-    
-    @:op(A | B)
-    private inline function or(flag:PxHitFlag):PxHitFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eMODIFIABLE_FLAGS = eMESH_MULTIPLE | eMESH_BOTH_SIDES | eASSUME_NO_INITIAL_OVERLAP | ePRECISE_SWEEP;
 }
 
 @:include("PxQueryReport.h")

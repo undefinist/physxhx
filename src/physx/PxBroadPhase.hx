@@ -22,23 +22,18 @@ of eMBP when a lot of objects are moving. While eSAP can remain faster when most
 sleeping and eMBP can remain faster when it uses a large number of properly-defined regions,
 eABP often gives the best performance on average and the best memory usage.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxBroadPhaseType"))
 extern enum abstract PxBroadPhaseType(PxBroadPhaseTypeImpl)
 {
-    /**
-     * 3-axes sweep-and-prune
-     */
-    @:native("physx::PxBroadPhaseType::eSAP") var eSAP;
-    /**
-     * Multi box pruning
-     */
-    @:native("physx::PxBroadPhaseType::eMBP") var eMBP;
-    /**
-     * Automatic box pruning
-     */
-    @:native("physx::PxBroadPhaseType::eABP") var eABP;
+    /** 3-axes sweep-and-prune */
+    var eSAP;
+    /** Multi box pruning */
+    var eMBP;
+    /** Automatic box pruning */
+    var eABP;
 
-    @:native("physx::PxBroadPhaseType::eGPU") var eGPU;
-    @:native("physx::PxBroadPhaseType::eLAST") var eLAST;
+    var eGPU;
+    var eLAST;
 }
 
 @:include("PxBroadPhase.h")

@@ -17,16 +17,18 @@ import physx.foundation.PxBase;
  in terms of cooking performance and runtime performance, but it is currently only available on platforms supporting the
  SSE2 instuction set.
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxMeshMidPhase"))
 extern enum abstract PxMeshMidPhase(PxMeshMidPhaseImpl) 
 {
     /**
      * Default midphase mesh structure, as used up to PhysX 3.3
      */
-    @:native("physx::PxMeshMidPhase::eBVH33") var eBVH33;
+    var eBVH33 = 0;
     /**
      * Default midphase mesh structure, as used up to PhysX 3.4
      */
-    @:native("physx::PxMeshMidPhase::eBVH34") var eBVH34;
+	var eBVH34 = 1;
+	var eLAST;
 }
 
 @:include("geometry/PxTriangleMesh.h")
@@ -38,16 +40,17 @@ private extern class PxMeshMidPhaseImpl {}
 
 Used in ::PxTriangleMeshFlags.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxTriangleMeshFlag", PxU8))
 extern enum abstract PxTriangleMeshFlag(PxTriangleMeshFlagImpl) 
 {
     /**
      * The triangle mesh has 16bits vertex indices.
      */
-    @:native("physx::PxTriangleMeshFlag::e16_BIT_INDICES") var e16_BIT_INDICES;
+    var e16_BIT_INDICES = (1<<1);
     /**
      * The triangle mesh has adjacency information build.
      */
-    @:native("physx::PxTriangleMeshFlag::eADJACENCY_INFO") var eADJACENCY_INFO;
+    var eADJACENCY_INFO = (1<<2);
 }
 
 @:include("geometry/PxTriangleMesh.h")

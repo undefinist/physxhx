@@ -7,6 +7,7 @@ import physx.common.PxCoreUtilityTypes;
 
 Used in ::PxMeshGeometryFlags.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxMeshGeometryFlag", physx.foundation.PxSimpleTypes.PxU8))
 extern enum abstract PxMeshGeometryFlag(PxMeshGeometryFlagImpl)
 {
     /**
@@ -14,7 +15,7 @@ extern enum abstract PxMeshGeometryFlag(PxMeshGeometryFlagImpl)
      * This flag is currently only used for raycasts and sweeps (it is ignored for overlap queries).
      * For detailed specifications of this flag for meshes and heightfields please refer to the Geometry Query section of the user guide.
      */
-    @:native("physx::PxMeshGeometryFlag::eDOUBLE_SIDED") var eDOUBLE_SIDED;
+    var eDOUBLE_SIDED = (1<<1);
 }
 
 @:include("geometry/PxTriangleMeshGeometry.h")

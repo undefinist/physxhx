@@ -8,15 +8,13 @@ import physx.foundation.PxSimpleTypes;
 
 Used in ::PxConvexMeshGeometryFlags.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxConvexMeshGeometryFlag", PxU8))
 extern enum abstract PxConvexMeshGeometryFlag(PxConvexMeshGeometryFlagImpl)
 {
     /**
      * Use tighter (but more expensive to compute) bounds around the convex geometry.
      */
-    @:native("physx::PxConvexMeshGeometryFlag::eTIGHT_BOUNDS") var eTIGHT_BOUNDS;
-
-    @:from static inline function from(value:PxU8):PxConvexMeshGeometryFlag { return cast value; }
-    @:to inline function to():PxU8 { return cast this; }
+    var eTIGHT_BOUNDS = (1<<0);
 }
 
 @:include("geometry/PxConvexMeshGeometry.h")

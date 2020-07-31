@@ -19,6 +19,7 @@ import physx.PxFiltering;
 
 @see PxShape PxShape.setFlag()
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxShapeFlag", PxU8))
 extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 {
     /**
@@ -33,12 +34,12 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 
     @see PxSimulationEventCallback.onContact() PxScene.setSimulationEventCallback() PxShape.setFlag(), PxShape.setFlags()
     */
-    @:native("physx::PxShapeFlag::eSIMULATION_SHAPE") var eSIMULATION_SHAPE;
+    var eSIMULATION_SHAPE = (1<<0);
 
     /**
     \brief The shape will partake in scene queries (ray casts, overlap tests, sweeps, ...).
     */
-    @:native("physx::PxShapeFlag::eSCENE_QUERY_SHAPE") var eSCENE_QUERY_SHAPE;
+    var eSCENE_QUERY_SHAPE = (1<<1);
 
     /**
     \brief The shape is a trigger which can send reports whenever other shapes enter/leave its volume.
@@ -60,20 +61,14 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 
     @see PxSimulationEventCallback.onTrigger() PxScene.setSimulationEventCallback() PxShape.setFlag(), PxShape.setFlags()
     */
-    @:native("physx::PxShapeFlag::eTRIGGER_SHAPE") var eTRIGGER_SHAPE;
+    var eTRIGGER_SHAPE = (1<<2);
 
     /**
     \brief Enable debug renderer for this shape
 
     @see PxScene.getRenderBuffer() PxRenderBuffer PxVisualizationParameter
     */
-	@:native("physx::PxShapeFlag::eVISUALIZATION") var eVISUALIZATION;
-	
-	@:op(A | B)
-    private inline function or(flag:PxShapeFlag):PxShapeFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-	}
+	var eVISUALIZATION = (1<<3);
 }
 
 @:include("PxShape.h")

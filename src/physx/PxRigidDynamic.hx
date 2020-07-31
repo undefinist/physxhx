@@ -8,20 +8,15 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxRigidDynamic.setRigidDynamicLockFlag(), PxRigidBody.getRigidDynamicLockFlags()
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxRigidDynamicLockFlag", PxU8))
 extern enum abstract PxRigidDynamicLockFlag(PxRigidDynamicLockFlagImpl)
 {
-    @:native("physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_X") var eLOCK_LINEAR_X;
-    @:native("physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Y") var eLOCK_LINEAR_Y;
-    @:native("physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z") var eLOCK_LINEAR_Z;
-    @:native("physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_X") var eLOCK_ANGULAR_X;
-    @:native("physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y") var eLOCK_ANGULAR_Y;
-	@:native("physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z") var eLOCK_ANGULAR_Z;
-	
-	@:op(A | B)
-    private inline function or(flag:PxRigidDynamicLockFlag):PxRigidDynamicLockFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eLOCK_LINEAR_X = (1 << 0);
+    var eLOCK_LINEAR_Y = (1 << 1);
+    var eLOCK_LINEAR_Z = (1 << 2);
+    var eLOCK_ANGULAR_X = (1 << 3);
+    var eLOCK_ANGULAR_Y = (1 << 4);
+	var eLOCK_ANGULAR_Z = (1 << 5);
 }
 
 @:include("PxRigidDynamic.h")

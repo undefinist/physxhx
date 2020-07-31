@@ -118,6 +118,10 @@ class Test
 
     public function initPhysics()
     {
+        var test:Int = PxPairFlag.eSOLVE_CONTACT
+            | PxPairFlag.eDETECT_DISCRETE_CONTACT
+            | PxPairFlag.eNOTIFY_TOUCH_FOUND;
+
         gFoundation = PxFoundation.create(PX_PHYSICS_VERSION, gAllocator, gErrorCallback);
 
         gPvd = PxPvd.create(gFoundation);

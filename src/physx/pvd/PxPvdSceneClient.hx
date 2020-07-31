@@ -7,32 +7,27 @@ import physx.foundation.PxSimpleTypes;
 /**
 \brief types of instrumentation that PVD can do.
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPvdSceneFlag", PxU8))
 extern enum abstract PxPvdSceneFlag(PxPvdSceneFlagImpl)
 {
     /**
      * Transmits contact stream to PVD.
      */
-    @:native("physx::PxPvdSceneFlag::eTRANSMIT_CONTACTS") var eTRANSMIT_CONTACTS;
+    var eTRANSMIT_CONTACTS = (1 << 0);
 
     /**
      * Transmits scene query stream to PVD.
      */
-    @:native("physx::PxPvdSceneFlag::eTRANSMIT_SCENEQUERIES") var eTRANSMIT_SCENEQUERIES;
+    var eTRANSMIT_SCENEQUERIES = (1 << 1);
 
     /**
      * Transmits constraints visualize stream to PVD.
      */
-    @:native("physx::PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS") var eTRANSMIT_CONSTRAINTS;
-
-    @:op(A | B)
-    private inline function or(flag:PxPvdSceneFlag):PxPvdSceneFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eTRANSMIT_CONSTRAINTS = (1 << 2);
 }
 
 @:include("pvd/PxPvdSceneClient.h")
-@:native("cpp::Struct<physx::PxPvdSceneFlag::Enum, ::cpp::EnumHandler>")
+@:native("physx::PxPvdSceneFlags")
 private extern class PxPvdSceneFlagImpl {}
 
 /**

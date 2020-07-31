@@ -17,6 +17,7 @@ for further details.
 
 @see PxScene.setVisualizationParameter() PxScene.getVisualizationParameter() PxScene.getRenderBuffer()
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxVisualizationParameter"))
 extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 {
 /* RigidBody-related parameters  */
@@ -46,13 +47,13 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
     <b>Range:</b> [0, PX_MAX_F32)<br>
     <b>Default:</b> 0
     */
-    @:native("physx::PxVisualizationParameter::eSCALE") var eSCALE;
+    var eSCALE;
 
     
     /**
     \brief Visualize the world axes.
     */
-    @:native("physx::PxVisualizationParameter::eWORLD_AXES") var eWORLD_AXES;
+    var eWORLD_AXES;
     
 /* Body visualizations */
 
@@ -61,7 +62,7 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 
     @see PxActor.globalPose PxActor
     */
-    @:native("physx::PxVisualizationParameter::eBODY_AXES") var eBODY_AXES;
+    var eBODY_AXES;
     
     /**
     \brief Visualize a body's mass axes.
@@ -72,21 +73,21 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 
     @see PxBodyDesc.massLocalPose PxActor
     */
-    @:native("physx::PxVisualizationParameter::eBODY_MASS_AXES") var eBODY_MASS_AXES;
+    var eBODY_MASS_AXES;
     
     /**
     \brief Visualize the bodies linear velocity.
 
     @see PxBodyDesc.linearVelocity PxActor
     */
-    @:native("physx::PxVisualizationParameter::eBODY_LIN_VELOCITY") var eBODY_LIN_VELOCITY;
+    var eBODY_LIN_VELOCITY;
     
     /**
     \brief Visualize the bodies angular velocity.
 
     @see PxBodyDesc.angularVelocity PxActor
     */
-    @:native("physx::PxVisualizationParameter::eBODY_ANG_VELOCITY") var eBODY_ANG_VELOCITY;
+    var eBODY_ANG_VELOCITY;
 
 
 /* Contact visualisations */
@@ -94,22 +95,22 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
     /**
     \brief  Visualize contact points. Will enable contact information.
     */
-    @:native("physx::PxVisualizationParameter::eCONTACT_POINT") var eCONTACT_POINT;
+    var eCONTACT_POINT;
     
     /**
     \brief Visualize contact normals. Will enable contact information.
     */
-    @:native("physx::PxVisualizationParameter::eCONTACT_NORMAL") var eCONTACT_NORMAL;
+    var eCONTACT_NORMAL;
     
     /**
     \brief  Visualize contact errors. Will enable contact information.
     */
-    @:native("physx::PxVisualizationParameter::eCONTACT_ERROR") var eCONTACT_ERROR;
+    var eCONTACT_ERROR;
     
     /**
     \brief Visualize Contact forces. Will enable contact information.
     */
-    @:native("physx::PxVisualizationParameter::eCONTACT_FORCE") var eCONTACT_FORCE;
+    var eCONTACT_FORCE;
 
     
     /**
@@ -117,88 +118,88 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 
     @see PxRigidStatic PxRigidDynamic PxArticulationLink
     */
-    @:native("physx::PxVisualizationParameter::eACTOR_AXES") var eACTOR_AXES;
+    var eACTOR_AXES;
 
     
     /**
     \brief Visualize bounds (AABBs in world space)
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_AABBS") var eCOLLISION_AABBS;
+    var eCOLLISION_AABBS;
     
     /**
     \brief Shape visualization
 
     @see PxShape
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_SHAPES") var eCOLLISION_SHAPES;
+    var eCOLLISION_SHAPES;
     
     /**
     \brief Shape axis visualization
 
     @see PxShape
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_AXES") var eCOLLISION_AXES;
+    var eCOLLISION_AXES;
 
     /**
     \brief Compound visualization (compound AABBs in world space)
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_COMPOUNDS") var eCOLLISION_COMPOUNDS;
+    var eCOLLISION_COMPOUNDS;
 
     /**
     \brief Mesh & convex face normals
 
     @see PxTriangleMesh PxConvexMesh
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_FNORMALS") var eCOLLISION_FNORMALS;
+    var eCOLLISION_FNORMALS;
     
     /**
     \brief Active edges for meshes
 
     @see PxTriangleMesh
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_EDGES") var eCOLLISION_EDGES;
+    var eCOLLISION_EDGES;
 
     /**
     \brief Static pruning structures
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_STATIC") var eCOLLISION_STATIC;
+    var eCOLLISION_STATIC;
 
     /**
     \brief Dynamic pruning structures
     */
-    @:native("physx::PxVisualizationParameter::eCOLLISION_DYNAMIC") var eCOLLISION_DYNAMIC;
+    var eCOLLISION_DYNAMIC;
 
     /**
     \brief Visualizes pairwise state.
     */
-    @:native("physx::PxVisualizationParameter::eDEPRECATED_COLLISION_PAIRS") var eDEPRECATED_COLLISION_PAIRS;
+    var eDEPRECATED_COLLISION_PAIRS;
 
     /**
     \brief Joint local axes
     */
-    @:native("physx::PxVisualizationParameter::eJOINT_LOCAL_FRAMES") var eJOINT_LOCAL_FRAMES;
+    var eJOINT_LOCAL_FRAMES;
 
     /** 
     \brief Joint limits
     */
-    @:native("physx::PxVisualizationParameter::eJOINT_LIMITS") var eJOINT_LIMITS;
+    var eJOINT_LIMITS;
 
     /**
     \brief Visualize culling box
     */
-    @:native("physx::PxVisualizationParameter::eCULL_BOX") var eCULL_BOX;
+    var eCULL_BOX;
 
     /**
     \brief MBP regions
     */
-    @:native("physx::PxVisualizationParameter::eMBP_REGIONS") var eMBP_REGIONS;
+    var eMBP_REGIONS;
 
     /**
     \brief This is not a parameter, it just records the current number of parameters (as maximum(PxVisualizationParameter)+1) for use in loops.
     */
-    @:native("physx::PxVisualizationParameter::eNUM_VALUES") var eNUM_VALUES;
+    var eNUM_VALUES;
 
-    //@:native("physx::PxVisualizationParameter::eFORCE_DWORD") var eFORCE_DWORD;
+    //var eFORCE_DWORD = 0x7fffffff;
 }
 
 @:include("PxVisualizationParameter.h")

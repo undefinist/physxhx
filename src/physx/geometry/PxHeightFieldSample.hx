@@ -8,12 +8,13 @@ import physx.foundation.PxBitAndData;
 
 @see PxHeightFieldSample.materialIndex0 PxHeightFieldSample.materialIndex1
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldMaterial"))
 extern enum abstract PxHeightFieldMaterial(PxHeightFieldMaterialImpl)
 {
     /**
      * A material indicating that the triangle should be treated as a hole in the mesh.
      */
-    @:native("physx::PxHeightFieldMaterial::eHOLE") var eHOLE;
+    var eHOLE = 127;
 }
 
 @:include("geometry/PxHeightFieldSample.h")
@@ -36,7 +37,7 @@ extern abstract PxHeightFieldSample(PxHeightFieldSampleData)
 {
     inline function new()
     {
-        this = cast untyped __cpp__("{}");
+        this = cast untyped __cpp__("physx::PxHeightFieldSample()");
     }
 }
 

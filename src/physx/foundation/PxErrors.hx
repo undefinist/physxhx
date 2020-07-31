@@ -1,37 +1,38 @@
 package physx.foundation;
 
+@:build(physx.hx.PxEnumBuilder.build("physx::PxErrorCode"))
 extern enum abstract PxErrorCode(PxErrorCodeImpl)
 {
-    @:native("physx::PxErrorCode::eNO_ERROR") var eNO_ERROR;
+    var eNO_ERROR = 0;
 
     //! \brief An informational message.
-    @:native("physx::PxErrorCode::eDEBUG_INFO") var eDEBUG_INFO;
+    var eDEBUG_INFO = 1;
 
     //! \brief a warning message for the user to help with debugging
-    @:native("physx::PxErrorCode::eDEBUG_WARNING") var eDEBUG_WARNING;
+    var eDEBUG_WARNING = 2;
 
     //! \brief method called with invalid parameter(s)
-    @:native("physx::PxErrorCode::eINVALID_PARAMETER") var eINVALID_PARAMETER;
+    var eINVALID_PARAMETER = 4;
 
     //! \brief method was called at a time when an operation is not possible
-    @:native("physx::PxErrorCode::eINVALID_OPERATION") var eINVALID_OPERATION;
+    var eINVALID_OPERATION = 8;
 
     //! \brief method failed to allocate some memory
-    @:native("physx::PxErrorCode::eOUT_OF_MEMORY") var eOUT_OF_MEMORY;
+    var eOUT_OF_MEMORY = 16;
 
     /** \brief The library failed for some reason.
     Possibly you have passed invalid values like NaNs, which are not checked for.
     */
-    @:native("physx::PxErrorCode::eINTERNAL_ERROR") var eINTERNAL_ERROR;
+    var eINTERNAL_ERROR = 32;
 
     //! \brief An unrecoverable error, execution should be halted and log output flushed
-    @:native("physx::PxErrorCode::eABORT") var eABORT;
+    var eABORT = 64;
 
     //! \brief The SDK has determined that an operation may result in poor performance.
-    @:native("physx::PxErrorCode::ePERF_WARNING") var ePERF_WARNING;
+    var ePERF_WARNING = 128;
 
     //! \brief A bit mask for including all errors
-    @:native("physx::PxErrorCode::eMASK_ALL") var eMASK_ALL;
+    var eMASK_ALL = -1;
 }
 
 @:include("foundation/PxErrors.h")

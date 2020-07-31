@@ -13,6 +13,7 @@ Flags which control the behavior of an actor.
 
 @see PxActorFlags PxActor PxActor.setActorFlag() PxActor.getActorFlags()
 */
+@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxActorFlag", PxU8))
 extern enum abstract PxActorFlag(PxActorFlagImpl)
 {
     /**
@@ -20,19 +21,19 @@ extern enum abstract PxActorFlag(PxActorFlagImpl)
 
     @see PxScene.getRenderBuffer() PxRenderBuffer PxVisualizationParameter
     */
-    @:native("physx::PxActorFlag::eVISUALIZATION") var eVISUALIZATION;
+    var eVISUALIZATION = (1<<0);
 
     /**
     Disables scene gravity for this actor
     */
-    @:native("physx::PxActorFlag::eDISABLE_GRAVITY") var eDISABLE_GRAVITY;
+    var eDISABLE_GRAVITY = (1<<1);
 
     /**
     Enables the sending of PxSimulationEventCallback::onWake() and PxSimulationEventCallback::onSleep() notify events
 
     @see PxSimulationEventCallback::onWake() PxSimulationEventCallback::onSleep()
     */
-    @:native("physx::PxActorFlag::eSEND_SLEEP_NOTIFIES") var eSEND_SLEEP_NOTIFIES;
+    var eSEND_SLEEP_NOTIFIES = (1<<2);
 
     /**
     Disables simulation for the actor.
@@ -50,13 +51,7 @@ extern enum abstract PxActorFlag(PxActorFlagImpl)
     Raising this flag will set all velocities and the wake counter to 0, clear all forces, clear the kinematic target, put the actor
     to sleep and wake up all touching actors from the previous frame.
     */
-    @:native("physx::PxActorFlag::eDISABLE_SIMULATION") var eDISABLE_SIMULATION;
-    
-    @:op(A | B)
-    private inline function or(flag:PxActorFlag):PxActorFlag
-    {
-        return untyped __cpp__("{0} | {1}", this, flag);
-    }
+    var eDISABLE_SIMULATION = (1<<3);
 }
 
 @:include("PxActor.h")
@@ -74,32 +69,33 @@ extern abstract PxActorFlags(PxActorFlag) from PxActorFlag to PxActorFlag {}
 Identifies each type of actor.
 @see PxActor 
 */
+@:build(physx.hx.PxEnumBuilder.build("physx::PxActorType"))
 extern enum abstract PxActorType(PxActorTypeImpl)
 {
     /**
     A static rigid body
     @see PxRigidStatic
     */
-    @:native("physx::PxActorType::eRIGID_STATIC") var eRIGID_STATIC;
+    var eRIGID_STATIC;
 
     /**
     A dynamic rigid body
     @see PxRigidDynamic
     */
-    @:native("physx::PxActorType::eRIGID_DYNAMIC") var eRIGID_DYNAMIC;
+    var eRIGID_DYNAMIC;
     
     /**
     An articulation link
     @see PxArticulationLink
     */
-    @:native("physx::PxActorType::eARTICULATION_LINK") var eARTICULATION_LINK;
+    var eARTICULATION_LINK;
 
     // /**
     // internal use only!
     // */
-    // @:native("physx::PxActorType::eACTOR_COUNT") var eACTOR_COUNT;
+    // var eACTOR_COUNT;
 
-    // @:native("physx::PxActorType::eACTOR_FORCE_DWORD") var eACTOR_FORCE_DWORD;
+    // var eACTOR_FORCE_DWORD = 0x7fffffff;
 }
 
 @:include("PxActor.h")
