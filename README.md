@@ -15,7 +15,7 @@ This library works with the Haxe cpp target only.
 This library was written with the following in mind:
 - Write bindings in a way that allow natural Haxe expressions.
   - e.g. Using `new ExternClass` instead of `ExternClass.create` wherever possible & sensible.
-  - As well as operator overloads for haxe classes.
+  - As well as operator overloads for mathematical structures such as `PxVec3` and `PxQuat`.
 - Maintain original physx folder layout and documentation wherever possible & sensible.
   - To aid in development and not have to keep the docs open all the time.
 - To do this we have to write the bindings *manually*.
@@ -60,7 +60,7 @@ Other features include:
   - For foreign threads to cooperate with Haxe, we have to attach/detach to/from Haxe GC.
   - See modification of [ExtCpuWorkerThread](https://github.com/NVIDIAGameWorks/PhysX/blob/4.1/physx/source/physxextensions/src/ExtCpuWorkerThread.cpp) => [ExtCpuWorkerThreadHx](src/linc/include/ExtCpuWorkerThreadHx.cpp).
 
-### Example Usage
+### Usage
 
 See [test/Main.hx](test/Main.hx). Build with `build.hxml` with cwd in `test/`.
 
@@ -187,7 +187,7 @@ class Test
 
 ### Precompiled libs and dlls
 
-The libs and dlls included is compiled by yours truly on a Windows x64 machine, in Visual Studio 2019.
+The libs and dlls included are compiled on a Windows x64 machine, in Visual Studio 2019.
 
 As per [build guidelines](https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/BuildingWithPhysX.html) they are compiled with the **checked** build configuration which is recommended for day-to-day development and QA. If you need other build configs (e.g. release), please build them yourself. See the linked page for a guide.
 
@@ -195,6 +195,14 @@ As per [build guidelines](https://gameworksdocs.nvidia.com/PhysX/4.1/documentati
 
 Please note that this is my first hxcpp binding project, as well as my first time using PhysX. Therefore there may be things I've mishandled and not taken into account. Furthermore, PhysX is a gigantic project to bind and so there are bound to be many things not done. Still, I hope I've covered the bases. That said, contributions and PRs are highly welcome!
 
+### Alternatives
+
+physxhx was written for a [still very wip 3d engine](https://github.com/undefinist/kappa) I've been working on.
+
+Alternatives for 3d physics:
+- [OimoPhysics](https://github.com/saharan/OimoPhysics)
+- [haxebullet](https://github.com/armory3d/haxebullet)
+
 ### License
 
-The Haxe code is licensed under the MIT License. The headers and minor source modifications are still have the original license intact.
+The Haxe code is licensed under the MIT License. The headers and minor source modifications still have the original license intact.
