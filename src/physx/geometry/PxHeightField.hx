@@ -170,6 +170,4 @@ extern class PxHeightField extends PxBase
 	\return the number of times the heightfield sample data has been modified.
 	*/
 	function getTimestamp():PxU32;
-
-	function getConcreteTypeName():String;
 }

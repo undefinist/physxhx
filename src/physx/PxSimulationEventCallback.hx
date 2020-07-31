@@ -577,22 +577,21 @@ extern class PxConstraintInfo
 private extern class PxSimulationEventCallbackNative {}
 
 /**
-\brief An interface class that the user can implement in order to receive simulation events.
+A base class that the user can extend in order to receive simulation events.
 
-With the exception of onAdvance(), the events get sent during the call to either #PxScene::fetchResults() or 
-#PxScene::flushSimulation() with sendPendingReports=true. onAdvance() gets called while the simulation
-is running (that is between PxScene::simulate(), onAdvance() and PxScene::fetchResults()).
+With the exception of `onAdvance()`, the events get sent during the call to either `PxScene.fetchResults()` or 
+`PxScene.flushSimulation()` with `sendPendingReports=true`. `onAdvance()` gets called while the simulation
+is running (that is between `PxScene.simulate()`, `onAdvance()` and `PxScene.fetchResults()`).
 
-\note SDK state should not be modified from within the callbacks. In particular objects should not
+**Note:** SDK state should not be modified from within the callbacks. In particular objects should not
 be created or destroyed. If state modification is needed then the changes should be stored to a buffer
 and performed after the simulation step.
 
-<b>Threading:</b> With the exception of onAdvance(), it is not necessary to make these callbacks thread safe as 
+**Threading:** With the exception of `onAdvance()`, it is not necessary to make these callbacks thread safe as 
 they will only be called in the context of the user thread.
 
 @see PxScene.setSimulationEventCallback() PxScene.getSimulationEventCallback()
 */
-
 @:headerInclude("PxSimulationEventCallback.h")
 @:headerNamespaceCode("
 class PxSimulationEventCallbackNative : public physx::PxSimulationEventCallback
@@ -631,8 +630,6 @@ class PxSimulationEventCallbackHx
     {
         untyped __cpp__("delete self->_native.ptr");
     }
-
-
     
 	/**
 	\brief This is called when a breakable constraint breaks.
@@ -646,10 +643,10 @@ class PxSimulationEventCallbackHx
 
 	@see PxConstraint PxConstraintDesc.linearBreakForce PxConstraintDesc.angularBreakForce
 	*/
-    public function onConstraintBreak(constraints:Array<PxConstraintInfo>):Void {}
+    public function onConstraintBreak(constraints:haxe.ds.Vector<PxConstraintInfo>):Void {}
     final private function _onConstraintBreak(constraints:cpp.Pointer<PxConstraintInfo>, count:PxU32):Void
     {
-        onConstraintBreak(constraints.toUnmanagedArray(count));
+        onConstraintBreak(constraints.toUnmanagedVector(count));
     }
 
 	/**
@@ -668,10 +665,10 @@ class PxSimulationEventCallbackHx
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
-    public function onWake(actors:Array<PxActor>):Void {}
+    public function onWake(actors:haxe.ds.Vector<PxActor>):Void {}
     final private function _onWake(actors:cpp.Pointer<PxActor>, count:PxU32):Void
     {
-        onWake(actors.toUnmanagedArray(count));
+        onWake(actors.toUnmanagedVector(count));
     }
 
 	/**
@@ -691,10 +688,10 @@ class PxSimulationEventCallbackHx
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
-    public function onSleep(actors:Array<PxActor>):Void {}
+    public function onSleep(actors:haxe.ds.Vector<PxActor>):Void {}
     final private function _onSleep(actors:cpp.Pointer<PxActor>, count:PxU32):Void
     {
-        onSleep(actors.toUnmanagedArray(count));
+        onSleep(actors.toUnmanagedVector(count));
     }
 
 	/**
@@ -713,10 +710,10 @@ class PxSimulationEventCallbackHx
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxContactPair PxPairFlag PxSimulationFilterShader PxSimulationFilterCallback
 	*/
-	public function onContact(pairHeader:PxContactPairHeader, pairs:Array<PxContactPair>):Void {}
+	public function onContact(pairHeader:PxContactPairHeader, pairs:haxe.ds.Vector<PxContactPair>):Void {}
     final private function _onContact(pairHeader:PxContactPairHeader, pairs:cpp.Pointer<PxContactPair>, nbPairs:PxU32):Void
     {
-        onContact(pairHeader, pairs.toUnmanagedArray(nbPairs));
+        onContact(pairHeader, pairs.toUnmanagedVector(nbPairs));
     }
 
 	/**
@@ -732,10 +729,10 @@ class PxSimulationEventCallbackHx
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxPairFlag PxSimulationFilterShader PxShapeFlag PxShape.setFlag()
 	*/
-    public function onTrigger(pairs:Array<PxTriggerPair>):Void {}
+    public function onTrigger(pairs:haxe.ds.Vector<PxTriggerPair>):Void {}
     final private function _onTrigger(pairs:cpp.Pointer<PxTriggerPair>, count:PxU32):Void
     {
-        onTrigger(pairs.toUnmanagedArray(count));
+        onTrigger(pairs.toUnmanagedVector(count));
     }
 
 	// /**

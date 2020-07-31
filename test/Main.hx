@@ -1,14 +1,11 @@
 package;
 
-import physx.PxQueryReport.PxRaycastBuffer;
-import physx.PxQueryReport.PxRaycastHit;
-import physx.PxQueryReport.PxAgain;
-import physx.PxQueryReport.PxRaycastCallbackHx;
 import physx.PxFiltering;
 import physx.PxFoundation;
 import physx.PxMaterial;
 import physx.PxPhysics;
 import physx.PxPhysicsVersion;
+import physx.PxQueryReport;
 import physx.PxRigidDynamic;
 import physx.PxScene;
 import physx.PxSceneDesc;
@@ -52,20 +49,12 @@ class Main
 class SimulationCallback extends PxSimulationEventCallbackHx
 {
     public function new() { super(); }
-    override function onContact(pairHeader:PxContactPairHeader, pairs:Array<PxContactPair>)
+    override function onContact(pairHeader:PxContactPairHeader, pairs:haxe.ds.Vector<PxContactPair>)
     {
         if(pairHeader.actor0.getName() == "Ball")
-            trace((pairHeader.actor0.userData.stringLiteral));
+            trace(pairHeader.actor0.userData.rawInt);
         else if(pairHeader.actor1.getName() == "Ball")
-            trace(pairHeader.actor1.userData);
-    }
-}
-
-class RaycastCallback extends PxRaycastCallbackHx
-{
-    public function new() { super(); }
-    override function processTouches(buffer:cpp.ConstPointer<PxRaycastHit>, nbHits:PxU32):PxAgain {
-        return super.processTouches(buffer, nbHits);
+            trace(pairHeader.actor1.userData.rawInt);
     }
 }
 
@@ -81,8 +70,6 @@ class Test
     static var gAllocator:PxDefaultAllocator = null;
     static var gSimulationCallback:SimulationCallback = new SimulationCallback();
 
-    
-
     @:unreflective
     static function contactReportFilterShader(attributes0:PxFilterObjectAttributes, filterData0:PxFilterData, 
         attributes1:PxFilterObjectAttributes, filterData1:PxFilterData,
@@ -97,6 +84,7 @@ class Test
 
         return PxFilterFlag.eDEFAULT;
     }
+
     public function new() {}
 
     function createDynamic(t:PxTransform, geometry:PxGeometry, velocity:PxVec3):PxRigidDynamic
@@ -105,30 +93,7 @@ class Test
         dyn.setAngularDamping(0.5);
         dyn.setLinearVelocity(velocity);
         dyn.setName("Ball");
-        dyn.userData.stringLiteral = "test user data";
-        //x = dyn.userData;
-
-        // dyn.userData.rawInt = 69;
-        // dyn.userData = 3;
-
-        var anyObj:String = "stringObj";
-        dyn.userData = anyObj; // stores pointer to anyObj
-        var str:String = dyn.userData; // get what userData points to, as a String
-        anyObj = "changedString";
-        trace(str); // prints stringObj
-        trace((dyn.userData:String)); // prints changedString
-        
-        var anyObj:Int = 123;
-        dyn.userData.rawInt = anyObj; // store 123 in userData. This simply treats the void* as int
-        anyObj = 456;
-        trace(dyn.userData.rawInt); // still prints 123.
-        
-        dyn.userData.stringLiteral = "Player"; // store "Player" as a const char*
-        trace(dyn.userData.stringLiteral); // prints Player
-        
-        dyn.userData.stringLiteral = str; // stores internal data of str, which may get GC'ed and data overwritten
-        str = "modifiedString";
-        trace(dyn.userData.stringLiteral); // still prints stringObj
+        dyn.userData.rawInt = 42; // see physx.hx.PxUserData
 
         gScene.addActor(dyn);
         return dyn;

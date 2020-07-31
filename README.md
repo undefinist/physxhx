@@ -15,9 +15,10 @@ This library works with the Haxe cpp target only.
 This library was written with the following in mind:
 - Write bindings in a way that allow natural Haxe expressions.
   - e.g. Using `new ExternClass` instead of `ExternClass.create` wherever possible & sensible.
-  - To do this we have to write it *manually*.
+  - As well as operator overloads for haxe classes.
 - Maintain original physx folder layout and documentation wherever possible & sensible.
   - To aid in development and not have to keep the docs open all the time.
+- To do this we have to write the bindings *manually*.
 
 Other features include:
 - Callbacks implemented as a base class in Haxe to extend, to write the behavior in Haxe.

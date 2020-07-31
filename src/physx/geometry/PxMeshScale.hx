@@ -40,6 +40,9 @@ extern abstract PxMeshScale(PxMeshScaleData)
         this = PxMeshScaleData.create(s, r);
     }
 
+    /**
+     * Identity scale and rotation
+     */
     static inline function identity():PxMeshScale
     {
         return cast PxMeshScaleData.create();

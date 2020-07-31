@@ -47,7 +47,7 @@ extern class PxBase
     
 	\return	Class name of most derived type of this object.
 	*/
-    public function getConcreteTypeName():String;
+    public function getConcreteTypeName():cpp.ConstCharStar;
 
 	/**
     Returns concrete type of object.

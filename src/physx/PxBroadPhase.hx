@@ -45,44 +45,91 @@ extern enum abstract PxBroadPhaseType(PxBroadPhaseTypeImpl)
 @:native("physx::PxBroadPhaseType::Enum")
 private extern class PxBroadPhaseTypeImpl {}
 
+
+
+@:native("::cpp::Reference<physx::PxBroadPhaseCallbackNative>")
+private extern class PxBroadPhaseCallbackNative {}
+
 /**
-\brief Broad-phase callback to receive broad-phase related events.
-
-Each broadphase callback object is associated with a PxClientID. It is possible to register different
-callbacks for different clients. The callback functions are called this way:
-- for shapes/actors, the callback assigned to the actors' clients are used
-- for aggregates, the callbacks assigned to clients from aggregated actors  are used
-
-\note SDK state should not be modified from within the callbacks. In particular objects should not
-be created or destroyed. If state modification is needed then the changes should be stored to a buffer
-and performed after the simulation step.
-
-<b>Threading:</b> It is not necessary to make this class thread safe as it will only be called in the context of the
-user thread.
-
-@see PxSceneDesc PxScene.setBroadPhaseCallback() PxScene.getBroadPhaseCallback()
-*/
+ * Broad-phase callback to receive broad-phase related events.
+ * 
+ * Each broadphase callback object is associated with a `PxClientID`. It is possible to register different
+ * callbacks for different clients. The callback functions are called this way:
+ * - for shapes/actors, the callback assigned to the actors' clients are used
+ * - for aggregates, the callbacks assigned to clients from aggregated actors are used
+ * 
+ * **Note:** SDK state should not be modified from within the callbacks. In particular objects should not
+ * be created or destroyed. If state modification is needed then the changes should be stored to a buffer
+ * and performed after the simulation step.
+ * 
+ * **Threading:** It is not necessary to make this class thread safe as it will only be called in the context of the
+ * user thread.
+ * 
+ * @see PxSceneDesc PxScene.setBroadPhaseCallback() PxScene.getBroadPhaseCallback()
+ */
+@:headerInclude("PxBroadPhase.h")
+@:headerNamespaceCode("
+class PxBroadPhaseCallbackNative : public physx::PxBroadPhaseCallback
+{
+public:
+    physx::PxBroadPhaseCallbackHx hxHandle;
+    PxBroadPhaseCallbackNative(physx::PxBroadPhaseCallbackHx hxHandle):hxHandle{ hxHandle } {}
+    void onObjectOutOfBounds(PxShape& shape, PxActor& actor);
+    void onObjectOutOfBounds(PxAggregate& aggregate);
+};
+")
+@:cppNamespaceCode("
+void PxBroadPhaseCallbackNative::onObjectOutOfBounds(PxShape& shape, PxActor& actor) { hxHandle->onObjectOutOfBounds(shape, actor); }
+void PxBroadPhaseCallbackNative::onObjectOutOfBounds(PxAggregate& aggregate) { hxHandle->onAggregateOutOfBounds(aggregate); }
+")
 class PxBroadPhaseCallbackHx
 {
-    /**
-    \brief Out-of-bounds notification.
+    @:allow(physx.PxBroadPhaseCallback) @:noCompletion
+    private var _native:PxBroadPhaseCallbackNative;
     
-    This function is called when an object leaves the broad-phase.
+    function new()
+    {
+        _native = untyped __cpp__("new PxBroadPhaseCallbackNative(this)");
+        cpp.vm.Gc.setFinalizer(this, cpp.Function.fromStaticFunction(_release));
+    }
 
-    \param[in] shape	Shape that left the broad-phase bounds
-    \param[in] actor	Owner actor
-    */
+    private static function _release(self:PxBroadPhaseCallbackHx):Void
+    {
+        untyped __cpp__("delete self->_native.ptr");
+    }
+
+    /**
+     * Out-of-bounds notification.
+     * 
+     * This function is called when an object leaves the broad-phase.
+     * 
+     * @param shape Shape that left the broad-phase bounds
+     * @param actor Owner actor
+     */
     function onObjectOutOfBounds(shape:PxShape, actor:PxActor):Void {}
 
     /**
-    \brief Out-of-bounds notification.
-    
-    This function is called when an aggregate leaves the broad-phase.
-
-    \param[in] aggregate	Aggregate that left the broad-phase bounds
-    */
+     * \brief Out-of-bounds notification.
+     *
+     * This function is called when an aggregate leaves the broad-phase.
+     *
+     * @param aggregate Aggregate that left the broad-phase bounds
+     */
     function onAggregateOutOfBounds(aggregate:PxAggregate):Void {}
 }
+
+/**
+ * Assign with a Haxe class that extends `PxBroadPhaseCallbackHx`.
+ */
+@:noCompletion extern abstract PxBroadPhaseCallback(PxBroadPhaseCallbackNative)
+{
+    @:from static inline function from(hxHandle:PxBroadPhaseCallbackHx):PxBroadPhaseCallback
+    {
+        return hxHandle == null ? null : cast hxHandle._native;
+    }
+}
+
+
 
 /**
 \brief "Region of interest" for the broad-phase.
@@ -106,10 +153,17 @@ function can do that for you.
 */
 @:include("PxBroadPhase.h")
 @:native("physx::PxBroadPhaseRegion")
+@:structAccess
 extern class PxBroadPhaseRegion
 {
-    var bounds:PxBounds3;		//!< Region's bounds
-    var userData:physx.hx.PxUserData;	//!< Region's user-provided data
+    /**
+     * Region's bounds
+     */
+    var bounds:PxBounds3;
+    /**
+     * Region's user-provided data
+     */
+    var userData:physx.hx.PxUserData;
 }
 
 /**
@@ -117,13 +171,29 @@ extern class PxBroadPhaseRegion
 */
 @:include("PxBroadPhase.h")
 @:native("physx::PxBroadPhaseRegionInfo")
+@:structAccess
 extern class PxBroadPhaseRegionInfo
 {
-    var region:PxBroadPhaseRegion;				//!< User-provided region data
-    var nbStaticObjects:PxU32;	//!< Number of static objects in the region
-    var nbDynamicObjects:PxU32;	//!< Number of dynamic objects in the region
-    var active:Bool;				//!< True if region is currently used, i.e. it has not been removed
-    var overlap:Bool;			//!< True if region overlaps other regions (regions that are just touching are not considering overlapping)
+    /**
+     * User-provided region data
+     */
+    var region:PxBroadPhaseRegion;
+    /**
+     * Number of static objects in the region
+     */
+    var nbStaticObjects:PxU32;
+    /**
+     * Number of dynamic objects in the region
+     */
+    var nbDynamicObjects:PxU32;
+    /**
+     * True if region is currently used, i.e. it has not been removed
+     */
+    var active:Bool;
+    /**
+     * True if region overlaps other regions (regions that are just touching are not considering overlapping)
+     */
+    var overlap:Bool;
 }
 
 /**
@@ -131,9 +201,19 @@ extern class PxBroadPhaseRegionInfo
 */
 @:include("PxBroadPhase.h")
 @:native("physx::PxBroadPhaseCaps")
+@:structAccess
 extern class PxBroadPhaseCaps
 {
-    var maxNbRegions:PxU32;			//!< Max number of regions supported by the broad-phase
-    var maxNbObjects:PxU32;			//!< Max number of objects supported by the broad-phase
-    var needsPredefinedBounds:Bool;	//!< If true, broad-phase needs 'regions' to work
+    /**
+     * Max number of regions supported by the broad-phase
+     */
+    var maxNbRegions:PxU32;
+    /**
+     * Max number of objects supported by the broad-phase
+     */
+    var maxNbObjects:PxU32;
+    /**
+     * If true, broad-phase needs 'regions' to work
+     */
+    var needsPredefinedBounds:Bool;
 }

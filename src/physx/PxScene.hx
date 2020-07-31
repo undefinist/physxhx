@@ -1,10 +1,9 @@
 package physx;
 
-import physx.foundation.PxTransform;
-import physx.geometry.PxGeometry;
 import physx.PxActor;
 import physx.PxBroadPhase;
 import physx.PxClient.PxClientID;
+import physx.PxContactModifyCallback;
 import physx.PxFiltering;
 import physx.PxQueryFiltering;
 import physx.PxQueryReport;
@@ -16,8 +15,10 @@ import physx.common.PxRenderBuffer;
 import physx.cudamanager.PxCudaContextManager;
 import physx.foundation.PxBounds3;
 import physx.foundation.PxSimpleTypes;
+import physx.foundation.PxTransform;
 import physx.foundation.PxVec3;
 import physx.geometry.PxBVHStructure;
+import physx.geometry.PxGeometry;
 import physx.pvd.PxPvdSceneClient;
 import physx.task.PxCpuDispatcher;
 import physx.task.PxTask;
@@ -656,7 +657,7 @@ extern class PxScene
 
     \param[in] callback Asynchronous user contact modification callback. See #PxContactModifyCallback.
     */
-//function setContactModifyCallback(PxContactModifyCallback* callback):void;
+    function setContactModifyCallback(callback:PxContactModifyCallback):Void;
 
     /**
     \brief Sets a user callback object, which receives callbacks on all CCD contacts generated for specified actors.
@@ -665,7 +666,7 @@ extern class PxScene
 
     \param[in] callback Asynchronous user contact modification callback. See #PxCCDContactModifyCallback.
     */
-//function setCCDContactModifyCallback(PxCCDContactModifyCallback* callback):void;
+    function setCCDContactModifyCallback(callback:PxCCDContactModifyCallback):Void;
 
     /**
     \brief Retrieves the PxContactModifyCallback pointer set with setContactModifyCallback().
@@ -674,7 +675,7 @@ extern class PxScene
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
-//function getContactModifyCallback() const:PxContactModifyCallback*;
+    function getContactModifyCallback():PxContactModifyCallback;
 
     /**
     \brief Retrieves the PxCCDContactModifyCallback pointer set with setContactModifyCallback().
@@ -683,7 +684,7 @@ extern class PxScene
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
-//function getCCDContactModifyCallback() const:PxCCDContactModifyCallback*;
+    function getCCDContactModifyCallback():PxCCDContactModifyCallback;
 
     /**
     \brief Sets a broad-phase user callback object.
@@ -692,7 +693,7 @@ extern class PxScene
 
     \param[in] callback	Asynchronous broad-phase callback. See #PxBroadPhaseCallback.
     */
-//function setBroadPhaseCallback(PxBroadPhaseCallback* callback):void;
+    function setBroadPhaseCallback(callback:PxBroadPhaseCallback):Void;
 
     /**
     \brief Retrieves the PxBroadPhaseCallback pointer set with setBroadPhaseCallback().
@@ -701,7 +702,7 @@ extern class PxScene
 
     @see PxBroadPhaseCallback setBroadPhaseCallback()
     */
-//function getBroadPhaseCallback()	const:PxBroadPhaseCallback*;
+    function getBroadPhaseCallback():PxBroadPhaseCallback;
 
     //@}
     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -764,7 +765,7 @@ extern class PxScene
 
     @see PxSceneDesc.filterCallback PxSimulationFilterCallback
     */
-//function getFilterCallback():PxSimulationFilterCallback;
+    function getFilterCallback():PxSimulationFilterCallback;
 
     /**
     \brief Marks the object to reset interactions and re-run collision filters in the next simulation step.
@@ -1438,15 +1439,21 @@ extern class PxScene
     */
     function getNbBroadPhaseRegions():PxU32;
 
+    @:native("getBroadPhaseRegions") private function _getBroadPhaseRegions(userBuffer:cpp.Pointer<PxBroadPhaseRegionInfo>, bufferSize:PxU32, startIndex:PxU32 = 0):PxU32;
     /**
-    \brief Gets broad-phase regions.
+    Gets broad-phase regions.
 
-    \param[out]	userBuffer	Returned broad-phase regions
-    \param[in]	bufferSize	Size of userBuffer
-    \param[in]	startIndex	Index of first desired region, in [0 ; getNbRegions()[
-    \return Number of written out regions
+    @param	startIndex	Index of first desired region, in [0 ; getNbRegions()[
+    @return Number of written out regions
     */
-//virtual	PxU32					getBroadPhaseRegions(PxBroadPhaseRegionInfo* userBuffer, PxU32 bufferSize, PxU32 startIndex=0) const	= 0;
+    inline function getBroadPhaseRegions(startIndex:PxU32 = 0):Array<PxBroadPhaseRegionInfo>
+    {
+        var buf:Array<PxBroadPhaseRegionInfo> = [];
+        var len = getNbBroadPhaseRegions();
+        buf.resize(len);
+        _getBroadPhaseRegions(cpp.Pointer.ofArray(buf), len, startIndex);
+        return buf;
+    }
 
     /**
     \brief Adds a new broad-phase region.
