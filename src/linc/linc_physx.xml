@@ -2,9 +2,8 @@
 
 <files id='haxe'>
   <section if="windows">
-    <compilerflag value="-I${LINC_PHYSX_PATH}lib/Windows/include" />
+    <compilerflag value="-I${LINC_PHYSX_PATH}lib/include" />
     <compilerflag value="-DNDEBUG" />
-    <!-- <copy to="bin" from="lib/Windows/dll/" /> -->
   </section>
 
   <compilerflag value="-I${LINC_PHYSX_PATH}src/linc/include" />
