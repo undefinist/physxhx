@@ -172,13 +172,15 @@ class PxQueryFilterCallbackNative : public PxQueryFilterCallback
 public:
     PxQueryFilterCallbackHx hxHandle;
     PxQueryFilterCallbackNative(PxQueryFilterCallbackHx hxHandle):hxHandle{ hxHandle } {}
-    PxQueryHitType::Enum preFilter(const PxFilterData& filterData, const PxShape* shape, const PxRigidActor* actor, PxHitFlags& queryFlags);
-    PxQueryHitType::Enum postFilter(const PxFilterData& filterData, const PxQueryHit& hit);
+    PxQueryHitType::Enum preFilter(const PxFilterData& filterData, const PxShape* shape, const PxRigidActor* actor, PxHitFlags& queryFlags) override;
+    PxQueryHitType::Enum postFilter(const PxFilterData& filterData, const PxQueryHit& hit) override;
 };
 ")
 @:cppNamespaceCode("
-PxQueryHitType::Enum PxQueryFilterCallbackNative::preFilter(const PxFilterData& filterData, const PxShape* shape, const PxRigidActor* actor, PxHitFlags& queryFlags) { return hxHandle->preFilter(filterData, shape, actor, queryFlags); }
-PxQueryHitType::Enum PxQueryFilterCallbackNative::postFilter(const PxFilterData& filterData, const PxQueryHit& hit) { return hxHandle->postFilter(filterData, &hit); };
+PxQueryHitType::Enum PxQueryFilterCallbackNative::preFilter(const PxFilterData& filterData, const PxShape* shape, const PxRigidActor* actor, PxHitFlags& queryFlags)
+    { return hxHandle->preFilter(filterData, shape, actor, queryFlags); }
+PxQueryHitType::Enum PxQueryFilterCallbackNative::postFilter(const PxFilterData& filterData, const PxQueryHit& hit)
+    { return hxHandle->postFilter(filterData, &hit); };
 ")
 class PxQueryFilterCallbackHx
 {

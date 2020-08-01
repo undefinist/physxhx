@@ -1,5 +1,8 @@
 package physx;
 
+import physx.geometry.PxConvexMesh;
+import physx.geometry.PxBVHStructure;
+import physx.geometry.PxHeightField;
 import physx.PxShape.PxShapeFlag;
 import physx.PxShape.PxShapeFlags;
 import physx.geometry.PxGeometry;
@@ -98,10 +101,7 @@ extern class PxPhysics
 
     @see PxTriangleMesh PxMeshPreprocessingFlag PxTriangleMesh.release() PxInputStream PxTriangleMeshFlag
     */
-    inline function createTriangleMesh(stream:PxInputStream):PxTriangleMesh
-    {
-        return untyped __cpp__("{0}->createTriangleMesh({1})", this, (cast stream.native() : PxInputStreamNative));
-    }
+    function createTriangleMesh(stream:PxInputStream):PxTriangleMesh;
     
     /**
     \brief Return the number of triangle meshes that currently exist.
@@ -128,26 +128,26 @@ extern class PxPhysics
     // */
     // virtual	PxU32				getTriangleMeshes(PxTriangleMesh** userBuffer, PxU32 bufferSize, PxU32 startIndex=0) const = 0;
 
-    // /**
-    // \brief Creates a heightfield object from previously cooked stream.
+    /**
+    \brief Creates a heightfield object from previously cooked stream.
 
-    // This can then be instanced into #PxShape objects.
+    This can then be instanced into #PxShape objects.
 
-    // \param	[in] stream	The heightfield mesh stream.
-    // \return The new heightfield.
+    \param	[in] stream	The heightfield mesh stream.
+    \return The new heightfield.
 
-    // @see PxHeightField PxHeightField.release() PxInputStream PxRegisterHeightFields
-    // */
-    // virtual PxHeightField*		createHeightField(PxInputStream& stream) = 0;
+    @see PxHeightField PxHeightField.release() PxInputStream PxRegisterHeightFields
+    */
+    function createHeightField(stream:PxInputStream):PxHeightField;
 
-    // /**
-    // \brief Return the number of heightfields that currently exist.
+    /**
+    \brief Return the number of heightfields that currently exist.
 
-    // \return Number of heightfields.
+    \return Number of heightfields.
 
-    // @see getHeightFields()
-    // */
-    // virtual PxU32				getNbHeightFields() const = 0;
+    @see getHeightFields()
+    */
+    function getNbHeightFields():PxU32;
 
     // /**
     // \brief Writes the array of heightfield pointers to a user buffer.
@@ -165,26 +165,26 @@ extern class PxPhysics
     // */
     // virtual	PxU32				getHeightFields(PxHeightField** userBuffer, PxU32 bufferSize, PxU32 startIndex=0) const = 0;
 
-    // /**
-    // \brief Creates a convex mesh object.
+    /**
+    \brief Creates a convex mesh object.
 
-    // This can then be instanced into #PxShape objects.
+    This can then be instanced into #PxShape objects.
 
-    // \param	[in] stream	The stream to load the convex mesh from.
-    // \return The new convex mesh.
+    \param	[in] stream	The stream to load the convex mesh from.
+    \return The new convex mesh.
 
-    // @see PxConvexMesh PxConvexMesh.release() PxInputStream createTriangleMesh() PxConvexMeshGeometry PxShape
-    // */
-    // virtual PxConvexMesh*		createConvexMesh(PxInputStream &stream)					= 0;
+    @see PxConvexMesh PxConvexMesh.release() PxInputStream createTriangleMesh() PxConvexMeshGeometry PxShape
+    */
+    function createConvexMesh(stream:PxInputStream):PxConvexMesh;
 
-    // /**
-    // \brief Return the number of convex meshes that currently exist.
+    /**
+    \brief Return the number of convex meshes that currently exist.
 
-    // \return Number of convex meshes.
+    \return Number of convex meshes.
 
-    // @see getConvexMeshes()
-    // */
-    // virtual PxU32				getNbConvexMeshes() const = 0;
+    @see getConvexMeshes()
+    */
+    function getNbConvexMeshes():PxU32;
 
     // /**
     // \brief Writes the array of convex mesh pointers to a user buffer.
@@ -202,24 +202,24 @@ extern class PxPhysics
     // */
     // virtual	PxU32				getConvexMeshes(PxConvexMesh** userBuffer, PxU32 bufferSize, PxU32 startIndex=0) const = 0;
 
-    // /**
-    // \brief Creates a bounding volume hierarchy structure.
+    /**
+    \brief Creates a bounding volume hierarchy structure.
     
-    // \param	[in] stream	The stream to load the BVH structure from.
-    // \return The new BVH structure.
+    \param	[in] stream	The stream to load the BVH structure from.
+    \return The new BVH structure.
 
-    // @see PxBVHStructure PxInputStream
-    // */
-    // virtual PxBVHStructure*		createBVHStructure(PxInputStream &stream)					= 0;
+    @see PxBVHStructure PxInputStream
+    */
+    function createBVHStructure(stream:PxInputStream):PxBVHStructure;
 
-    // /**
-    // \brief Return the number of bounding volume hierarchy structures that currently exist.
+    /**
+    \brief Return the number of bounding volume hierarchy structures that currently exist.
 
-    // \return Number of bounding volume hierarchy structures.
+    \return Number of bounding volume hierarchy structures.
 
-    // @see getBVHStructures()
-    // */
-    // virtual PxU32				getNbBVHStructures() const = 0;
+    @see getBVHStructures()
+    */
+    function getNbBVHStructures():PxU32;
 
     // /**
     // \brief Writes the array of bounding volume hierarchy structure pointers to a user buffer.

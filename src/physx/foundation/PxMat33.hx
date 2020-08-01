@@ -149,11 +149,10 @@ extern abstract PxMat33(PxMat33Data)
     }
 }
 
-@:include("foundation/Px.h")
 @:include("foundation/PxMat33.h")
 @:native("physx::PxMat33")
 @:structAccess
-private extern class PxMat33Data
+private extern class PxMat33Data implements physx.hx.IncludeHelper<"foundation/Px.h">
 {
     var column0:PxVec3;
     var column1:PxVec3;

@@ -320,7 +320,7 @@ class PxContactModifyCallbackNative : public physx::PxContactModifyCallback
 public:
     physx::PxContactModifyCallbackHx hxHandle;
     PxContactModifyCallbackNative(physx::PxContactModifyCallbackHx hxHandle):hxHandle{ hxHandle } {}
-    void onContactModify(PxContactModifyPair* const pairs, PxU32 count);
+    void onContactModify(PxContactModifyPair* const pairs, PxU32 count) override;
 };
 ")
 @:cppNamespaceCode("
@@ -384,7 +384,7 @@ class PxCCDContactModifyCallbackNative : public physx::PxCCDContactModifyCallbac
 public:
     physx::PxCCDContactModifyCallbackHx hxHandle;
     PxCCDContactModifyCallbackNative(physx::PxCCDContactModifyCallbackHx hxHandle):hxHandle{ hxHandle } {}
-    void onCCDContactModify(PxContactModifyPair* const pairs, PxU32 count);
+    void onCCDContactModify(PxContactModifyPair* const pairs, PxU32 count) override;
 };
 ")
 @:cppNamespaceCode("

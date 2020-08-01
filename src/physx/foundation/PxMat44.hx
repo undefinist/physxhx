@@ -7,10 +7,9 @@ This class is layout-compatible with D3D and OpenGL matrices. More notes on layo
 
 @see PxMat33 PxTransform
 */
-@:include("foundation/Px.h")
 @:include("foundation/PxMat44.h")
 @:native("physx::PxMat44")
-extern class PxMat44
+extern class PxMat44 implements physx.hx.IncludeHelper<"foundation/Px.h">
 {
     
 }

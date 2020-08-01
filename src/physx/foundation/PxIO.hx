@@ -1,25 +1,18 @@
 package physx.foundation;
 
+import haxe.io.BytesInput;
 import haxe.io.Bytes;
 import haxe.io.BytesData;
 
-@:native("::cpp::Struct<physx::foundation::PxInputStreamNative>")
-extern class PxInputStreamNative
-{
-    var haxeDelegate:PxInputStream;
-}
+@:native("::cpp::Reference<physx::foundation::PxInputStreamNative>")
+@:noCompletion extern class PxInputStreamNative {}
 
-@:native("::cpp::Struct<physx::foundation::PxInputDataNative>")
-extern class PxInputDataNative
-{
-    var haxeDelegate:PxInputData;
-}
+@:include("physx/foundation/PxInputDataHx.h")
+@:native("::cpp::Reference<physx::foundation::PxInputDataNative>")
+@:noCompletion extern class PxInputDataNative extends PxInputStreamNative {}
 
-@:native("::cpp::Struct<physx::foundation::PxOutputStreamNative>")
-extern class PxOutputStreamNative
-{
-    var haxeDelegate:PxOutputStream;
-}
+@:native("::cpp::Reference<physx::foundation::PxOutputStreamNative>")
+@:noCompletion extern class PxOutputStreamNative {}
 
 
 
@@ -33,45 +26,43 @@ The user needs to supply a PxInputStream implementation to a number of methods t
 class PxInputStreamNative : public physx::PxInputStream
 {
 public:
-    physx::foundation::PxInputStream haxeDelegate;
-    uint32_t read(void* dest, uint32_t count);
+    PxInputStreamHx hxHandle;
+    PxInputStreamNative(PxInputStreamHx hxHandle):hxHandle{ hxHandle } {}
+    uint32_t read(void* dest, uint32_t count) override;
 };
 ")
 @:cppNamespaceCode("
-uint32_t PxInputStreamNative::read(void* dest, uint32_t count)
-{
-    return haxeDelegate->_read(static_cast<uint8_t*>(dest), count);
-}
+uint32_t PxInputStreamNative::read(void* dest, uint32_t count) { return hxHandle->_read(static_cast<uint8_t*>(dest), count); }
 ")
-class PxInputStream
+class PxInputStreamHx
 {
-    final _native:PxInputStreamNative = null;
-    public function native():Dynamic
+    @:allow(physx.foundation.PxInputStream) @:noCompletion
+    private var _native:PxInputStreamNative;
+    
+    function new()
     {
-        return _native;
+        _native = untyped __cpp__("new PxInputStreamNative(this)");
+        cpp.vm.Gc.setFinalizer(this, cpp.Function.fromStaticFunction(_release));
     }
 
-    public function new()
+    private static function _release(self:PxInputStreamHx):Void
     {
-        _native.haxeDelegate = this;
+        untyped __cpp__("delete self->_native.ptr");
     }
 
-    @:noCompletion @:noDoc @:keep
-    final function _read(dest:cpp.Pointer<cpp.UInt8>, count:cpp.UInt32):cpp.UInt32
+    @:noCompletion @:noDoc
+    final private function _read(dest:cpp.Pointer<cpp.UInt8>, count:cpp.UInt32):cpp.UInt32
     {
-        var bytes:Bytes = Bytes.alloc(count);
-        count = read(bytes);
-        for(i in 0...count)
-            dest[i] = bytes.get(i);
-        return count;
+        var bytes = Bytes.ofData(dest.toUnmanagedArray(count));
+        return read(bytes);
     }
 
     /**
-    Read from the stream. The number of bytes read may be less than the number requested.
-
-    @param data the buffer to fill.
-    @return the number of bytes read from the stream.
-    */
+     * Read from the stream. The number of bytes read may be less than the number requested.
+     * 
+     * @param data the buffer to fill.
+     * @return the number of bytes read from the stream.
+     */
     public function read(data:Bytes):UInt { return 0; }
 }
 
@@ -87,64 +78,70 @@ The user needs to supply a PxInputData implementation to a number of methods to 
 class PxInputDataNative : public physx::PxInputData
 {
 public:
-    physx::foundation::PxInputData haxeDelegate;
-    uint32_t read(void* dest, uint32_t count);
-    uint32_t getLength() const;
-    void seek(uint32_t offset);
-    uint32_t tell();
+    PxInputDataHx hxHandle;
+    PxInputDataNative(PxInputDataHx hxHandle):hxHandle{ hxHandle } {}
+    uint32_t read(void* dest, uint32_t count) override;
+    uint32_t getLength() const override;
+    void seek(uint32_t offset) override;
+    uint32_t tell() const override;
 };
 ")
 @:cppNamespaceCode("
-uint32_t PxInputDataNative::read(void* dest, uint32_t count)
-{
-    return haxeDelegate->_read(static_cast<uint8_t*>(dest), count);
-}
-uint32_t PxInputDataNative::getLength() const
-{
-    return const_cast<physx::foundation::PxInputData&>(haxeDelegate)->getLength();
-}
-void PxInputDataNative::seek(uint32_t offset)
-{
-    return haxeDelegate->seek(offset);
-}
-uint32_t PxInputDataNative::tell()
-{
-    return haxeDelegate->tell();
-}
+uint32_t PxInputDataNative::read(void* dest, uint32_t count) { return hxHandle->_read(static_cast<uint8_t*>(dest), count); }
+uint32_t PxInputDataNative::getLength() const { return const_cast<PxInputDataHx&>(hxHandle)->getLength(); }
+void PxInputDataNative::seek(uint32_t offset) { return hxHandle->seek(offset); }
+uint32_t PxInputDataNative::tell() const { return const_cast<PxInputDataHx&>(hxHandle)->tell(); }
 ")
-class PxInputData extends PxInputStream
+class PxInputDataHx
 {
-    override public function native():Dynamic
+    @:allow(physx.foundation.PxInputStream, physx.foundation.PxInputData) @:noCompletion
+    private var _native:PxInputDataNative;
+    
+    function new()
     {
-        return untyped __cpp__("reinterpret_cast<PxInputDataNative*>(&{0}->_native);", this);
+        _native = untyped __cpp__("new PxInputDataNative(this)");
+        cpp.vm.Gc.setFinalizer(this, cpp.Function.fromStaticFunction(_release));
     }
 
-    public function new()
+    private static function _release(self:PxInputDataHx):Void
     {
-        super();
+        untyped __cpp__("delete self->_native.ptr");
     }
 
     /**
-	\brief return the length of the input data
+     * Return the length of the input data
+     * 
+     * @return size in bytes of the input data
+     */
+    public function getLength():cpp.UInt32 { return 0; }
 
-	\return size in bytes of the input data
-    */
-    @:keep public function getLength():cpp.UInt32 { return 0; }
+    /** 
+     * Seek to the given offset from the start of the data.
+     * 
+     * @param offset the offset to seek to. If greater than the length of the data, this call is equivalent to
+     * `seek(length)`.
+     */
+    public function seek(offset:cpp.UInt32):Void {}
 
-	/**
-	\brief seek to the given offset from the start of the data.
+    /**
+     * Return the current offset from the start of the data
+     * 
+     * @return the offset to seek to.
+     */
+    public function tell():cpp.UInt32 { return 0; }
 
-	\param[in] offset the offset to seek to. 	If greater than the length of the data, this call is equivalent to
-	seek(length);
-	*/
-    @:keep public function seek(offset:cpp.UInt32):Void {}
-
-	/**
-	\brief return the current offset from the start of the data
-
-	\return the offset to seek to.
-	*/
-	@:keep public function tell():cpp.UInt32 { return 0; }
+    /**
+     * Read from the stream. The number of bytes read may be less than the number requested.
+     * 
+     * @param data the buffer to fill.
+     * @return the number of bytes read from the stream.
+     */
+    public function read(data:Bytes):UInt { return 0; }
+    final private function _read(dest:cpp.Pointer<cpp.UInt8>, count:cpp.UInt32):cpp.UInt32
+    {
+        var bytes = Bytes.ofData(dest.toUnmanagedArray(count));
+        return read(bytes);
+    }
 }
 
 
@@ -159,45 +156,85 @@ The user needs to supply a PxOutputStream implementation to a number of methods 
 class PxOutputStreamNative : public physx::PxOutputStream
 {
 public:
-    physx::foundation::PxOutputStream haxeDelegate;
-    uint32_t write(const void* src, uint32_t count);
+    PxOutputStreamHx hxHandle;
+    PxOutputStreamNative(PxOutputStreamHx hxHandle):hxHandle{ hxHandle } {}
+    uint32_t write(const void* src, uint32_t count) override;
 };
 ")
 @:cppNamespaceCode("
-uint32_t PxOutputStreamNative::write(const void* src, uint32_t count)
-{
-    return haxeDelegate->_write(static_cast<const uint8_t*>(src), count);
-}
+uint32_t PxOutputStreamNative::write(const void* src, uint32_t count) { return hxHandle->_write(static_cast<const uint8_t*>(src), count); }
 ")
-class PxOutputStream
+class PxOutputStreamHx
 {
-    final _native:PxOutputStreamNative = null;
-    public function native():PxOutputStreamNative
+    @:allow(physx.foundation.PxOutputStream) @:noCompletion
+    private var _native:PxOutputStreamNative;
+    
+    function new()
     {
-        return _native;
+        _native = untyped __cpp__("new PxOutputStreamNative(this)");
+        cpp.vm.Gc.setFinalizer(this, cpp.Function.fromStaticFunction(_release));
     }
 
-    public function new()
+    private static function _release(self:PxOutputStreamHx):Void
     {
-        _native.haxeDelegate = this;
+        untyped __cpp__("delete self->_native.ptr");
     }
+
+    /**
+     * Write to the stream. The number of bytes written may be less than the number sent.
+     * 
+     * @param data Source data buffer. It is **IMMUTABLE**!
+     * 
+     * @return The number of bytes written to the stream by this call.
+     */
+    public function write(data:BytesInput):UInt { return 0; }
 
     @:noCompletion @:noDoc @:keep
     final function _write(src:cpp.ConstPointer<cpp.UInt8>, count:cpp.UInt32):cpp.UInt32
     {
-        var data = cpp.NativeArray.create(count);
-        cpp.NativeArray.setUnmanagedData(data, src, count);
-        var bytes:Bytes = Bytes.ofData(data);
-        return write(bytes);
+        var bytes = Bytes.ofData(cpp.Pointer.fromRaw(src.raw).toUnmanagedArray(count));
+        return write(new BytesInput(bytes));
     }
+}
 
-    /**
-	\brief write to the stream. The number of bytes written may be less than the number sent.
 
-	\param[in] src the destination address from which the data will be written
-	\param[in] count the number of bytes to be written
 
-	\return the number of bytes written to the stream by this call.
-	*/
-    public function write(data:Bytes):UInt { return 0; }
+/**
+ * Assign with a Haxe class that extends `PxInputStreamHx` or `PxInputDataHx`,
+ * or the default streams `PxDefaultMemoryInputData` or `PxDefaultFileInputData`.
+ */
+@:noCompletion extern abstract PxInputStream(PxInputStreamNative) from PxInputStreamNative
+{
+    @:from static inline function fromInputStreamHx(hxHandle:PxInputStreamHx):PxInputStream
+    {
+        return hxHandle == null ? null : cast hxHandle._native;
+    }
+    @:from static inline function fromInputDataHx(hxHandle:PxInputDataHx):PxInputStream
+    {
+        return hxHandle == null ? null : cast hxHandle._native;
+    }
+}
+
+/**
+ * Assign with a Haxe class that extends `PxInputDataHx`,
+ * or the default streams `PxDefaultMemoryInputData` or `PxDefaultFileInputData`.
+ */
+@:noCompletion extern abstract PxInputData(PxInputDataNative) from PxInputDataNative
+{
+    @:from static inline function from(hxHandle:PxInputDataHx):PxInputData
+    {
+        return hxHandle == null ? null : cast hxHandle._native;
+    }
+}
+
+/**
+ * Assign with a Haxe class that extends `PxOutputStreamHx`,
+ * or the default streams `PxDefaultMemoryOutputStream` or `PxDefaultFileOutputStream`.
+ */
+@:noCompletion extern abstract PxOutputStream(PxOutputStreamNative) from PxOutputStreamNative
+{
+    @:from static inline function from(hxHandle:PxOutputStreamHx):PxOutputStream
+    {
+        return hxHandle == null ? null : cast hxHandle._native;
+    }
 }

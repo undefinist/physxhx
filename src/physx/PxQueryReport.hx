@@ -259,8 +259,8 @@ class PxRaycastCallbackNative : public PxRaycastCallback
 public:
     PxRaycastCallbackHx hxHandle;
     PxRaycastCallbackNative(PxRaycastCallbackHx hxHandle, PxRaycastHit* aTouches, PxU32 aMaxNbTouches):PxRaycastCallback(aTouches, aMaxNbTouches), hxHandle{ hxHandle } {}
-    PxAgain processTouches(const PxRaycastHit* buffer, PxU32 nbHits);
-    void finalizeQuery();
+    PxAgain processTouches(const PxRaycastHit* buffer, PxU32 nbHits) override;
+    void finalizeQuery() override;
 };
 ")
 @:cppNamespaceCode("
@@ -337,8 +337,8 @@ class PxOverlapCallbackNative : public PxOverlapCallback
 public:
     PxOverlapCallbackHx hxHandle;
     PxOverlapCallbackNative(PxOverlapCallbackHx hxHandle, PxOverlapHit* aTouches, PxU32 aMaxNbTouches):PxOverlapCallback(aTouches, aMaxNbTouches), hxHandle{ hxHandle } {}
-    PxAgain processTouches(const PxOverlapHit* buffer, PxU32 nbHits);
-    void finalizeQuery();
+    PxAgain processTouches(const PxOverlapHit* buffer, PxU32 nbHits) override;
+    void finalizeQuery() override;
 };
 ")
 @:cppNamespaceCode("
@@ -415,8 +415,8 @@ class PxSweepCallbackNative : public PxSweepCallback
 public:
     PxSweepCallbackHx hxHandle;
     PxSweepCallbackNative(PxSweepCallbackHx hxHandle, PxSweepHit* aTouches, PxU32 aMaxNbTouches):PxSweepCallback(aTouches, aMaxNbTouches), hxHandle{ hxHandle } {}
-    PxAgain processTouches(const PxSweepHit* buffer, PxU32 nbHits);
-    void finalizeQuery();
+    PxAgain processTouches(const PxSweepHit* buffer, PxU32 nbHits) override;
+    void finalizeQuery() override;
 };
 ")
 @:cppNamespaceCode("
@@ -543,7 +543,7 @@ extern abstract PxRaycastBuffer(PxRaycastBufferNative) to PxRaycastBufferNative
  * For touch buffer: Construct an external array, resize it, and pass it into `new`.
  */
 @:forward
-extern abstract PxOverlapBuffer(PxOverlapBufferNative)
+extern abstract PxOverlapBuffer(PxOverlapBufferNative) to PxOverlapBufferNative
 {
     /**
      * Initializes the buffer with user memory.
@@ -568,7 +568,7 @@ extern abstract PxOverlapBuffer(PxOverlapBufferNative)
  * For touch buffer: Construct an external array, resize it, and pass it into `new`.
  */
 @:forward
-extern abstract PxSweepBuffer(PxSweepBufferNative)
+extern abstract PxSweepBuffer(PxSweepBufferNative) to PxSweepBufferNative
 {
     /**
      * Initializes the buffer with user memory.
@@ -601,7 +601,7 @@ extern abstract PxSweepBuffer(PxSweepBufferNative)
 /**
  * Assign with `PxOverlapCallbackHx` or `PxOverlapBuffer`.
  */
-@:noCompletion extern abstract PxOverlapCallback(PxHitCallbackNative<PxOverlapHit>)
+@:noCompletion extern abstract PxOverlapCallback(PxHitCallbackNative<PxOverlapHit>) from PxOverlapBuffer
 {
     @:from private static inline function from(hxHandle:PxOverlapCallbackHx):PxOverlapCallback
     {
@@ -612,7 +612,7 @@ extern abstract PxSweepBuffer(PxSweepBufferNative)
 /**
  * Assign with `PxSweepCallbackHx` or `PxSweepBuffer`.
  */
-@:noCompletion extern abstract PxSweepCallback(PxHitCallbackNative<PxSweepHit>)
+@:noCompletion extern abstract PxSweepCallback(PxHitCallbackNative<PxSweepHit>) from PxSweepBuffer
 {
     @:from private static inline function from(hxHandle:PxSweepCallbackHx):PxSweepCallback
     {

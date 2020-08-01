@@ -106,11 +106,10 @@ extern abstract PxQuat(PxQuatData)
     }
 }
 
-@:include("foundation/Px.h")
 @:include("foundation/PxQuat.h")
 @:native("physx::PxQuat")
 @:structAccess
-private extern class PxQuatData
+private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px.h">
 {
     var x:cpp.Float32;
     var y:cpp.Float32;

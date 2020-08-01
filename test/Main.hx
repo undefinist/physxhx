@@ -1,5 +1,7 @@
 package;
 
+import physx.extensions.PxDefaultStreams.PxDefaultFileInputData;
+import physx.foundation.PxIO;
 import physx.PxFiltering;
 import physx.PxFoundation;
 import physx.PxMaterial;
@@ -118,10 +120,6 @@ class Test
 
     public function initPhysics()
     {
-        var test:Int = PxPairFlag.eSOLVE_CONTACT
-            | PxPairFlag.eDETECT_DISCRETE_CONTACT
-            | PxPairFlag.eNOTIFY_TOUCH_FOUND;
-
         gFoundation = PxFoundation.create(PX_PHYSICS_VERSION, gAllocator, gErrorCallback);
 
         gPvd = PxPvd.create(gFoundation);
@@ -168,7 +166,6 @@ class Test
         {
             trace("Raycast hit: " + buf.block.actor.getName());
         }
-        
     }
 
     public function stepPhysics()

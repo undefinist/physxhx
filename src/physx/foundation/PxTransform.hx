@@ -46,11 +46,10 @@ extern abstract PxTransform(PxTransformData)
     }
 }
 
-@:include("foundation/Px.h")
 @:include("foundation/PxTransform.h")
 @:native("physx::PxTransform")
 @:structAccess
-private extern class PxTransformData
+private extern class PxTransformData implements physx.hx.IncludeHelper<"foundation/Px.h">
 {
     var q:PxQuat;
     var p:PxVec3;

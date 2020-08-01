@@ -69,8 +69,8 @@ class PxBroadPhaseCallbackNative : public physx::PxBroadPhaseCallback
 public:
     physx::PxBroadPhaseCallbackHx hxHandle;
     PxBroadPhaseCallbackNative(physx::PxBroadPhaseCallbackHx hxHandle):hxHandle{ hxHandle } {}
-    void onObjectOutOfBounds(PxShape& shape, PxActor& actor);
-    void onObjectOutOfBounds(PxAggregate& aggregate);
+    void onObjectOutOfBounds(PxShape& shape, PxActor& actor) override;
+    void onObjectOutOfBounds(PxAggregate& aggregate) override;
 };
 ")
 @:cppNamespaceCode("
