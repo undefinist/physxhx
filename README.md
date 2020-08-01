@@ -28,7 +28,7 @@ Other features include:
     class SimulationCallback extends PxSimulationEventCallbackHx
     {
         public function new() { super(); }
-        override function onContact(pairHeader:PxContactPairHeader, pairs:Array<PxContactPair>)
+        override function onContact(pairHeader:PxContactPairHeader, pairs:haxe.ds.Vector<PxContactPair>)
         {
             // do stuff...
         }
