@@ -62,12 +62,12 @@ class SimulationCallback extends PxSimulationEventCallbackHx
 
 class Test
 {
-    static var gFoundation:PxFoundation;
-    static var gPhysics:PxPhysics;
-    static var gPvd:PxPvd;
-    static var gMaterial:PxMaterial;
-    static var gScene:PxScene;
-    static var gDispatcher:PxDefaultCpuDispatcher;
+    var gFoundation:PxFoundation;
+    var gPhysics:PxPhysics;
+    var gPvd:PxPvd;
+    var gMaterial:PxMaterial;
+    var gScene:PxScene;
+    var gDispatcher:PxDefaultCpuDispatcher;
     static var gErrorCallback:PxDefaultErrorCallback = null;
     static var gAllocator:PxDefaultAllocator = null;
     static var gSimulationCallback:SimulationCallback = new SimulationCallback();

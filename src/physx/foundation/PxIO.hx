@@ -7,7 +7,6 @@ import haxe.io.BytesData;
 @:native("::cpp::Reference<physx::foundation::PxInputStreamNative>")
 @:noCompletion extern class PxInputStreamNative {}
 
-@:include("physx/foundation/PxInputDataHx.h")
 @:native("::cpp::Reference<physx::foundation::PxInputDataNative>")
 @:noCompletion extern class PxInputDataNative extends PxInputStreamNative {}
 
