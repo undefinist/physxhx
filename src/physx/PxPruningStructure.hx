@@ -20,7 +20,7 @@ invalidate the pruning structure. Same happens if shape scene query flags change
 
 @see PxScene::addActors PxCollection
 */
-@:include("PxPruningStructure.hx")
+@:include("PxPruningStructure.h")
 @:native("::cpp::Reference<PxPruningStructure>")
 extern class PxPruningStructure extends PxBase
 {
