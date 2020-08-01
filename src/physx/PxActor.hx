@@ -13,7 +13,7 @@ Flags which control the behavior of an actor.
 
 @see PxActorFlags PxActor PxActor.setActorFlag() PxActor.getActorFlags()
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxActorFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxActorFlag", PxU8))
 extern enum abstract PxActorFlag(PxActorFlagImpl)
 {
     /**
@@ -69,7 +69,7 @@ extern abstract PxActorFlags(PxActorFlag) from PxActorFlag to PxActorFlag {}
 Identifies each type of actor.
 @see PxActor 
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxActorType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxActorType"))
 extern enum abstract PxActorType(PxActorTypeImpl)
 {
     /**

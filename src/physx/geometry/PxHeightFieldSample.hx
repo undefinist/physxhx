@@ -8,7 +8,7 @@ import physx.foundation.PxBitAndData;
 
 @see PxHeightFieldSample.materialIndex0 PxHeightFieldSample.materialIndex1
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldMaterial"))
+@:build(physx.hx.EnumBuilder.build("physx::PxHeightFieldMaterial"))
 extern enum abstract PxHeightFieldMaterial(PxHeightFieldMaterialImpl)
 {
     /**

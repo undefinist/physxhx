@@ -5,7 +5,7 @@ package physx;
 
 @see PxRigidBody.addForce() PxRigidBody.addTorque()
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxForceMode"))
+@:build(physx.hx.EnumBuilder.build("physx::PxForceMode"))
 extern enum abstract PxForceMode(PxForceModeImpl)
 {
 	/**

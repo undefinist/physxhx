@@ -16,7 +16,7 @@ All these flags apply to both scene queries and geometry queries (PxGeometryQuer
 
 @see PxRaycastHit PxSweepHit PxOverlapHit PxScene.raycast PxScene.sweep PxScene.overlap PxGeometryQuery PxFindFaceIndex
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxHitFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxHitFlag", PxU16))
 extern enum abstract PxHitFlag(PxHitFlagImpl) 
 {
     /**

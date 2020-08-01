@@ -8,7 +8,7 @@ import physx.PxFiltering.PxFilterData;
 
 @see PxQueryFilterData.flags
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxQueryFlag", physx.foundation.PxSimpleTypes.PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxQueryFlag", physx.foundation.PxSimpleTypes.PxU16))
 extern enum abstract PxQueryFlag(PxQueryFlagImpl) 
 {
     /**
@@ -72,7 +72,7 @@ only the closest hit of type eBLOCK is returned. All eTOUCH hits are discarded.
 
 @see PxQueryFilterCallback.preFilter PxQueryFilterCallback.postFilter PxScene.raycast PxScene.sweep PxScene.overlap
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxQueryHitType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxQueryHitType"))
 extern enum abstract PxQueryHitType(PxQueryHitTypeImpl) 
 {
     /**

@@ -6,7 +6,7 @@ import physx.foundation.PxSimpleTypes;
 /**
 \brief Default color values used for debug rendering.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxDebugColor"))
+@:build(physx.hx.EnumBuilder.build("physx::PxDebugColor"))
 extern enum abstract PxDebugColor(PxDebugColorImpl)
 {
     var eARGB_BLACK     = 0xff000000;

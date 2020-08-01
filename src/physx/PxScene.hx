@@ -57,7 +57,7 @@ private extern class PxDominanceGroupPairData
 
 @see PxScene::getActors(), PxScene::getNbActors()
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxActorTypeFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxActorTypeFlag", PxU16))
 extern enum abstract PxActorTypeFlag(PxActorTypeFlagImpl)
 {
     /**

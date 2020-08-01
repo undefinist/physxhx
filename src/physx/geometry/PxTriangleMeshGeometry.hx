@@ -7,7 +7,7 @@ import physx.common.PxCoreUtilityTypes;
 
 Used in ::PxMeshGeometryFlags.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxMeshGeometryFlag", physx.foundation.PxSimpleTypes.PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxMeshGeometryFlag", physx.foundation.PxSimpleTypes.PxU8))
 extern enum abstract PxMeshGeometryFlag(PxMeshGeometryFlagImpl)
 {
     /**

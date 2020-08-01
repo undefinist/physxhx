@@ -17,7 +17,7 @@ import physx.foundation.PxBase;
  in terms of cooking performance and runtime performance, but it is currently only available on platforms supporting the
  SSE2 instuction set.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxMeshMidPhase"))
+@:build(physx.hx.EnumBuilder.build("physx::PxMeshMidPhase"))
 extern enum abstract PxMeshMidPhase(PxMeshMidPhaseImpl) 
 {
     /**
@@ -40,7 +40,7 @@ private extern class PxMeshMidPhaseImpl {}
 
 Used in ::PxTriangleMeshFlags.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxTriangleMeshFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxTriangleMeshFlag", PxU8))
 extern enum abstract PxTriangleMeshFlag(PxTriangleMeshFlagImpl) 
 {
     /**

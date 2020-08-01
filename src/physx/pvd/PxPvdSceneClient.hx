@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 /**
 \brief types of instrumentation that PVD can do.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPvdSceneFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxPvdSceneFlag", PxU8))
 extern enum abstract PxPvdSceneFlag(PxPvdSceneFlagImpl)
 {
     /**

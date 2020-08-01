@@ -13,7 +13,7 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxContactPairExtraDataItem.type
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxContactPairExtraDataType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxContactPairExtraDataType"))
 extern enum abstract PxContactPairExtraDataType(PxContactPairExtraDataTypeImpl)
 {
     /** see `PxContactPairVelocity` */
@@ -158,7 +158,7 @@ extern class PxContactPairExtraDataIterator
 
 @see PxContactPairHeader
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxContactPairHeaderFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxContactPairHeaderFlag", PxU16))
 extern enum abstract PxContactPairHeaderFlag(PxContactPairHeaderFlagImpl)
 {
     /** The actor with index 0 has been removed from the scene. */
@@ -253,7 +253,7 @@ extern class PxContactPairHeader
 
 @see PxContactPair
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxContactPairFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxContactPairFlag", PxU16))
 extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 {
     /**
@@ -502,7 +502,7 @@ extern class PxContactPair
 
 @see PxTriggerPair
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxTriggerPairFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxTriggerPairFlag", PxU8))
 extern enum abstract PxTriggerPairFlag(PxTriggerPairFlagImpl)
 {
     /** The trigger shape has been removed from the actor/scene. */

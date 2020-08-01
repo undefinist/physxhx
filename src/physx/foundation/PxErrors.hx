@@ -1,6 +1,6 @@
 package physx.foundation;
 
-@:build(physx.hx.PxEnumBuilder.build("physx::PxErrorCode"))
+@:build(physx.hx.EnumBuilder.build("physx::PxErrorCode"))
 extern enum abstract PxErrorCode(PxErrorCodeImpl)
 {
     var eNO_ERROR = 0;

@@ -5,7 +5,7 @@ import physx.foundation.PxProfiler;
 /**
 \brief types of instrumentation that PVD can do.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPvdInstrumentationFlag", cpp.UInt8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxPvdInstrumentationFlag", cpp.UInt8))
 extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
 {
     /**

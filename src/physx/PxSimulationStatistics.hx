@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes.PxU32;
 \brief Different types of rigid body collision pair statistics.
 @see getRbPairStats
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxSimulationStatistics"))
+@:build(physx.hx.EnumBuilder.build("physx::PxSimulationStatistics"))
 extern enum abstract RbPairStatsType(RbPairStatsTypeImpl)
 {
     /**

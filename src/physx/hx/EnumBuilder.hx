@@ -5,7 +5,7 @@ import haxe.macro.Context;
 using haxe.macro.TypeTools;
 using haxe.macro.ExprTools;
 
-class PxEnumBuilder
+class EnumBuilder
 {
     public static macro function build(scope:String):Array<Field>
     {

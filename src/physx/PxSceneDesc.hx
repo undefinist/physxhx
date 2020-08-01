@@ -29,7 +29,7 @@ objects, if no static objects are added, moved or removed after the scene has be
 created. If there is no such guarantee (e.g. when streaming parts of the world in and out),
 then the dynamic version is a better choice even for static objects.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxPruningStructureType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxPruningStructureType"))
 extern enum abstract PxPruningStructureType(PxPruningStructureTypeImpl)
 {
     /**
@@ -71,7 +71,7 @@ this means that refit will then occur during the first scene query following fet
 eCOMMIT_DISABLED_BUILD_DISABLED no further scene query work is executed. The scene queries update needs to be called manually, see PxScene::sceneQueriesUpdate.
 It is recommended to call PxScene::sceneQueriesUpdate right after fetchResults as the pruning structures are not updated. 
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxSceneQueryUpdateMode"))
+@:build(physx.hx.EnumBuilder.build("physx::PxSceneQueryUpdateMode"))
 extern enum abstract PxSceneQueryUpdateMode(PxSceneQueryUpdateModeImpl)
 {
     /**
@@ -108,7 +108,7 @@ than patch friction for scenarios with many contact points.
 
 #PxFrictionType::eFRICTION_COUNT is the total numer of friction models supported by the SDK.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxFrictionType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxFrictionType"))
 extern enum abstract PxFrictionType(PxFrictionTypeImpl)
 {
     /**
@@ -141,7 +141,7 @@ private extern class PxFrictionTypeImpl {}
 
 #PxSolverType::eTGS selects a non linear iterative solver. This kind of solver can lead to improved convergence and handle large mass ratios, long chains and jointed systems better. It is slightly more expensive than the default solver and can introduce more energy to correct joint and contact errors.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxSolverType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxSolverType"))
 extern enum abstract PxSolverType(PxSolverTypeImpl)
 {
     /**
@@ -164,7 +164,7 @@ private extern class PxSolverTypeImpl {}
 
 @see PxScene
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxSceneFlag", PxU32))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxSceneFlag", PxU32))
 extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 {
     /**

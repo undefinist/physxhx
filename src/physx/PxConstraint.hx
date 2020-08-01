@@ -9,7 +9,7 @@ import physx.foundation.PxBase;
 
 \note eBROKEN is a read only flag
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxConstraintFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxConstraintFlag", PxU16))
 extern enum abstract PxConstraintFlag(PxConstraintFlagImpl)
 {
     /** whether the constraint is broken */

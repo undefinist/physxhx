@@ -7,7 +7,7 @@ typedef PxType = PxI16;
 /**
 Flags for PxBase.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxBaseFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxBaseFlag", PxU16))
 extern enum abstract PxBaseFlag(PxBaseFlagImpl)
 {
     var eOWNS_MEMORY = (1<<0);

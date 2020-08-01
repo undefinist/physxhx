@@ -17,7 +17,7 @@ for further details.
 
 @see PxScene.setVisualizationParameter() PxScene.getVisualizationParameter() PxScene.getRenderBuffer()
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxVisualizationParameter"))
+@:build(physx.hx.EnumBuilder.build("physx::PxVisualizationParameter"))
 extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 {
 /* RigidBody-related parameters  */

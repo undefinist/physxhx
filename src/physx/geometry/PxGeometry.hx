@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 
 Used to distinguish the type of a ::PxGeometry object.
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxGeometryType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxGeometryType"))
 extern enum abstract PxGeometryType(PxGeometryTypeImpl)
 {
     var eSPHERE;

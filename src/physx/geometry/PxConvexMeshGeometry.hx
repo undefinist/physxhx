@@ -8,7 +8,7 @@ import physx.foundation.PxSimpleTypes;
 
 Used in ::PxConvexMeshGeometryFlags.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxConvexMeshGeometryFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxConvexMeshGeometryFlag", PxU8))
 extern enum abstract PxConvexMeshGeometryFlag(PxConvexMeshGeometryFlagImpl)
 {
     /**

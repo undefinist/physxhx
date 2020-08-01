@@ -2,7 +2,7 @@
 
 Haxe/hxcpp @:native bindings for [PhysX](https://github.com/NVIDIAGameWorks/PhysX).
 
-This is a [linc](http://snowkit.github.io/linc/) library. (Well, sort of...)
+This is a [linc](http://snowkit.github.io/linc/) & [Kha](https://github.com/Kode/Kha) library.
 
 ---
 
@@ -200,7 +200,7 @@ class Test
 
 ### Precompiled libs and dlls
 
-The libs and dlls included are compiled on a Windows x64 machine, in Visual Studio 2019.
+Currently there are only Windows libs and dlls included. They are compiled on a Windows x64 machine, in Visual Studio 2019.
 
 As per [build guidelines](https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Manual/BuildingWithPhysX.html) they are compiled with the **checked** build configuration which is recommended for day-to-day development and QA. If you need other build configs (e.g. release), please build them yourself. See the linked page for a guide.
 

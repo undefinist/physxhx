@@ -8,7 +8,7 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxRigidDynamic.setRigidDynamicLockFlag(), PxRigidBody.getRigidDynamicLockFlags()
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxRigidDynamicLockFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxRigidDynamicLockFlag", PxU8))
 extern enum abstract PxRigidDynamicLockFlag(PxRigidDynamicLockFlagImpl)
 {
     var eLOCK_LINEAR_X = (1 << 0);

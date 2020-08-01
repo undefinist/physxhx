@@ -19,7 +19,7 @@ import physx.PxFiltering;
 
 @see PxShape PxShape.setFlag()
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxShapeFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxShapeFlag", PxU8))
 extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 {
     /**

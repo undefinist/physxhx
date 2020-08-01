@@ -4,7 +4,7 @@ package physx.geometry;
 \brief Describes the format of height field samples.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldFormat"))
+@:build(physx.hx.EnumBuilder.build("physx::PxHeightFieldFormat"))
 extern enum abstract PxHeightFieldFormat(PxHeightFieldFormatImpl)
 {
     /**
@@ -38,7 +38,7 @@ private extern class PxHeightFieldFormatImpl {}
 \brief Determines the tessellation of height field cells.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxHeightFieldTessFlag"))
+@:build(physx.hx.EnumBuilder.build("physx::PxHeightFieldTessFlag"))
 extern enum abstract PxHeightFieldTessFlag(PxHeightFieldTessFlagImpl)
 {
     /**
@@ -90,7 +90,7 @@ private extern class PxHeightFieldTessFlagImpl {}
 /**
 \brief Enum with flag values to be used in PxHeightFieldDesc.flags.
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxHeightFieldFlag", physx.foundation.PxSimpleTypes.PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxHeightFieldFlag", physx.foundation.PxSimpleTypes.PxU16))
 extern enum abstract PxHeightFieldFlag(PxHeightFieldFlagImpl)
 {
     /**

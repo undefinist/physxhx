@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 
 @see PxPairFlags PxSimulationFilterShader.filter() PxSimulationFilterCallback
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxPairFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxPairFlag", PxU16))
 extern enum abstract PxPairFlag(PxPairFlagImpl)
 {
     /**
@@ -242,7 +242,7 @@ extern abstract PxPairFlags(PxPairFlag) from PxPairFlag to PxPairFlag {}
 
 @see PxFilterFlags PxSimulationFilterShader PxSimulationFilterCallback
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxFilterFlag", PxU16))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxFilterFlag", PxU16))
 extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 {
     /**
@@ -353,7 +353,7 @@ private extern class PxFilterDataData
 
 @see PxGetFilterObjectType()
 */
-@:build(physx.hx.PxEnumBuilder.build("physx::PxFilterObjectType"))
+@:build(physx.hx.EnumBuilder.build("physx::PxFilterObjectType"))
 extern enum abstract PxFilterObjectType(PxFilterObjectTypeImpl)
 {
     /**
@@ -671,7 +671,7 @@ class PxSimulationFilterCallbackHx
 
 
 
-@:build(physx.hx.PxEnumBuilder.build("physx::PxPairFilteringMode"))
+@:build(physx.hx.EnumBuilder.build("physx::PxPairFilteringMode"))
 extern enum abstract PxPairFilteringMode(PxPairFilteringModeImpl)
 {
     /**

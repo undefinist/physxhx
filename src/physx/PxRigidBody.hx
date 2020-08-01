@@ -9,7 +9,7 @@ import physx.foundation.PxTransform;
 
 @see PxRigidBody.setRigidBodyFlag(), PxRigidBody.getRigidBodyFlags()
 */
-@:build(physx.hx.PxEnumBuilder.buildFlags("physx::PxRigidBodyFlag", PxU8))
+@:build(physx.hx.EnumBuilder.buildFlags("physx::PxRigidBodyFlag", PxU8))
 extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 {
 	/**
