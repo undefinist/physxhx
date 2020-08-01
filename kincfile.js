@@ -1,9 +1,12 @@
-let project = new Project('physx', __dirname);
+let project = new Project('physxhx', __dirname);
+
+project.addIncludeDir('lib/include');
+project.addIncludeDir('src/linc/include');
+project.addFile('src/linc/include/ExtCpuWorkerThreadHx.cpp');
+project.addFile('src/linc/include/ExtDefaultCpuDispatcherHx.cpp');
 
 if(platform == Platform.Windows)
 {
-    project.addFile('lib/Windows/**');
-    project.addIncludeDir('lib/Windows/include');
     project.addLib('lib/Windows/lib/**');
 }
 

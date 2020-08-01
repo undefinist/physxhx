@@ -69,6 +69,19 @@ Run the PVD, then run the test and it should automatically connect to the PVD.
 
 Also see the [PhysX 4.1 User Guide](https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxguide/Index.html) and [PhysX 4.1 API Documentation](https://gameworksdocs.nvidia.com/PhysX/4.1/documentation/physxapi/files/index.html).
 
+#### Using for Kha
+
+To use physxhx as a Kha library, simply add the library and dlls, which need to exist beside the output exe.
+```js
+project.addLibrary('physxhx');
+if(platform == Platform.Windows)
+{
+    project.addAssets('Libraries/physxhx/lib/Windows/dll/**', { destination: '', notinlist: true });
+}
+```
+
+#### Example Code
+
 The following code is adapted from [SnippetHelloWorld.cpp](https://github.com/NVIDIAGameWorks/PhysX/blob/4.1/physx/snippets/snippethelloworld/SnippetHelloWorld.cpp):
 ```haxe
 class Main
@@ -85,12 +98,12 @@ class Main
 
 class Test
 {
-    static var gFoundation:PxFoundation;
-    static var gPhysics:PxPhysics;
-    static var gPvd:PxPvd;
-    static var gMaterial:PxMaterial;
-    static var gScene:PxScene;
-    static var gDispatcher:PxDefaultCpuDispatcher;
+    var gFoundation:PxFoundation;
+    var gPhysics:PxPhysics;
+    var gPvd:PxPvd;
+    var gMaterial:PxMaterial;
+    var gScene:PxScene;
+    var gDispatcher:PxDefaultCpuDispatcher;
     static var gErrorCallback:PxDefaultErrorCallback = null;
     static var gAllocator:PxDefaultAllocator = null;
 

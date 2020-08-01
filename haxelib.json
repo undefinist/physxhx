@@ -1,0 +1,14 @@
+{
+    "name": "physxhx",
+    "description": "Haxe/hxcpp @:native bindings for PhysX.",
+    "version": "1.0.0",
+    "url" : "https://github.com/undefinist/physxhx/",
+    "license": "MIT",
+    "tags": ["extern", "cpp", "physx", "physics", "3d"],
+    "classPath": "src/",
+    "contributors": ["undefinist"],
+    "dependencies": {
+        "hxcpp": ""
+    },
+    "releasenote": "Initial release."
+}
