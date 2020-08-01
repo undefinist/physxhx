@@ -1,7 +1,5 @@
 package;
 
-import physx.extensions.PxDefaultStreams.PxDefaultFileInputData;
-import physx.foundation.PxIO;
 import physx.PxFiltering;
 import physx.PxFoundation;
 import physx.PxMaterial;
@@ -34,17 +32,11 @@ class Main
 {
     static public function main()
     {
-        trace("hello!!");
         var test:Test = new Test();
         test.initPhysics();
-        trace("hello!!");
         for(i in 0...100)
-        {
             test.stepPhysics();
-        }
-        trace("hello!!");
         test.cleanupPhysics();
-        trace("hello!!");
     }
 }
 
@@ -189,6 +181,6 @@ class Test
         }
         gFoundation.release();
         gSimulationCallback = null;
-        cpp.vm.Gc.run(true); // should call gSimulationCallback._release
+        // cpp.vm.Gc.run(true); // should call gSimulationCallback._release
     }
 }
