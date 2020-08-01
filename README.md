@@ -71,7 +71,7 @@ Also see the [PhysX 4.1 User Guide](https://gameworksdocs.nvidia.com/PhysX/4.1/d
 
 #### Using for Kha
 
-To use physxhx as a Kha library, simply add the library and dlls, which need to exist beside the output exe.
+To use physxhx as a Kha library, simply add the library and dlls (which need to exist beside the output exe), by adding to your khafile.js:
 ```js
 project.addLibrary('physxhx');
 if(platform == Platform.Windows)
