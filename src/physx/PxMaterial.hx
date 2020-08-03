@@ -224,7 +224,7 @@ extern class PxMaterial extends PxBase
     <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
 
     */
-    function setFlag(flags:PxMaterialFlags):Void;
+    function setFlags(flags:PxMaterialFlags):Void;
 
     /**
     \brief Retrieves the flags. See #PxMaterialFlag.
