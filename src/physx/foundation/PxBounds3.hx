@@ -74,7 +74,7 @@ private extern class PxBounds3Data
     /**
     \brief gets the transformed bounds of the passed AABB (resulting in a bigger AABB).
 
-    Calling this method for empty bounds leads to undefined behavior. Use #transformSafe() instead.
+    Calling this method for empty bounds leads to undefined behavior. Use `transformSafe()` instead.
 
     \param[in] transform Transform to apply, can contain scaling as well
     \param[in] bounds The bounds to transform.
@@ -164,7 +164,7 @@ private extern class PxBounds3Data
     /**
     \brief scales the AABB.
 
-    Calling this method for empty bounds leads to undefined behavior. Use #scaleSafe() instead.
+    Calling this method for empty bounds leads to undefined behavior. Use `scaleSafe()` instead.
 
     \param scale Factor to scale AABB by.
     */
@@ -180,7 +180,7 @@ private extern class PxBounds3Data
     /**
     fattens the AABB in all 3 dimensions by the given distance.
 
-    Calling this method for empty bounds leads to undefined behavior. Use #fattenSafe() instead.
+    Calling this method for empty bounds leads to undefined behavior. Use `fattenSafe()` instead.
     */
     function fattenFast(distance:cpp.Float32):Void;
 

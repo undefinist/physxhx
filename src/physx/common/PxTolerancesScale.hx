@@ -6,7 +6,7 @@ import physx.foundation.PxSimpleTypes;
 \brief Class to define the scale at which simulation runs. Most simulation tolerances are
 calculated in terms of the values here. 
 
-\note if you change the simulation scale, you will probablly also wish to change the scene's
+**Note:** if you change the simulation scale, you will probablly also wish to change the scene's
 default value of gravity, and stable simulation will probably require changes to the scene's 
 bounceThreshold also.
 */

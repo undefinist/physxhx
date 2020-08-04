@@ -18,7 +18,7 @@ extern enum abstract RbPairStatsType(RbPairStatsTypeImpl)
     /**
     \brief Shape pairs processed as swept integration pairs for the current simulation step.
 
-    \note Counts the pairs for which special CCD (continuous collision detection) work was actually done and NOT the number of pairs which were configured for CCD. 
+    **Note:** Counts the pairs for which special CCD (continuous collision detection) work was actually done and NOT the number of pairs which were configured for CCD. 
     Furthermore, there can be multiple CCD passes and all processed pairs of all passes are summed up, hence the number can be larger than the amount of pairs which have been configured for CCD.
 
     @see PxPairFlag::eDETECT_CCD_CONTACT,
@@ -62,14 +62,14 @@ extern class PxSimulationStatistics
 	/**
 	\brief Number of active dynamic bodies for the current simulation step.
 
-	\note Does not include active kinematic bodies
+	**Note:** Does not include active kinematic bodies
 	*/
 	var nbActiveDynamicBodies:PxU32;
 
 	/**
 	\brief Number of active kinematic bodies for the current simulation step.
 	
-	\note Kinematic deactivation occurs at the end of the frame after the last call to PxRigidDynamic::setKinematicTarget() was called so kinematics that are
+	**Note:** Kinematic deactivation occurs at the end of the frame after the last call to PxRigidDynamic::setKinematicTarget() was called so kinematics that are
 	deactivated in a given frame will be included by this counter.
 	*/
 	var nbActiveKinematicBodies:PxU32;
@@ -82,15 +82,15 @@ extern class PxSimulationStatistics
 	/**
 	\brief Number of dynamic bodies for the current simulation step.
 
-	\note Includes inactive bodies and articulation links
-	\note Does not include kinematic bodies
+	**Note:** Includes inactive bodies and articulation links
+	**Note:** Does not include kinematic bodies
 	*/
 	var nbDynamicBodies:PxU32;
 
 	/**
 	\brief Number of kinematic bodies for the current simulation step.
 
-	\note Includes inactive bodies
+	**Note:** Includes inactive bodies
 	*/
 	var nbKinematicBodies:PxU32;
 
@@ -151,7 +151,7 @@ extern class PxSimulationStatistics
 
 	There is an entry for each geometry pair type.
 
-	\note entry[i][j] = entry[j][i], hence, if you want the sum of all pair
+	**Note:** entry[i][j] = entry[j][i], hence, if you want the sum of all pair
 	      types, you need to discard the symmetric entries
 
 	\param[in] pairType The type of pair for which to get information
@@ -168,7 +168,7 @@ extern class PxSimulationStatistics
 
 	/**
 	\brief Total number of (non CCD) pairs for which contacts are successfully cached (<=nbDiscreteContactPairsTotal)
-	\note This includes pairs for which no contacts are generated, it still counts as a cache hit.
+	**Note:** This includes pairs for which no contacts are generated, it still counts as a cache hit.
 	*/
 	var nbDiscreteContactPairsWithCacheHits:PxU32;
 

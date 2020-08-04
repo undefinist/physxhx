@@ -53,7 +53,7 @@ private extern class PxDominanceGroupPairData
 /**
 \brief Identifies each type of actor for retrieving actors from a scene.
 
-\note #PxArticulationLink objects are not supported. Use the #PxArticulation object to retrieve all its links.
+**Note:** `PxArticulationLink` objects are not supported. Use the `PxArticulation` object to retrieve all its links.
 
 @see PxScene::getActors(), PxScene::getNbActors()
 */
@@ -88,14 +88,14 @@ extern abstract PxActorTypeFlags(PxActorTypeFlag) from PxActorTypeFlag to PxActo
  * Single hit cache for scene queries.
  * 
  * If a cache object is supplied to a scene query, the cached actor/shape pair is checked for intersection first.
- * \note Filters are not executed for the cached shape.
- * \note If intersection is found, the hit is treated as blocking.
- * \note Typically actor and shape from the last PxHitCallback.block query result is used as a cached actor/shape pair.
- * \note Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
- * \note Cache is only used if no touch buffer was provided, for single nearest blocking hit queries and queries using eANY_HIT flag.
- * \note if non-zero touch buffer was provided, cache will be ignored
+ * **Note:** Filters are not executed for the cached shape.
+ * **Note:** If intersection is found, the hit is treated as blocking.
+ * **Note:** Typically actor and shape from the last PxHitCallback.block query result is used as a cached actor/shape pair.
+ * **Note:** Using past touching hits as cache will produce incorrect behavior since the cached hit will always be treated as blocking.
+ * **Note:** Cache is only used if no touch buffer was provided, for single nearest blocking hit queries and queries using eANY_HIT flag.
+ * **Note:** if non-zero touch buffer was provided, cache will be ignored
  * 
- * \note It is the user's responsibility to ensure that the shape and actor are valid, so care must be taken
+ * **Note:** It is the user's responsibility to ensure that the shape and actor are valid, so care must be taken
  * when deleting shapes to invalidate cached references.
  * 
  * The faceIndex field is an additional hint for a mesh or height field which is not currently used.
@@ -148,7 +148,7 @@ extern class PxScene
     /**
     \brief Sets a scene flag. You can only set one flag at a time.
 
-    \note Not all flags are mutable and changing some will result in an error. Please check #PxSceneFlag to see which flags can be changed.
+    **Note:** Not all flags are mutable and changing some will result in an error. Please check `PxSceneFlag` to see which flags can be changed.
 
     @see PxSceneFlag
     */
@@ -157,7 +157,7 @@ extern class PxScene
     /**
     \brief Get the scene flags.
 
-    \return The scene flags. See #PxSceneFlag
+    \return The scene flags. See `PxSceneFlag`
 
     @see PxSceneFlag
     */
@@ -166,7 +166,7 @@ extern class PxScene
     /**
     \brief Set new scene limits. 
 
-    \note Increase the maximum capacity of various data structures in the scene. The new capacities will be 
+    **Note:** Increase the maximum capacity of various data structures in the scene. The new capacities will be 
     at least as large as required to deal with the objects currently in the scene. Further, these values 
     are for preallocation and do not represent hard limits.
 
@@ -208,9 +208,9 @@ extern class PxScene
     /**
     \brief Adds an articulation to this scene.
 
-    \note If the articulation is already assigned to a scene (see #PxArticulation::getScene), the call is ignored and an error is issued.
+    **Note:** If the articulation is already assigned to a scene (see `PxArticulation.getScene),` the call is ignored and an error is issued.
 
-    \param[in] articulation Articulation to add to scene. See #PxArticulation
+    \param[in] articulation Articulation to add to scene. See `PxArticulation`
 
     @see PxArticulation
     */
@@ -219,11 +219,11 @@ extern class PxScene
     /**
     \brief Removes an articulation from this scene.
 
-    \note If the articulation is not part of this scene (see #PxArticulation::getScene), the call is ignored and an error is issued. 
+    **Note:** If the articulation is not part of this scene (see `PxArticulation.getScene),` the call is ignored and an error is issued. 
     
-    \note If the articulation is in an aggregate it will be removed from the aggregate.
+    **Note:** If the articulation is in an aggregate it will be removed from the aggregate.
 
-    \param[in] articulation Articulation to remove from scene. See #PxArticulation
+    \param[in] articulation Articulation to remove from scene. See `PxArticulation`
     \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types.
 
     @see PxArticulation, PxAggregate
@@ -238,15 +238,15 @@ extern class PxScene
     /**
     \brief Adds an actor to this scene.
     
-    \note If the actor is already assigned to a scene (see #PxActor::getScene), the call is ignored and an error is issued.
-    \note If the actor has an invalid constraint, in checked builds the call is ignored and an error is issued.
+    **Note:** If the actor is already assigned to a scene (see `PxActor.getScene),` the call is ignored and an error is issued.
+    **Note:** If the actor has an invalid constraint, in checked builds the call is ignored and an error is issued.
 
-    \note You can not add individual articulation links (see #PxArticulationLink) to the scene. Use #addArticulation() instead.
+    **Note:** You can not add individual articulation links (see `PxArticulationLink)` to the scene. Use `addArticulation()` instead.
 
-    \note If the actor is a PxRigidActor then each assigned PxConstraint object will get added to the scene automatically if
+    **Note:** If the actor is a PxRigidActor then each assigned PxConstraint object will get added to the scene automatically if
     it connects to another actor that is part of the scene already. 
 
-    \note When BVHStructure is provided the actor shapes are grouped together. 
+    **Note:** When BVHStructure is provided the actor shapes are grouped together. 
     The scene query pruning structure inside PhysX SDK will store/update one
     bound per actor. The scene queries against such an actor will query actor
     bounds and then make a local space query against the provided BVH structure, which is in
@@ -262,15 +262,15 @@ extern class PxScene
     /**
     \brief Adds actors to this scene.	
 
-    \note If one of the actors is already assigned to a scene (see #PxActor::getScene), the call is ignored and an error is issued.
+    **Note:** If one of the actors is already assigned to a scene (see `PxActor.getScene),` the call is ignored and an error is issued.
 
-    \note You can not add individual articulation links (see #PxArticulationLink) to the scene. Use #addArticulation() instead.
+    **Note:** You can not add individual articulation links (see `PxArticulationLink)` to the scene. Use `addArticulation()` instead.
 
-    \note If an actor in the array contains an invalid constraint, in checked builds the call is ignored and an error is issued.
-    \note If an actor in the array is a PxRigidActor then each assigned PxConstraint object will get added to the scene automatically if
+    **Note:** If an actor in the array contains an invalid constraint, in checked builds the call is ignored and an error is issued.
+    **Note:** If an actor in the array is a PxRigidActor then each assigned PxConstraint object will get added to the scene automatically if
     it connects to another actor that is part of the scene already.
 
-    \note this method is optimized for high performance, and does not support buffering. It may not be called during simulation.
+    **Note:** this method is optimized for high performance, and does not support buffering. It may not be called during simulation.
 
     \param[in] actors Array of actors to add to scene.
     \param[in] nbActors Number of actors in the array.
@@ -286,13 +286,13 @@ extern class PxScene
     /**
     \brief Removes an actor from this scene.
 
-    \note If the actor is not part of this scene (see #PxActor::getScene), the call is ignored and an error is issued.
+    **Note:** If the actor is not part of this scene (see `PxActor.getScene),` the call is ignored and an error is issued.
 
-    \note You can not remove individual articulation links (see #PxArticulationLink) from the scene. Use #removeArticulation() instead.
+    **Note:** You can not remove individual articulation links (see `PxArticulationLink)` from the scene. Use `removeArticulation()` instead.
 
-    \note If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
+    **Note:** If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
 
-    \note If the actor is in an aggregate it will be removed from the aggregate.
+    **Note:** If the actor is in an aggregate it will be removed from the aggregate.
 
     \param[in] actor Actor to remove from scene.
     \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
@@ -305,11 +305,11 @@ extern class PxScene
     /**
     \brief Removes actors from this scene.
 
-    \note If some actor is not part of this scene (see #PxActor::getScene), the actor remove is ignored and an error is issued.
+    **Note:** If some actor is not part of this scene (see `PxActor.getScene),` the actor remove is ignored and an error is issued.
 
-    \note You can not remove individual articulation links (see #PxArticulationLink) from the scene. Use #removeArticulation() instead.
+    **Note:** You can not remove individual articulation links (see `PxArticulationLink)` from the scene. Use `removeArticulation()` instead.
 
-    \note If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
+    **Note:** If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
 
     \param[in] actors Array of actors to add to scene.
     \param[in] nbActors Number of actors in the array.
@@ -326,10 +326,10 @@ extern class PxScene
     /**
     \brief Adds an aggregate to this scene.
     
-    \note If the aggregate is already assigned to a scene (see #PxAggregate::getScene), the call is ignored and an error is issued.
-    \note If the aggregate contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
+    **Note:** If the aggregate is already assigned to a scene (see `PxAggregate.getScene),` the call is ignored and an error is issued.
+    **Note:** If the aggregate contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
 
-    \note If the aggregate already contains actors, those actors are added to the scene as well.
+    **Note:** If the aggregate already contains actors, those actors are added to the scene as well.
 
     \param[in] aggregate Aggregate to add to scene.
     
@@ -340,9 +340,9 @@ extern class PxScene
     /**
     \brief Removes an aggregate from this scene.
 
-    \note If the aggregate is not part of this scene (see #PxAggregate::getScene), the call is ignored and an error is issued.
+    **Note:** If the aggregate is not part of this scene (see `PxAggregate.getScene),` the call is ignored and an error is issued.
 
-    \note If the aggregate contains actors, those actors are removed from the scene as well.
+    **Note:** If the aggregate contains actors, those actors are removed from the scene as well.
 
     \param[in] aggregate Aggregate to remove from scene.
     \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
@@ -358,9 +358,9 @@ extern class PxScene
     This function adds the following types of objects to this scene: PxActor, PxAggregate, PxArticulation. 
     This method is typically used after deserializing the collection in order to populate the scene with deserialized objects.
 
-    \note If the collection contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
+    **Note:** If the collection contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
 
-    \param[in] collection Objects to add to this scene. See #PxCollection
+    \param[in] collection Objects to add to this scene. See `PxCollection`
 
     @see PxCollection, PxConstraint::isValid()
     */
@@ -405,9 +405,9 @@ extern class PxScene
     \brief Queries the PxScene for a list of the PxActors whose transforms have been 
     updated during the previous simulation step
 
-    \note PxSceneFlag::eENABLE_ACTIVE_ACTORS must be set.
+    **Note:** PxSceneFlag::eENABLE_ACTIVE_ACTORS must be set.
 
-    \note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored and NULL will be returned.
+    **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored and NULL will be returned.
 
     \param[out] nbActorsOut The number of actors returned.
 
@@ -520,7 +520,7 @@ extern class PxScene
     /**
     \brief Specifies the dominance behavior of contacts between two actors with two certain dominance groups.
     
-    It is possible to assign each actor to a dominance groups using #PxActor::setDominanceGroup().
+    It is possible to assign each actor to a dominance groups using `PxActor.setDominanceGroup()`.
 
     With dominance groups one can have all contacts created between actors act in one direction only. This is useful, for example, if you
     want an object to push debris out of its way and be unaffected,while still responding physically to forces and collisions
@@ -563,7 +563,7 @@ extern class PxScene
     Dominance settings are currently specified as floats 0.0f or 1.0f because in the future we may permit arbitrary 
     fractional settings to express 'partly-one-way' interactions.
         
-    <b>Sleeping:</b> Does <b>NOT</b> wake actors up automatically.
+    **Sleeping:** Does **NOT** wake actors up automatically.
 
     @see getDominanceGroupPair() PxDominanceGroup PxDominanceGroupPair PxActor::setDominanceGroup() PxActor::getDominanceGroup()
     */
@@ -593,7 +593,7 @@ extern class PxScene
     /**
     \brief Return the CUDA context manager that was set in PxSceneDesc::cudaContextManager when creating the scene with PxPhysics::createScene
 
-    <b>Platform specific:</b> Applies to PC GPU only.
+    **Platform specific:** Applies to PC GPU only.
 
     @see PxSceneDesc::cudaContextManager, PxPhysics::createScene
     */
@@ -628,9 +628,9 @@ extern class PxScene
     /**
     \brief Sets a user notify object which receives special simulation events when they occur.
 
-    \note Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback User notification callback. See #PxSimulationEventCallback.
+    \param[in] callback User notification callback. See `PxSimulationEventCallback.`
 
     @see PxSimulationEventCallback getSimulationEventCallback
     */
@@ -639,7 +639,7 @@ extern class PxScene
     /**
     \brief Retrieves the simulationEventCallback pointer set with setSimulationEventCallback().
 
-    \return The current user notify pointer. See #PxSimulationEventCallback.
+    \return The current user notify pointer. See `PxSimulationEventCallback.`
 
     @see PxSimulationEventCallback setSimulationEventCallback()
     */
@@ -648,25 +648,25 @@ extern class PxScene
     /**
     \brief Sets a user callback object, which receives callbacks on all contacts generated for specified actors.
 
-    \note Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback Asynchronous user contact modification callback. See #PxContactModifyCallback.
+    \param[in] callback Asynchronous user contact modification callback. See `PxContactModifyCallback.`
     */
     function setContactModifyCallback(callback:PxContactModifyCallback):Void;
 
     /**
     \brief Sets a user callback object, which receives callbacks on all CCD contacts generated for specified actors.
 
-    \note Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback Asynchronous user contact modification callback. See #PxCCDContactModifyCallback.
+    \param[in] callback Asynchronous user contact modification callback. See `PxCCDContactModifyCallback.`
     */
     function setCCDContactModifyCallback(callback:PxCCDContactModifyCallback):Void;
 
     /**
     \brief Retrieves the PxContactModifyCallback pointer set with setContactModifyCallback().
 
-    \return The current user contact modify callback pointer. See #PxContactModifyCallback.
+    \return The current user contact modify callback pointer. See `PxContactModifyCallback.`
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
@@ -675,7 +675,7 @@ extern class PxScene
     /**
     \brief Retrieves the PxCCDContactModifyCallback pointer set with setContactModifyCallback().
 
-    \return The current user contact modify callback pointer. See #PxContactModifyCallback.
+    \return The current user contact modify callback pointer. See `PxContactModifyCallback.`
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
@@ -684,16 +684,16 @@ extern class PxScene
     /**
     \brief Sets a broad-phase user callback object.
 
-    \note Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback	Asynchronous broad-phase callback. See #PxBroadPhaseCallback.
+    \param[in] callback	Asynchronous broad-phase callback. See `PxBroadPhaseCallback.`
     */
     function setBroadPhaseCallback(callback:PxBroadPhaseCallback):Void;
 
     /**
     \brief Retrieves the PxBroadPhaseCallback pointer set with setBroadPhaseCallback().
 
-    \return The current broad-phase callback pointer. See #PxBroadPhaseCallback.
+    \return The current broad-phase callback pointer. See `PxBroadPhaseCallback.`
 
     @see PxBroadPhaseCallback setBroadPhaseCallback()
     */
@@ -709,13 +709,13 @@ extern class PxScene
     /**
     \brief Sets the shared global filter data which will get passed into the filter shader.
 
-    \note It is the user's responsibility to ensure that changing the shared global filter data does not change the filter output value for existing pairs. 
+    **Note:** It is the user's responsibility to ensure that changing the shared global filter data does not change the filter output value for existing pairs. 
           If the filter output for existing pairs does change nonetheless then such a change will not take effect until the pair gets refiltered. 
           resetFiltering() can be used to explicitly refilter the pairs of specific objects.
 
-    \note The provided data will get copied to internal buffers and this copy will be used for filtering calls.
+    **Note:** The provided data will get copied to internal buffers and this copy will be used for filtering calls.
 
-    \note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
     \param[in] data The shared global filter shader data.
     \param[in] dataSize Size of the shared global filter shader data (in bytes).
@@ -727,7 +727,7 @@ extern class PxScene
     /**
     \brief Gets the shared global filter data in use for this scene.
 
-    \note The reference points to a copy of the original filter data specified in #PxSceneDesc.filterShaderData or provided by #setFilterShaderData().
+    **Note:** The reference points to a copy of the original filter data specified in `PxSceneDesc.filterShaderData` or provided by `setFilterShaderData()`.
 
     \return Shared filter data for filter shader.
 
@@ -736,7 +736,7 @@ extern class PxScene
     function getFilterShaderData():cpp.ConstPointer<cpp.Void>;
 
     /**
-    \brief Gets the size of the shared global filter data (#PxSceneDesc.filterShaderData)
+    \brief Gets the size of the shared global filter data (`PxSceneDesc.filterShaderData)`
 
     \return Size of shared filter data [bytes].
 
@@ -768,24 +768,24 @@ extern class PxScene
     This call forces the object to remove all existing collision interactions, to search anew for existing contact
     pairs and to run the collision filters again for found collision pairs.
 
-    \note The operation is supported for PxRigidActor objects only.
+    **Note:** The operation is supported for PxRigidActor objects only.
 
-    \note All persistent state of existing interactions will be lost and can not be retrieved even if the same collison pair
+    **Note:** All persistent state of existing interactions will be lost and can not be retrieved even if the same collison pair
     is found again in the next step. This will mean, for example, that you will not get notified about persistent contact
-    for such an interaction (see #PxPairFlag::eNOTIFY_TOUCH_PERSISTS), the contact pair will be interpreted as newly found instead.
+    for such an interaction (see `PxPairFlag.eNOTIFY_TOUCH_PERSISTS),` the contact pair will be interpreted as newly found instead.
 
-    \note Lost touch contact reports will be sent for every collision pair which includes this shape, if they have
-    been requested through #PxPairFlag::eNOTIFY_TOUCH_LOST or #PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST.
+    **Note:** Lost touch contact reports will be sent for every collision pair which includes this shape, if they have
+    been requested through `PxPairFlag::eNOTIFY_TOUCH_LOST` or `PxPairFlag.eNOTIFY_THRESHOLD_FORCE_LOST.`
 
-    \note This is an expensive operation, don't use it if you don't have to.
+    **Note:** This is an expensive operation, don't use it if you don't have to.
 
-    \note Can be used to retrieve collision pairs that were killed by the collision filters (see #PxFilterFlag::eKILL)
+    **Note:** Can be used to retrieve collision pairs that were killed by the collision filters (see `PxFilterFlag.eKILL)`
 
-    \note It is invalid to use this method if the actor has not been added to a scene already.
+    **Note:** It is invalid to use this method if the actor has not been added to a scene already.
 
-    \note It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+    **Note:** It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
 
-    <b>Sleeping:</b> Does wake up the actor.
+    **Sleeping:** Does wake up the actor.
 
     \param[in] actor The actor for which to re-evaluate interactions.
 
@@ -800,7 +800,7 @@ extern class PxScene
     This is a specialization of the resetFiltering(PxActor& actor) method and allows to reset interactions for specific shapes of
     a PxRigidActor.
 
-    <b>Sleeping:</b> Does wake up the actor.
+    **Sleeping:** Does wake up the actor.
 
     \param[in] actor The actor for which to re-evaluate interactions.
     \param[in] shapes The shapes for which to re-evaluate interactions.
@@ -857,7 +857,7 @@ extern class PxScene
     // ...now results of run may be retrieved.
     ```
 
-    @param elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. <b>Range:</b> (0, PX_MAX_F32)
+    @param elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. **Range:** (0, PX_MAX_F32)
     @param completionTask if non-NULL, this task will have its refcount incremented in simulate(), then
     decremented when the scene is ready to have fetchResults called. So the task will not run until the
     application also calls removeReference().
@@ -878,7 +878,7 @@ extern class PxScene
     /**
      \brief Performs dynamics phase of the simulation pipeline.
     
-    \note Calls to advance() should follow calls to fetchCollision(). An error message will be issued if this sequence is not followed.
+    **Note:** Calls to advance() should follow calls to fetchCollision(). An error message will be issued if this sequence is not followed.
 
     \param[in] completionTask if non-NULL, this task will have its refcount incremented in advance(), then
     decremented when the scene is ready to have fetchResults called. So the task will not run until the
@@ -890,10 +890,10 @@ extern class PxScene
     /**
     \brief Performs collision detection for the scene over elapsedTime
     
-    \note Calls to collide() should be the first method called to simulate a frame.
+    **Note:** Calls to collide() should be the first method called to simulate a frame.
 
 
-    \param[in] elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. <b>Range:</b> (0, PX_MAX_F32)
+    \param[in] elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. **Range:** (0, PX_MAX_F32)
     \param[in] completionTask if non-NULL, this task will have its refcount incremented in collide(), then
     decremented when the scene is ready to have fetchResults called. So the task will not run until the
     application also calls removeReference().
@@ -1009,7 +1009,7 @@ extern class PxScene
     This method can be used to clear buffers and free internal memory without having to destroy the scene. Can be useful if
     the physics data gets streamed in and a checkpoint with a clean state should be created.
 
-    \note It is not allowed to call this method while the simulation is running. The call will fail.
+    **Note:** It is not allowed to call this method while the simulation is running. The call will fail.
     
     \param[in] sendPendingReports When set to true pending reports will be sent out before the buffers get cleaned up (for instance lost touch contact/trigger reports due to deleted objects).
     */
@@ -1018,9 +1018,9 @@ extern class PxScene
     /**
     \brief Sets a constant gravity for the entire scene.
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake the actor up automatically.
+    **Sleeping:** Does **NOT** wake the actor up automatically.
 
-    \param[in] vec A new gravity vector(e.g. PxVec3(0.0f,-9.8f,0.0f) ) <b>Range:</b> force vector
+    \param[in] vec A new gravity vector(e.g. PxVec3(0.0f,-9.8f,0.0f) ) **Range:** force vector
 
     @see PxSceneDesc.gravity getGravity()
     */
@@ -1101,8 +1101,8 @@ extern class PxScene
 
     Returns false if the value passed is out of range for usage specified by the enum.
 
-    \param[in] param	Parameter to set. See #PxVisualizationParameter
-    \param[in] value	The value to set, see #PxVisualizationParameter for allowable values. Setting to zero disables visualization for the specified property, setting to a positive value usually enables visualization and defines the scale factor.
+    \param[in] param	Parameter to set. See `PxVisualizationParameter`
+    \param[in] value	The value to set, see `PxVisualizationParameter` for allowable values. Setting to zero disables visualization for the specified property, setting to a positive value usually enables visualization and defines the scale factor.
     \return False if the parameter is out of range.
 
     @see getVisualizationParameter PxVisualizationParameter getRenderBuffer()
@@ -1141,7 +1141,7 @@ extern class PxScene
     
     This will contain the results of any active visualization for this scene.
 
-    \note Do not use this method while the simulation is running. Calls to this method while result in undefined behaviour.
+    **Note:** Do not use this method while the simulation is running. Calls to this method while result in undefined behaviour.
 
     \return The render buffer.
 
@@ -1153,7 +1153,7 @@ extern class PxScene
     /**
     \brief Call this method to retrieve statistics for the current simulation step.
 
-    \note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
     \param[out] stats Used to retrieve statistics for the current simulation step.
 
@@ -1207,11 +1207,11 @@ extern class PxScene
     // /**
     // \brief Creates a BatchQuery object. 
 
-    // Scene queries like raycasts, overlap tests and sweeps are batched in this object and are then executed at once. See #PxBatchQuery.
+    // Scene queries like raycasts, overlap tests and sweeps are batched in this object and are then executed at once. See `PxBatchQuery.`
 
     // \deprecated The batched query feature has been deprecated in PhysX version 3.4
 
-    // \param[in] desc The descriptor of scene query. Scene Queries need to register a callback. See #PxBatchQueryDesc.
+    // \param[in] desc The descriptor of scene query. Scene Queries need to register a callback. See `PxBatchQueryDesc.`
 
     // @see PxBatchQuery PxBatchQueryDesc
     // */
@@ -1269,7 +1269,7 @@ extern class PxScene
     build on a different thread. The new AABB tree is built based on the dynamic tree rebuild hint rate. Once
     the new tree is ready it will be commited in next fetchQueries call, which must be called after.
 
-    \note If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
+    **Note:** If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
     using this function.
 
     \param[in] completionTask if non-NULL, this task will have its refcount incremented in sceneQueryUpdate(), then
@@ -1509,10 +1509,10 @@ extern class PxScene
     If a call to lockRead() is made while another thread is holding a write lock 
     then the calling thread will be blocked until the writing thread calls unlockWrite().
 
-    \note Lock upgrading is *not* supported, that means it is an error to
+    **Note:** Lock upgrading is *not* supported, that means it is an error to
     call lockRead() followed by lockWrite().
 
-    \note Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
+    **Note:** Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
 
     \param file String representing the calling file, for debug purposes
     \param line The source file line number, for debug purposes
@@ -1522,7 +1522,7 @@ extern class PxScene
     /** 
     \brief Unlock the scene from reading.
 
-    \note Each unlockRead() must be paired with a lockRead() from the same thread.
+    **Note:** Each unlockRead() must be paired with a lockRead() from the same thread.
     */
     function unlockRead():Void;
 
@@ -1539,13 +1539,13 @@ extern class PxScene
     Writers have priority. If a thread is blocked waiting to write then subsequent calls to 
     lockRead() from other threads will be blocked until the writer completes.
 
-    \note If multiple threads are waiting to write then the thread that is first
+    **Note:** If multiple threads are waiting to write then the thread that is first
     granted access depends on OS scheduling.
 
-    \note Recursive locking is supported but each lockWrite() call must be paired 
+    **Note:** Recursive locking is supported but each lockWrite() call must be paired 
     with an unlockWrite().	
 
-    \note If a thread has already locked the scene for writing then it may call
+    **Note:** If a thread has already locked the scene for writing then it may call
     lockRead().
 
     \param file String representing the calling file, for debug purposes
@@ -1556,7 +1556,7 @@ extern class PxScene
     /**
     \brief Unlock the scene from writing.
 
-    \note Each unlockWrite() must be paired with a lockWrite() from the same thread.
+    **Note:** Each unlockWrite() must be paired with a lockWrite() from the same thread.
     */
     function unlockWrite():Void;
     
@@ -1662,13 +1662,13 @@ extern class PxScene
     The poses of all objects in the scene and the corresponding data structures will get adjusted to reflect the new origin location
     (the shift vector will get subtracted from all object positions).
 
-    \note It is the user's responsibility to keep track of the summed total origin shift and adjust all input/output to/from PhysX accordingly.
+    **Note:** It is the user's responsibility to keep track of the summed total origin shift and adjust all input/output to/from PhysX accordingly.
 
-    \note Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
+    **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \note Make sure to propagate the origin shift to other dependent modules (for example, the character controller module etc.).
+    **Note:** Make sure to propagate the origin shift to other dependent modules (for example, the character controller module etc.).
 
-    \note This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
+    **Note:** This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
 
     \param[in] shift Translation vector to shift the origin by.
     */

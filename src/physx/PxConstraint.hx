@@ -7,7 +7,7 @@ import physx.foundation.PxBase;
 /**
 \brief constraint flags
 
-\note eBROKEN is a read only flag
+**Note:** eBROKEN is a read only flag
 */
 @:build(physx.hx.EnumBuilder.buildFlags("physx::PxConstraintFlag", PxU16))
 extern enum abstract PxConstraintFlag(PxConstraintFlagImpl)
@@ -73,7 +73,7 @@ extern class PxConstraint extends PxBase
     /**
     \brief Releases a PxConstraint instance.
 
-    \note This call does not wake up the connected rigid bodies.
+    **Note:** This call does not wake up the connected rigid bodies.
 
     @see PxPhysics.createConstraint, PxBase.release()
     */

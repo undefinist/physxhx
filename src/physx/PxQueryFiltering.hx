@@ -20,11 +20,11 @@ extern enum abstract PxQueryFlag(PxQueryFlagImpl)
      */
     var eDYNAMIC = (1<<1);
     /**
-     * Run the pre-intersection-test filter (see #PxQueryFilterCallback::preFilter())
+     * Run the pre-intersection-test filter (see `PxQueryFilterCallback.preFilter()`)
      */
     var ePREFILTER = (1<<2);
     /**
-     * Run the post-intersection-test filter (see #PxQueryFilterCallback::postFilter())
+     * Run the post-intersection-test filter (see `PxQueryFilterCallback.postFilter()`)
      */
     var ePOSTFILTER = (1<<3);
     /**
@@ -147,18 +147,18 @@ private extern class PxQueryFilterCallbackNative {}
 \brief Scene query filtering callbacks.
 
 Custom filtering logic for scene query intersection candidates. If an intersection candidate object passes the data based filter
-(see #PxQueryFilterData), filtering callbacks are executed if requested (see #PxQueryFilterData.flags)
+(see `PxQueryFilterData),` filtering callbacks are executed if requested (see `PxQueryFilterData.flags)`
 
-\li If #PxQueryFlag::ePREFILTER is set, the preFilter function runs before exact intersection tests.
-If this function returns #PxQueryHitType::eTOUCH or #PxQueryHitType::eBLOCK, exact testing is performed to
+- If `PxQueryFlag.ePREFILTER` is set, the preFilter function runs before exact intersection tests.
+If this function returns `PxQueryHitType::eTOUCH` or `PxQueryHitType.eBLOCK,` exact testing is performed to
 determine the intersection location.
 
-The preFilter function may overwrite the copy of queryFlags it receives as an argument to specify any of #PxHitFlag::eMODIFIABLE_FLAGS
+The preFilter function may overwrite the copy of queryFlags it receives as an argument to specify any of `PxHitFlag.eMODIFIABLE_FLAGS`
 on a per-shape basis. Changes apply only to the shape being filtered, and changes to other flags are ignored.
 
-\li If #PxQueryFlag::ePREFILTER is not set, precise intersection testing is performed using the original query's filterData.flags.
+- If `PxQueryFlag.ePREFILTER` is not set, precise intersection testing is performed using the original query's filterData.flags.
 
-\li If #PxQueryFlag::ePOSTFILTER is set, the postFilter function is called for each intersection to determine the touch/block status.
+- If `PxQueryFlag.ePOSTFILTER` is set, the postFilter function is called for each intersection to determine the touch/block status.
 This overrides any touch/block status previously returned from the preFilter function for this shape.
 
 Filtering calls are not guaranteed to be sorted along the ray or sweep direction.
@@ -205,7 +205,7 @@ class PxQueryFilterCallbackHx
      * @param [in]shape **Immutable** A shape that has not yet passed the exact intersection test.
      * @param [in]actor **Immutable** The shape's actor.
      * @param [in,out]queryFlags scene query flags from the query's function call (only flags from PxHitFlag::eMODIFIABLE_FLAGS bitmask can be modified)
-     * @return the updated type for this hit  (see #PxQueryHitType)
+     * @return the updated type for this hit  (see `PxQueryHitType)`
      */
     @:unreflective function preFilter(filterData:PxFilterData, shape:PxShape, actor:PxRigidActor, queryFlags:cpp.Reference<PxHitFlags>):PxQueryHitType { return eNONE; }
 

@@ -25,11 +25,11 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 	You can not connect Reduced joints to kinematic actors. Lagrange joints work ok if the platform
 	is moving with a relatively low, uniform velocity.
 
-	<b>Sleeping:</b>
-	\li Setting this flag on a dynamic actor will put the actor to sleep and set the velocities to 0.
-	\li If this flag gets cleared, the current sleep state of the actor will be kept.
+	**Sleeping:**
+	- Setting this flag on a dynamic actor will put the actor to sleep and set the velocities to 0.
+	- If this flag gets cleared, the current sleep state of the actor will be kept.
 
-	\note kinematic actors are incompatible with CCD so raising this flag will automatically clear eENABLE_CCD
+	**Note:** kinematic actors are incompatible with CCD so raising this flag will automatically clear eENABLE_CCD
 
 	@see PxRigidDynamic.setKinematicTarget()
 	*/
@@ -53,7 +53,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 	high-speed motion. Note individual shape pairs still need to enable PxPairFlag::eDETECT_CCD_CONTACT in the collision filtering to enable the CCD to respond to 
 	individual interactions. 
 
-	\note kinematic actors are incompatible with CCD so this flag will be cleared automatically when raised on a kinematic actor
+	**Note:** kinematic actors are incompatible with CCD so this flag will be cleared automatically when raised on a kinematic actor
 
 	*/
 	var eENABLE_CCD = (1<<2);		//!< Enable CCD for the body.
@@ -65,7 +65,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 	CCD friction has been observed to introduce some simulation artifacts. CCD friction was enabled in previous versions of the SDK. Raising this flag will result in behavior 
 	that is a closer match for previous versions of the SDK.
 
-	\note This flag requires PxRigidBodyFlag::eENABLE_CCD to be raised to have any effect.
+	**Note:** This flag requires PxRigidBodyFlag::eENABLE_CCD to be raised to have any effect.
 	*/
 	var eENABLE_CCD_FRICTION = (1<<3);
 
@@ -74,7 +74,7 @@ extern enum abstract PxRigidBodyFlag(PxRigidBodyFlagImpl)
 
 	Sometimes it might be advantageous to get access to the new pose of a rigid body as early as possible and
 	not wait until the call to fetchResults() returns. Setting this flag will schedule the rigid body to get reported
-	in #PxSimulationEventCallback::onAdvance(). Please refer to the documentation of that callback to understand
+	in `PxSimulationEventCallback.onAdvance()`. Please refer to the documentation of that callback to understand
 	the behavior and limitations of this functionality.
 
 	@see PxSimulationEventCallback::onAdvance()
@@ -125,14 +125,14 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Sets the pose of the center of mass relative to the actor.	
 	
-	\note Changing this transform will not move the actor in the world!
+	**Note:** Changing this transform will not move the actor in the world!
 
-	\note Setting an unrealistic center of mass which is a long way from the body can make it difficult for
+	**Note:** Setting an unrealistic center of mass which is a long way from the body can make it difficult for
 	the SDK to solve constraints. Perhaps leading to instability and jittering bodies.
 
-	<b>Default:</b> the identity transform
+	**Default:** the identity transform
 
-	\param[in] pose Mass frame offset transform relative to the actor frame. <b>Range:</b> rigid body transform.
+	\param[in] pose Mass frame offset transform relative to the actor frame. **Range:** rigid body transform.
 
 	@see getCMassLocalPose() PxRigidBodyDesc.massLocalPose
 	*/
@@ -155,16 +155,16 @@ extern class PxRigidBody extends PxRigidActor
 	The mass must be non-negative.
 	
 	setMass() does not update the inertial properties of the body, to change the inertia tensor
-	use setMassSpaceInertiaTensor() or the PhysX extensions method #PxRigidBodyExt::updateMassAndInertia().
+	use setMassSpaceInertiaTensor() or the PhysX extensions method `PxRigidBodyExt.updateMassAndInertia()`.
 
-	\note A value of 0 is interpreted as infinite mass.
-	\note Values of 0 are not permitted for instances of PxArticulationLink but are permitted for instances of PxRigidDynamic. 
+	**Note:** A value of 0 is interpreted as infinite mass.
+	**Note:** Values of 0 are not permitted for instances of PxArticulationLink but are permitted for instances of PxRigidDynamic. 
 
-	<b>Default:</b> 1.0
+	**Default:** 1.0
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the actor up automatically.
+	**Sleeping:** Does **NOT** wake the actor up automatically.
 
-	\param[in] mass New mass value for the actor. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] mass New mass value for the actor. **Range:** [0, PX_MAX_F32)
 
 	@see getMass() PxRigidBodyDesc.mass setMassSpaceInertiaTensor()
 	*/
@@ -173,7 +173,7 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Retrieves the mass of the actor.
 
-	\note A value of 0 is interpreted as infinite mass.
+	**Note:** A value of 0 is interpreted as infinite mass.
 
 	\return The mass of this actor.
 
@@ -196,16 +196,16 @@ extern class PxRigidBody extends PxRigidActor
 	Note that such matrices are diagonal -- the passed vector is the diagonal.
 
 	If you have a non diagonal world/actor space inertia tensor(3x3 matrix). Then you need to
-	diagonalize it and set an appropriate mass space transform. See #setCMassLocalPose().
+	diagonalize it and set an appropriate mass space transform. See `setCMassLocalPose()`.
 
 	The inertia tensor elements must be non-negative.
 
-	\note A value of 0 in an element is interpreted as infinite inertia along that axis.
-	\note Values of 0 are not permitted for instances of PxArticulationLink but are permitted for instances of PxRigidDynamic. 
+	**Note:** A value of 0 in an element is interpreted as infinite inertia along that axis.
+	**Note:** Values of 0 are not permitted for instances of PxArticulationLink but are permitted for instances of PxRigidDynamic. 
 
-	<b>Default:</b> (1.0, 1.0, 1.0)
+	**Default:** (1.0, 1.0, 1.0)
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the actor up automatically.
+	**Sleeping:** Does **NOT** wake the actor up automatically.
 
 	\param[in] m New mass space inertia tensor for the actor.
 
@@ -220,7 +220,7 @@ extern class PxRigidBody extends PxRigidActor
 
 	\return The mass space inertia tensor of this actor.
 
-	\note A value of 0 in an element is interpreted as infinite inertia along that axis.
+	**Note:** A value of 0 in an element is interpreted as infinite inertia along that axis.
 
 	@see PxRigidBodyDesc.massSpaceInertia setMassSpaceInertiaTensor() setMass() setCMassLocalPose()
 	*/
@@ -231,7 +231,7 @@ extern class PxRigidBody extends PxRigidActor
 
 	This method retrieves a mass frame inverse inertia vector.
 
-	\note A value of 0 in an element is interpreted as infinite inertia along that axis.
+	**Note:** A value of 0 in an element is interpreted as infinite inertia along that axis.
 
 	\return The mass space inverse inertia tensor of this actor.
 
@@ -248,9 +248,9 @@ extern class PxRigidBody extends PxRigidActor
 
 	Zero represents no damping. The damping coefficient must be nonnegative.
 
-	<b>Default:</b> 0.0
+	**Default:** 0.0
 
-	\param[in] linDamp Linear damping coefficient. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] linDamp Linear damping coefficient. **Range:** [0, PX_MAX_F32)
 
 	@see getLinearDamping() setAngularDamping()
 	*/
@@ -272,9 +272,9 @@ extern class PxRigidBody extends PxRigidActor
 
 	The angular damping coefficient must be nonnegative.
 
-	<b>Default:</b> 0.05
+	**Default:** 0.05
 
-	\param[in] angDamp Angular damping coefficient. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] angDamp Angular damping coefficient. **Range:** [0, PX_MAX_F32)
 
 	@see getAngularDamping() setLinearDamping()
 	*/
@@ -311,15 +311,15 @@ extern class PxRigidBody extends PxRigidActor
 	forces such as gravity or friction will not be able to manifest themselves, because forces directly
 	influence only the velocity/momentum of an actor.
 
-	<b>Default:</b> (0.0, 0.0, 0.0)
+	**Default:** (0.0, 0.0, 0.0)
 
-	<b>Sleeping:</b> This call wakes the actor if it is sleeping, the autowake parameter is true (default) or the 
+	**Sleeping:** This call wakes the actor if it is sleeping, the autowake parameter is true (default) or the 
 	new velocity is non-zero
 
-	\note It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	@param linVel New linear velocity of actor. <b>Range:</b> velocity vector
-	@param autowake Whether to wake the object up if it is asleep and the velocity is non-zero. Default `true`. If true and the current wake counter value is smaller than #PxSceneDesc::wakeCounterResetValue it will get increased to the reset value.
+	@param linVel New linear velocity of actor. **Range:** velocity vector
+	@param autowake Whether to wake the object up if it is asleep and the velocity is non-zero. Default `true`. If true and the current wake counter value is smaller than `PxSceneDesc.wakeCounterResetValue` it will get increased to the reset value.
 
 	@see getLinearVelocity() setAngularVelocity()
     */
@@ -344,16 +344,16 @@ extern class PxRigidBody extends PxRigidActor
 	Note that if you continuously set the angular velocity of an actor yourself, 
 	forces such as friction will not be able to rotate the actor, because forces directly influence only the velocity/momentum.
 
-	<b>Default:</b> (0.0, 0.0, 0.0)
+	**Default:** (0.0, 0.0, 0.0)
 
-	<b>Sleeping:</b> This call wakes the actor if it is sleeping, the autowake parameter is true (default) or the 
+	**Sleeping:** This call wakes the actor if it is sleeping, the autowake parameter is true (default) or the 
 	new velocity is non-zero
 
-	\note It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	\param[in] angVel New angular velocity of actor. <b>Range:</b> angular velocity vector
+	\param[in] angVel New angular velocity of actor. **Range:** angular velocity vector
 	\param[in] autowake Whether to wake the object up if it is asleep and the velocity is non-zero.  If true and the current wake 
-	counter value is smaller than #PxSceneDesc::wakeCounterResetValue it will get increased to the reset value.
+	counter value is smaller than `PxSceneDesc.wakeCounterResetValue` it will get increased to the reset value.
 
 	@see getAngularVelocity() setLinearVelocity() 
 	*/
@@ -369,12 +369,12 @@ extern class PxRigidBody extends PxRigidActor
 	With this function, you can set the  maximum angular velocity permitted for this rigid body.
 	Higher angular velocities are clamped to this value.
 
-	Note: The angular velocity is clamped to the set value <i>before</i> the solver, which means that
+	Note: The angular velocity is clamped to the set value *before* the solver, which means that
 	the limit may still be momentarily exceeded.
 
-	<b>Default:</b> 100.0
+	**Default:** 100.0
 
-	\param[in] maxAngVel Max allowable angular velocity for actor. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] maxAngVel Max allowable angular velocity for actor. **Range:** [0, PX_MAX_F32)
 
 	@see getMaxAngularVelocity()
 	*/
@@ -396,12 +396,12 @@ extern class PxRigidBody extends PxRigidActor
 	With this function, you can set the  maximum linear velocity permitted for this rigid body.
 	Higher angular velocities are clamped to this value.
 
-	Note: The angular velocity is clamped to the set value <i>before</i> the solver, which means that
+	Note: The angular velocity is clamped to the set value *before* the solver, which means that
 	the limit may still be momentarily exceeded.
 
-	<b>Default:</b> PX_MAX_F32
+	**Default:** PX_MAX_F32
 
-	\param[in] maxLinVel Max allowable linear velocity for actor. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] maxLinVel Max allowable linear velocity for actor. **Range:** [0, PX_MAX_F32)
 
 	@see getMaxAngularVelocity()
 	*/
@@ -424,7 +424,7 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Applies a force (or impulse) defined in the global coordinate frame to the actor at its center of mass.
 	
-	<b>This will not induce a torque</b>.
+	**This will not induce a torque**.
 
 	::PxForceMode determines if the force is to be conventional or impulsive.
 	
@@ -434,20 +434,20 @@ extern class PxRigidBody extends PxRigidActor
 	PxForceMode::eVELOCITY_CHANGE respectively.
 
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	\note The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
+	**Note:** The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
 
-	\note if this is called on an articulation link, only the link is updated, not the entire articulation.
+	**Note:** if this is called on an articulation link, only the link is updated, not the entire articulation.
 
-	\note see #PxRigidBodyExt::computeVelocityDeltaFromImpulse for details of how to compute the change in linear velocity that 
+	**Note:** see `PxRigidBodyExt.computeVelocityDeltaFromImpulse` for details of how to compute the change in linear velocity that 
 	will arise from the application of an impulsive force, where an impulsive force is applied force multiplied by a timestep.
 
-	<b>Sleeping:</b> This call wakes the actor if it is sleeping and the autowake parameter is true (default) or the force is non-zero.
+	**Sleeping:** This call wakes the actor if it is sleeping and the autowake parameter is true (default) or the force is non-zero.
 
 	@param force Force/Impulse to apply defined in the global frame.
-	@param mode The mode to use when applying the force/impulse(see #PxForceMode). Default `eFORCE`.
-	@param autowake Specify if the call should wake up the actor if it is currently asleep. Default `true`. If true and the current wake counter value is smaller than #PxSceneDesc::wakeCounterResetValue it will get increased to the reset value.
+	@param mode The mode to use when applying the force/impulse(see `PxForceMode).` Default `eFORCE`.
+	@param autowake Specify if the call should wake up the actor if it is currently asleep. Default `true`. If true and the current wake counter value is smaller than `PxSceneDesc.wakeCounterResetValue` it will get increased to the reset value.
 
 	@see PxForceMode addTorque
 	*/
@@ -466,20 +466,20 @@ extern class PxRigidBody extends PxRigidActor
 	using PxForceMode::eACCELERATION and PxForceMode::eVELOCITY_CHANGE respectively.
 	
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	\note The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
+	**Note:** The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
 	
-	\note if this called on an articulation link, only the link is updated, not the entire articulation.
+	**Note:** if this called on an articulation link, only the link is updated, not the entire articulation.
 
-	\note see #PxRigidBodyExt::computeVelocityDeltaFromImpulse for details of how to compute the change in angular velocity that 
+	**Note:** see `PxRigidBodyExt.computeVelocityDeltaFromImpulse` for details of how to compute the change in angular velocity that 
 	will arise from the application of an impulsive torque, where an impulsive torque is an applied torque multiplied by a timestep.
 
-	<b>Sleeping:</b> This call wakes the actor if it is sleeping and the autowake parameter is true (default) or the torque is non-zero.
+	**Sleeping:** This call wakes the actor if it is sleeping and the autowake parameter is true (default) or the torque is non-zero.
 
-	@param torque Torque to apply defined in the global frame. <b>Range:</b> torque vector
-	@param mode The mode to use when applying the force/impulse(see #PxForceMode). Default `eFORCE`.
-	@param autowake whether to wake up the object if it is asleep. Default `true`. If true and the current wake counter value is smaller than #PxSceneDesc::wakeCounterResetValue it will get increased to the reset value.
+	@param torque Torque to apply defined in the global frame. **Range:** torque vector
+	@param mode The mode to use when applying the force/impulse(see `PxForceMode).` Default `eFORCE`.
+	@param autowake whether to wake up the object if it is asleep. Default `true`. If true and the current wake counter value is smaller than `PxSceneDesc.wakeCounterResetValue` it will get increased to the reset value.
 
 	@see PxForceMode addForce()
 	*/
@@ -498,11 +498,11 @@ extern class PxRigidBody extends PxRigidActor
 
 	::PxForceMode determines if the cleared force is to be conventional or impulsive.
 
-	\note The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
+	**Note:** The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	@param mode The mode to use when clearing the force/impulse(see #PxForceMode). Default `eFORCE`.
+	@param mode The mode to use when clearing the force/impulse(see `PxForceMode).` Default `eFORCE`.
 
 	@see PxForceMode addForce
 	*/
@@ -520,11 +520,11 @@ extern class PxRigidBody extends PxRigidActor
 	clearTorque(PxForceMode::eACCELERATION), and the effect of calling clearTorque(PxForceMode::eIMPULSE) is equivalent to calling 
 	clearTorque(PxForceMode::eVELOCITY_CHANGE).	
 
-	\note The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
+	**Note:** The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	@param mode The mode to use when clearing the force/impulse(see #PxForceMode). Default `eFORCE`.
+	@param mode The mode to use when clearing the force/impulse(see `PxForceMode).` Default `eFORCE`.
 
 	@see PxForceMode addTorque
 	*/
@@ -537,13 +537,13 @@ extern class PxRigidBody extends PxRigidActor
 
 	::PxForceMode determines if the cleared torque is to be conventional or impulsive.
 
-	\note The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
+	**Note:** The force modes PxForceMode::eIMPULSE and PxForceMode::eVELOCITY_CHANGE can not be applied to articulation links.
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
 	@param force Force/Impulse to apply defined in the global frame.
-	@param torque Torque to apply defined in the global frame. <b>Range:</b> torque vector
-	@param mode The mode to use when applying the force/impulse(see #PxForceMode). Default `eFORCE`.
+	@param torque Torque to apply defined in the global frame. **Range:** torque vector
+	@param mode The mode to use when applying the force/impulse(see `PxForceMode).` Default `eFORCE`.
 
 	@see PxForceMode addTorque
 	*/
@@ -553,13 +553,13 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Raises or clears a particular rigid body flag.
 	
-	See the list of flags #PxRigidBodyFlag
+	See the list of flags `PxRigidBodyFlag`
 
-	<b>Default:</b> no flags are set
+	**Default:** no flags are set
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the actor up automatically.
+	**Sleeping:** Does **NOT** wake the actor up automatically.
 
-	\param[in] flag		The PxRigidBody flag to raise(set) or clear. See #PxRigidBodyFlag.
+	\param[in] flag		The PxRigidBody flag to raise(set) or clear. See `PxRigidBodyFlag.`
 	\param[in] value	The new boolean value for the flag.
 
 	@see PxRigidBodyFlag getRigidBodyFlags() 
@@ -571,7 +571,7 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Reads the PxRigidBody flags.
 	
-	See the list of flags #PxRigidBodyFlag
+	See the list of flags `PxRigidBodyFlag`
 
 	\return The values of the PxRigidBody flags.
 
@@ -588,7 +588,7 @@ extern class PxRigidBody extends PxRigidActor
 	which these bodies could be integrated forwards that would ensure that these bodies did not pass through each-other. This value is then scaled by CCD minimum advance
 	coefficient to determine the amount of time that will be consumed in the CCD pass.
 
-	<b>Things to consider:</b> 
+	**Things to consider:** 
 	A large value (approaching 1) ensures that the objects will always advance some time. However, larger values increase the chances of objects gently drifting through each-other in
 	scenes which the constraint solver can't converge, e.g. scenes where an object is being dragged through a wall with a constraint.
 	A value of 0 ensures that the pair of objects stop at the exact time-of-impact and will not gently drift through each-other. However, with very small/thin objects initially in 
@@ -597,7 +597,7 @@ extern class PxRigidBody extends PxRigidActor
 
 	The chances of jamming can be reduced by increasing the number of CCD mass @see PxSceneDesc.ccdMaxPasses. However, increasing this number increases the CCD overhead.
 
-	\param[in] advanceCoefficient The CCD min advance coefficient. <b>Range:</b> [0, 1] <b>Default:</b> 0.15
+	\param[in] advanceCoefficient The CCD min advance coefficient. **Range:** [0, 1] **Default:** 0.15
 	*/
 
 	function setMinCCDAdvanceCoefficient(advanceCoefficient:PxReal):Void;
@@ -617,7 +617,7 @@ extern class PxRigidBody extends PxRigidActor
 	/**
 	\brief Sets the maximum depenetration velocity permitted to be introduced by the solver.
 	This value controls how much velocity the solver can introduce to correct for penetrations in contacts. 
-	\param[in] biasClamp The maximum velocity to de-penetrate by <b>Range:</b> (0, PX_MAX_F32].
+	\param[in] biasClamp The maximum velocity to de-penetrate by **Range:** (0, PX_MAX_F32].
 	*/
 	function setMaxDepenetrationVelocity(biasClamp:PxReal):Void;
 
@@ -634,7 +634,7 @@ extern class PxRigidBody extends PxRigidActor
 	bodies will be the minimum	of the two limit values. For a collision between a static and a dynamic body, the impulse is limited
 	by the value for the dynamic body.
 
-	\param[in] maxImpulse the maximum contact impulse. <b>Range:</b> [0, PX_MAX_F32] <b>Default:</b> PX_MAX_F32
+	\param[in] maxImpulse the maximum contact impulse. **Range:** [0, PX_MAX_F32] **Default:** PX_MAX_F32
 
 	@see getMaxContactImpulse
 	*/

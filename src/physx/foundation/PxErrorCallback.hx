@@ -8,7 +8,7 @@ extern class PxErrorCallback
 {
 	/**
 	Reports an error code.
-	@param code Error code, see #PxErrorCode
+	@param code Error code, see `PxErrorCode`
 	@param message Message to display.
 	@param file File error occured in.
 	@param line Line number error occured on.

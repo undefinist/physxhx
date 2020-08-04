@@ -10,11 +10,11 @@ import physx.foundation.PxSimpleTypes;
 
 The scaling is along arbitrary axes that are specified by PxMeshScale::rotation.
 
-\note	Negative scale values are supported for PxTriangleMeshGeometry
+**Note:**	Negative scale values are supported for PxTriangleMeshGeometry
 		with absolute values for each component within [PX_MIN_ABS_MESH_SCALE, PX_MAX_ABS_MESH_SCALE] range.
 		Negative scale causes a reflection around the specified axis, in addition PhysX will flip the normals
 		for mesh triangles when scale.x*scale.y*scale.z < 0.
-\note	Only positive scale values are supported for PxConvexMeshGeometry
+**Note:**	Only positive scale values are supported for PxConvexMeshGeometry
 		with values for each component within [PX_MIN_ABS_MESH_SCALE, PX_MAX_ABS_MESH_SCALE] range).
 
 @see PxConvexMeshGeometry PxTriangleMeshGeometry
@@ -24,11 +24,11 @@ The scaling is along arbitrary axes that are specified by PxMeshScale::rotation.
 extern abstract PxMeshScale(PxMeshScaleData)
 {
     /** \brief Minimum allowed absolute magnitude for each of mesh scale's components (x,y,z).
-        \note Only positive scale values are allowed for convex meshes. */
+        **Note:** Only positive scale values are allowed for convex meshes. */
     static inline final MIN:Float = 1e-6;
     
     /** \brief Maximum allowed absolute magnitude for each of mesh scale's components (x,y,z).
-        \note Only positive scale values are allowed for convex meshes. */
+        **Note:** Only positive scale values are allowed for convex meshes. */
     static inline final MAX:Float = 1e6;
 
     /**

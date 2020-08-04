@@ -25,12 +25,12 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
     /**
     \brief The shape will partake in collision in the physical simulation.
 
-    \note It is illegal to raise the eSIMULATION_SHAPE and eTRIGGER_SHAPE flags.
+    **Note:** It is illegal to raise the eSIMULATION_SHAPE and eTRIGGER_SHAPE flags.
     In the event that one of these flags is already raised the sdk will reject any 
     attempt to raise the other.  To raise the eSIMULATION_SHAPE first ensure that 
     eTRIGGER_SHAPE is already lowered.
 
-    \note This flag has no effect if simulation is disabled for the corresponding actor (see #PxActorFlag::eDISABLE_SIMULATION).
+    **Note:** This flag has no effect if simulation is disabled for the corresponding actor (see `PxActorFlag.eDISABLE_SIMULATION).`
 
     @see PxSimulationEventCallback.onContact() PxScene.setSimulationEventCallback() PxShape.setFlag(), PxShape.setFlags()
     */
@@ -44,20 +44,20 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
     /**
     \brief The shape is a trigger which can send reports whenever other shapes enter/leave its volume.
 
-    \note Triangle meshes and heightfields can not be triggers. Shape creation will fail in these cases.
+    **Note:** Triangle meshes and heightfields can not be triggers. Shape creation will fail in these cases.
 
-    \note Shapes marked as triggers do not collide with other objects. If an object should act both
+    **Note:** Shapes marked as triggers do not collide with other objects. If an object should act both
     as a trigger shape and a collision shape then create a rigid body with two shapes, one being a 
     trigger shape and the other a collision shape. 	It is illegal to raise the eTRIGGER_SHAPE and 
     eSIMULATION_SHAPE flags on a single PxShape instance.  In the event that one of these flags is already 
     raised the sdk will reject any attempt to raise the other.  To raise the eTRIGGER_SHAPE flag first 
     ensure that eSIMULATION_SHAPE flag is already lowered.
 
-    \note Trigger shapes will no longer send notification events for interactions with other trigger shapes.
+    **Note:** Trigger shapes will no longer send notification events for interactions with other trigger shapes.
 
-    \note Shapes marked as triggers are allowed to participate in scene queries, provided the eSCENE_QUERY_SHAPE flag is set. 
+    **Note:** Shapes marked as triggers are allowed to participate in scene queries, provided the eSCENE_QUERY_SHAPE flag is set. 
 
-    \note This flag has no effect if simulation is disabled for the corresponding actor (see #PxActorFlag::eDISABLE_SIMULATION).
+    **Note:** This flag has no effect if simulation is disabled for the corresponding actor (see `PxActorFlag.eDISABLE_SIMULATION).`
 
     @see PxSimulationEventCallback.onTrigger() PxScene.setSimulationEventCallback() PxShape.setFlag(), PxShape.setFlags()
     */
@@ -91,7 +91,7 @@ Shapes are shared, reference counted objects.
 An instance can be created by calling the createShape() method of the PxRigidActor class, or
 the createShape() method of the PxPhysics class.
 
-### Visualizations
+`##` Visualizations
 - PxVisualizationParameter::eCOLLISION_AABBS
 - PxVisualizationParameter::eCOLLISION_SHAPES
 - PxVisualizationParameter::eCOLLISION_AXES
@@ -145,9 +145,9 @@ extern class PxShape extends PxBase
 	/**
 	\brief Adjust the geometry of the shape.
 
-	\note The type of the passed in geometry must match the geometry type of the shape.
-	\note It is not allowed to change the geometry type of a shape.
-	\note This function does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
+	**Note:** The type of the passed in geometry must match the geometry type of the shape.
+	**Note:** It is not allowed to change the geometry type of a shape.
+	**Note:** This function does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
 
 	\param[in] geometry New geometry of the shape.
 
@@ -170,7 +170,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -183,7 +183,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -196,7 +196,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -209,7 +209,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -222,7 +222,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -235,7 +235,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -249,7 +249,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Fetch the geometry of the shape.
 
-	\note If the type of geometry to extract does not match the geometry type of the shape
+	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
 	\param[in] geometry The descriptor to save the shape's geometry data to.
@@ -282,14 +282,14 @@ extern class PxShape extends PxBase
 
 	The local pose is an attribute of the shape, and so will apply to all actors to which the shape is attached.
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the associated actor up automatically.
+	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	<i>Note:</i> Does not automatically update the inertia properties of the owning actor (if applicable); use the
-	PhysX extensions method #PxRigidBodyExt::updateMassAndInertia() to do this.
+	*Note:* Does not automatically update the inertia properties of the owning actor (if applicable); use the
+	PhysX extensions method `PxRigidBodyExt.updateMassAndInertia()` to do this.
 
-	<b>Default:</b> the identity transform
+	**Default:** the identity transform
 
-	\param[in] pose	The new transform from the actor frame to the shape frame. <b>Range:</b> rigid body transform
+	\param[in] pose	The new transform from the actor frame to the shape frame. **Range:** rigid body transform
 
 	@see getLocalPose() 
 	*/
@@ -316,10 +316,10 @@ extern class PxShape extends PxBase
 	/**
 	\brief Sets the user definable collision filter data.
 	
-	<b>Sleeping:</b> Does wake up the actor if the filter data change causes a formerly suppressed
+	**Sleeping:** Does wake up the actor if the filter data change causes a formerly suppressed
 	collision pair to be enabled.
 
-	<b>Default:</b> (0,0,0,0)
+	**Default:** (0,0,0,0)
 
 	@see getSimulationFilterData() 
 	*/
@@ -335,7 +335,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Sets the user definable query filter data.
 
-	<b>Default:</b> (0,0,0,0)
+	**Default:** (0,0,0,0)
 
 	@see getQueryFilterData() 
 	*/
@@ -355,9 +355,9 @@ extern class PxShape extends PxBase
 	/**
 	\brief Assigns material(s) to the shape.
 	
-	<b>Sleeping:</b> Does <b>NOT</b> wake the associated actor up automatically.
+	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] materials List of material pointers to assign to the shape. See #PxMaterial
+	\param[in] materials List of material pointers to assign to the shape. See `PxMaterial`
 	\param[in] materialCount The number of materials provided.
 
 	@see PxPhysics.createMaterial() getMaterials() 
@@ -374,7 +374,7 @@ extern class PxShape extends PxBase
 	/**
 	\brief Returns the number of materials assigned to the shape.
 
-	You can use #getMaterials() to retrieve the material pointers.
+	You can use `getMaterials()` to retrieve the material pointers.
 
 	\return Number of materials associated with this shape.
 
@@ -385,9 +385,9 @@ extern class PxShape extends PxBase
 	/**
 	\brief Retrieve all the material pointers associated with the shape.
 
-	You can retrieve the number of material pointers by calling #getNbMaterials()
+	You can retrieve the number of material pointers by calling `getNbMaterials()`
 
-	Note: Removing materials with #PxMaterial::release() will invalidate the pointer of the released material.
+	Note: Removing materials with `PxMaterial.release()` will invalidate the pointer of the released material.
 
 	\param[out] userBuffer The buffer to store the material pointers.
 	\param[in] bufferSize Size of provided user buffer.
@@ -414,8 +414,8 @@ extern class PxShape extends PxBase
 	\param[in] faceIndex The internal triangle index whose material you want to retrieve.
 	\return Material from input triangle
 
-	\note If faceIndex value of 0xFFFFffff is passed as an input for mesh and heightfield shapes, this function will issue a warning and return NULL.
-	\note Scene queries set the value of PxQueryHit::faceIndex to 0xFFFFffff whenever it is undefined or does not apply.
+	**Note:** If faceIndex value of 0xFFFFffff is passed as an input for mesh and heightfield shapes, this function will issue a warning and return NULL.
+	**Note:** Scene queries set the value of PxQueryHit::faceIndex to 0xFFFFffff whenever it is undefined or does not apply.
 
 	@see PxMaterial getNbMaterials() PxMaterial::release()
 	*/
@@ -429,11 +429,11 @@ extern class PxShape extends PxBase
 	predictively enforce the contact constraint even when the objects are slightly separated. This prevents jitter that would occur
 	if the constraint were enforced only when shapes were within the rest distance.
 
-	<b>Default:</b> 0.02f * PxTolerancesScale::length
+	**Default:** 0.02f * PxTolerancesScale::length
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the associated actor up automatically.
+	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] contactOffset <b>Range:</b> [maximum(0,restOffset), PX_MAX_F32)
+	\param[in] contactOffset **Range:** [maximum(0,restOffset), PX_MAX_F32)
 
 	@see getContactOffset PxTolerancesScale setRestOffset
 	*/
@@ -455,11 +455,11 @@ extern class PxShape extends PxBase
 	exactly.  Having a restOffset greater than zero is useful to have objects slide smoothly, so that they do not get hung up on irregularities of 
 	each others' surfaces.
 
-	<b>Default:</b> 0.0f
+	**Default:** 0.0f
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the associated actor up automatically.
+	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] restOffset	<b>Range:</b> (-PX_MAX_F32, contactOffset)
+	\param[in] restOffset	**Range:** (-PX_MAX_F32, contactOffset)
 
 	@see getRestOffset setContactOffset
 	*/
@@ -483,7 +483,7 @@ extern class PxShape extends PxBase
 	so, if the shapes are separated or penetration is zero, no torsional friction will be applied. It is used to approximate 
 	rotational friction introduced by the compression of contacting surfaces.
 
-	\param[in] radius	<b>Range:</b> (0, PX_MAX_F32)
+	\param[in] radius	**Range:** (0, PX_MAX_F32)
 
 	*/
 	function setTorsionalPatchRadius(radius:PxReal):Void;
@@ -508,7 +508,7 @@ extern class PxShape extends PxBase
 	
 	If the radius is > 0, some torsional friction will be applied regardless of the value of torsionalPatchRadius or the amount of penetration.
 
-	\param[in] radius	<b>Range:</b> (0, PX_MAX_F32)
+	\param[in] radius	**Range:** (0, PX_MAX_F32)
 
 	*/
 	function setMinTorsionalPatchRadius(radius:PxReal):Void;
@@ -531,12 +531,12 @@ extern class PxShape extends PxBase
 	/**
 	\brief Sets shape flags
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the associated actor up automatically.
+	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] flag The shape flag to enable/disable. See #PxShapeFlag.
+	\param[in] flag The shape flag to enable/disable. See `PxShapeFlag.`
 	\param[in] value True to set the flag. False to clear the flag specified in flag.
 
-	<b>Default:</b> PxShapeFlag::eVISUALIZATION | PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE
+	**Default:** PxShapeFlag::eVISUALIZATION | PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE
 
 	@see PxShapeFlag getFlags()
 	*/
@@ -566,12 +566,12 @@ extern class PxShape extends PxBase
 	function isExclusive():Bool;
 
 	/**
-	\brief Sets a name string for the object that can be retrieved with #getName().
+	\brief Sets a name string for the object that can be retrieved with `getName()`.
 	
 	This is for debugging and is not used by the SDK.
 	The string is not copied by the SDK, only the pointer is stored.
 
-	<b>Default:</b> NULL
+	**Default:** NULL
 	
 	\param[in] name The name string to set the objects name to.
 

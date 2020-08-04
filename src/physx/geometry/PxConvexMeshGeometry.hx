@@ -90,7 +90,7 @@ private extern class PxConvexMeshGeometryData extends PxGeometry
      * Constructor.
      * @param [in]mesh		Mesh pointer. May be NULL, though this will not make the object valid for shape construction.
      * @param [in]scaling	Scale factor. Default `PxMeshScale.identity()`.
-     * @param [in]flags	    Mesh flags. Default `PxConvexMeshGeometryFlag::eTIGHT_BOUNDS`.
+     * @param [in]flags	    Mesh flags. Default `PxConvexMeshGeometryFlag.eTIGHT_BOUNDS`.
      */
     @:native("physx::PxConvexMeshGeometry")
     @:overload(function():PxConvexMeshGeometryData {})

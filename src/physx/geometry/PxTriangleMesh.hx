@@ -84,11 +84,11 @@ once you have released all of its PxShape instances.
 
 
 <h3>Visualizations:</h3>
-\li #PxVisualizationParameter::eCOLLISION_AABBS
-\li #PxVisualizationParameter::eCOLLISION_SHAPES
-\li #PxVisualizationParameter::eCOLLISION_AXES
-\li #PxVisualizationParameter::eCOLLISION_FNORMALS
-\li #PxVisualizationParameter::eCOLLISION_EDGES
+- `PxVisualizationParameter.eCOLLISION_AABBS`
+- `PxVisualizationParameter.eCOLLISION_SHAPES`
+- `PxVisualizationParameter.eCOLLISION_AXES`
+- `PxVisualizationParameter.eCOLLISION_FNORMALS`
+- `PxVisualizationParameter.eCOLLISION_EDGES`
 
 @see PxTriangleMeshDesc PxTriangleMeshGeometry PxShape PxPhysics.createTriangleMesh()
 */
@@ -110,7 +110,7 @@ extern class PxTriangleMesh extends PxBase
 	*/
     function getVertices():cpp.ConstPointer<PxVec3>;
 
-//#if PX_ENABLE_DYNAMIC_MESH_RTREE
+//`if` PX_ENABLE_DYNAMIC_MESH_RTREE
 	/**
 	\brief Returns all mesh vertices for modification.
 
@@ -120,13 +120,13 @@ extern class PxTriangleMesh extends PxBase
 
 	\return  inplace vertex coordinates for each existing mesh vertex.
 
-	\note works only for PxMeshMidPhase::eBVH33
-	\note Size of array returned is equal to the number returned by getNbVertices().
-	\note This function operates on cooked vertex indices.
-	\note This means the index mapping and vertex count can be different from what was provided as an input to the cooking routine.
-	\note To achieve unchanged 1-to-1 index mapping with orignal mesh data (before cooking) please use the following cooking flags:
-	\note eWELD_VERTICES = 0, eDISABLE_CLEAN_MESH = 1.
-	\note It is also recommended to make sure that a call to validateTriangleMesh returns true if mesh cleaning is disabled.
+	**Note:** works only for PxMeshMidPhase::eBVH33
+	**Note:** Size of array returned is equal to the number returned by getNbVertices().
+	**Note:** This function operates on cooked vertex indices.
+	**Note:** This means the index mapping and vertex count can be different from what was provided as an input to the cooking routine.
+	**Note:** To achieve unchanged 1-to-1 index mapping with orignal mesh data (before cooking) please use the following cooking flags:
+	**Note:** eWELD_VERTICES = 0, eDISABLE_CLEAN_MESH = 1.
+	**Note:** It is also recommended to make sure that a call to validateTriangleMesh returns true if mesh cleaning is disabled.
 	@see getNbVertices()
 	@see refitBVH()	
 	*/
@@ -140,17 +140,17 @@ extern class PxTriangleMesh extends PxBase
 
 	\return New bounds for the entire mesh.
 
-	\note works only for PxMeshMidPhase::eBVH33
-	\note PhysX does not keep a mapping from the mesh to mesh shapes that reference it.
-	\note Call PxShape::setGeometry on each shape which references the mesh, to ensure that internal data structures are updated to reflect the new geometry.
-	\note PxShape::setGeometry does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
-	\note It is also recommended to make sure that a call to validateTriangleMesh returns true if mesh cleaning is disabled.
-	\note Active edges information will be lost during refit, the rigid body mesh contact generation might not perform as expected.
+	**Note:** works only for PxMeshMidPhase::eBVH33
+	**Note:** PhysX does not keep a mapping from the mesh to mesh shapes that reference it.
+	**Note:** Call PxShape::setGeometry on each shape which references the mesh, to ensure that internal data structures are updated to reflect the new geometry.
+	**Note:** PxShape::setGeometry does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
+	**Note:** It is also recommended to make sure that a call to validateTriangleMesh returns true if mesh cleaning is disabled.
+	**Note:** Active edges information will be lost during refit, the rigid body mesh contact generation might not perform as expected.
 	@see getNbVertices()
 	@see getVerticesForModification()	
 	*/
 	function refitBVH():PxBounds3;
-//#endif // PX_ENABLE_DYNAMIC_MESH_RTREE
+//`endif` // PX_ENABLE_DYNAMIC_MESH_RTREE
 
 	/**
 	\brief Returns the number of triangles.
@@ -175,7 +175,7 @@ extern class PxTriangleMesh extends PxBase
 	/**
 	\brief Reads the PxTriangleMesh flags.
 	
-	See the list of flags #PxTriangleMeshFlag
+	See the list of flags `PxTriangleMeshFlag`
 
 	\return The values of the PxTriangleMesh flags.
 

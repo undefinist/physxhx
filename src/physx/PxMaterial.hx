@@ -140,9 +140,9 @@ extern class PxMaterial extends PxBase
     
     The coefficient of dynamic friction should be in [0, PX_MAX_F32). If set to greater than staticFriction, the effective value of staticFriction will be increased to match.
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] coef Coefficient of dynamic friction. <b>Range:</b> [0, PX_MAX_F32)
+    \param[in] coef Coefficient of dynamic friction. **Range:** [0, PX_MAX_F32)
 
     @see getDynamicFriction()
     */
@@ -162,9 +162,9 @@ extern class PxMaterial extends PxBase
     
     The coefficient of static friction should be in the range [0, PX_MAX_F32)
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] coef Coefficient of static friction. <b>Range:</b> [0, PX_MAX_F32)
+    \param[in] coef Coefficient of static friction. **Range:** [0, PX_MAX_F32)
 
     @see getStaticFriction() 
     */
@@ -183,9 +183,9 @@ extern class PxMaterial extends PxBase
     
     A coefficient of 0 makes the object bounce as little as possible, higher values up to 1.0 result in more bounce.
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] rest Coefficient of restitution. <b>Range:</b> [0,1]
+    \param[in] rest Coefficient of restitution. **Range:** [0,1]
 
     @see getRestitution() 
     */
@@ -194,7 +194,7 @@ extern class PxMaterial extends PxBase
     /**
     \brief Retrieves the coefficient of restitution.     
 
-    See #setRestitution.
+    See `setRestitution.`
 
     \return The coefficient of restitution.
 
@@ -205,9 +205,9 @@ extern class PxMaterial extends PxBase
     /**
     \brief Raises or clears a particular material flag.
     
-    See the list of flags #PxMaterialFlag
+    See the list of flags `PxMaterialFlag`
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
     \param[in] flag The PxMaterial flag to raise(set) or clear.
 
@@ -219,15 +219,15 @@ extern class PxMaterial extends PxBase
     /**
     \brief sets all the material flags.
     
-    See the list of flags #PxMaterialFlag
+    See the list of flags `PxMaterialFlag`
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
     */
     function setFlags(flags:PxMaterialFlags):Void;
 
     /**
-    \brief Retrieves the flags. See #PxMaterialFlag.
+    \brief Retrieves the flags. See `PxMaterialFlag.`
 
     \return The material flags.
 
@@ -240,9 +240,9 @@ extern class PxMaterial extends PxBase
     
     See the enum ::PxCombineMode .
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] combMode Friction combine mode to set for this material. See #PxCombineMode.
+    \param[in] combMode Friction combine mode to set for this material. See `PxCombineMode.`
 
     @see PxCombineMode getFrictionCombineMode setStaticFriction() setDynamicFriction()
     */
@@ -251,7 +251,7 @@ extern class PxMaterial extends PxBase
     /**
     \brief Retrieves the friction combine mode.
     
-    See #setFrictionCombineMode.
+    See `setFrictionCombineMode.`
 
     \return The friction combine mode for this material.
 
@@ -264,9 +264,9 @@ extern class PxMaterial extends PxBase
     
     See the enum ::PxCombineMode .
 
-    <b>Sleeping:</b> Does <b>NOT</b> wake any actors which may be affected.
+    **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] combMode Restitution combine mode for this material. See #PxCombineMode.
+    \param[in] combMode Restitution combine mode for this material. See `PxCombineMode.`
 
     @see PxCombineMode getRestitutionCombineMode() setRestitution()
     */
@@ -275,7 +275,7 @@ extern class PxMaterial extends PxBase
     /**
     \brief Retrieves the restitution combine mode.
     
-    See #setRestitutionCombineMode.
+    See `setRestitutionCombineMode.`
 
     \return The coefficient of restitution combine mode for this material.
 

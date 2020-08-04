@@ -95,7 +95,7 @@ private extern class PxTriangleMeshGeometryData extends PxGeometry
 
     \return  True if the current settings are valid for shape creation.
 
-    \note A valid triangle mesh has a positive scale value in each direction (scale.scale.x > 0, scale.scale.y > 0, scale.scale.z > 0).
+    **Note:** A valid triangle mesh has a positive scale value in each direction (scale.scale.x > 0, scale.scale.y > 0, scale.scale.z > 0).
     It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a triangle mesh that has zero extents in any direction.
 
     @see PxRigidActor::createShape, PxPhysics::createShape

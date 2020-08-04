@@ -5,9 +5,9 @@ import physx.geometry.PxHeightFieldFlag;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Descriptor class for #PxHeightField.
+\brief Descriptor class for `PxHeightField.`
 
-\note The heightfield data is *copied* when a PxHeightField object is created from this descriptor. After the call the
+**Note:** The heightfield data is *copied* when a PxHeightField object is created from this descriptor. After the call the
 user may discard the height data.
 
 Construct using `= null`.
@@ -21,20 +21,20 @@ extern class PxHeightFieldDesc
     /**
 	\brief Number of sample rows in the height field samples array.
 
-	\note Local space X-axis corresponds to rows.
+	**Note:** Local space X-axis corresponds to rows.
 
-	<b>Range:</b> &gt;1<br>
-	<b>Default:</b> 0
+	**Range:** &gt;1<br>
+	**Default:** 0
 	*/
 	var nbRows:PxU32;
 
 	/**
 	\brief Number of sample columns in the height field samples array.
 
-	\note Local space Z-axis corresponds to columns.
+	**Note:** Local space Z-axis corresponds to columns.
 
-	<b>Range:</b> &gt;1<br>
-	<b>Default:</b> 0
+	**Range:** &gt;1<br>
+	**Default:** 0
 	*/
 	var nbColumns:PxU32;
 
@@ -43,7 +43,7 @@ extern class PxHeightFieldDesc
 
 	Currently the only supported format is PxHeightFieldFormat::eS16_TM:
 
-	<b>Default:</b> PxHeightFieldFormat::eS16_TM
+	**Default:** PxHeightFieldFormat::eS16_TM
 
 	@see PxHeightFormat PxHeightFieldDesc.samples
 	*/
@@ -63,7 +63,7 @@ extern class PxHeightFieldDesc
 	The sample data follows at the offset and spans the number of bytes defined by the format.
 	Then there are zero or more unused bytes depending on sampleStride before the next sample.
 
-	<b>Default:</b> NULL
+	**Default:** NULL
 
 	@see PxHeightFormat
 	*/
@@ -88,15 +88,15 @@ extern class PxHeightFieldDesc
 
 	This parameter is ignored in contact generation with sphere and capsule primitives.
 
-	<b>Range:</b> [0, PX_MAX_F32)<br>
-	<b>Default:</b> 0
+	**Range:** [0, PX_MAX_F32)<br>
+	**Default:** 0
 	*/
 	var convexEdgeThreshold:PxReal;
 
 	/**
 	\brief Flags bits, combined from values of the enum ::PxHeightFieldFlag.
 
-	<b>Default:</b> 0
+	**Default:** 0
 
 	@see PxHeightFieldFlag PxHeightFieldFlags
 	*/

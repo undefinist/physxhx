@@ -49,7 +49,7 @@ extern class PxSimpleFactory
     unlike PxCreateDynamic, the geometry is not restricted to box, capsule, sphere or convex. However, 
 	kinematics of other geometry types may not participate in simulation collision and may be used only for
 	triggers or scene queries of moving objects under animation control. In this case the density parameter
-	will be ignored and the created shape will be set up as a scene query only shape (see #PxShapeFlag::eSCENE_QUERY_SHAPE)
+	will be ignored and the created shape will be set up as a scene query only shape (see `PxShapeFlag.eSCENE_QUERY_SHAPE)`
 
     @param sdk the PxPhysics object
     @param transform the global pose of the new object
@@ -152,7 +152,7 @@ extern class PxSimpleFactory
     - aggregate or scene membership
     - user data
     
-    \note Transforms are not copied with bit-exact accuracy.
+    **Note:** Transforms are not copied with bit-exact accuracy.
     
     \param[in] physicsSDK - the physics SDK used to allocate the rigid static
     \param[in] actor the rigid actor from which to take the attributes.
@@ -189,7 +189,7 @@ extern class PxSimpleFactory
     - sleep timer
     - user data
 
-    \note Transforms are not copied with bit-exact accuracy.
+    **Note:** Transforms are not copied with bit-exact accuracy.
 
     \param[in] physicsSDK PxPhysics - the physics SDK used to allocate the rigid static
     \param[in] body the rigid dynamic to clone.

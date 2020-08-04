@@ -44,7 +44,7 @@ extern class PxHeightField extends PxBase
 	\param[in] shrinkBounds If left as false, the bounds will never shrink but only grow. If set to true the bounds will be recomputed from all HF samples at O(nbColums*nbRows) perf cost.
 	\return True on success, false on failure. Failure can occur due to format mismatch.
 
-	\note Modified samples are constrained to the same height quantization range as the original heightfield.
+	**Note:** Modified samples are constrained to the same height quantization range as the original heightfield.
 	Source samples that are out of range of target heightfield will be clipped with no error.
 	PhysX does not keep a mapping from the heightfield to heightfield shapes that reference it.
 	Call PxShape::setGeometry on each shape which references the height field, to ensure that internal data structures are updated to reflect the new geometry.
@@ -135,7 +135,7 @@ extern class PxHeightField extends PxBase
 	/**
 	\brief Returns material table index of given triangle
 
-	\note This function takes a post cooking triangle index.
+	**Note:** This function takes a post cooking triangle index.
 
 	\param[in] triangleIndex (internal) index of desired triangle
 	\return Material table index, or 0xffff if no per-triangle materials are used
@@ -145,7 +145,7 @@ extern class PxHeightField extends PxBase
 	/**
 	\brief Returns a triangle face normal for a given triangle index
 
-	\note This function takes a post cooking triangle index.
+	**Note:** This function takes a post cooking triangle index.
 
 	\param[in] triangleIndex (internal) index of desired triangle
 	\return Triangle normal for a given triangle index

@@ -15,7 +15,7 @@ extern abstract PxQuat(PxQuatData)
 
     Angle is in radians!
 
-    <b>Unit:</b> Radians
+    **Unit:** Radians
     */
     inline static function angleAxis(angleRadians:cpp.Float32, unitAxis:PxVec3):PxQuat
     {
@@ -179,7 +179,7 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     /**
     \brief Gets the angle between this quat and the specified `q`, or the identity quaternion if not specified.
 
-    <b>Unit:</b> Radians
+    **Unit:** Radians
     */
     @:overload(function ():cpp.Float32 {})
     function getAngle(q:PxQuat):cpp.Float32;
@@ -207,7 +207,7 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     /*
     \brief returns the conjugate.
 
-    \note for unit quaternions, this is the inverse.
+    **Note:** for unit quaternions, this is the inverse.
     */
     function getConjugate():PxQuat;
 

@@ -30,7 +30,7 @@ extern class PxAggregate extends PxBase
 	If the actor already belongs to a scene, a warning is output and the call is ignored. You need to remove
 	the actor from the scene first, before adding it to the aggregate.
 
-	\note When BVHStructure is provided the actor shapes are grouped together. 
+	**Note:** When BVHStructure is provided the actor shapes are grouped together. 
 	The scene query pruning structure inside PhysX SDK will store/update one
 	bound per actor. The scene queries against such an actor will query actor
 	bounds and then make a local space query against the provided BVH structure, which is in
@@ -47,7 +47,7 @@ extern class PxAggregate extends PxBase
 
 	A warning is output if the incoming actor does not belong to the aggregate. Otherwise the actor is
 	removed from the aggregate. If the aggregate belongs to a scene, the actor is reinserted in that
-	scene. If you intend to delete the actor, it is best to call #PxActor::release() directly. That way
+	scene. If you intend to delete the actor, it is best to call `PxActor.release()` directly. That way
 	the actor will be automatically removed from its aggregate (if any) and not reinserted in a scene.
 
 	\param	[in] actor The actor that should be removed from the aggregate
@@ -76,7 +76,7 @@ extern class PxAggregate extends PxBase
 
 	A warning is output if the incoming articulation does not belong to the aggregate. Otherwise the articulation is
 	removed from the aggregate. If the aggregate belongs to a scene, the articulation is reinserted in that
-	scene. If you intend to delete the articulation, it is best to call #PxArticulation::release() directly. That way
+	scene. If you intend to delete the articulation, it is best to call `PxArticulation.release()` directly. That way
 	the articulation will be automatically removed from its aggregate (if any) and not reinserted in a scene.
 
 	\param	[in] articulation The articulation that should be removed from the aggregate
@@ -87,7 +87,7 @@ extern class PxAggregate extends PxBase
 	/**
 	\brief Returns the number of actors contained in the aggregate.
 
-	You can use #getActors() to retrieve the actor pointers.
+	You can use `getActors()` to retrieve the actor pointers.
 
 	\return Number of actors contained in the aggregate.
 
@@ -107,7 +107,7 @@ extern class PxAggregate extends PxBase
 	/**
 	\brief Retrieve all actors contained in the aggregate.
 
-	You can retrieve the number of actor pointers by calling #getNbActors()
+	You can retrieve the number of actor pointers by calling `getNbActors()`
 
 	\param[out] userBuffer The buffer to store the actor pointers.
 	\param[in] bufferSize Size of provided user buffer.

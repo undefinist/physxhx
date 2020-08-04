@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 
 Capsules are shaped as the union of a cylinder of length 2 * halfHeight and with the 
 given radius centered at the origin and extending along the x axis, and two hemispherical ends.
-\note The scaling of the capsule is expected to be baked into these values, there is no additional scaling parameter.
+**Note:** The scaling of the capsule is expected to be baked into these values, there is no additional scaling parameter.
 
 The function PxTransformFromSegment is a helper for generating an appropriate transform for the capsule from the capsule's interior line segment.
 
@@ -52,7 +52,7 @@ private extern class PxCapsuleGeometryData extends PxGeometry
 
 	\return True if the current settings are valid.
 
-	\note A valid capsule has radius > 0, halfHeight > 0.
+	**Note:** A valid capsule has radius > 0, halfHeight > 0.
 	It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a capsule that has zero radius or height.
 
 	@see PxRigidActor::createShape, PxPhysics::createShape

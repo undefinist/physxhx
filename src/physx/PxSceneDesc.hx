@@ -20,7 +20,7 @@ but generally has slower query performance.
 
 eDYNAMIC_AABB_TREE usually provides the fastest queries. However there is a
 constant per-frame management cost associated with this structure. How much work should
-be done per frame can be tuned via the #PxSceneDesc::dynamicTreeRebuildRateHint
+be done per frame can be tuned via the `PxSceneDesc.dynamicTreeRebuildRateHint`
 parameter.
 
 eSTATIC_AABB_TREE is typically used for static objects. It is the same as the
@@ -96,17 +96,17 @@ private extern class PxSceneQueryUpdateModeImpl {}
 /**
 \brief Enum for selecting the friction algorithm used for simulation.
 
-#PxFrictionType::ePATCH selects the patch friction model which typically leads to the most stable results at low solver iteration counts and is also quite inexpensive, as it uses only
+`PxFrictionType.ePATCH` selects the patch friction model which typically leads to the most stable results at low solver iteration counts and is also quite inexpensive, as it uses only
 up to four scalar solver constraints per pair of touching objects.  The patch friction model is the same basic strong friction algorithm as PhysX 3.2 and before.  
 
-#PxFrictionType::eONE_DIRECTIONAL is a simplification of the Coulomb friction model, in which the friction for a given point of contact is applied in the alternating tangent directions of
+`PxFrictionType.eONE_DIRECTIONAL` is a simplification of the Coulomb friction model, in which the friction for a given point of contact is applied in the alternating tangent directions of
 the contact's normal.  This simplification allows us to reduce the number of iterations required for convergence but is not as accurate as the two directional model.
 
-#PxFrictionType::eTWO_DIRECTIONAL is identical to the one directional model, but it applies friction in both tangent directions simultaneously.  This hurts convergence a bit so it 
+`PxFrictionType.eTWO_DIRECTIONAL` is identical to the one directional model, but it applies friction in both tangent directions simultaneously.  This hurts convergence a bit so it 
 requires more solver iterations, but is more accurate.  Like the one directional model, it is applied at every contact point, which makes it potentially more expensive
 than patch friction for scenarios with many contact points.
 
-#PxFrictionType::eFRICTION_COUNT is the total numer of friction models supported by the SDK.
+`PxFrictionType.eFRICTION_COUNT` is the total numer of friction models supported by the SDK.
 */
 @:build(physx.hx.EnumBuilder.build("physx::PxFrictionType"))
 extern enum abstract PxFrictionType(PxFrictionTypeImpl)
@@ -137,9 +137,9 @@ private extern class PxFrictionTypeImpl {}
 /**
 \brief Enum for selecting the type of solver used for the simulation.
 
-#PxSolverType::ePGS selects the default iterative sequential impulse solver. This is the same kind of solver used in PhysX 3.4 and earlier releases.
+`PxSolverType.ePGS` selects the default iterative sequential impulse solver. This is the same kind of solver used in PhysX 3.4 and earlier releases.
 
-#PxSolverType::eTGS selects a non linear iterative solver. This kind of solver can lead to improved convergence and handle large mass ratios, long chains and jointed systems better. It is slightly more expensive than the default solver and can introduce more energy to correct joint and contact errors.
+`PxSolverType.eTGS` selects a non linear iterative solver. This kind of solver can lead to improved convergence and handle large mass ratios, long chains and jointed systems better. It is slightly more expensive than the default solver and can introduce more energy to correct joint and contact errors.
 */
 @:build(physx.hx.EnumBuilder.build("physx::PxSolverType"))
 extern enum abstract PxSolverType(PxSolverTypeImpl)
@@ -174,10 +174,10 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     feature defaults to disabled.  When disabled, the function
     PxScene::getActiveActors() will always return a NULL list.
 
-    \note There may be a performance penalty for enabling the Active Actor Notification, hence this flag should
+    **Note:** There may be a performance penalty for enabling the Active Actor Notification, hence this flag should
     only be enabled if the application intends to use the feature.
 
-    <b>Default:</b> False
+    **Default:** False
     */
     var eENABLE_ACTIVE_ACTORS = (1 << 0);
 
@@ -186,10 +186,10 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     PxPairFlag::eDETECT_CCD_CONTACT requires this flag to be specified.
 
-    \note For this feature to be effective for bodies that can move at a significant velocity, the user should raise the flag PxRigidBodyFlag::eENABLE_CCD for them.
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** For this feature to be effective for bodies that can move at a significant velocity, the user should raise the flag PxRigidBodyFlag::eENABLE_CCD for them.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
-    <b>Default:</b> False
+    **Default:** False
 
     @see PxRigidBodyFlag::eENABLE_CCD, PxPairFlag::eDETECT_CCD_CONTACT, eDISABLE_CCD_RESWEEP
     */
@@ -206,11 +206,11 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     PxPairFlag::eDETECT_CCD_CONTACT requires this flag to be specified.
 
-    \note This scene flag requires eENABLE_CCD to be enabled as well. If it is not, this scene flag will do nothing.
-    \note For this feature to be effective for bodies that can move at a significant velocity, the user should raise the flag PxRigidBodyFlag::eENABLE_CCD for them.
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This scene flag requires eENABLE_CCD to be enabled as well. If it is not, this scene flag will do nothing.
+    **Note:** For this feature to be effective for bodies that can move at a significant velocity, the user should raise the flag PxRigidBodyFlag::eENABLE_CCD for them.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
-    <b>Default:</b> False
+    **Default:** False
 
     @see PxRigidBodyFlag::eENABLE_CCD, PxPairFlag::eDETECT_CCD_CONTACT, eENABLE_CCD
     */
@@ -219,18 +219,18 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     /**
     \brief Enable adaptive forces to accelerate convergence of the solver. 
     
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
-    <b>Default:</b> false
+    **Default:** false
     */
     var eADAPTIVE_FORCE = (1 << 3);
 
     /**
     \brief Enable GJK-based distance collision detection system.
     
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
-    <b>Default:</b> true
+    **Default:** true
     */
     var eENABLE_PCM = (1 << 6);
 
@@ -238,9 +238,9 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     \brief Disable contact report buffer resize. Once the contact buffer is full, the rest of the contact reports will 
     not be buffered and sent.
 
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
     
-    <b>Default:</b> false
+    **Default:** false
     */
     var eDISABLE_CONTACT_REPORT_BUFFER_RESIZE = (1 << 7);
 
@@ -250,9 +250,9 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     Contact caches are used internally to provide faster contact generation. You can disable all contact caches
     if memory usage for this feature becomes too high.
 
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
-    <b>Default:</b> false
+    **Default:** false
     */
     var eDISABLE_CONTACT_CACHE = (1 << 8);
 
@@ -262,14 +262,14 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     When set to true this requires that threads accessing the PxScene use the
     multi-threaded lock methods.
     
-    \note This flag is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
     @see PxScene::lockRead
     @see PxScene::unlockRead
     @see PxScene::lockWrite
     @see PxScene::unlockWrite
     
-    <b>Default:</b> false
+    **Default:** false
     */
     var eREQUIRE_RW_LOCK = (1 << 9);
 
@@ -298,11 +298,11 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     Since the target pose for kinematics is set by the user, an application can track the activity state directly and use
     this flag to avoid that kinematics get added to the list of active actors.
 
-    \note This flag has only an effect in combination with eENABLE_ACTIVE_ACTORS.
+    **Note:** This flag has only an effect in combination with eENABLE_ACTIVE_ACTORS.
 
     @see eENABLE_ACTIVE_ACTORS
 
-    <b>Default:</b> false
+    **Default:** false
     */
     var eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS = (1 << 12);
 
@@ -333,7 +333,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 
     Note that this feature is not currently supported on GPU.
 
-    <b>Default</b> false
+    **Default** false
     */
     var eENABLE_ENHANCED_DETERMINISM = (1 << 14);
 
@@ -349,7 +349,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     When simulating more complex frictional behaviour, such as grasping of complex geometries with
     a robotic manipulator, better results can be achieved by enabling friction in all solver iterations.
 
-    \note This flag only has effect with the default solver. The TGS solver always performs friction per-iteration.
+    **Note:** This flag only has effect with the default solver. The TGS solver always performs friction per-iteration.
     */
     var eENABLE_FRICTION_EVERY_ITERATION = (1 << 15);
 
@@ -402,7 +402,7 @@ extern class PxSceneLimits
 }
 
 
-//#if PX_SUPPORT_GPU_PHYSX
+//`if` PX_SUPPORT_GPU_PHYSX
 /**
 \brief Sizes of pre-allocated buffers use for GPU dynamics
 */
@@ -420,7 +420,7 @@ extern class PxgDynamicsMemoryConfig
     var foundLostPairsCapacity:PxU32;	//!< Capacity of found and lost buffers allocated in GPU global memory. This is used for the found/lost pair reports in the BP. 
 }
 
-//#endif
+//`endif`
 
 @:forward
 extern abstract PxSceneDesc(PxSceneDescData) 
@@ -440,7 +440,7 @@ extern abstract PxSceneDesc(PxSceneDescData)
 }
 
 /**
-\brief Descriptor class for scenes. See #PxScene.
+\brief Descriptor class for scenes. See `PxScene.`
 
 This struct must be initialized with the same PxTolerancesScale values used to initialize PxPhysics.
 
@@ -493,7 +493,7 @@ private extern class PxSceneDescData
     /**
     \brief Shared global filter data which will get passed into the filter shader.
 
-    \note The provided data will get copied to internal buffers and this copy will be used for filtering calls.
+    **Note:** The provided data will get copied to internal buffers and this copy will be used for filtering calls.
 
     **Default:** NULL
 
@@ -502,7 +502,7 @@ private extern class PxSceneDescData
     var filterShaderData:cpp.ConstPointer<cpp.Void>;
 
     /**
-    \brief Size (in bytes) of the shared global filter data #filterShaderData.
+    \brief Size (in bytes) of the shared global filter data `filterShaderData.`
 
     **Default:** 0
 
@@ -590,7 +590,7 @@ private extern class PxSceneDescData
     /**
     \brief Selects the friction algorithm to use for simulation.
 
-    \note frictionType cannot be modified after the first call to any of PxScene::simulate, PxScene::solve and PxScene::collide
+    **Note:** frictionType cannot be modified after the first call to any of PxScene::simulate, PxScene::solve and PxScene::collide
 
     @see PxFrictionType
     **Default:** PxFrictionType::ePATCH
@@ -622,12 +622,12 @@ private extern class PxSceneDescData
     /**
     \brief A threshold of contact separation distance used to decide if a contact point will experience friction forces.
 
-    \note If the separation distance of a contact point is greater than the threshold then the contact point will not experience friction forces. 
+    **Note:** If the separation distance of a contact point is greater than the threshold then the contact point will not experience friction forces. 
 
-    \note If the aggregated contact offset of a pair of shapes is large it might be desirable to neglect friction
+    **Note:** If the aggregated contact offset of a pair of shapes is large it might be desirable to neglect friction
     for contact points whose separation distance is sufficiently large that the shape surfaces are clearly separated. 
     
-    \note This parameter can be used to tune the separation distance of contact points at which friction starts to have an effect.  
+    **Note:** This parameter can be used to tune the separation distance of contact points at which friction starts to have an effect.  
 
     **Range:** [0, PX_MAX_F32)  
     **Default:** 0.04 * PxTolerancesScale::length
@@ -637,7 +637,7 @@ private extern class PxSceneDescData
     /**
     \brief A threshold for speculative CCD. Used to control whether bias, restitution or a combination of the two are used to resolve the contacts.
 
-    \note This only has any effect on contacting pairs where one of the bodies has PxRigidBodyFlag::eENABLE_SPECULATIVE_CCD raised.
+    **Note:** This only has any effect on contacting pairs where one of the bodies has PxRigidBodyFlag::eENABLE_SPECULATIVE_CCD raised.
 
     **Range:** [0, PX_MAX_F32)  
     **Default:** 0.04 * PxTolerancesScale::length
@@ -681,7 +681,7 @@ private extern class PxSceneDescData
     /**
     \brief Defines the structure used to store static objects.
 
-    \note Only PxPruningStructureType::eSTATIC_AABB_TREE and PxPruningStructureType::eDYNAMIC_AABB_TREE are allowed here.
+    **Note:** Only PxPruningStructureType::eSTATIC_AABB_TREE and PxPruningStructureType::eDYNAMIC_AABB_TREE are allowed here.
     */
     var staticStructure:PxPruningStructureType;
 
@@ -694,14 +694,14 @@ private extern class PxSceneDescData
     \brief Hint for how much work should be done per simulation frame to rebuild the pruning structure.
 
     This parameter gives a hint on the distribution of the workload for rebuilding the dynamic AABB tree
-    pruning structure #PxPruningStructureType::eDYNAMIC_AABB_TREE. It specifies the desired number of simulation frames
+    pruning structure `PxPruningStructureType.eDYNAMIC_AABB_TREE.` It specifies the desired number of simulation frames
     the rebuild process should take. Higher values will decrease the workload per frame but the pruning
     structure will get more and more outdated the longer the rebuild takes (which can make
     scene queries less efficient).
 
-    \note Only used for #PxPruningStructureType::eDYNAMIC_AABB_TREE pruning structure.
+    **Note:** Only used for `PxPruningStructureType.eDYNAMIC_AABB_TREE` pruning structure.
 
-    \note This parameter gives only a hint. The rebuild process might still take more or less time depending on the
+    **Note:** This parameter gives only a hint. The rebuild process might still take more or less time depending on the
     number of objects involved.
 
     **Range:** [4, PX_MAX_U32)  
@@ -761,7 +761,7 @@ private extern class PxSceneDescData
     This is the number of 16K memory blocks that will be automatically allocated from the user allocator when the scene is instantiated. Further 16k
     memory blocks may be allocated during the simulation up to maxNbContactDataBlocks.
 
-    \note This value cannot be larger than maxNbContactDataBlocks because that defines the maximum number of 16k blocks that can be allocated by the SDK.
+    **Note:** This value cannot be larger than maxNbContactDataBlocks because that defines the maximum number of 16k blocks that can be allocated by the SDK.
 
     **Default:** 0
 
@@ -829,8 +829,8 @@ private extern class PxSceneDescData
 
     The CCD performs multiple passes, where each pass every object advances to its time of first impact. This value defines how many passes the CCD system should perform.
     
-    \note The CCD system is a multi-pass best-effort conservative advancement approach. After the defined number of passes has been completed, any remaining time is dropped.
-    \note This defines the maximum number of passes the CCD can perform. It may perform fewer if additional passes are not necessary.
+    **Note:** The CCD system is a multi-pass best-effort conservative advancement approach. After the defined number of passes has been completed, any remaining time is dropped.
+    **Note:** This defines the maximum number of passes the CCD can perform. It may perform fewer if additional passes are not necessary.
 
     **Default:** 1
     **Range:** [1, PX_MAX_U32]  
@@ -845,7 +845,7 @@ private extern class PxSceneDescData
     approach may produce undesired simulation artefacts. This parameter defines the minimum relative motion that would be required to force CCD between shapes.
     The smaller of this value and the sum of the thresholds calculated for the shapes involved will be used.
 
-    \note It is not advisable to set this to a very small value as this may lead to CCD "jamming" and detrimentally effect performance. This value should be at least larger than the translation caused by a single frame's gravitational effect
+    **Note:** It is not advisable to set this to a very small value as this may lead to CCD "jamming" and detrimentally effect performance. This value should be at least larger than the translation caused by a single frame's gravitational effect
 
     **Default:** PX_MAX_F32
     **Range:** [Eps, PX_MAX_F32]  

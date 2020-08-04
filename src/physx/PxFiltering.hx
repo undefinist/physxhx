@@ -13,14 +13,14 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Process the contacts of this collision pair in the dynamics solver.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
     */
     var eSOLVE_CONTACT = (1<<0);
 
     /**
     \brief Call contact modification callback for this collision pair
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
     @see PxContactModifyCallback
     */
@@ -29,14 +29,14 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Call contact report callback or trigger callback when this collision pair starts to be in contact.
 
-    If one of the two collision objects is a trigger shape (see #PxShapeFlag::eTRIGGER_SHAPE) 
+    If one of the two collision objects is a trigger shape (see `PxShapeFlag.eTRIGGER_SHAPE)` 
     then the trigger callback will get called as soon as the other object enters the trigger volume. 
     If none of the two collision objects is a trigger shape then the contact report callback will get 
     called when the actors of this collision pair start to be in contact.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
@@ -48,15 +48,15 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     If none of the two collision objects is a trigger shape then the contact report callback will get 
     called while the actors of this collision pair are in contact.
 
-    \note Triggers do not support this event. Persistent trigger contacts need to be tracked separately by observing eNOTIFY_TOUCH_FOUND/eNOTIFY_TOUCH_LOST events.
+    **Note:** Triggers do not support this event. Persistent trigger contacts need to be tracked separately by observing eNOTIFY_TOUCH_FOUND/eNOTIFY_TOUCH_LOST events.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note No report will get sent if the objects in contact are sleeping.
+    **Note:** No report will get sent if the objects in contact are sleeping.
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
-    \note If this flag gets enabled while a pair is in touch already, there will be no eNOTIFY_TOUCH_PERSISTS events until the pair loses and regains touch.
+    **Note:** If this flag gets enabled while a pair is in touch already, there will be no eNOTIFY_TOUCH_PERSISTS events until the pair loses and regains touch.
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
@@ -65,16 +65,16 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Call contact report callback or trigger callback when this collision pair stops to be in contact
 
-    If one of the two collision objects is a trigger shape (see #PxShapeFlag::eTRIGGER_SHAPE) 
+    If one of the two collision objects is a trigger shape (see `PxShapeFlag.eTRIGGER_SHAPE)` 
     then the trigger callback will get called as soon as the other object leaves the trigger volume. 
     If none of the two collision objects is a trigger shape then the contact report callback will get 
     called when the actors of this collision pair stop to be in contact.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note This event will also get triggered if one of the colliding objects gets deleted.
+    **Note:** This event will also get triggered if one of the colliding objects gets deleted.
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
@@ -90,11 +90,11 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     passes and thus can also not always tell whether the contact is new or has persisted. eNOTIFY_TOUCH_CCD
     just reports when the two collision objects were detected as being in contact during a CCD pass.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note Trigger shapes are not supported.
+    **Note:** Trigger shapes are not supported.
 
-    \note Only takes effect if eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact() PxSimulationEventCallback.onTrigger()
     */
@@ -103,9 +103,9 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair exceeds one of the actor-defined force thresholds.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact()
     */
@@ -114,12 +114,12 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair continues to exceed one of the actor-defined force thresholds.
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
-    previous one (unless #eNOTIFY_THRESHOLD_FORCE_FOUND has been set in the previous frame).
+    **Note:** If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
+    previous one (unless `eNOTIFY_THRESHOLD_FORCE_FOUND` has been set in the previous frame).
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact()
     */
@@ -128,12 +128,12 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Call contact report callback when the contact force between the actors of this collision pair falls below one of the actor-defined force thresholds (includes the case where this collision pair stops being in contact).
 
-    \note Only takes effect if the colliding actors are rigid bodies.
+    **Note:** Only takes effect if the colliding actors are rigid bodies.
 
-    \note If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
-    previous one (unless #eNOTIFY_THRESHOLD_FORCE_FOUND or #eNOTIFY_THRESHOLD_FORCE_PERSISTS has been set in the previous frame).
+    **Note:** If a pair gets re-filtered and this flag has previously been disabled, then the report will not get fired in the same frame even if the force threshold has been reached in the
+    previous one (unless `eNOTIFY_THRESHOLD_FORCE_FOUND` or `eNOTIFY_THRESHOLD_FORCE_PERSISTS` has been set in the previous frame).
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact()
     */
@@ -142,9 +142,9 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief Provide contact points in contact reports for this collision pair.
 
-    \note Only takes effect if the colliding actors are rigid bodies and if used in combination with the flags eNOTIFY_TOUCH_... or eNOTIFY_THRESHOLD_FORCE_...
+    **Note:** Only takes effect if the colliding actors are rigid bodies and if used in combination with the flags eNOTIFY_TOUCH_... or eNOTIFY_THRESHOLD_FORCE_...
 
-    \note Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
+    **Note:** Only takes effect if eDETECT_DISCRETE_CONTACT or eDETECT_CCD_CONTACT is raised
 
     @see PxSimulationEventCallback.onContact() PxContactPair PxContactPair.extractContacts()
     */
@@ -153,17 +153,17 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     /**
     \brief This flag is used to indicate whether this pair generates discrete collision detection contacts. 
 
-    \note Contacts are only responded to if eSOLVE_CONTACT is enabled.
+    **Note:** Contacts are only responded to if eSOLVE_CONTACT is enabled.
     */
     var eDETECT_DISCRETE_CONTACT = (1<<10);
     
     /**
     \brief This flag is used to indicate whether this pair generates CCD contacts. 
 
-    \note The contacts will only be responded to if eSOLVE_CONTACT is enabled on this pair.
-    \note The scene must have PxSceneFlag::eENABLE_CCD enabled to use this feature.
-    \note Non-static bodies of the pair should have PxRigidBodyFlag::eENABLE_CCD specified for this feature to work correctly.
-    \note This flag is not supported with trigger shapes. However, CCD trigger events can be emulated using non-trigger shapes 
+    **Note:** The contacts will only be responded to if eSOLVE_CONTACT is enabled on this pair.
+    **Note:** The scene must have PxSceneFlag::eENABLE_CCD enabled to use this feature.
+    **Note:** Non-static bodies of the pair should have PxRigidBodyFlag::eENABLE_CCD specified for this feature to work correctly.
+    **Note:** This flag is not supported with trigger shapes. However, CCD trigger events can be emulated using non-trigger shapes 
     and requesting eNOTIFY_TOUCH_FOUND and eNOTIFY_TOUCH_LOST and not raising eSOLVE_CONTACT on the pair.
 
     @see PxRigidBodyFlag::eENABLE_CCD
@@ -177,7 +177,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     If the collision pair has contact reports enabled, the velocities of the rigid bodies before contacts have been solved
     will be provided in the contact report callback unless the pair lost touch in which case no data will be provided.
     
-    \note Usually it is not necessary to request these velocities as they will be available by querying the velocity from the provided
+    **Note:** Usually it is not necessary to request these velocities as they will be available by querying the velocity from the provided
     PxRigidActor object directly. However, it might be the case that the velocity of a rigid body gets set while the simulation is running
     in which case the PxRigidActor would return this new velocity in the contact report callback and not the velocity the simulation used.
     
@@ -201,7 +201,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     If the collision pair has contact reports enabled, the rigid body poses at the contact event will be provided 
     in the contact report callback unless the pair lost touch in which case no data will be provided.
     
-    \note Usually it is not necessary to request these poses as they will be available by querying the pose from the provided
+    **Note:** Usually it is not necessary to request these poses as they will be available by querying the pose from the provided
     PxRigidActor object directly. However, it might be the case that the pose of a rigid body gets set while the simulation is running
     in which case the PxRigidActor would return this new pose in the contact report callback and not the pose the simulation used.
     Another use case is related to CCD with multiple passes enabled, A fast moving object might bounce on and off the same 
@@ -251,8 +251,8 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     Killed pairs will be ignored by the simulation and won't run through the filter again until one
     of the following occurs:
 
-    \li The bounding volumes of the two objects overlap again (after being separated)
-    \li The user enforces a re-filtering (see #PxScene::resetFiltering())
+    - The bounding volumes of the two objects overlap again (after being separated)
+    - The user enforces a re-filtering (see `PxScene.resetFiltering()`)
 
     @see PxScene::resetFiltering()
     */
@@ -264,15 +264,15 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     Suppressed pairs will be ignored by the simulation and won't make another filter request until one
     of the following occurs:
 
-    \li Same conditions as for killed pairs (see #eKILL)
-    \li The filter data or the filter object attributes change for one of the collision objects
+    - Same conditions as for killed pairs (see `eKILL)`
+    - The filter data or the filter object attributes change for one of the collision objects
 
     @see PxFilterData PxFilterObjectAttributes
     */
     var eSUPPRESS = (1<<1);
 
     /**
-    \brief Invoke the filter callback (#PxSimulationFilterCallback::pairFound()) for this collision pair.
+    \brief Invoke the filter callback (`PxSimulationFilterCallback.pairFound()`) for this collision pair.
 
     @see PxSimulationFilterCallback
     */
@@ -281,8 +281,8 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     /**
     \brief Track this collision pair with the filter callback mechanism.
 
-    When the bounding volumes of the collision pair lose contact, the filter callback #PxSimulationFilterCallback::pairLost()
-    will be invoked. Furthermore, the filter status of the collision pair can be adjusted through #PxSimulationFilterCallback::statusChange()
+    When the bounding volumes of the collision pair lose contact, the filter callback `PxSimulationFilterCallback.pairLost()`
+    will be invoked. Furthermore, the filter status of the collision pair can be adjusted through `PxSimulationFilterCallback.statusChange()`
     once per frame (until a pairLost() notification occurs).
 
     @see PxSimulationFilterCallback
@@ -450,7 +450,7 @@ extern class PxFilterObject
  * This methods gets called when:
  * - The bounding volumes of two objects start to overlap.
  * - The bounding volumes of two objects overlap and the filter data or filter attributes of one of the objects changed
- * - A re-filtering was forced through `resetFiltering()` (see `PxScene::resetFiltering()`)
+ * - A re-filtering was forced through `resetFiltering()` (see `PxScene.resetFiltering()`)
  * - Filtering is requested in scene queries
  * 
  * **Note**: Certain pairs of objects are always ignored and this method does not get called. This is the case for the
@@ -679,10 +679,10 @@ extern enum abstract PxPairFilteringMode(PxPairFilteringModeImpl)
 
     Enable contact pair filtering between kinematic/static or kinematic/kinematic rigid bodies.
     
-    By default contacts between these are suppressed (see #PxFilterFlag::eSUPPRESS) and don't get reported to the filter mechanism.
+    By default contacts between these are suppressed (see `PxFilterFlag.eSUPPRESS)` and don't get reported to the filter mechanism.
     Use this mode if these pairs should go through the filtering pipeline nonetheless.
 
-    \note This mode is not mutable, and must be set in PxSceneDesc at scene creation.
+    **Note:** This mode is not mutable, and must be set in PxSceneDesc at scene creation.
     */
     var eKEEP;
 

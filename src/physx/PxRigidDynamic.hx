@@ -30,15 +30,15 @@ extern abstract PxRigidDynamicLockFlags(PxRigidDynamicLockFlag) from PxRigidDyna
 \brief PxRigidDynamic represents a dynamic rigid simulation object in the physics SDK.
 
 <h3>Creation</h3>
-Instances of this class are created by calling #PxPhysics::createRigidDynamic() and deleted with #release().
+Instances of this class are created by calling `PxPhysics.createRigidDynamic()` and deleted with `release()`.
 
 
 <h3>Visualizations</h3>
-\li #PxVisualizationParameter::eACTOR_AXES
-\li #PxVisualizationParameter::eBODY_AXES
-\li #PxVisualizationParameter::eBODY_MASS_AXES
-\li #PxVisualizationParameter::eBODY_LIN_VELOCITY
-\li #PxVisualizationParameter::eBODY_ANG_VELOCITY
+- `PxVisualizationParameter.eACTOR_AXES`
+- `PxVisualizationParameter.eBODY_AXES`
+- `PxVisualizationParameter.eBODY_MASS_AXES`
+- `PxVisualizationParameter.eBODY_LIN_VELOCITY`
+- `PxVisualizationParameter.eBODY_ANG_VELOCITY`
 
 @see PxRigidBody  PxPhysics.createRigidDynamic()  release()
 */
@@ -69,11 +69,11 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	The motion is always fully carried out.	
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	<b>Sleeping:</b> This call wakes the actor if it is sleeping and will set the wake counter to #PxSceneDesc::wakeCounterResetValue.
+	**Sleeping:** This call wakes the actor if it is sleeping and will set the wake counter to `PxSceneDesc.wakeCounterResetValue.`
 
-	\param[in] destination The desired pose for the kinematic actor, in the global frame. <b>Range:</b> rigid body transform.
+	\param[in] destination The desired pose for the kinematic actor, in the global frame. **Range:** rigid body transform.
 
 	@see getKinematicTarget() PxRigidBodyFlag setRigidBodyFlag()
 	*/
@@ -103,26 +103,26 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	In general, a dynamic rigid actor is guaranteed to be awake if at least one of the following holds:
 
-	\li The wake counter is positive (see #setWakeCounter()).
-	\li The linear or angular velocity is non-zero.
-	\li A non-zero force or torque has been applied.
+	- The wake counter is positive (see `setWakeCounter()`).
+	- The linear or angular velocity is non-zero.
+	- A non-zero force or torque has been applied.
 
 	If a dynamic rigid actor is sleeping, the following state is guaranteed:
 
-	\li The wake counter is zero.
-	\li The linear and angular velocity is zero.
-	\li There is no force update pending.
+	- The wake counter is zero.
+	- The linear and angular velocity is zero.
+	- There is no force update pending.
 
 	When an actor gets inserted into a scene, it will be considered asleep if all the points above hold, else it will be treated as awake.
 	
 	If an actor is asleep after the call to PxScene::fetchResults() returns, it is guaranteed that the pose of the actor 
 	was not changed. You can use this information to avoid updating the transforms of associated objects.
 
-	\note A kinematic actor is asleep unless a target pose has been set (in which case it will stay awake until the end of the next 
+	**Note:** A kinematic actor is asleep unless a target pose has been set (in which case it will stay awake until the end of the next 
 	simulation step where no target pose has been set anymore). The wake counter will get set to zero or to the reset value 
-	#PxSceneDesc::wakeCounterResetValue in the case where a target pose has been set to be consistent with the definitions above.
+	`PxSceneDesc.wakeCounterResetValue` in the case where a target pose has been set to be consistent with the definitions above.
 
-	\note It is invalid to use this method if the actor has not been added to a scene already.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already.
 
 	\return True if the actor is sleeping.
 
@@ -136,9 +136,9 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	Actors whose kinetic energy divided by their mass is below this threshold will be candidates for sleeping.
 
-	<b>Default:</b> 5e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
+	**Default:** 5e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
 
-	\param[in] threshold Energy below which an actor may go to sleep. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] threshold Energy below which an actor may go to sleep. **Range:** [0, PX_MAX_F32)
 
 	@see isSleeping() getSleepThreshold() wakeUp() putToSleep() PxTolerancesScale
 	*/
@@ -160,9 +160,9 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	This value has no effect if PxSceneFlag::eENABLE_STABILIZATION was not enabled on the PxSceneDesc.
 
-	<b>Default:</b> 1e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
+	**Default:** 1e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
 
-	\param[in] threshold Energy below which an actor may participate in stabilization. <b>Range:</b> [0,inf)
+	\param[in] threshold Energy below which an actor may participate in stabilization. **Range:** [0,inf)
 
 	@see  getStabilizationThreshold() PxSceneFlag::eENABLE_STABILIZATION
 	*/
@@ -183,7 +183,7 @@ extern class PxRigidDynamic extends PxRigidBody
 	/**
 	\brief Reads the PxRigidDynamic lock flags.
 
-	See the list of flags #PxRigidDynamicLockFlag
+	See the list of flags `PxRigidDynamicLockFlag`
 
 	\return The values of the PxRigidDynamicLock flags.
 
@@ -194,12 +194,12 @@ extern class PxRigidDynamic extends PxRigidBody
 	/**
 	\brief Raises or clears a particular rigid dynamic lock flag.
 
-	See the list of flags #PxRigidDynamicLockFlag
+	See the list of flags `PxRigidDynamicLockFlag`
 
-	<b>Default:</b> no flags are set
+	**Default:** no flags are set
 
 
-	\param[in] flag		The PxRigidDynamicLockBody flag to raise(set) or clear. See #PxRigidBodyFlag.
+	\param[in] flag		The PxRigidDynamicLockBody flag to raise(set) or clear. See `PxRigidBodyFlag.`
 	\param[in] value	The new boolean value for the flag.
 
 	@see PxRigidDynamicLockFlag getRigidDynamicLockFlags()
@@ -213,19 +213,19 @@ extern class PxRigidDynamic extends PxRigidBody
 	\brief Sets the wake counter for the actor.
 
 	The wake counter value determines the minimum amount of time until the body can be put to sleep. Please note
-	that a body will not be put to sleep if the energy is above the specified threshold (see #setSleepThreshold())
+	that a body will not be put to sleep if the energy is above the specified threshold (see `setSleepThreshold()`)
 	or if other awake bodies are touching it.
 
-	\note Passing in a positive value will wake the actor up automatically.
+	**Note:** Passing in a positive value will wake the actor up automatically.
 
-	\note It is invalid to use this method for kinematic actors since the wake counter for kinematics is defined
-	based on whether a target pose has been set (see the comment in #isSleeping()).
+	**Note:** It is invalid to use this method for kinematic actors since the wake counter for kinematics is defined
+	based on whether a target pose has been set (see the comment in `isSleeping()`).
 
-	\note It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	<b>Default:</b> 0.4 (which corresponds to 20 frames for a time step of 0.02)
+	**Default:** 0.4 (which corresponds to 20 frames for a time step of 0.02)
 
-	\param[in] wakeCounterValue Wake counter value. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] wakeCounterValue Wake counter value. **Range:** [0, PX_MAX_F32)
 
 	@see isSleeping() getWakeCounter()
 	*/
@@ -245,12 +245,12 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	The actor will get woken up and might cause other touching actors to wake up as well during the next simulation step.
 
-	\note This will set the wake counter of the actor to the value specified in #PxSceneDesc::wakeCounterResetValue.
+	**Note:** This will set the wake counter of the actor to the value specified in `PxSceneDesc.wakeCounterResetValue.`
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	\note It is invalid to use this method for kinematic actors since the sleep state for kinematics is defined
-	based on whether a target pose has been set (see the comment in #isSleeping()).
+	**Note:** It is invalid to use this method for kinematic actors since the sleep state for kinematics is defined
+	based on whether a target pose has been set (see the comment in `isSleeping()`).
 
 	@see isSleeping() putToSleep()
 	*/
@@ -261,12 +261,12 @@ extern class PxRigidDynamic extends PxRigidBody
 	
 	The actor will stay asleep during the next simulation step if not touched by another non-sleeping actor.
 	
-	\note Any applied force will be cleared and the velocity and the wake counter of the actor will be set to 0.
+	**Note:** Any applied force will be cleared and the velocity and the wake counter of the actor will be set to 0.
 
-	\note It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
+	**Note:** It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
 
-	\note It is invalid to use this method for kinematic actors since the sleep state for kinematics is defined
-	based on whether a target pose has been set (see the comment in #isSleeping()).
+	**Note:** It is invalid to use this method for kinematic actors since the sleep state for kinematics is defined
+	based on whether a target pose has been set (see the comment in `isSleeping()`).
 
 	@see isSleeping() wakeUp()
 	*/
@@ -285,10 +285,10 @@ extern class PxRigidDynamic extends PxRigidBody
 	iterations. More velocity iterations will drive the relative exit velocity of the intersecting 
 	objects closer to the correct value given the restitution.
 
-	<b>Default:</b> 4 position iterations, 1 velocity iteration
+	**Default:** 4 position iterations, 1 velocity iteration
 
-	\param[in] minPositionIters Number of position iterations the solver should perform for this body. <b>Range:</b> [1,255]
-	\param[in] minVelocityIters Number of velocity iterations the solver should perform for this body. <b>Range:</b> [1,255]
+	\param[in] minPositionIters Number of position iterations the solver should perform for this body. **Range:** [1,255]
+	\param[in] minVelocityIters Number of velocity iterations the solver should perform for this body. **Range:** [1,255]
 
 	@see getSolverIterationCounts()
 	*/
@@ -314,13 +314,13 @@ extern class PxRigidDynamic extends PxRigidBody
 	two actors exceeds this threshold for either of the two actors, a contact report 
 	will be generated according to the contact report threshold flags provided by
 	the filter shader/callback.
-	See #PxPairFlag.
+	See `PxPairFlag.`
 
 	The threshold used for a collision between a dynamic actor and the static environment is 
     the threshold of the dynamic actor, and all contacts with static actors are summed to find 
     the total normal force.
 
-	<b>Default:</b> PX_MAX_F32
+	**Default:** PX_MAX_F32
 
 	\return Force threshold for contact reports.
 
@@ -331,9 +331,9 @@ extern class PxRigidDynamic extends PxRigidBody
 	/**
 	\brief Sets the force threshold for contact reports.
 
-	See #getContactReportThreshold().
+	See `getContactReportThreshold()`.
 
-	\param[in] threshold Force threshold for contact reports. <b>Range:</b> [0, PX_MAX_F32)
+	\param[in] threshold Force threshold for contact reports. **Range:** [0, PX_MAX_F32)
 
 	@see getContactReportThreshold PxPairFlag
 	*/

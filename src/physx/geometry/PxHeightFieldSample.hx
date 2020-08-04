@@ -24,7 +24,7 @@ private extern class PxHeightFieldMaterialImpl {}
 /**
 \brief Heightfield sample format.
 
-This format corresponds to the #PxHeightFieldFormat member PxHeightFieldFormat::eS16_TM.
+This format corresponds to the `PxHeightFieldFormat` member PxHeightFieldFormat::eS16_TM.
 
 An array of heightfield samples are used when creating a PxHeightField to specify
 the elevation of the heightfield points. In addition the material and tessellation of the adjacent 

@@ -20,15 +20,15 @@ All these flags apply to both scene queries and geometry queries (PxGeometryQuer
 extern enum abstract PxHitFlag(PxHitFlagImpl) 
 {
     /**
-     * "position" member of #PxQueryHit is valid
+     * "position" member of `PxQueryHit` is valid
      */
     var ePOSITION = (1<<0);
     /**
-     * "normal" member of #PxQueryHit is valid
+     * "normal" member of `PxQueryHit` is valid
      */
     var eNORMAL = (1<<1);
     /**
-     * "u" and "v" barycentric coordinates of #PxQueryHit are valid. Not applicable to sweep queries.
+     * "u" and "v" barycentric coordinates of `PxQueryHit` are valid. Not applicable to sweep queries.
      */
     var eUV = (1<<3);
     /**
@@ -61,7 +61,7 @@ extern enum abstract PxHitFlag(PxHitFlagImpl)
      */
     var eMTD = (1<<9);
     /**
-     * "face index" member of #PxQueryHit is valid
+     * "face index" member of `PxQueryHit` is valid
      */
     var eFACE_INDEX = (1<<10);
 
@@ -111,10 +111,10 @@ extern class PxQueryHit extends PxActorShape
     /**
     Face index of touched triangle, for triangle meshes, convex meshes and height fields.
 
-    \note This index will default to 0xFFFFffff value for overlap queries.
-    \note Please refer to the user guide for more details for sweep queries.
-    \note This index is remapped by mesh cooking. Use #PxTriangleMesh::getTrianglesRemap() to convert to original mesh index.
-    \note For convex meshes use #PxConvexMesh::getPolygonData() to retrieve touched polygon data.
+    **Note:** This index will default to 0xFFFFffff value for overlap queries.
+    **Note:** Please refer to the user guide for more details for sweep queries.
+    **Note:** This index is remapped by mesh cooking. Use `PxTriangleMesh.getTrianglesRemap()` to convert to original mesh index.
+    **Note:** For convex meshes use `PxConvexMesh.getPolygonData()` to retrieve touched polygon data.
     */
     var faceIndex:PxU32;
 }
@@ -132,25 +132,25 @@ extern class PxLocationHit extends PxQueryHit
 {
     function hadInitialOverlap():Bool;
 
-    // the following fields are set in accordance with the #PxHitFlags
+    // the following fields are set in accordance with the `PxHitFlags`
     
     /**
      * Hit flags specifying which members contain valid values.
      */
     var flags:PxHitFlags;
     /**
-     * World-space hit position (flag: #PxHitFlag::ePOSITION)
+     * World-space hit position (flag: `PxHitFlag.ePOSITION)`
      */
     var position:PxVec3;
     /**
-     * World-space hit normal (flag: #PxHitFlag::eNORMAL)
+     * World-space hit normal (flag: `PxHitFlag.eNORMAL)`
      */
     var normal:PxVec3;
 
     /**
     \brief	Distance to hit.
-    \note	If the eMTD flag is used, distance will be a negative value if shapes are overlapping indicating the penetration depth.
-    \note	Otherwise, this value will be >= 0 
+    **Note:**	If the eMTD flag is used, distance will be a negative value if shapes are overlapping indicating the penetration depth.
+    **Note:**	Otherwise, this value will be >= 0 
     */
     var distance:PxF32;
 }
@@ -162,7 +162,7 @@ extern class PxLocationHit extends PxQueryHit
 structure.
 
 Some members like barycentric coordinates are currently only computed for triangle meshes and height fields, but next versions
-might provide them in other cases. The client code should check #flags to make sure returned values are valid.
+might provide them in other cases. The client code should check `flags` to make sure returned values are valid.
 
 @see PxScene.raycast PxBatchQuery.raycast
 */
@@ -171,7 +171,7 @@ might provide them in other cases. The client code should check #flags to make s
 @:structAccess
 extern class PxRaycastHit extends PxLocationHit
 {
-    // the following fields are set in accordance with the #PxHitFlags
+    // the following fields are set in accordance with the `PxHitFlags`
 
     /**
      * barycentric coordinates u of hit point, for triangle mesh and height field (flag: `PxHitFlag.eUV`)
@@ -181,9 +181,9 @@ extern class PxRaycastHit extends PxLocationHit
      * barycentric coordinates v of hit point, for triangle mesh and height field (flag: `PxHitFlag.eUV`)
      */
     var v:PxReal;
-// #if !PX_P64_FAMILY
+// `if` !PX_P64_FAMILY
 // 	PxU32	padTo16Bytes[3];
-// #endif
+// `endif`
 }
 
 /**
@@ -222,11 +222,11 @@ typedef PxAgain = Bool;
 
 User overrides the virtual processTouches function to receive hits in (possibly multiple) fixed size blocks.
 
-\note	PxHitBuffer derives from this class and is used to receive touching hits in a fixed size buffer.
-\note	Since the compiler doesn't look in template dependent base classes when looking for non-dependent names
-\note	with some compilers it will be necessary to use "this->hasBlock" notation to access a parent variable
-\note	in a child callback class.
-\note	Pre-made typedef shorthands, such as ::PxRaycastCallback can be used for raycast, overlap and sweep queries.
+**Note:**	PxHitBuffer derives from this class and is used to receive touching hits in a fixed size buffer.
+**Note:**	Since the compiler doesn't look in template dependent base classes when looking for non-dependent names
+**Note:**	with some compilers it will be necessary to use "this->hasBlock" notation to access a parent variable
+**Note:**	in a child callback class.
+**Note:**	Pre-made typedef shorthands, such as ::PxRaycastCallback can be used for raycast, overlap and sweep queries.
 
 @see PxHitBuffer PxRaycastHit PxSweepHit PxOverlapHit PxRaycastCallback PxOverlapCallback PxSweepCallback
 */
@@ -300,7 +300,7 @@ class PxRaycastCallbackHx
     /**
      * Virtual callback function used to communicate query results to the user.
      * 
-     * This callback will always be invoked with #touches as a buffer if #touches was specified as non-NULL.
+     * This callback will always be invoked with `touches` as a buffer if `touches` was specified as non-NULL.
      * All reported touch hits are guaranteed to be closer than the closest blocking hit.
      * 
      * **Note:** There is a significant performance penalty in case multiple touch callbacks are issued (up to 2x)  
@@ -311,8 +311,8 @@ class PxRaycastCallbackHx
      * values of hasBlock and block are final and all touch hits are guaranteed to be closer than the blocking hit.
      * touches and maxNbTouches can be modified inside of processTouches callback.
      * 
-     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as #touches.
-     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed #maxNbTouches.
+     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as `touches.`
+     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed `maxNbTouches.`
      * 
      * @return true to continue receiving callbacks in case there are more hits or false to stop.
      * 
@@ -378,7 +378,7 @@ class PxOverlapCallbackHx
     /**
      * Virtual callback function used to communicate query results to the user.
      * 
-     * This callback will always be invoked with #touches as a buffer if #touches was specified as non-NULL.
+     * This callback will always be invoked with `touches` as a buffer if `touches` was specified as non-NULL.
      * All reported touch hits are guaranteed to be closer than the closest blocking hit.
      * 
      * **Note:** There is a significant performance penalty in case multiple touch callbacks are issued (up to 2x)  
@@ -389,8 +389,8 @@ class PxOverlapCallbackHx
      * values of hasBlock and block are final and all touch hits are guaranteed to be closer than the blocking hit.
      * touches and maxNbTouches can be modified inside of processTouches callback.
      * 
-     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as #touches.
-     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed #maxNbTouches.
+     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as `touches.`
+     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed `maxNbTouches.`
      * 
      * @return true to continue receiving callbacks in case there are more hits or false to stop.
      * 
@@ -456,7 +456,7 @@ class PxSweepCallbackHx
     /**
      * Virtual callback function used to communicate query results to the user.
      * 
-     * This callback will always be invoked with #touches as a buffer if #touches was specified as non-NULL.
+     * This callback will always be invoked with `touches` as a buffer if `touches` was specified as non-NULL.
      * All reported touch hits are guaranteed to be closer than the closest blocking hit.
      * 
      * **Note:** There is a significant performance penalty in case multiple touch callbacks are issued (up to 2x)  
@@ -467,8 +467,8 @@ class PxSweepCallbackHx
      * values of hasBlock and block are final and all touch hits are guaranteed to be closer than the blocking hit.
      * touches and maxNbTouches can be modified inside of processTouches callback.
      * 
-     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as #touches.
-     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed #maxNbTouches.
+     * @param [in]buffer Callback will report touch hits to the user in this buffer. This pointer will be the same as `touches.`
+     * @param [in]nbHits Number of touch hits reported in buffer. This number will not exceed `maxNbTouches.`
      * 
      * @return true to continue receiving callbacks in case there are more hits or false to stop.
      * 
@@ -490,7 +490,7 @@ Overflow does not trigger warnings or errors. block and hasBlock will be valid i
 Touching hits are guaranteed to have closer or same distance ( <= condition) as the globally nearest blocking hit at the time any processTouches()
 callback is issued.
 
-\note	Pre-made typedef shorthands, such as ::PxRaycastBuffer can be used for raycast, overlap and sweep queries.
+**Note:**	Pre-made typedef shorthands, such as ::PxRaycastBuffer can be used for raycast, overlap and sweep queries.
 
 @see PxHitCallback
 @see PxRaycastBuffer PxOverlapBuffer PxSweepBuffer PxRaycastBufferN PxOverlapBufferN PxSweepBufferN

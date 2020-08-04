@@ -69,7 +69,7 @@ extern class PxBVHStructure extends PxBase
     /**
     \brief Returns the number of bounds in the BVH.
 
-    You can use #getBounds() to retrieve the bounds.
+    You can use `getBounds()` to retrieve the bounds.
 
     \return Number of bounds in the BVH.
 

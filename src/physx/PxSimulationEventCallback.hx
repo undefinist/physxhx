@@ -50,11 +50,11 @@ extern class PxContactPairExtraDataItem
 /**
 \brief Velocities of the contact pair rigid bodies
 
-This struct is shared by multiple types of extra data items. The #type field allows to distinguish between them:
-\li PxContactPairExtraDataType::ePRE_SOLVER_VELOCITY: see #PxPairFlag::ePRE_SOLVER_VELOCITY
-\li PxContactPairExtraDataType::ePOST_SOLVER_VELOCITY: see #PxPairFlag::ePOST_SOLVER_VELOCITY
+This struct is shared by multiple types of extra data items. The `type` field allows to distinguish between them:
+- PxContactPairExtraDataType::ePRE_SOLVER_VELOCITY: see `PxPairFlag.ePRE_SOLVER_VELOCITY`
+- PxContactPairExtraDataType::ePOST_SOLVER_VELOCITY: see `PxPairFlag.ePOST_SOLVER_VELOCITY`
 
-\note For static rigid bodies, the velocities will be set to zero.
+**Note:** For static rigid bodies, the velocities will be set to zero.
 
 @see PxContactPairHeader.extraDataStream
 */
@@ -121,12 +121,12 @@ The extra data stream will look like this:
 
 PxContactPairIndexA | PxContactPairPoseA | PxContactPairIndexB | PxContactPairPoseB
 
-The corresponding array of PxContactPair events (see #PxSimulationEventCallback.onContact()) will look like this:
+The corresponding array of PxContactPair events (see `PxSimulationEventCallback.onContact()`) will look like this:
 
 PxContactPair(touch_found: s0_0, s1) | PxContactPair(touch_lost: s0_0, s1) | PxContactPair(touch_found: s0_1, s1)
  
-The #index of PxContactPairIndexA will point to the first entry in the PxContactPair array, for PxContactPairIndexB,
-#index will point to the third entry.
+The `index` of PxContactPairIndexA will point to the first entry in the PxContactPair array, for PxContactPairIndexB,
+`index` will point to the third entry.
 
 @see PxContactPairHeader.extraDataStream
 */
@@ -135,7 +135,7 @@ The #index of PxContactPairIndexA will point to the first entry in the PxContact
 extern class PxContactPairIndex extends PxContactPairExtraDataItem
 {
     /**
-    \brief The next item set in the extra data stream refers to the contact pairs starting at #index in the reported PxContactPair array.
+    \brief The next item set in the extra data stream refers to the contact pairs starting at `index` in the reported PxContactPair array.
     */
     var index:PxU16;
 }
@@ -191,9 +191,9 @@ extern class PxContactPairHeader
     /**
     \brief The first actor of the notification shape pairs.
 
-    \note The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
+    **Note:** The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
           or PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved actors 
-          gets deleted or removed from the scene. Check the #flags member to see whether that is the case.
+          gets deleted or removed from the scene. Check the `flags` member to see whether that is the case.
           Do not dereference a pointer to a deleted actor. The pointer to a deleted actor is only provided 
           such that user data structures which might depend on the pointer value can be updated.
 
@@ -204,9 +204,9 @@ extern class PxContactPairHeader
     /**
     \brief The second actor of the notification shape pairs.
 
-    \note The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
+    **Note:** The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
           or PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved actors 
-          gets deleted or removed from the scene. Check the #flags member to see whether that is the case.
+          gets deleted or removed from the scene. Check the `flags` member to see whether that is the case.
           Do not dereference a pointer to a deleted actor. The pointer to a deleted actor is only provided 
           such that user data structures which might depend on the pointer value can be updated.
 
@@ -217,7 +217,7 @@ extern class PxContactPairHeader
     /**
     \brief Stream containing extra data as requested in the PxPairFlag flags of the simulation filter.
 
-    This pointer is only valid if any kind of extra data information has been requested for the contact report pair (see #PxPairFlag::ePOST_SOLVER_VELOCITY etc.),
+    This pointer is only valid if any kind of extra data information has been requested for the contact report pair (see `PxPairFlag.ePOST_SOLVER_VELOCITY` etc.),
     else it will be NULL.
     
     @see PxPairFlag
@@ -271,7 +271,7 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 
     The provided shape pair marks the first contact between the two actors, no other shape pair has been touching prior to the current simulation frame.
 
-    \note: This info is only available if #PxPairFlag::eNOTIFY_TOUCH_FOUND has been declared for the pair.
+    **Note:**: This info is only available if `PxPairFlag.eNOTIFY_TOUCH_FOUND` has been declared for the pair.
     */
     var eACTOR_PAIR_HAS_FIRST_TOUCH = (1<<2);
 
@@ -283,15 +283,15 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
     var eACTOR_PAIR_LOST_TOUCH = (1<<3);
 
     /**
-    \brief Internal flag, used by #PxContactPair.extractContacts()
+    \brief Internal flag, used by `PxContactPair.extractContacts()`
 
     The applied contact impulses are provided for every contact point. 
-    This is the case if #PxPairFlag::eSOLVE_CONTACT has been set for the pair.
+    This is the case if `PxPairFlag.eSOLVE_CONTACT` has been set for the pair.
     */
     var eINTERNAL_HAS_IMPULSES = (1<<4);
 
     /**
-    \brief Internal flag, used by #PxContactPair.extractContacts()
+    \brief Internal flag, used by `PxContactPair.extractContacts()`
 
     The provided contact point information is flipped with regards to the shapes of the contact pair. This mainly concerns the order of the internal triangle indices.
     */
@@ -352,7 +352,7 @@ extern class PxContactPairPoint
 /**
 \brief Contact report pair information.
 
-Instances of this class are passed to PxSimulationEventCallback.onContact(). If contact reports have been requested for a pair of shapes (see #PxPairFlag),
+Instances of this class are passed to PxSimulationEventCallback.onContact(). If contact reports have been requested for a pair of shapes (see `PxPairFlag),`
 then the corresponding contact information will be provided through this structure.
 
 @see PxSimulationEventCallback.onContact()
@@ -364,9 +364,9 @@ extern class PxContactPair
     /**
     \brief The first shape of the pair.
 
-    \note The shape pointers might reference deleted shapes. This will be the case if #PxPairFlag::eNOTIFY_TOUCH_LOST
-          or #PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved shapes 
-          gets deleted. Check the #flags member to see whether that is the case. Do not dereference a pointer to a 
+    **Note:** The shape pointers might reference deleted shapes. This will be the case if `PxPairFlag.eNOTIFY_TOUCH_LOST`
+          or `PxPairFlag.eNOTIFY_THRESHOLD_FORCE_LOST` events were requested for the pair and one of the involved shapes 
+          gets deleted. Check the `flags` member to see whether that is the case. Do not dereference a pointer to a 
           deleted shape. The pointer to a deleted shape is only provided such that user data structures which might 
           depend on the pointer value can be updated.
 
@@ -377,9 +377,9 @@ extern class PxContactPair
     /**
     \brief The second shape of the pair.
 
-    \note The shape pointers might reference deleted shapes. This will be the case if #PxPairFlag::eNOTIFY_TOUCH_LOST
-          or #PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved shapes 
-          gets deleted. Check the #flags member to see whether that is the case. Do not dereference a pointer to a 
+    **Note:** The shape pointers might reference deleted shapes. This will be the case if `PxPairFlag.eNOTIFY_TOUCH_LOST`
+          or `PxPairFlag.eNOTIFY_THRESHOLD_FORCE_LOST` events were requested for the pair and one of the involved shapes 
+          gets deleted. Check the `flags` member to see whether that is the case. Do not dereference a pointer to a 
           deleted shape. The pointer to a deleted shape is only provided such that user data structures which might 
           depend on the pointer value can be updated.
 
@@ -390,24 +390,24 @@ extern class PxContactPair
     /**
     \brief Pointer to first patch header in contact stream containing contact patch data
 
-    This pointer is only valid if contact point information has been requested for the contact report pair (see #PxPairFlag::eNOTIFY_CONTACT_POINTS).
-    Use #extractContacts() as a reference for the data layout of the stream.
+    This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
+    Use `extractContacts()` as a reference for the data layout of the stream.
     */
     var contactPatches:cpp.ConstPointer<PxU8>;
 
     /**
     \brief Pointer to first contact point in contact stream containing contact data
 
-    This pointer is only valid if contact point information has been requested for the contact report pair (see #PxPairFlag::eNOTIFY_CONTACT_POINTS).
-    Use #extractContacts() as a reference for the data layout of the stream.
+    This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
+    Use `extractContacts()` as a reference for the data layout of the stream.
     */
     var contactPoints:cpp.ConstPointer<PxU8>;
 
     /**
     \brief Buffer containing applied impulse data.
 
-    This pointer is only valid if contact point information has been requested for the contact report pair (see #PxPairFlag::eNOTIFY_CONTACT_POINTS).
-    Use #extractContacts() as a reference for the data layout of the stream.
+    This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
+    Use `extractContacts()` as a reference for the data layout of the stream.
     */
     var contactImpulses:cpp.ConstPointer<PxReal>;
 
@@ -455,9 +455,9 @@ extern class PxContactPair
     <li>PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST</li>
     </ul>
 
-    See the documentation of #PxPairFlag for an explanation of each.
+    See the documentation of `PxPairFlag` for an explanation of each.
 
-    \note eNOTIFY_TOUCH_CCD can get raised even if the pair did not request this event. However, in such a case it will only get
+    **Note:** eNOTIFY_TOUCH_CCD can get raised even if the pair did not request this event. However, in such a case it will only get
     raised in combination with one of the other flags to point out that the other event occured during a CCD pass.
 
     @see PxPairFlag
@@ -489,7 +489,7 @@ extern class PxContactPair
     to buffer the contact stream information such that it can get accessed at a later stage.
 
     \param[out] newPair The contact pair info will get copied to this instance. The contact data stream pointer of the copy will be redirected to the provided user buffer. Use NULL to skip the contact pair copy operation.
-    \param[out] bufferMemory Memory block to store the contact data stream to. At most #requiredBufferSize bytes will get written to the buffer.
+    \param[out] bufferMemory Memory block to store the contact data stream to. At most `requiredBufferSize` bytes will get written to the buffer.
     */
     function bufferContacts(newPair:cpp.Pointer<PxContactPair>, bufferMemory:cpp.Pointer<PxU8>):Void;
 
@@ -529,8 +529,8 @@ extern abstract PxTriggerPairFlags(PxTriggerPairFlag) from PxTriggerPairFlag to 
 
 An array of these structs gets passed to the PxSimulationEventCallback::onTrigger() report.
 
-\note The shape pointers might reference deleted shapes. This will be the case if #PxPairFlag::eNOTIFY_TOUCH_LOST
-      events were requested for the pair and one of the involved shapes gets deleted. Check the #flags member to see
+**Note:** The shape pointers might reference deleted shapes. This will be the case if `PxPairFlag.eNOTIFY_TOUCH_LOST`
+      events were requested for the pair and one of the involved shapes gets deleted. Check the `flags` member to see
       whether that is the case. Do not dereference a pointer to a deleted shape. The pointer to a deleted shape is 
       only provided such that user data structures which might depend on the pointer value can be updated.
 
@@ -542,10 +542,10 @@ extern class PxTriggerPair
 {
     var triggerShape:PxShape;	    //!< The shape that has been marked as a trigger.
     var triggerActor:PxRigidActor;	//!< The actor to which triggerShape is attached
-    var otherShape:PxShape;		    //!< The shape causing the trigger event. \deprecated (see #PxSimulationEventCallback::onTrigger()) If collision between trigger shapes is enabled, then this member might point to a trigger shape as well.
+    var otherShape:PxShape;		    //!< The shape causing the trigger event. \deprecated (see `PxSimulationEventCallback.onTrigger()`) If collision between trigger shapes is enabled, then this member might point to a trigger shape as well.
     var otherActor:PxRigidActor;	//!< The actor to which otherShape is attached
     var status:PxPairFlag;			//!< Type of trigger event (eNOTIFY_TOUCH_FOUND or eNOTIFY_TOUCH_LOST). eNOTIFY_TOUCH_PERSISTS events are not supported.
-    var flags:PxTriggerPairFlags;	//!< Additional information on the pair (see #PxTriggerPairFlag)
+    var flags:PxTriggerPairFlags;	//!< Additional information on the pair (see `PxTriggerPairFlag)`
 }
 
 
@@ -561,7 +561,7 @@ An array of these structs gets passed to the PxSimulationEventCallback::onConstr
 extern class PxConstraintInfo
 {
     var constraint:PxConstraint;				//!< The broken constraint.
-    var externalReference:Dynamic;		//!< The external object which owns the constraint (see #PxConstraintConnector::getExternalReference())
+    var externalReference:Dynamic;		//!< The external object which owns the constraint (see `PxConstraintConnector.getExternalReference()`)
     var type:PxU32;					//!< Unique type ID of the external object. Allows to cast the provided external reference to the appropriate type
 }
 
@@ -628,9 +628,9 @@ class PxSimulationEventCallbackHx
 	/**
 	\brief This is called when a breakable constraint breaks.
 	
-	\note The user should not release the constraint shader inside this call!
+	**Note:** The user should not release the constraint shader inside this call!
 
-	\note No event will get reported if the constraint breaks but gets deleted while the time step is still being simulated.
+	**Note:** No event will get reported if the constraint breaks but gets deleted while the time step is still being simulated.
 
 	\param[in] constraints - The constraints which have been broken.
 	\param[in] count       - The number of constraints
@@ -646,12 +646,12 @@ class PxSimulationEventCallbackHx
 	/**
 	\brief This is called with the actors which have just been woken up.
 
-	\note Only supported by rigid bodies yet.
-	\note Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
-	\note Only the latest sleep state transition happening between fetchResults() of the previous frame and fetchResults() of the current frame
+	**Note:** Only supported by rigid bodies yet.
+	**Note:** Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
+	**Note:** Only the latest sleep state transition happening between fetchResults() of the previous frame and fetchResults() of the current frame
 	will get reported. For example, let us assume actor A is awake, then A->putToSleep() gets called, then later A->wakeUp() gets called.
 	At the next simulate/fetchResults() step only an onWake() event will get triggered because that was the last transition.
-	\note If an actor gets newly added to a scene with properties such that it is awake and the sleep state does not get changed by 
+	**Note:** If an actor gets newly added to a scene with properties such that it is awake and the sleep state does not get changed by 
 	the user or simulation, then an onWake() event will get sent at the next simulate/fetchResults() step.
 
 	\param[in] actors - The actors which just woke up.
@@ -668,13 +668,13 @@ class PxSimulationEventCallbackHx
 	/**
 	\brief This is called with the actors which have just been put to sleep.
 
-	\note Only supported by rigid bodies yet.
-	\note Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
-	\note Only the latest sleep state transition happening between fetchResults() of the previous frame and fetchResults() of the current frame
+	**Note:** Only supported by rigid bodies yet.
+	**Note:** Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
+	**Note:** Only the latest sleep state transition happening between fetchResults() of the previous frame and fetchResults() of the current frame
 	will get reported. For example, let us assume actor A is asleep, then A->wakeUp() gets called, then later A->putToSleep() gets called.
 	At the next simulate/fetchResults() step only an onSleep() event will get triggered because that was the last transition (assuming the simulation
 	does not wake the actor up).
-	\note If an actor gets newly added to a scene with properties such that it is asleep and the sleep state does not get changed by 
+	**Note:** If an actor gets newly added to a scene with properties such that it is asleep and the sleep state does not get changed by 
 	the user or simulation, then an onSleep() event will get sent at the next simulate/fetchResults() step.
 
 	\param[in] actors - The actors which have just been put to sleep.
@@ -692,14 +692,14 @@ class PxSimulationEventCallbackHx
 	\brief This is called when certain contact events occur.
 
 	The method will be called for a pair of actors if one of the colliding shape pairs requested contact notification.
-	You request which events are reported using the filter shader/callback mechanism (see #PxSimulationFilterShader,
-	#PxSimulationFilterCallback, #PxPairFlag).
+	You request which events are reported using the filter shader/callback mechanism (see `PxSimulationFilterShader,`
+	`PxSimulationFilterCallback,` `PxPairFlag).`
 	
 	Do not keep references to the passed objects, as they will be 
 	invalid after this function returns.
 
 	\param[in] pairHeader Information on the two actors whose shapes triggered a contact report.
-	\param[in] pairs The contact pairs of two actors for which contact reports have been requested. See #PxContactPair.
+	\param[in] pairs The contact pairs of two actors for which contact reports have been requested. See `PxContactPair.`
 	\param[in] nbPairs The number of provided contact pairs.
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxContactPair PxPairFlag PxSimulationFilterShader PxSimulationFilterCallback
@@ -714,9 +714,9 @@ class PxSimulationEventCallbackHx
 	\brief This is called with the current trigger pair events.
 
 	Shapes which have been marked as triggers using PxShapeFlag::eTRIGGER_SHAPE will send events
-	according to the pair flag specification in the filter shader (see #PxPairFlag, #PxSimulationFilterShader).
+	according to the pair flag specification in the filter shader (see `PxPairFlag,` `PxSimulationFilterShader).`
 
-	\note Trigger shapes will no longer send notification events for interactions with other trigger shapes.
+	**Note:** Trigger shapes will no longer send notification events for interactions with other trigger shapes.
 
 	\param[in] pairs - The trigger pair events.
 	\param[in] count - The number of trigger pair events.
@@ -732,21 +732,21 @@ class PxSimulationEventCallbackHx
 	// /**
 	// \brief Provides early access to the new pose of moving rigid bodies.
 
-	// When this call occurs, rigid bodies having the #PxRigidBodyFlag::eENABLE_POSE_INTEGRATION_PREVIEW 
+	// When this call occurs, rigid bodies having the `PxRigidBodyFlag.eENABLE_POSE_INTEGRATION_PREVIEW` 
 	// flag set, were moved by the simulation and their new poses can be accessed through the provided buffers.
 	
-	// \note The provided buffers are valid and can be read until the next call to #PxScene::simulate() or #PxScene::collide().
+	// **Note:** The provided buffers are valid and can be read until the next call to `PxScene::simulate()` or `PxScene.collide()`.
 	
-	// \note Buffered user changes to the rigid body pose will not yet be reflected in the provided data. More important,
+	// **Note:** Buffered user changes to the rigid body pose will not yet be reflected in the provided data. More important,
 	// the provided data might contain bodies that have been deleted while the simulation was running. It is the user's
 	// responsibility to detect and avoid dereferencing such bodies.
 
-	// \note This callback gets triggered while the simulation is running. If the provided rigid body references are used to
+	// **Note:** This callback gets triggered while the simulation is running. If the provided rigid body references are used to
 	// read properties of the object, then the callback has to guarantee no other thread is writing to the same body at the same
 	// time.
 	
-	// \note The code in this callback should be lightweight as it can block the simulation, that is, the
-	// #PxScene::fetchResults() call.
+	// **Note:** The code in this callback should be lightweight as it can block the simulation, that is, the
+	// `PxScene.fetchResults()` call.
 
 	// \param[in] bodyBuffer The rigid bodies that moved and requested early pose reporting.
 	// \param[in] poseBuffer The integrated rigid body poses of the bodies listed in bodyBuffer.

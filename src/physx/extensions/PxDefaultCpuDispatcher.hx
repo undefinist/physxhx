@@ -26,7 +26,7 @@ extern class PxDefaultCpuDispatcher extends PxCpuDispatcher
     /**
     \brief Enables profiling at task level.
 
-    \note By default enabled only in profiling builds.
+    **Note:** By default enabled only in profiling builds.
     
     \param[in] runProfiled True if tasks should be profiled.
     */
@@ -35,7 +35,7 @@ extern class PxDefaultCpuDispatcher extends PxCpuDispatcher
     /**
     \brief Enables profiling at task level.
 
-    \note By default enabled only in profiling builds.
+    **Note:** By default enabled only in profiling builds.
     
     \param[in] runProfiled True if tasks should be profiled.
     */

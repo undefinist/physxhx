@@ -15,12 +15,12 @@ Serialization and deserialization only work through collections.
 
 A scene is typically serialized using the following steps:
 
- -# create a serialization registry
- -# create a collection for scene objects
- -# complete the scene objects (adds all dependent objects, e.g. meshes)
- -# serialize collection
- -# release collection
- -# release serialization registry
+ -`` create a serialization registry
+ -`` create a collection for scene objects
+ -`` complete the scene objects (adds all dependent objects, e.g. meshes)
+ -`` serialize collection
+ -`` release collection
+ -`` release serialization registry
 
 For example the code may look like this:
 
@@ -39,12 +39,12 @@ For example the code may look like this:
 
 A scene is typically deserialized using the following steps:
 
- -# load a serialized collection into memory
- -# create a serialization registry
- -# create a collection by passing the serialized memory block
- -# add collected objects to scene
- -# release collection
- -# release serialization registry
+ -`` load a serialized collection into memory
+ -`` create a serialization registry
+ -`` create a collection by passing the serialized memory block
+ -`` add collected objects to scene
+ -`` release collection
+ -`` release serialization registry
 
 For example the code may look like this:
 

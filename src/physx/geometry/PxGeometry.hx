@@ -33,7 +33,7 @@ private extern class PxGeometryTypeImpl {}
 A geometry object defines the characteristics of a spatial object, but without any information
 about its placement in the world.
 
-\note This is an abstract class.  You cannot create instances directly.  Create an instance of one of the derived classes instead.
+**Note:** This is an abstract class.  You cannot create instances directly.  Create an instance of one of the derived classes instead.
 */
 @:include("geometry/PxGeometry.h")
 @:native("::cpp::Reference<physx::PxGeometry>")

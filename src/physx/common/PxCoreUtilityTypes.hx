@@ -9,7 +9,7 @@ extern class PxStridedData
 	/**
 	\brief The offset in bytes between consecutive samples in the data.
 
-	<b>Default:</b> 0
+	**Default:** 0
 	*/
 	var stride:PxU32;
 	var data:cpp.ConstPointer<cpp.Void>;

@@ -12,7 +12,7 @@ eNUM_VALUES, which should be one higher than the maximum value in the enum.
 /**
 \brief Debug visualization parameters.
 
-#PxVisualizationParameter::eSCALE is the master switch for enabling visualization, please read the corresponding documentation
+`PxVisualizationParameter.eSCALE` is the master switch for enabling visualization, please read the corresponding documentation
 for further details.
 
 @see PxScene.setVisualizationParameter() PxScene.getVisualizationParameter() PxScene.getRenderBuffer()
@@ -29,7 +29,7 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
     The setting is either zero, in which case the property is not drawn. Otherwise it is a scaling factor
     that determines the size of the visualization widgets.
 
-    Only objects for which visualization is turned on using setFlag(eVISUALIZATION) are visualized (see #PxActorFlag::eVISUALIZATION, #PxShapeFlag::eVISUALIZATION, ...).
+    Only objects for which visualization is turned on using setFlag(eVISUALIZATION) are visualized (see `PxActorFlag::eVISUALIZATION,` `PxShapeFlag.eVISUALIZATION,` ...).
     Contacts are visualized if they involve a body which is being visualized.
     Default is 0.
 
@@ -44,8 +44,8 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
     triangles & polygons themselves, and there's no point in scaling that. So the visualization widgets
     are only scaled when it makes sense.
 
-    <b>Range:</b> [0, PX_MAX_F32)<br>
-    <b>Default:</b> 0
+    **Range:** [0, PX_MAX_F32)<br>
+    **Default:** 0
     */
     var eSCALE;
 

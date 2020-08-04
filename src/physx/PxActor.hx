@@ -118,7 +118,7 @@ extern class PxActor extends PxBase
 	
 	Do not keep a reference to the deleted instance.
 
-	If the actor belongs to a #PxAggregate object, it is automatically removed from the aggregate.
+	If the actor belongs to a `PxAggregate` object, it is automatically removed from the aggregate.
 
 	@see PxBase.release(), PxAggregate
 	*/
@@ -152,7 +152,7 @@ extern class PxActor extends PxBase
 
 	\param[in] name String to set the objects name to.
 
-	<b>Default:</b> NULL
+	**Default:** NULL
 
 	@see getName()
 	*/
@@ -181,14 +181,14 @@ extern class PxActor extends PxBase
 	/**
 	\brief Raises or clears a particular actor flag.
 	
-	See the list of flags #PxActorFlag
+	See the list of flags `PxActorFlag`
 
-	<b>Sleeping:</b> Does <b>NOT</b> wake the actor up automatically.
+	**Sleeping:** Does **NOT** wake the actor up automatically.
 
-	\param[in] flag  The PxActor flag to raise(set) or clear. See #PxActorFlag.
+	\param[in] flag  The PxActor flag to raise(set) or clear. See `PxActorFlag.`
 	\param[in] value The boolean value to assign to the flag.
 
-	<b>Default:</b> PxActorFlag::eVISUALIZATION
+	**Default:** PxActorFlag::eVISUALIZATION
 
 	@see PxActorFlag getActorFlags() 
 	*/
@@ -196,7 +196,7 @@ extern class PxActor extends PxBase
 	/**
 	\brief sets the actor flags
 	
-	See the list of flags #PxActorFlag
+	See the list of flags `PxActorFlag`
 	@see PxActorFlag setActorFlag() 
 	*/
 	function setActorFlags(inFlags:PxActorFlags):Void;
@@ -204,7 +204,7 @@ extern class PxActor extends PxBase
 	/**
 	\brief Reads the PxActor flags.
 	
-	See the list of flags #PxActorFlag
+	See the list of flags `PxActorFlag`
 
 	\return The values of the PxActor flags.
 
@@ -220,11 +220,11 @@ extern class PxActor extends PxBase
 	The PxScene::setDominanceGroupPair() lets you set certain behaviors for pairs of dominance groups.
 	By default every dynamic actor is created in group 0.
 
-	<b>Default:</b> 0
+	**Default:** 0
 
-	<b>Sleeping:</b> Changing the dominance group does <b>NOT</b> wake the actor up automatically.
+	**Sleeping:** Changing the dominance group does **NOT** wake the actor up automatically.
 
-	\param[in] dominanceGroup The dominance group identifier. <b>Range:</b> [0..31]
+	\param[in] dominanceGroup The dominance group identifier. **Range:** [0..31]
 
 	@see getDominanceGroup() PxDominanceGroup PxScene::setDominanceGroupPair()
 	*/
@@ -245,7 +245,7 @@ extern class PxActor extends PxBase
 
 	This cannot be done once the actor has been placed into a scene.
 
-	<b>Default:</b> PX_DEFAULT_CLIENT
+	**Default:** PX_DEFAULT_CLIENT
 
 	@see PxClientID PxScene::createClient() 
 	*/

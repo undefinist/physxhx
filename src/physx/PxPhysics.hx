@@ -58,7 +58,7 @@ extern class PxPhysics
     Releasing an SDK will also release any scenes, triangle meshes, convex meshes, heightfields and shapes
     created through it, provided the user hasn't already done so.
 
-    \note This function is required to be called to release foundation usage.
+    **Note:** This function is required to be called to release foundation usage.
 
     @see PxCreatePhysics()
     */
@@ -94,7 +94,7 @@ extern class PxPhysics
     /**
     \brief Creates a triangle mesh object.
 
-    This can then be instanced into #PxShape objects.
+    This can then be instanced into `PxShape` objects.
 
     \param	[in] stream	The triangle mesh stream.
     \return The new triangle mesh.
@@ -131,7 +131,7 @@ extern class PxPhysics
     /**
     \brief Creates a heightfield object from previously cooked stream.
 
-    This can then be instanced into #PxShape objects.
+    This can then be instanced into `PxShape` objects.
 
     \param	[in] stream	The heightfield mesh stream.
     \return The new heightfield.
@@ -168,7 +168,7 @@ extern class PxPhysics
     /**
     \brief Creates a convex mesh object.
 
-    This can then be instanced into #PxShape objects.
+    This can then be instanced into `PxShape` objects.
 
     \param	[in] stream	The stream to load the convex mesh from.
     \return The new convex mesh.
@@ -244,10 +244,10 @@ extern class PxPhysics
     /**
     \brief Creates a scene.
 
-    \note Every scene uses a Thread Local Storage slot. This imposes a platform specific limit on the
+    **Note:** Every scene uses a Thread Local Storage slot. This imposes a platform specific limit on the
     number of scenes that can be created.
 
-    \param	[in] sceneDesc	Scene descriptor. See #PxSceneDesc
+    \param	[in] sceneDesc	Scene descriptor. See `PxSceneDesc`
     \return The new scene object.
 
     @see PxScene PxScene.release() PxSceneDesc
@@ -307,10 +307,10 @@ extern class PxPhysics
     /**
     \brief Creates a pruning structure from actors.
 
-    \note Every provided actor needs at least one shape with the eSCENE_QUERY_SHAPE flag set.
-    \note Both static and dynamic actors can be provided.
-    \note It is not allowed to pass in actors which are already part of a scene.
-    \note Articulation links cannot be provided.
+    **Note:** Every provided actor needs at least one shape with the eSCENE_QUERY_SHAPE flag set.
+    **Note:** Both static and dynamic actors can be provided.
+    **Note:** It is not allowed to pass in actors which are already part of a scene.
+    **Note:** Articulation links cannot be provided.
 
     \param	[in] actors		Array of actors to add to the pruning structure. Must be non NULL.
     \param	[in] nbActors	Number of actors in the array. Must be >0.
@@ -401,7 +401,7 @@ extern class PxPhysics
     /**
     \brief Creates a constraint shader.
 
-    \note A constraint shader will get added automatically to the scene the two linked actors belong to. Either, but not both, of actor0 and actor1 may
+    **Note:** A constraint shader will get added automatically to the scene the two linked actors belong to. Either, but not both, of actor0 and actor1 may
     be NULL to denote attachment to the world.
     
     \param	[in] actor0		The first actor

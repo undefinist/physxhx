@@ -45,7 +45,7 @@ extern class PxContactSet
     /**
     \brief Alter the contact normal of a specific contact point in the set.
 
-    \note Changing the normal can cause contact points to be ignored.
+    **Note:** Changing the normal can cause contact points to be ignored.
 
     @see PxModifiableContact.normal
     */
@@ -104,7 +104,7 @@ extern class PxContactSet
     /**
     \brief Alter the maximum impulse for a specific contact point in the set.
 
-    \note Must be nonnegative. If set to zero, the contact point will be ignored
+    **Note:** Must be nonnegative. If set to zero, the contact point will be ignored
 
     @see PxModifiableContact.maxImpulse
     */
@@ -120,7 +120,7 @@ extern class PxContactSet
     /**
     \brief Alter the restitution coefficient for a specific contact point in the set.
 
-    \note Valid ranges [0,1]
+    **Note:** Valid ranges [0,1]
 
     @see PxModifiableContact.restitution
     */

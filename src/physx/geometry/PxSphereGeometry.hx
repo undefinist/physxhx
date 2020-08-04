@@ -6,7 +6,7 @@ import physx.foundation.PxSimpleTypes.PxReal;
 \brief A class representing the geometry of a sphere.
 
 Spheres are defined by their radius.
-\note The scaling of the sphere is expected to be baked into this value, there is no additional scaling parameter.
+**Note:** The scaling of the sphere is expected to be baked into this value, there is no additional scaling parameter.
 */
 @:forward
 extern abstract PxSphereGeometry(PxSphereGeometryData) from PxSphereGeometryData to PxSphereGeometryData
@@ -35,7 +35,7 @@ private extern class PxSphereGeometryData extends PxGeometry
 
     \return True if the current settings are valid
 
-    \note A valid sphere has radius > 0.  
+    **Note:** A valid sphere has radius > 0.  
     It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a sphere that has zero radius.
 
     @see PxRigidActor::createShape, PxPhysics::createShape

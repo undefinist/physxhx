@@ -3,9 +3,9 @@ package physx.foundation;
 /**
 \brief Abstract base class for an application defined memory allocator that can be used by the Nv library.
 
-\note The SDK state should not be modified from within any allocation/free function.
+**Note:** The SDK state should not be modified from within any allocation/free function.
 
-<b>Threading:</b> All methods of this class should be thread safe as it can be called from the user thread
+**Threading:** All methods of this class should be thread safe as it can be called from the user thread
 or the physics processing thread(s).
 */
 @:include("foundation/PxAllocatorCallback.h")
@@ -18,7 +18,7 @@ extern class PxAllocatorCallback
 	This method should never return NULL.  If you run out of memory, then
 	you should terminate the app or take some other appropriate action.
 
-	<b>Threading:</b> This function should be thread safe as it can be called in the context of the user thread
+	**Threading:** This function should be thread safe as it can be called in the context of the user thread
 	and physics processing thread(s).
 
 	@param size			Number of bytes to allocate.
@@ -32,7 +32,7 @@ extern class PxAllocatorCallback
 	/**
 	\brief Frees memory previously allocated by allocate().
 
-	<b>Threading:</b> This function should be thread safe as it can be called in the context of the user thread
+	**Threading:** This function should be thread safe as it can be called in the context of the user thread
 	and physics processing thread(s).
 
 	@param ptr Memory to free.
