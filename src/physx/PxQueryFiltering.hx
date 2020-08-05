@@ -4,7 +4,7 @@ import physx.PxQueryReport;
 import physx.PxFiltering.PxFilterData;
 
 /**
-\brief Filtering flags for scene queries.
+Filtering flags for scene queries.
 
 @see PxQueryFilterData.flags
 */
@@ -48,12 +48,12 @@ extern enum abstract PxQueryFlag(PxQueryFlagImpl)
 private extern class PxQueryFlagImpl {}
 
 /**
-\brief Flags typedef for the set of bits defined in PxQueryFlag.
+Flags typedef for the set of bits defined in PxQueryFlag.
 */
 extern abstract PxQueryFlags(PxQueryFlag) from PxQueryFlag to PxQueryFlag {}
 
 /**
-\brief Classification of scene query hits (intersections).
+Classification of scene query hits (intersections).
 
  - eNONE: Returning this hit type means that the hit should not be reported.
  - eBLOCK: For all raycast, sweep and overlap queries the nearest eBLOCK type hit will always be returned in PxHitCallback::block member.
@@ -144,7 +144,7 @@ private extern class PxQueryFilterDataData
 private extern class PxQueryFilterCallbackNative {}
 
 /**
-\brief Scene query filtering callbacks.
+Scene query filtering callbacks.
 
 Custom filtering logic for scene query intersection candidates. If an intersection candidate object passes the data based filter
 (see `PxQueryFilterData),` filtering callbacks are executed if requested (see `PxQueryFilterData.flags)`

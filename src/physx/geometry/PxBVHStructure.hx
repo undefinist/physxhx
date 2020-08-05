@@ -6,7 +6,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxVec3;
 
 /**
-\brief Class representing the bounding volume hierarchy structure.
+Class representing the bounding volume hierarchy structure.
 
 PxBVHStructure can be  provided to PxScene::addActor. In this case the scene query 
 pruning structure inside PhysX SDK will store/update one bound per actor. 
@@ -60,18 +60,18 @@ extern class PxBVHStructure extends PxBase
         overlapHits:cpp.Pointer<PxU32>):PxU32;
 
     /**
-    \brief Retrieve the bounds in the BVH.
+    Retrieve the bounds in the BVH.
 
     @see PxBounds3
     */
     function getBounds():cpp.ConstPointer<PxBounds3>;
 
     /**
-    \brief Returns the number of bounds in the BVH.
+    Returns the number of bounds in the BVH.
 
     You can use `getBounds()` to retrieve the bounds.
 
-    \return Number of bounds in the BVH.
+    @return Number of bounds in the BVH.
 
     */
     function getNbBounds():PxU32;

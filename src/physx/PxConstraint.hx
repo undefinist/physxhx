@@ -5,7 +5,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxBase;
 
 /**
-\brief constraint flags
+constraint flags
 
 **Note:** eBROKEN is a read only flag
 */
@@ -41,7 +41,7 @@ extern enum abstract PxConstraintFlag(PxConstraintFlagImpl)
 private extern class PxConstraintFlagImpl {}
 
 /**
-\brief constraint flags
+constraint flags
 @see PxConstraintFlag
 */
 extern abstract PxConstraintFlags(PxConstraintFlag) from PxConstraintFlag to PxConstraintFlag {}
@@ -62,7 +62,7 @@ extern class PxConstraintShaderTable
 
 
 /**
-\brief A plugin class for implementing constraints
+A plugin class for implementing constraints
 
 @see PxPhysics.createConstraint
 */
@@ -71,7 +71,7 @@ extern class PxConstraintShaderTable
 extern class PxConstraint extends PxBase
 {
     /**
-    \brief Releases a PxConstraint instance.
+    Releases a PxConstraint instance.
 
     **Note:** This call does not wake up the connected rigid bodies.
 
@@ -80,9 +80,9 @@ extern class PxConstraint extends PxBase
     function release():Void;
 
     /**
-    \brief Retrieves the scene which this constraint belongs to.
+    Retrieves the scene which this constraint belongs to.
 
-    \return Owner Scene. NULL if not part of a scene.
+    @return Owner Scene. NULL if not part of a scene.
 
     @see PxScene
     */
@@ -90,7 +90,7 @@ extern class PxConstraint extends PxBase
 
     @:native("getActors") private function _getActors(actor0:cpp.Reference<cpp.Pointer<PxRigidActor>>, actor1:cpp.Reference<cpp.Pointer<PxRigidActor>>):Void;
     /**
-    \brief Retrieves the actors for this constraint.
+    Retrieves the actors for this constraint.
 
     @see PxActor
     */
@@ -103,24 +103,24 @@ extern class PxConstraint extends PxBase
     }
 
     /**
-    \brief Sets the actors for this constraint.
+    Sets the actors for this constraint.
 
-    \param[in] actor0 a reference to the pointer for the first actor
-    \param[in] actor1 a reference to the pointer for the second actor
+    @param [in]actor0 a reference to the pointer for the first actor
+    @param [in]actor1 a reference to the pointer for the second actor
 
     @see PxActor
     */
     function setActors(actor0:PxRigidActor, actor1:PxRigidActor):Void;
 
     /**
-    \brief Notify the scene that the constraint shader data has been updated by the application
+    Notify the scene that the constraint shader data has been updated by the application
     */
     function markDirty():Void;
 
     /**
-    \brief Set the flags for this constraint
+    Set the flags for this constraint
 
-    \param[in] flags the new constraint flags
+    @param [in]flags the new constraint flags
 
     default: PxConstraintFlag::eDRIVE_LIMITS_ARE_FORCES
 
@@ -129,33 +129,33 @@ extern class PxConstraint extends PxBase
     function setFlags(flags:PxConstraintFlags):Void;
 
     /**
-    \brief Retrieve the flags for this constraint
+    Retrieve the flags for this constraint
 
-    \return the constraint flags
+    @return the constraint flags
     @see PxConstraintFlags
     */
     function getFlags():PxConstraintFlags;
 
     /**
-    \brief Set a flag for this constraint
+    Set a flag for this constraint
 
-    \param[in] flag the constraint flag
-    \param[in] value the new value of the flag
+    @param [in]flag the constraint flag
+    @param [in]value the new value of the flag
 
     @see PxConstraintFlags
     */
     function setFlag(flag:PxConstraintFlag, value:Bool):Void;
 
     /**
-    \brief Retrieve the constraint force most recently applied to maintain this constraint.
+    Retrieve the constraint force most recently applied to maintain this constraint.
     
-    \param[out] linear the constraint force
-    \param[out] angular the constraint torque
+    @param [out]linear the constraint force
+    @param [out]angular the constraint torque
     */
     function getForce(linear:PxVec3, angular:PxVec3):Void;
 
     /**
-    \brief whether the constraint is valid. 
+    whether the constraint is valid. 
     
     A constraint is valid if it has at least one dynamic rigid body or articulation link. A constraint that
     is not valid may not be inserted into a scene, and therefore a static actor to which an invalid constraint
@@ -166,18 +166,18 @@ extern class PxConstraint extends PxBase
     function isValid():Bool;
 
     /**
-    \brief Set the break force and torque thresholds for this constraint. 
+    Set the break force and torque thresholds for this constraint. 
     
     If either the force or torque measured at the constraint exceed these thresholds the constraint will break.
 
-    \param[in] linear the linear break threshold
-    \param[in] angular the angular break threshold
+    @param [in]linear the linear break threshold
+    @param [in]angular the angular break threshold
     */
     function setBreakForce(linear:PxReal, angular:PxReal):Void;
 
     @:native("getBreakForce") private function _getBreakForce(linear:cpp.Reference<PxReal>, angular:cpp.Reference<PxReal>):Void;
     /**
-    \brief Retrieve the constraint break force and torque thresholds
+    Retrieve the constraint break force and torque thresholds
     */
     inline function getBreakForce():{ linear:PxReal, angular:PxReal }
     {
@@ -188,34 +188,34 @@ extern class PxConstraint extends PxBase
     }
 
     /**
-    \brief Set the minimum response threshold for a constraint row 
+    Set the minimum response threshold for a constraint row 
     
     When using mass modification for a joint or infinite inertia for a jointed body, very stiff solver constraints can be generated which 
     can destabilize simulation. Setting this value to a small positive value (e.g. 1e-8) will cause constraint rows to be ignored if very 
     large changes in impulses will generate only small changes in velocity. When setting this value, also set 
     PxConstraintFlag::eDISABLE_PREPROCESSING. The solver accuracy for this joint may be reduced.
 
-    \param[in] threshold the minimum response threshold
+    @param [in]threshold the minimum response threshold
 
     @see PxConstraintFlag::eDISABLE_PREPROCESSING
     */
     function setMinResponseThreshold(threshold:PxReal):Void;
 
     /**
-    \brief Retrieve the constraint break force and torque thresholds
+    Retrieve the constraint break force and torque thresholds
 
-    \return the minimum response threshold for a constraint row
+    @return the minimum response threshold for a constraint row
     */
     function getMinResponseThreshold():PxReal;
 
     @:native("getExternalReference") private function _getExternalReference(typeID:cpp.Reference<PxU32>):Dynamic;
     /**
-    \brief Fetch external owner of the constraint.
+    Fetch external owner of the constraint.
     
     Provides a reference to the external owner of a constraint and a unique owner type ID.
 
-    \param[out] typeID Unique type identifier of the external object.
-    \return Reference to the external object which owns the constraint.
+    @param [out]typeID Unique type identifier of the external object.
+    @return Reference to the external object which owns the constraint.
 
     @see PxConstraintConnector.getExternalReference()
     */
@@ -227,10 +227,10 @@ extern class PxConstraint extends PxBase
     }
 
     /**
-    \brief Set the constraint functions for this constraint
+    Set the constraint functions for this constraint
     
-    \param[in] connector the constraint connector object by which the SDK communicates with the constraint.
-    \param[in] shaders the shader table for the constraint
+    @param [in]connector the constraint connector object by which the SDK communicates with the constraint.
+    @param [in]shaders the shader table for the constraint
     
     @see PxConstraintConnector PxConstraintSolverPrep PxConstraintProject PxConstraintVisualize
     */

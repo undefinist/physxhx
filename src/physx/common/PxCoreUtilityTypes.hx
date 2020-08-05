@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 extern class PxStridedData
 {
 	/**
-	\brief The offset in bytes between consecutive samples in the data.
+	The offset in bytes between consecutive samples in the data.
 
 	**Default:** 0
 	*/

@@ -3,13 +3,13 @@ package physx.pvd;
 import physx.foundation.PxProfiler;
 
 /**
-\brief types of instrumentation that PVD can do.
+types of instrumentation that PVD can do.
 */
 @:build(physx.hx.EnumBuilder.buildFlags("physx::PxPvdInstrumentationFlag", cpp.UInt8))
 extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
 {
     /**
-        \brief Send debugging information to PVD.
+        Send debugging information to PVD.
 
         This information is the actual object data of the rigid statics, shapes,
         articulations, etc.  Sending this information has a noticeable impact on
@@ -19,7 +19,7 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
     var eDEBUG = 1 << 0;
 
     /**
-        \brief Send profile information to PVD.
+        Send profile information to PVD.
 
         This information populates PVD's profile view.  It has (at this time) negligible
         cost compared to Debug information and makes PVD *much* more useful so it is quite
@@ -31,7 +31,7 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
     var ePROFILE = 1 << 1;
 
     /**
-        \brief Send memory information to PVD.
+        Send memory information to PVD.
 
         The PVD sdk side hooks into the Foundation memory controller and listens to
         allocation/deallocation events.  This has a noticable hit on the first frame,
@@ -60,7 +60,7 @@ extern enum abstract PxPvdInstrumentationFlag(PxPvdInstrumentationFlagImpl)
 private extern class PxPvdInstrumentationFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxPvdInstrumentationFlag.
+Bitfield that contains a set of raised flags defined in PxPvdInstrumentationFlag.
 
 @see PxPvdInstrumentationFlag
 */
@@ -72,8 +72,8 @@ extern class PxPvd extends PxProfilerCallback
 {
 	/**
 	Connects the SDK to the PhysX Visual Debugger application.
-	\param transport transport for pvd captured data.
-	\param flags Flags to set.
+	@param transport transport for pvd captured data.
+	@param flags Flags to set.
 	return True if success
 	*/
 	function connect(transport:PxPvdTransport, flags:PxPvdInstrumentationFlags):Bool;
@@ -86,7 +86,7 @@ extern class PxPvd extends PxProfilerCallback
     
 	/**
 	 *	Return if connection to PVD is created.
-	  \param useCachedStatus
+	  @param useCachedStatus
 	    1> When useCachedStaus is false, isConnected() checks the lowlevel network status.
 	       This can be slow because it needs to lock the lowlevel network stream. If isConnected() is
 	       called frequently, the expense of locking can be significant.
@@ -110,15 +110,15 @@ extern class PxPvd extends PxProfilerCallback
 	function getInstrumentationFlags():PxPvdInstrumentationFlags;
 
 	/**
-	\brief Releases the pvd instance.
+	Releases the pvd instance.
 	*/
 	function release():Void;
 
 
 
     /**
-        \brief Create a pvd instance. 	
-        \param foundation is the foundation instance that stores the allocator and error callbacks.
+        Create a pvd instance. 	
+        @param foundation is the foundation instance that stores the allocator and error callbacks.
     */
     @:native("physx::PxCreatePvd")
     static function create(foundation:PxFoundation):PxPvd;

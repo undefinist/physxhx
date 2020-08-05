@@ -4,7 +4,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxBitAndData;
 
 /**
-\brief Special material index values for height field samples.
+Special material index values for height field samples.
 
 @see PxHeightFieldSample.materialIndex0 PxHeightFieldSample.materialIndex1
 */
@@ -22,7 +22,7 @@ extern enum abstract PxHeightFieldMaterial(PxHeightFieldMaterialImpl)
 private extern class PxHeightFieldMaterialImpl {}
 
 /**
-\brief Heightfield sample format.
+Heightfield sample format.
 
 This format corresponds to the `PxHeightFieldFormat` member PxHeightFieldFormat::eS16_TM.
 
@@ -47,7 +47,7 @@ extern abstract PxHeightFieldSample(PxHeightFieldSampleData)
 private extern class PxHeightFieldSampleData
 {
 	/**
-	\brief The height of the heightfield sample
+	The height of the heightfield sample
 
 	This value is scaled by PxHeightFieldGeometry::heightScale.
 
@@ -56,7 +56,7 @@ private extern class PxHeightFieldSampleData
     var height:PxI16;
     
 	/**
-	\brief The triangle material index of the quad's lower triangle + tesselation flag
+	The triangle material index of the quad's lower triangle + tesselation flag
 
 	An index pointing into the material table of the shape which instantiates the heightfield.
 	This index determines the material of the lower of the quad's two triangles (i.e. the quad whose 
@@ -73,7 +73,7 @@ private extern class PxHeightFieldSampleData
     var materialIndex0:PxBitAndByte;
 
 	/**
-	\brief The triangle material index of the quad's upper triangle + reserved flag
+	The triangle material index of the quad's upper triangle + reserved flag
 
 	An index pointing into the material table of the shape which instantiates the heightfield.
 	This index determines the material of the upper of the quad's two triangles (i.e. the quad whose 

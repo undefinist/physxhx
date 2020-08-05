@@ -10,7 +10,7 @@ extern class PxSimpleFactory
 {
     
     /** 
-    \brief simple method to create a PxRigidDynamic actor with a single PxShape. 
+    simple method to create a PxRigidDynamic actor with a single PxShape. 
 
     @param sdk the PxPhysics object
     @param transform the global pose of the new object
@@ -44,7 +44,7 @@ extern class PxSimpleFactory
 
 
     /**
-    \brief simple method to create a kinematic PxRigidDynamic actor with a single PxShape. 
+    simple method to create a kinematic PxRigidDynamic actor with a single PxShape. 
 
     unlike PxCreateDynamic, the geometry is not restricted to box, capsule, sphere or convex. However, 
 	kinematics of other geometry types may not participate in simulation collision and may be used only for
@@ -83,7 +83,7 @@ extern class PxSimpleFactory
     
 
     /** 
-    \brief simple method to create a PxRigidStatic actor with a single PxShape.  
+    simple method to create a PxRigidStatic actor with a single PxShape.  
 
     @param sdk the PxPhysics object
     @param transform the global pose of the new object
@@ -112,7 +112,7 @@ extern class PxSimpleFactory
 
 
     /**
-    \brief create a shape by copying attributes from another shape
+    create a shape by copying attributes from another shape
 
     The function clones a PxShape. The following properties are copied:
     - geometry
@@ -128,18 +128,18 @@ extern class PxSimpleFactory
     - name
     - user data
 
-    \param[in] physicsSDK - the physics SDK used to allocate the shape
-    \param[in] shape the shape from which to take the attributes.
-    \param[in] isExclusive whether the new shape should be an exclusive or shared shape.
+    @param [in]physicsSDK - the physics SDK used to allocate the shape
+    @param [in]shape the shape from which to take the attributes.
+    @param [in]isExclusive whether the new shape should be an exclusive or shared shape.
 
-    \return the newly-created rigid static
+    @return the newly-created rigid static
 
     */
     @:native("physx::PxCloneShape")
     static function cloneShape(physicsSDK:PxPhysics, shape:PxShape, isExclusive:Bool):PxShape;
 
     /**
-    \brief create a static body by copying attributes from another rigid actor
+    create a static body by copying attributes from another rigid actor
     
     The function clones a PxRigidDynamic or PxRigidStatic as a PxRigidStatic. A uniform scale is applied. The following properties are copied:
     - shapes
@@ -154,18 +154,18 @@ extern class PxSimpleFactory
     
     **Note:** Transforms are not copied with bit-exact accuracy.
     
-    \param[in] physicsSDK - the physics SDK used to allocate the rigid static
-    \param[in] actor the rigid actor from which to take the attributes.
-    \param[in] transform the transform of the new static.
+    @param [in]physicsSDK - the physics SDK used to allocate the rigid static
+    @param [in]actor the rigid actor from which to take the attributes.
+    @param [in]transform the transform of the new static.
     
-    \return the newly-created rigid static
+    @return the newly-created rigid static
     
     */
     @:native("physx::PxCloneStatic")
     static function cloneStatic(physicsSDK:PxPhysics, transform:PxTransform, actor:PxRigidActor):PxRigidStatic;
     
     /**
-    \brief create a dynamic body by copying attributes from an existing body
+    create a dynamic body by copying attributes from an existing body
 
     The following properties are copied:
     - shapes
@@ -191,24 +191,24 @@ extern class PxSimpleFactory
 
     **Note:** Transforms are not copied with bit-exact accuracy.
 
-    \param[in] physicsSDK PxPhysics - the physics SDK used to allocate the rigid static
-    \param[in] body the rigid dynamic to clone.
-    \param[in] transform the transform of the new dynamic
+    @param [in]physicsSDK PxPhysics - the physics SDK used to allocate the rigid static
+    @param [in]body the rigid dynamic to clone.
+    @param [in]transform the transform of the new dynamic
 
-    \return the newly-created rigid static
+    @return the newly-created rigid static
 
     */
     @:native("physx::PxCloneDynamic")
     static function cloneDynamic(physicsSDK:PxPhysics, transform:PxTransform, body:PxRigidDynamic):PxRigidDynamic;
     
     /** 
-    \brief create a plane actor. The plane equation is n.x + d = 0
+    create a plane actor. The plane equation is n.x + d = 0
 
-    \param[in] sdk the PxPhysics object
-    \param[in] plane a plane of the form n.x + d = 0
-    \param[in] material the material for the new object's shape
+    @param [in]sdk the PxPhysics object
+    @param [in]plane a plane of the form n.x + d = 0
+    @param [in]material the material for the new object's shape
 
-    \return a new static actor, or NULL if it could not be constructed
+    @return a new static actor, or NULL if it could not be constructed
 
     @see PxRigidStatic
     */

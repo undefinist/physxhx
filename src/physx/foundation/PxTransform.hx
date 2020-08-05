@@ -3,7 +3,7 @@ package physx.foundation;
 import physx.foundation.PxSimpleTypes.PxReal;
 
 /*!
-\brief class representing a rigid euclidean transform as a quaternion and a vector
+class representing a rigid euclidean transform as a quaternion and a vector
 */
 @:forward
 @:forwardStatics
@@ -25,7 +25,7 @@ extern abstract PxTransform(PxTransformData)
     }
 
 	/**
-	\brief returns true if the two transforms are exactly equal
+	returns true if the two transforms are exactly equal
 	*/
     @:op(A == B)
     inline function equals(t:PxTransform):Bool
@@ -75,7 +75,7 @@ private extern class PxTransformData implements physx.hx.IncludeHelper<"foundati
     }
     
 	/**
-	\brief returns true if the two transforms are exactly equal
+	returns true if the two transforms are exactly equal
 	*/
     @:native("operator==") function equals(t:PxTransform):Bool;
     
@@ -92,7 +92,7 @@ private extern class PxTransformData implements physx.hx.IncludeHelper<"foundati
     function getInverse():PxTransform;
     
 	/**
-	\brief return a normalized transform (i.e. one in which the quaternion has unit magnitude)
+	return a normalized transform (i.e. one in which the quaternion has unit magnitude)
 	*/
     function getNormalized():PxTransform;
 
@@ -107,16 +107,16 @@ private extern class PxTransformData implements physx.hx.IncludeHelper<"foundati
     function rotateInv(input:PxVec3):PxVec3;
 
 	/**
-	\brief returns true if finite and q is a unit quaternion
+	returns true if finite and q is a unit quaternion
 	*/
     function isValid():Bool;
 	/**
-	\brief returns true if finite and quat magnitude is reasonably close to unit to allow for some accumulation of error
+	returns true if finite and quat magnitude is reasonably close to unit to allow for some accumulation of error
 	vs isValid
 	*/
     function isSane():Bool;
 	/**
-	\brief returns true if all elems are finite (not NAN or INF, etc.)
+	returns true if all elems are finite (not NAN or INF, etc.)
 	*/
     function isFinite():Bool;
 

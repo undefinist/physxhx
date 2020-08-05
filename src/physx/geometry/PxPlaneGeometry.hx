@@ -1,7 +1,7 @@
 package physx.geometry;
 
 /**
-\brief Class describing a plane geometry.
+Class describing a plane geometry.
 
 The plane geometry specifies the half-space volume x<=0. As with other geometry types, 
 when used in a PxShape the collision volume is obtained by transforming the halfspace 
@@ -31,9 +31,9 @@ private extern class PxPlaneGeometryData extends PxGeometry
     static function create():PxPlaneGeometry;
 
 	/**
-	\brief Returns true if the geometry is valid.
+	Returns true if the geometry is valid.
 
-	\return True if the current settings are valid
+	@return True if the current settings are valid
 	*/
 	function isValid():Bool;
 }

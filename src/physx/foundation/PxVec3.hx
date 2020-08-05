@@ -26,7 +26,7 @@ extern abstract PxVec3(PxVec3Data)
     }
 
     /**
-    \brief element access
+    element access
     */
     @:op([])
     inline function elemGet(index:Int):cpp.Float32
@@ -35,7 +35,7 @@ extern abstract PxVec3(PxVec3Data)
     }
     
     /**
-    \brief element access
+    element access
     */
     @:op([])
     inline function elemSet(index:Int, value:cpp.Float32):cpp.Float32
@@ -44,7 +44,7 @@ extern abstract PxVec3(PxVec3Data)
     }
 
     /**
-    \brief returns true if the two vectors are exactly equal.
+    returns true if the two vectors are exactly equal.
     */
     @:op(A == B)
     inline function equals(v:PxVec3):Bool
@@ -53,7 +53,7 @@ extern abstract PxVec3(PxVec3Data)
     }
 
     /**
-    \brief returns true if the two vectors are not exactly equal.
+    returns true if the two vectors are not exactly equal.
     */
     @:op(A != B)
     inline function notEquals(v:PxVec3):Bool
@@ -71,7 +71,7 @@ extern abstract PxVec3(PxVec3Data)
     }
     
     /**
-    \brief vector addition
+    vector addition
     */
     @:op(A + B)
     inline function add(v:PxVec3):PxVec3
@@ -80,7 +80,7 @@ extern abstract PxVec3(PxVec3Data)
     }
     
     /**
-    \brief vector difference
+    vector difference
     */
     @:op(A - B)
     inline function sub(v:PxVec3):PxVec3
@@ -89,7 +89,7 @@ extern abstract PxVec3(PxVec3Data)
     }
     
     /**
-    \brief scalar post-multiplication
+    scalar post-multiplication
     */
     @:op(A * B)
     @:commutative
@@ -99,7 +99,7 @@ extern abstract PxVec3(PxVec3Data)
     }
     
     /**
-    \brief scalar division
+    scalar division
     */
     @:op(A / B)
     inline function div(f:cpp.Float32):PxVec3
@@ -139,39 +139,39 @@ private extern class PxVec3Data
     }
     
     /**
-    \brief tests for exact zero vector
+    tests for exact zero vector
     */
     function isZero():Bool;
 
     /**
-    \brief returns true if all 3 elems of the vector are finite (not NAN or INF, etc.)
+    returns true if all 3 elems of the vector are finite (not NAN or INF, etc.)
     */
     function isFinite():Bool;
     
     /**
-    \brief is normalized - used by API parameter validation
+    is normalized - used by API parameter validation
     */
     function isNormalized():Bool;
 
     /**
-    \brief returns the squared magnitude
+    returns the squared magnitude
 
     Avoids calling PxSqrt()!
     */
     function magnitudeSquared():cpp.Float32;
 
     /**
-    \brief returns the magnitude
+    returns the magnitude
     */
     function magnitude():cpp.Float32;
 
     /**
-    \brief returns the scalar product of this and other.
+    returns the scalar product of this and other.
     */
     function dot(v:PxVec3):cpp.Float32;
 
     /**
-    \brief cross product
+    cross product
     */
     function cross(v:PxVec3):PxVec3;
 
@@ -181,49 +181,49 @@ private extern class PxVec3Data
     function getNormalized():PxVec3;
 
     /**
-    \brief normalizes the vector in place
+    normalizes the vector in place
     */
     function normalize():cpp.Float32;
 
     /**
-    \brief normalizes the vector in place. Does nothing if vector magnitude is under PX_NORMALIZATION_EPSILON.
+    normalizes the vector in place. Does nothing if vector magnitude is under PX_NORMALIZATION_EPSILON.
     Returns vector magnitude if >= PX_NORMALIZATION_EPSILON and 0.0f otherwise.
     */
     function normalizeSafe():cpp.Float32;
 
     /**
-    \brief normalizes the vector in place. Asserts if vector magnitude is under PX_NORMALIZATION_EPSILON.
+    normalizes the vector in place. Asserts if vector magnitude is under PX_NORMALIZATION_EPSILON.
     returns vector magnitude.
     */
     function normalizeFast():cpp.Float32;
 
     /**
-    \brief a[i] * b[i], for all i.
+    a[i] * b[i], for all i.
     */
     function multiply(a:PxVec3):PxVec3;
 
     /**
-    \brief element-wise minimum
+    element-wise minimum
     */
     function minimum(v:PxVec3):PxVec3;
 
     /**
-    \brief returns MIN(x, y, z);
+    returns MIN(x, y, z);
     */
     function minElement():cpp.Float32;
 
     /**
-    \brief element-wise maximum
+    element-wise maximum
     */
     function maximum(v:PxVec3):PxVec3;
 
     /**
-    \brief returns MAX(x, y, z);
+    returns MAX(x, y, z);
     */
     function maxElement():cpp.Float32;
 
     /**
-    \brief returns absolute values of components;
+    returns absolute values of components;
     */
     function abs():PxVec3;
 }

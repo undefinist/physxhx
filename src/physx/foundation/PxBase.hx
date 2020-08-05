@@ -22,7 +22,7 @@ private extern class PxBaseFlagImpl {}
 extern abstract PxBaseFlags(PxBaseFlag) from PxBaseFlag to PxBaseFlag {}
 
 /**
-\brief Base class for objects that can be members of a PxCollection.
+Base class for objects that can be members of a PxCollection.
 
 All PxBase sub-classes can be serialized.
 
@@ -40,14 +40,14 @@ extern class PxBase
 	/**
     Returns string name of dynamic type.
     
-	\return	Class name of most derived type of this object.
+	@return	Class name of most derived type of this object.
 	*/
     public function getConcreteTypeName():cpp.ConstCharStar;
 
 	/**
     Returns concrete type of object.
     
-	\return	PxConcreteType::Enum of serialized object
+	@return	PxConcreteType::Enum of serialized object
 
 	@see PxConcreteType
 	*/
@@ -73,7 +73,7 @@ extern class PxBase
 	/**
 	Returns PxBaseFlags 
 
-	\return	PxBaseFlags
+	@return	PxBaseFlags
 
 	@see PxBaseFlags
 	*/
@@ -84,7 +84,7 @@ extern class PxBase
 	
 	A class is subordinate, if it can only be instantiated in the context of another class.
 
-	\return	Whether the class is subordinate
+	@return	Whether the class is subordinate
 	
 	@see PxSerialization::isSerializable
 	*/

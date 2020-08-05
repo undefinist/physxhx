@@ -1,7 +1,7 @@
 package physx.foundation;
 
 /*!
-\brief 4x4 matrix class
+4x4 matrix class
 
 This class is layout-compatible with D3D and OpenGL matrices. More notes on layout are given in the PxMat33
 

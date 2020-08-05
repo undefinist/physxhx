@@ -1,7 +1,7 @@
 package physx;
 
 /**
-\brief Parameter to addForce() and addTorque() calls, determines the exact operation that is carried out.
+Parameter to addForce() and addTorque() calls, determines the exact operation that is carried out.
 
 @see PxRigidBody.addForce() PxRigidBody.addTorque()
 */

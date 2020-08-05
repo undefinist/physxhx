@@ -4,7 +4,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxVec3;
 
 /**
-\brief Scene query and geometry query behavior flags.
+Scene query and geometry query behavior flags.
 
 PxHitFlags are used for 3 different purposes:
 
@@ -78,14 +78,14 @@ extern enum abstract PxHitFlag(PxHitFlagImpl)
 private extern class PxHitFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxHitFlag.
+collection of set bits defined in PxHitFlag.
 
 @see PxHitFlag
 */
 extern abstract PxHitFlags(PxHitFlag) from PxHitFlag to PxHitFlag {}
 
 /**
-\brief Combines a shape pointer and the actor the shape belongs to into one memory location.
+Combines a shape pointer and the actor the shape belongs to into one memory location.
 
 Serves as a base class for PxQueryHit.
 
@@ -101,7 +101,7 @@ extern class PxActorShape
 }
 
 /**
-\brief Scene query hit information.
+Scene query hit information.
 */
 @:include("PxQueryReport.h")
 @:native("physx::PxQueryHit")
@@ -120,7 +120,7 @@ extern class PxQueryHit extends PxActorShape
 }
 
 /**
-\brief Scene query hit information for raycasts and sweeps returning hit position and normal information.
+Scene query hit information for raycasts and sweeps returning hit position and normal information.
 
 ::PxHitFlag flags can be passed to scene query functions, as an optimization, to cause the SDK to
 only generate specific members of this structure.
@@ -156,7 +156,7 @@ extern class PxLocationHit extends PxQueryHit
 }
 
 /**
-\brief Stores results of raycast queries.
+Stores results of raycast queries.
 
 ::PxHitFlag flags can be passed to raycast function, as an optimization, to cause the SDK to only compute specified members of this
 structure.
@@ -187,7 +187,7 @@ extern class PxRaycastHit extends PxLocationHit
 }
 
 /**
-\brief Stores results of overlap queries.
+Stores results of overlap queries.
 
 @see PxScene.overlap PxBatchQuery.overlap
 */
@@ -197,7 +197,7 @@ extern class PxRaycastHit extends PxLocationHit
 extern class PxOverlapHit extends PxQueryHit {}
 
 /**
-\brief Stores results of sweep queries.
+Stores results of sweep queries.
 
 @see PxScene.sweep PxBatchQuery.sweep
 */
@@ -207,7 +207,7 @@ extern class PxOverlapHit extends PxQueryHit {}
 extern class PxSweepHit extends PxLocationHit {}
 
 /**
-\brief Describes query behavior after returning a partial query result via a callback.
+Describes query behavior after returning a partial query result via a callback.
 
 If callback returns true, traversal will continue and callback can be issued again.
 If callback returns false, traversal will stop, callback will not be issued again.

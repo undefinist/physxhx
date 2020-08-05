@@ -6,7 +6,7 @@ import physx.foundation.PxErrors;
 import physx.foundation.PxErrorCallback;
 
 /**
-\brief Foundation SDK singleton class.
+Foundation SDK singleton class.
 
 You need to have an instance of this class to instance the higher level SDKs.
 */
@@ -19,7 +19,7 @@ You need to have an instance of this class to instance the higher level SDKs.
 extern class PxFoundation
 {
     /**
-    \brief Destroys the instance it is called on.
+    Destroys the instance it is called on.
 
     The operation will fail, if there are still modules referencing the foundation object. Release all dependent modules
     prior

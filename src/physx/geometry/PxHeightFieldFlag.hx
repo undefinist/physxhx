@@ -1,14 +1,14 @@
 package physx.geometry;
 
 /**
-\brief Describes the format of height field samples.
+Describes the format of height field samples.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
 @:build(physx.hx.EnumBuilder.build("physx::PxHeightFieldFormat"))
 extern enum abstract PxHeightFieldFormat(PxHeightFieldFormatImpl)
 {
     /**
-    \brief Height field height data is 16 bit signed integers, followed by triangle materials. 
+    Height field height data is 16 bit signed integers, followed by triangle materials. 
     
     Each sample is 32 bits wide arranged as follows:
     
@@ -35,14 +35,14 @@ extern enum abstract PxHeightFieldFormat(PxHeightFieldFormatImpl)
 private extern class PxHeightFieldFormatImpl {}
 
 /** 
-\brief Determines the tessellation of height field cells.
+Determines the tessellation of height field cells.
 @see PxHeightFieldDesc.format PxHeightFieldDesc.samples
 */
 @:build(physx.hx.EnumBuilder.build("physx::PxHeightFieldTessFlag"))
 extern enum abstract PxHeightFieldTessFlag(PxHeightFieldTessFlagImpl)
 {
     /**
-    \brief This flag determines which way each quad cell is subdivided.
+    This flag determines which way each quad cell is subdivided.
 
     The flag lowered indicates subdivision like this: (the 0th vertex is referenced by only one triangle)
     
@@ -88,13 +88,13 @@ extern enum abstract PxHeightFieldTessFlag(PxHeightFieldTessFlagImpl)
 private extern class PxHeightFieldTessFlagImpl {}
 
 /**
-\brief Enum with flag values to be used in PxHeightFieldDesc.flags.
+Enum with flag values to be used in PxHeightFieldDesc.flags.
 */
 @:build(physx.hx.EnumBuilder.buildFlags("physx::PxHeightFieldFlag", physx.foundation.PxSimpleTypes.PxU16))
 extern enum abstract PxHeightFieldFlag(PxHeightFieldFlagImpl)
 {
     /**
-    \brief Disable collisions with height field with boundary edges.
+    Disable collisions with height field with boundary edges.
     
     Raise this flag if several terrain patches are going to be placed adjacent to each other, 
     to avoid a bump when sliding across.
@@ -111,7 +111,7 @@ extern enum abstract PxHeightFieldFlag(PxHeightFieldFlagImpl)
 private extern class PxHeightFieldFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxHeightFieldFlag.
+collection of set bits defined in PxHeightFieldFlag.
 
 @see PxHeightFieldFlag
 */

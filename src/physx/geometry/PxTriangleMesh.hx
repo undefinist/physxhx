@@ -7,7 +7,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxBase;
 
 /**
-\brief Mesh midphase structure. This enum is used to select the desired acceleration structure for midphase queries
+Mesh midphase structure. This enum is used to select the desired acceleration structure for midphase queries
  (i.e. raycasts, overlaps, sweeps vs triangle meshes).
 
  The PxMeshMidPhase::eBVH33 structure is the one used in recent PhysX versions (up to PhysX 3.3). It has great performance and is
@@ -36,7 +36,7 @@ extern enum abstract PxMeshMidPhase(PxMeshMidPhaseImpl)
 private extern class PxMeshMidPhaseImpl {}
 
 /**
-\brief Flags for the mesh geometry properties.
+Flags for the mesh geometry properties.
 
 Used in ::PxTriangleMeshFlags.
 */
@@ -58,7 +58,7 @@ extern enum abstract PxTriangleMeshFlag(PxTriangleMeshFlagImpl)
 private extern class PxTriangleMeshFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxTriangleMeshFlag.
+collection of set bits defined in PxTriangleMeshFlag.
 
 @see PxTriangleMeshFlag
 */
@@ -66,7 +66,7 @@ extern abstract PxTriangleMeshFlags(PxTriangleMeshFlag) from PxTriangleMeshFlag 
 
 /**
 
-\brief A triangle mesh, also called a 'polygon soup'.
+A triangle mesh, also called a 'polygon soup'.
 
 It is represented as an indexed triangle list. There are no restrictions on the
 triangle data. 
@@ -97,28 +97,28 @@ once you have released all of its PxShape instances.
 extern class PxTriangleMesh extends PxBase
 {
     /**
-	\brief Returns the number of vertices.
-	\return	number of vertices
+	Returns the number of vertices.
+	@return	number of vertices
 	@see getVertices()
 	*/
 	function getNbVertices():PxU32;
 
 	/**
-	\brief Returns the vertices.
-	\return	array of vertices
+	Returns the vertices.
+	@return	array of vertices
 	@see getNbVertices()
 	*/
     function getVertices():cpp.ConstPointer<PxVec3>;
 
 //`if` PX_ENABLE_DYNAMIC_MESH_RTREE
 	/**
-	\brief Returns all mesh vertices for modification.
+	Returns all mesh vertices for modification.
 
 	This function will return the vertices of the mesh so that their positions can be changed in place.
 	After modifying the vertices you must call refitBVH for the refitting to actually take place.
 	This function maintains the old mesh topology (triangle indices).	
 
-	\return  inplace vertex coordinates for each existing mesh vertex.
+	@return  inplace vertex coordinates for each existing mesh vertex.
 
 	**Note:** works only for PxMeshMidPhase::eBVH33
 	**Note:** Size of array returned is equal to the number returned by getNbVertices().
@@ -133,12 +133,12 @@ extern class PxTriangleMesh extends PxBase
     function getVerticesForModification():cpp.Pointer<PxVec3>;
 
 	/**
-	\brief Refits BVH for mesh vertices.
+	Refits BVH for mesh vertices.
 
 	This function will refit the mesh BVH to correctly enclose the new positions updated by getVerticesForModification.
 	Mesh BVH will not be reoptimized by this function so significantly different new positions will cause significantly reduced performance.	
 
-	\return New bounds for the entire mesh.
+	@return New bounds for the entire mesh.
 
 	**Note:** works only for PxMeshMidPhase::eBVH33
 	**Note:** PhysX does not keep a mapping from the mesh to mesh shapes that reference it.
@@ -153,38 +153,38 @@ extern class PxTriangleMesh extends PxBase
 //`endif` // PX_ENABLE_DYNAMIC_MESH_RTREE
 
 	/**
-	\brief Returns the number of triangles.
-	\return	number of triangles
+	Returns the number of triangles.
+	@return	number of triangles
 	@see getTriangles() getTrianglesRemap()
 	*/
 	function getNbTriangles():PxU32;
 
 	/**
-	\brief Returns the triangle indices.
+	Returns the triangle indices.
 
 	The indices can be 16 or 32bit depending on the number of triangles in the mesh.
 	Call getTriangleMeshFlags() to know if the indices are 16 or 32 bits.
 
 	The number of indices is the number of triangles * 3.
 
-	\return	array of triangles
+	@return	array of triangles
 	@see getNbTriangles() getTriangleMeshFlags() getTrianglesRemap()
 	*/
 	function getTriangles():cpp.ConstPointer<cpp.Void>;
 
 	/**
-	\brief Reads the PxTriangleMesh flags.
+	Reads the PxTriangleMesh flags.
 	
 	See the list of flags `PxTriangleMeshFlag`
 
-	\return The values of the PxTriangleMesh flags.
+	@return The values of the PxTriangleMesh flags.
 
 	@see PxTriangleMesh
 	*/
 	function getTriangleMeshFlags():PxTriangleMeshFlags;
 
 	/**
-	\brief Returns the triangle remapping table.
+	Returns the triangle remapping table.
 
 	The triangles are internally sorted according to various criteria. Hence the internal triangle order
 	does not always match the original (user-defined) order. The remapping table helps finding the old
@@ -192,48 +192,48 @@ extern class PxTriangleMesh extends PxBase
 
 		remapTable[ internalTriangleIndex ] = originalTriangleIndex
 
-	\return	the remapping table (or NULL if 'PxCookingParams::suppressTriangleMeshRemapTable' has been used)
+	@return	the remapping table (or NULL if 'PxCookingParams::suppressTriangleMeshRemapTable' has been used)
 	@see getNbTriangles() getTriangles() PxCookingParams::suppressTriangleMeshRemapTable
 	*/
 	function getTrianglesRemap():cpp.ConstPointer<PxU32>;
 
 
 	/**	
-	\brief Decrements the reference count of a triangle mesh and releases it if the new reference count is zero.	
+	Decrements the reference count of a triangle mesh and releases it if the new reference count is zero.	
 	
 	@see PxPhysics.createTriangleMesh()
 	*/
 	function release():Void;
 
 	/**
-	\brief Returns material table index of given triangle
+	Returns material table index of given triangle
 
 	This function takes a post cooking triangle index.
 
-	\param[in] triangleIndex (internal) index of desired triangle
-	\return Material table index, or 0xffff if no per-triangle materials are used
+	@param [in]triangleIndex (internal) index of desired triangle
+	@return Material table index, or 0xffff if no per-triangle materials are used
 	*/
 	function getTriangleMaterialIndex(triangleIndex:PxTriangleID):PxMaterialTableIndex;
 
 	/**
-	\brief Returns the local-space (vertex space) AABB from the triangle mesh.
+	Returns the local-space (vertex space) AABB from the triangle mesh.
 
-	\return	local-space bounds
+	@return	local-space bounds
 	*/
 	function getLocalBounds():PxBounds3;
 
 	/**
-	\brief Returns the reference count for shared meshes.
+	Returns the reference count for shared meshes.
 
 	At creation, the reference count of the mesh is 1. Every shape referencing this mesh increments the
 	count by 1.	When the reference count reaches 0, and only then, the mesh gets destroyed automatically.
 
-	\return the current reference count.
+	@return the current reference count.
 	*/
 	function getReferenceCount():PxU32;
 
 	/**
-	\brief Acquires a counted reference to a triangle mesh.
+	Acquires a counted reference to a triangle mesh.
 
 	This method increases the reference count of the triangle mesh by 1. Decrement the reference count by calling release()
 	*/
@@ -241,7 +241,7 @@ extern class PxTriangleMesh extends PxBase
 }
 
 /**
-\brief A triangle mesh containing the PxMeshMidPhase::eBVH33 structure.
+A triangle mesh containing the PxMeshMidPhase::eBVH33 structure.
 
 @see PxMeshMidPhase
 */
@@ -250,7 +250,7 @@ extern class PxTriangleMesh extends PxBase
 extern class PxBVH33TriangleMesh extends PxTriangleMesh {}
 
 /**
-\brief A triangle mesh containing the PxMeshMidPhase::eBVH34 structure.
+A triangle mesh containing the PxMeshMidPhase::eBVH34 structure.
 
 @see PxMeshMidPhase
 */

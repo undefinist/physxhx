@@ -4,7 +4,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxBase;
 
 /**
-\brief Flags which control the behavior of a material.
+Flags which control the behavior of a material.
 
 @see PxMaterial 
 */
@@ -55,7 +55,7 @@ extern enum abstract PxMaterialFlag(PxMaterialFlagImpl)
 private extern class PxMaterialFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxMaterialFlag.
+collection of set bits defined in PxMaterialFlag.
 
 @see PxMaterialFlag
 */
@@ -63,7 +63,7 @@ extern abstract PxMaterialFlags(PxMaterialFlag) from PxMaterialFlag to PxMateria
 
 
 /**
-\brief enumeration that determines the way in which two material properties will be combined to yield a friction or restitution coefficient for a collision.
+enumeration that determines the way in which two material properties will be combined to yield a friction or restitution coefficient for a collision.
 
 When two actors come in contact with each other, they each have materials with various coefficients, but we only need a single set of coefficients for the pair.
 
@@ -103,7 +103,7 @@ private extern class PxCombineModeImpl {}
 
 
 /**
-\brief Material class to represent a set of surface properties. 
+Material class to represent a set of surface properties. 
 
 @see PxPhysics.createMaterial
 */
@@ -112,104 +112,104 @@ private extern class PxCombineModeImpl {}
 extern class PxMaterial extends PxBase
 {
     /**
-    \brief Decrements the reference count of a material and releases it if the new reference count is zero.		
+    Decrements the reference count of a material and releases it if the new reference count is zero.		
     
     @see PxPhysics.createMaterial()
     */
     function release():Void;
 
     /**
-    \brief Returns the reference count of the material.
+    Returns the reference count of the material.
 
     At creation, the reference count of the material is 1. Every shape referencing this material increments the
     count by 1.	When the reference count reaches 0, and only then, the material gets destroyed automatically.
 
-    \return the current reference count.
+    @return the current reference count.
     */
     function getReferenceCount():PxU32;
 
     /**
-    \brief Acquires a counted reference to a material.
+    Acquires a counted reference to a material.
 
     This method increases the reference count of the material by 1. Decrement the reference count by calling release()
     */
     function acquireReference():Void;
 
     /**
-    \brief Sets the coefficient of dynamic friction.
+    Sets the coefficient of dynamic friction.
     
     The coefficient of dynamic friction should be in [0, PX_MAX_F32). If set to greater than staticFriction, the effective value of staticFriction will be increased to match.
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] coef Coefficient of dynamic friction. **Range:** [0, PX_MAX_F32)
+    @param [in]coef Coefficient of dynamic friction. **Range:** [0, PX_MAX_F32)
 
     @see getDynamicFriction()
     */
     function setDynamicFriction(coef:PxReal):Void;
 
     /**
-    \brief Retrieves the DynamicFriction value.
+    Retrieves the DynamicFriction value.
 
-    \return The coefficient of dynamic friction.
+    @return The coefficient of dynamic friction.
 
     @see setDynamicFriction
     */
     function getDynamicFriction():PxReal;
 
     /**
-    \brief Sets the coefficient of static friction
+    Sets the coefficient of static friction
     
     The coefficient of static friction should be in the range [0, PX_MAX_F32)
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] coef Coefficient of static friction. **Range:** [0, PX_MAX_F32)
+    @param [in]coef Coefficient of static friction. **Range:** [0, PX_MAX_F32)
 
     @see getStaticFriction() 
     */
     function setStaticFriction(coef:PxReal):Void;
 
     /**
-    \brief Retrieves the coefficient of static friction.
-    \return The coefficient of static friction.
+    Retrieves the coefficient of static friction.
+    @return The coefficient of static friction.
 
     @see setStaticFriction 
     */
     function getStaticFriction():PxReal;
 
     /**
-    \brief Sets the coefficient of restitution 
+    Sets the coefficient of restitution 
     
     A coefficient of 0 makes the object bounce as little as possible, higher values up to 1.0 result in more bounce.
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] rest Coefficient of restitution. **Range:** [0,1]
+    @param [in]rest Coefficient of restitution. **Range:** [0,1]
 
     @see getRestitution() 
     */
     function setRestitution(rest:PxReal):Void;
 
     /**
-    \brief Retrieves the coefficient of restitution.     
+    Retrieves the coefficient of restitution.     
 
     See `setRestitution.`
 
-    \return The coefficient of restitution.
+    @return The coefficient of restitution.
 
     @see setRestitution() 
     */
     function getRestitution():PxReal;
 
     /**
-    \brief Raises or clears a particular material flag.
+    Raises or clears a particular material flag.
     
     See the list of flags `PxMaterialFlag`
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] flag The PxMaterial flag to raise(set) or clear.
+    @param [in]flag The PxMaterial flag to raise(set) or clear.
 
     @see getFlags() PxMaterialFlag
     */
@@ -217,7 +217,7 @@ extern class PxMaterial extends PxBase
 
 
     /**
-    \brief sets all the material flags.
+    sets all the material flags.
     
     See the list of flags `PxMaterialFlag`
 
@@ -227,57 +227,57 @@ extern class PxMaterial extends PxBase
     function setFlags(flags:PxMaterialFlags):Void;
 
     /**
-    \brief Retrieves the flags. See `PxMaterialFlag.`
+    Retrieves the flags. See `PxMaterialFlag.`
 
-    \return The material flags.
+    @return The material flags.
 
     @see PxMaterialFlag setFlags()
     */
     function getFlags():PxMaterialFlags;
 
     /**
-    \brief Sets the friction combine mode.
+    Sets the friction combine mode.
     
     See the enum ::PxCombineMode .
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] combMode Friction combine mode to set for this material. See `PxCombineMode.`
+    @param [in]combMode Friction combine mode to set for this material. See `PxCombineMode.`
 
     @see PxCombineMode getFrictionCombineMode setStaticFriction() setDynamicFriction()
     */
     function setFrictionCombineMode(combMode:PxCombineMode):Void;
 
     /**
-    \brief Retrieves the friction combine mode.
+    Retrieves the friction combine mode.
     
     See `setFrictionCombineMode.`
 
-    \return The friction combine mode for this material.
+    @return The friction combine mode for this material.
 
     @see PxCombineMode setFrictionCombineMode() 
     */
     function getFrictionCombineMode():PxCombineMode;
 
     /**
-    \brief Sets the restitution combine mode.
+    Sets the restitution combine mode.
     
     See the enum ::PxCombineMode .
 
     **Sleeping:** Does **NOT** wake any actors which may be affected.
 
-    \param[in] combMode Restitution combine mode for this material. See `PxCombineMode.`
+    @param [in]combMode Restitution combine mode for this material. See `PxCombineMode.`
 
     @see PxCombineMode getRestitutionCombineMode() setRestitution()
     */
     function setRestitutionCombineMode(combMode:PxCombineMode):Void;
 
     /**
-    \brief Retrieves the restitution combine mode.
+    Retrieves the restitution combine mode.
     
     See `setRestitutionCombineMode.`
 
-    \return The coefficient of restitution combine mode for this material.
+    @return The coefficient of restitution combine mode for this material.
 
     @see PxCombineMode setRestitutionCombineMode getRestitution()
     */

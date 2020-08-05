@@ -4,7 +4,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Class representing the geometry of a box.  
+Class representing the geometry of a box.  
 
 The geometry of a box can be fully specified by its half extents.  This is the half of its width, height, and depth.
 **Note:** The scaling of the box is expected to be baked into these values, there is no additional scaling parameter.
@@ -43,9 +43,9 @@ private extern class PxBoxGeometryData extends PxGeometry
 	static function create(hx:PxReal, hy:PxReal, hz:PxReal):PxBoxGeometry;
 
 	/**
-	\brief Returns true if the geometry is valid.
+	Returns true if the geometry is valid.
 
-	\return True if the current settings are valid
+	@return True if the current settings are valid
 
 	**Note:** A valid box has a positive extent in each direction (halfExtents.x > 0, halfExtents.y > 0, halfExtents.z > 0). 
 	It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a box that has zero extent in any direction.

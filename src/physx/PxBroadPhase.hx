@@ -4,7 +4,7 @@ import physx.foundation.PxBounds3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Broad phase algorithm used in the simulation
+Broad phase algorithm used in the simulation
 
 eSAP is a good generic choice with great performance when many objects are sleeping. Performance
 can degrade significantly though, when all objects are moving, or when large numbers of objects
@@ -104,7 +104,7 @@ class PxBroadPhaseCallbackHx
     function onObjectOutOfBounds(shape:PxShape, actor:PxActor):Void {}
 
     /**
-     * \brief Out-of-bounds notification.
+     * Out-of-bounds notification.
      *
      * This function is called when an aggregate leaves the broad-phase.
      *
@@ -127,7 +127,7 @@ class PxBroadPhaseCallbackHx
 
 
 /**
-\brief "Region of interest" for the broad-phase.
+"Region of interest" for the broad-phase.
 
 This is currently only used for the PxBroadPhaseType::eMBP broad-phase, which requires zones or regions to be defined
 when the simulation starts in order to work. Regions can overlap and be added or removed at runtime, but at least one
@@ -162,7 +162,7 @@ extern class PxBroadPhaseRegion
 }
 
 /**
-\brief Information & stats structure for a region
+Information & stats structure for a region
 */
 @:include("PxBroadPhase.h")
 @:native("physx::PxBroadPhaseRegionInfo")
@@ -192,7 +192,7 @@ extern class PxBroadPhaseRegionInfo
 }
 
 /**
-\brief Caps class for broad phase.
+Caps class for broad phase.
 */
 @:include("PxBroadPhase.h")
 @:native("physx::PxBroadPhaseCaps")

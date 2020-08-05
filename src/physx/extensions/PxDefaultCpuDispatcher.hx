@@ -15,7 +15,7 @@ To create, use `PxDefaultCpuDispatcher.create()`.
 extern class PxDefaultCpuDispatcher extends PxCpuDispatcher
 {
     /**
-    \brief Deletes the dispatcher.
+    Deletes the dispatcher.
     
     Do not keep a reference to the deleted instance.
 
@@ -24,20 +24,20 @@ extern class PxDefaultCpuDispatcher extends PxCpuDispatcher
     function release():Void;
 
     /**
-    \brief Enables profiling at task level.
+    Enables profiling at task level.
 
     **Note:** By default enabled only in profiling builds.
     
-    \param[in] runProfiled True if tasks should be profiled.
+    @param [in]runProfiled True if tasks should be profiled.
     */
     function setRunProfiled(runProfiled:Bool):Void;
     
     /**
-    \brief Enables profiling at task level.
+    Enables profiling at task level.
 
     **Note:** By default enabled only in profiling builds.
     
-    \param[in] runProfiled True if tasks should be profiled.
+    @param [in]runProfiled True if tasks should be profiled.
     */
     function getRunProfiled():Bool;
 

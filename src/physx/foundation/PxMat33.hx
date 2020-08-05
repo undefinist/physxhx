@@ -1,7 +1,7 @@
 package physx.foundation;
 
 /*!
-\brief 3x3 matrix class
+3x3 matrix class
 
 Some clarifications, as there have been much confusion about matrix formats etc in the past.
 
@@ -70,7 +70,7 @@ extern abstract PxMat33(PxMat33Data)
     }
 
     /**
-    \brief returns true if the two matrices are exactly equal
+    returns true if the two matrices are exactly equal
     */
     @:op(A == B)
     inline function equals(other:PxMat33):Bool
@@ -192,7 +192,7 @@ private extern class PxMat33Data implements physx.hx.IncludeHelper<"foundation/P
     @:native("operator==") function set(other:PxMat33):PxMat33;
 
 	/**
-	\brief returns true if the two matrices are exactly equal
+	returns true if the two matrices are exactly equal
 	*/
     @:native("operator==") function equals(m:PxMat33):Bool;
 

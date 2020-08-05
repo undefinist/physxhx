@@ -6,7 +6,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief A class expressing a nonuniform scaling transformation.
+A class expressing a nonuniform scaling transformation.
 
 The scaling is along arbitrary axes that are specified by PxMeshScale::rotation.
 
@@ -23,11 +23,11 @@ The scaling is along arbitrary axes that are specified by PxMeshScale::rotation.
 @:forwardStatics
 extern abstract PxMeshScale(PxMeshScaleData)
 {
-    /** \brief Minimum allowed absolute magnitude for each of mesh scale's components (x,y,z).
+    /** Minimum allowed absolute magnitude for each of mesh scale's components (x,y,z).
         **Note:** Only positive scale values are allowed for convex meshes. */
     static inline final MIN:Float = 1e-6;
     
-    /** \brief Maximum allowed absolute magnitude for each of mesh scale's components (x,y,z).
+    /** Maximum allowed absolute magnitude for each of mesh scale's components (x,y,z).
         **Note:** Only positive scale values are allowed for convex meshes. */
     static inline final MAX:Float = 1e6;
 
@@ -78,22 +78,22 @@ private extern class PxMeshScaleData
 
 
 	/**
-	\brief Returns true if the scaling is an identity transformation.
+	Returns true if the scaling is an identity transformation.
 	*/
 	function isIdentity():Bool;
 
 	/**
-	\brief Returns the inverse of this scaling transformation.
+	Returns the inverse of this scaling transformation.
 	*/
 	function getInverse():PxMeshScale;
 
 	/**
-	\brief Converts this transformation to a 3x3 matrix representation.
+	Converts this transformation to a 3x3 matrix representation.
 	*/
 	function toMat33():PxMat33;
 
 	/**
-	\brief Returns true if combination of negative scale components will cause the triangle normal to flip. The SDK will flip the normals internally.
+	Returns true if combination of negative scale components will cause the triangle normal to flip. The SDK will flip the normals internally.
 	*/
 	function hasNegativeDeterminant():Bool;
 

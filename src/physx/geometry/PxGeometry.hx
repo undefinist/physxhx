@@ -3,7 +3,7 @@ package physx.geometry;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief A geometry type.
+A geometry type.
 
 Used to distinguish the type of a ::PxGeometry object.
 */
@@ -28,7 +28,7 @@ extern enum abstract PxGeometryType(PxGeometryTypeImpl)
 private extern class PxGeometryTypeImpl {}
 
 /**
-\brief A geometry object.
+A geometry object.
 
 A geometry object defines the characteristics of a spatial object, but without any information
 about its placement in the world.
@@ -40,8 +40,8 @@ about its placement in the world.
 extern class PxGeometry 
 { 
 	/**
-	\brief Returns the type of the geometry.
-	\return The type of the object.
+	Returns the type of the geometry.
+	@return The type of the object.
     */
     function getType():PxGeometryType;
 }

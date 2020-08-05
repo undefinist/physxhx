@@ -4,7 +4,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Default color values used for debug rendering.
+Default color values used for debug rendering.
 */
 @:build(physx.hx.EnumBuilder.build("physx::PxDebugColor"))
 extern enum abstract PxDebugColor(PxDebugColorImpl)
@@ -28,7 +28,7 @@ extern enum abstract PxDebugColor(PxDebugColorImpl)
 private extern class PxDebugColorImpl {}
 
 /**
-\brief Used to store a single point and colour for debug rendering.
+Used to store a single point and colour for debug rendering.
 */
 @:include("common/PxRenderBuffer.h")
 @:native("physx::PxDebugPoint")
@@ -39,7 +39,7 @@ extern class PxDebugPoint
 }
 
 /**
-\brief Used to store a single line and colour for debug rendering.
+Used to store a single line and colour for debug rendering.
 */
 @:include("common/PxRenderBuffer.h")
 @:native("physx::PxDebugLine")
@@ -52,7 +52,7 @@ extern class PxDebugLine
 }
 
 /**
-\brief Used to store a single triangle and colour for debug rendering.
+Used to store a single triangle and colour for debug rendering.
 */
 @:include("common/PxRenderBuffer.h")
 @:native("physx::PxDebugTriangle")
@@ -67,7 +67,7 @@ extern class PxDebugTriangle
 }
 
 /**
-\brief Used to store a text for debug rendering. Doesn't own 'string' array.
+Used to store a text for debug rendering. Doesn't own 'string' array.
 */
 @:include("common/PxRenderBuffer.h")
 @:native("physx::PxDebugText")
@@ -90,7 +90,7 @@ extern class PxDebugText
 }
 
 /**
-\brief Interface for points, lines, triangles, and text buffer.
+Interface for points, lines, triangles, and text buffer.
 */
 @:include("common/PxRenderBuffer.h")
 @:native("::cpp::Reference<physx::PxRenderBuffer>")

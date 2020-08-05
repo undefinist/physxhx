@@ -5,7 +5,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxVec3;
 
 /**
-\brief An array of contact points, as passed to contact modification.
+An array of contact points, as passed to contact modification.
 
 The word 'set' in the name does not imply that duplicates are filtered in any 
 way.  This initial set of contacts does potentially get reduced to a smaller 
@@ -22,28 +22,28 @@ contacts is immutable, other than being able to disable contacts using ignore().
 extern class PxContactSet
 {
     /**
-    \brief Get the position of a specific contact point in the set.
+    Get the position of a specific contact point in the set.
 
     @see PxModifiableContact.point
     */
     function getPoint(i:PxU32):PxVec3;
 
     /**
-    \brief Alter the position of a specific contact point in the set.
+    Alter the position of a specific contact point in the set.
 
     @see PxModifiableContact.point
     */
     function setPoint(i:PxU32, p:PxVec3):Void;
 
     /**
-    \brief Get the contact normal of a specific contact point in the set.
+    Get the contact normal of a specific contact point in the set.
 
     @see PxModifiableContact.normal
     */
     function getNormal(i:PxU32):PxVec3;
 
     /**
-    \brief Alter the contact normal of a specific contact point in the set.
+    Alter the contact normal of a specific contact point in the set.
 
     **Note:** Changing the normal can cause contact points to be ignored.
 
@@ -52,21 +52,21 @@ extern class PxContactSet
     function setNormal(i:PxU32, n:PxVec3):Void;	
     
     /**
-    \brief Get the separation of a specific contact point in the set.
+    Get the separation of a specific contact point in the set.
 
     @see PxModifiableContact.separation
     */
     function getSeparation(i:PxU32):PxReal;
 
     /**
-    \brief Alter the separation of a specific contact point in the set.
+    Alter the separation of a specific contact point in the set.
 
     @see PxModifiableContact.separation
     */
     function setSeparation(i:PxU32, s:PxReal):Void;
 
     /**
-    \brief Get the target velocity of a specific contact point in the set.
+    Get the target velocity of a specific contact point in the set.
 
     @see PxModifiableContact.targetVelocity
 
@@ -74,35 +74,35 @@ extern class PxContactSet
     function getTargetVelocity(i:PxU32):PxVec3;
 
     /**
-    \brief Alter the target velocity of a specific contact point in the set.
+    Alter the target velocity of a specific contact point in the set.
 
     @see PxModifiableContact.targetVelocity
     */
     function setTargetVelocity(i:PxU32, v:PxVec3):Void;
 
     /**
-    \brief Get the face index with respect to the first shape of the pair for a specific contact point in the set.
+    Get the face index with respect to the first shape of the pair for a specific contact point in the set.
 
     @see PxModifiableContact.internalFaceIndex0
     */
     function getInternalFaceIndex0(i:PxU32):PxU32;
 
     /**
-    \brief Get the face index with respect to the second shape of the pair for a specific contact point in the set.
+    Get the face index with respect to the second shape of the pair for a specific contact point in the set.
 
     @see PxModifiableContact.internalFaceIndex1
     */
     function getInternalFaceIndex1(i:PxU32):PxU32;
     
     /**
-    \brief Get the maximum impulse for a specific contact point in the set.
+    Get the maximum impulse for a specific contact point in the set.
 
     @see PxModifiableContact.maxImpulse
     */
     function getMaxImpulse(i:PxU32):PxReal;
 
     /**
-    \brief Alter the maximum impulse for a specific contact point in the set.
+    Alter the maximum impulse for a specific contact point in the set.
 
     **Note:** Must be nonnegative. If set to zero, the contact point will be ignored
 
@@ -111,14 +111,14 @@ extern class PxContactSet
     function setMaxImpulse(i:PxU32, s:PxReal):Void;
 
     /**
-    \brief Get the restitution coefficient for a specific contact point in the set.
+    Get the restitution coefficient for a specific contact point in the set.
 
     @see PxModifiableContact.restitution
     */
     function getRestitution(i:PxU32):PxReal;
 
     /**
-    \brief Alter the restitution coefficient for a specific contact point in the set.
+    Alter the restitution coefficient for a specific contact point in the set.
 
     **Note:** Valid ranges [0,1]
 
@@ -127,47 +127,47 @@ extern class PxContactSet
     function setRestitution(i:PxU32, r:PxReal):Void;
 
     /**
-    \brief Get the static friction coefficient for a specific contact point in the set.
+    Get the static friction coefficient for a specific contact point in the set.
 
     @see PxModifiableContact.staticFriction
     */
     function getStaticFriction(i:PxU32):PxReal;
 
     /**
-    \brief Alter the static friction coefficient for a specific contact point in the set.
+    Alter the static friction coefficient for a specific contact point in the set.
 
     @see PxModifiableContact.staticFriction
     */
     function setStaticFriction(i:PxU32, f:PxReal):Void;
 
     /**
-    \brief Get the static friction coefficient for a specific contact point in the set.
+    Get the static friction coefficient for a specific contact point in the set.
 
     @see PxModifiableContact.dynamicFriction
     */
     function getDynamicFriction(i:PxU32):PxReal;
 
     /**
-    \brief Alter the static dynamic coefficient for a specific contact point in the set.
+    Alter the static dynamic coefficient for a specific contact point in the set.
 
     @see PxModifiableContact.dynamic
     */
     function setDynamicFriction(i:PxU32, f:PxReal):Void;
 
     /**
-    \brief Ignore the contact point.
+    Ignore the contact point.
 
     If a contact point is ignored then no force will get applied at this point. This can be used to disable collision in certain areas of a shape, for example.
     */
     function ignore(i:PxU32):Void;
 
     /**
-    \brief The number of contact points in the set.
+    The number of contact points in the set.
     */
     function size():PxU32;
 
     /**
-    \brief Returns the invMassScale of body 0
+    Returns the invMassScale of body 0
 
     A value < 1.0 makes this contact treat the body as if it had larger mass. A value of 0.f makes this contact
     treat the body as if it had infinite mass. Any value > 1.f makes this contact treat the body as if it had smaller mass.
@@ -175,7 +175,7 @@ extern class PxContactSet
     function getInvMassScale0():PxReal;
 
     /**
-    \brief Returns the invMassScale of body 1
+    Returns the invMassScale of body 1
 
     A value < 1.0 makes this contact treat the body as if it had larger mass. A value of 0.f makes this contact
     treat the body as if it had infinite mass. Any value > 1.f makes this contact treat the body as if it had smaller mass.
@@ -183,7 +183,7 @@ extern class PxContactSet
     function getInvMassScale1():PxReal;
 
     /**
-    \brief Returns the invInertiaScale of body 0
+    Returns the invInertiaScale of body 0
 
     A value < 1.0 makes this contact treat the body as if it had larger inertia. A value of 0.f makes this contact
     treat the body as if it had infinite inertia. Any value > 1.f makes this contact treat the body as if it had smaller inertia.
@@ -191,7 +191,7 @@ extern class PxContactSet
     function getInvInertiaScale0():PxReal;
 
     /**
-    \brief Returns the invInertiaScale of body 1
+    Returns the invInertiaScale of body 1
 
     A value < 1.0 makes this contact treat the body as if it had larger inertia. A value of 0.f makes this contact
     treat the body as if it had infinite inertia. Any value > 1.f makes this contact treat the body as if it had smaller inertia.
@@ -199,7 +199,7 @@ extern class PxContactSet
     function getInvInertiaScale1():PxReal;
 
     /**
-    \brief Sets the invMassScale of body 0
+    Sets the invMassScale of body 0
 
     This can be set to any value in the range [0, PX_MAX_F32). A value < 1.0 makes this contact treat the body as if it had larger mass. A value of 0.f makes this contact
     treat the body as if it had infinite mass. Any value > 1.f makes this contact treat the body as if it had smaller mass.
@@ -207,7 +207,7 @@ extern class PxContactSet
     function setInvMassScale0(scale:PxReal):Void;
 
     /**
-    \brief Sets the invMassScale of body 1
+    Sets the invMassScale of body 1
 
     This can be set to any value in the range [0, PX_MAX_F32). A value < 1.0 makes this contact treat the body as if it had larger mass. A value of 0.f makes this contact
     treat the body as if it had infinite mass. Any value > 1.f makes this contact treat the body as if it had smaller mass.
@@ -215,7 +215,7 @@ extern class PxContactSet
     function setInvMassScale1(scale:PxReal):Void;
 
     /**
-    \brief Sets the invInertiaScale of body 0
+    Sets the invInertiaScale of body 0
 
     This can be set to any value in the range [0, PX_MAX_F32). A value < 1.0 makes this contact treat the body as if it had larger inertia. A value of 0.f makes this contact
     treat the body as if it had infinite inertia. Any value > 1.f makes this contact treat the body as if it had smaller inertia.
@@ -223,7 +223,7 @@ extern class PxContactSet
     function setInvInertiaScale0(scale:PxReal):Void;
 
     /**
-    \brief Sets the invInertiaScale of body 1
+    Sets the invInertiaScale of body 1
 
     This can be set to any value in the range [0, PX_MAX_F32). A value < 1.0 makes this contact treat the body as if it had larger inertia. A value of 0.f makes this contact
     treat the body as if it had infinite inertia. Any value > 1.f makes this contact treat the body as if it had smaller inertia.
@@ -232,7 +232,7 @@ extern class PxContactSet
 }
 
 /**
-\brief An array of instances of this class is passed to PxContactModifyCallback::onContactModify().
+An array of instances of this class is passed to PxContactModifyCallback::onContactModify().
 
 @see PxContactModifyCallback
 */
@@ -242,40 +242,40 @@ extern class PxContactSet
 extern class PxContactModifyPair
 {
     /**
-    \brief The actors which make up the pair in contact. 
+    The actors which make up the pair in contact. 
     
     Note that these are the actors as seen by the simulation, and may have been deleted since the simulation step started.
     */
     @:native("actor[0]") var actor0:PxRigidActor;
     /**
-    \brief The actors which make up the pair in contact. 
+    The actors which make up the pair in contact. 
     
     Note that these are the actors as seen by the simulation, and may have been deleted since the simulation step started.
     */
     @:native("actor[1]") var actor1:PxRigidActor;
     
     /**
-    \brief The shapes which make up the pair in contact. 
+    The shapes which make up the pair in contact. 
     
     Note that these are the shapes as seen by the simulation, and may have been deleted since the simulation step started.
     */
     @:native("shape[0]") var shape0:PxShape;
     /**
-    \brief The shapes which make up the pair in contact. 
+    The shapes which make up the pair in contact. 
     
     Note that these are the shapes as seen by the simulation, and may have been deleted since the simulation step started.
     */
     @:native("shape[1]") var shape1:PxShape;
     
     /**
-    \brief The shape to world transforms of the two shapes. 
+    The shape to world transforms of the two shapes. 
     
     These are the transforms as the simulation engine sees them, and may have been modified by the application
     since the simulation step started.
     */
     @:native("transform[0]") var transform0:PxTransform;
     /**
-    \brief The shape to world transforms of the two shapes. 
+    The shape to world transforms of the two shapes. 
     
     These are the transforms as the simulation engine sees them, and may have been modified by the application
     since the simulation step started.
@@ -283,7 +283,7 @@ extern class PxContactModifyPair
     @:native("transform[1]") var transform1:PxTransform;
     
     /**
-    \brief An array of contact points between these two shapes.
+    An array of contact points between these two shapes.
     */
     var contacts:PxContactSet;
 }
@@ -343,7 +343,7 @@ class PxContactModifyCallbackHx
     }
 
     /**
-     * \brief Passes modifiable arrays of contacts to the application.
+     * Passes modifiable arrays of contacts to the application.
      * 
      * The initial contacts are as determined fresh each frame by collision detection.
      * 
@@ -407,7 +407,7 @@ class PxCCDContactModifyCallbackHx
     }
 
     /**
-     * \brief Passes modifiable arrays of contacts to the application.
+     * Passes modifiable arrays of contacts to the application.
      * 
      * The initial contacts are as determined fresh each frame by collision detection.
      * 

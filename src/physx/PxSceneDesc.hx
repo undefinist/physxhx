@@ -13,7 +13,7 @@ import physx.PxFiltering;
 import physx.PxContactModifyCallback;
 
 /**
-\brief Pruning structure used to accelerate scene queries.
+Pruning structure used to accelerate scene queries.
 
 eNONE uses a simple data structure that consumes less memory than the alternatives,
 but generally has slower query performance.
@@ -54,7 +54,7 @@ private extern class PxPruningStructureTypeImpl {}
 
 
 /**
-\brief Scene query update mode
+Scene query update mode
 
 When PxScene::fetchResults is called it does scene query related work, with this enum it is possible to 
 set what work is done during the fetchResults. 
@@ -94,7 +94,7 @@ private extern class PxSceneQueryUpdateModeImpl {}
 
 
 /**
-\brief Enum for selecting the friction algorithm used for simulation.
+Enum for selecting the friction algorithm used for simulation.
 
 `PxFrictionType.ePATCH` selects the patch friction model which typically leads to the most stable results at low solver iteration counts and is also quite inexpensive, as it uses only
 up to four scalar solver constraints per pair of touching objects.  The patch friction model is the same basic strong friction algorithm as PhysX 3.2 and before.  
@@ -135,7 +135,7 @@ private extern class PxFrictionTypeImpl {}
 
 
 /**
-\brief Enum for selecting the type of solver used for the simulation.
+Enum for selecting the type of solver used for the simulation.
 
 `PxSolverType.ePGS` selects the default iterative sequential impulse solver. This is the same kind of solver used in PhysX 3.4 and earlier releases.
 
@@ -160,7 +160,7 @@ private extern class PxSolverTypeImpl {}
 
 
 /**
-\brief flags for configuring properties of the scene
+flags for configuring properties of the scene
 
 @see PxScene
 */
@@ -168,7 +168,7 @@ private extern class PxSolverTypeImpl {}
 extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 {
     /**
-    \brief Enable Active Actors Notification.
+    Enable Active Actors Notification.
 
     This flag enables the Active Actor Notification feature for a scene.  This
     feature defaults to disabled.  When disabled, the function
@@ -182,7 +182,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_ACTIVE_ACTORS = (1 << 0);
 
     /**
-    \brief Enables a second broad phase check after integration that makes it possible to prevent objects from tunneling through eachother.
+    Enables a second broad phase check after integration that makes it possible to prevent objects from tunneling through eachother.
 
     PxPairFlag::eDETECT_CCD_CONTACT requires this flag to be specified.
 
@@ -196,7 +196,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_CCD = (1 << 1);
 
     /**
-    \brief Enables a simplified swept integration strategy, which sacrifices some accuracy for improved performance.
+    Enables a simplified swept integration strategy, which sacrifices some accuracy for improved performance.
 
     This simplified swept integration approach makes certain assumptions about the motion of objects that are not made when using a full swept integration. 
     These assumptions usually hold but there are cases where they could result in incorrect behavior between a set of fast-moving rigid bodies. A key issue is that
@@ -217,7 +217,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eDISABLE_CCD_RESWEEP = (1 << 2);
 
     /**
-    \brief Enable adaptive forces to accelerate convergence of the solver. 
+    Enable adaptive forces to accelerate convergence of the solver. 
     
     **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
@@ -226,7 +226,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eADAPTIVE_FORCE = (1 << 3);
 
     /**
-    \brief Enable GJK-based distance collision detection system.
+    Enable GJK-based distance collision detection system.
     
     **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
 
@@ -235,7 +235,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_PCM = (1 << 6);
 
     /**
-    \brief Disable contact report buffer resize. Once the contact buffer is full, the rest of the contact reports will 
+    Disable contact report buffer resize. Once the contact buffer is full, the rest of the contact reports will 
     not be buffered and sent.
 
     **Note:** This flag is not mutable, and must be set in PxSceneDesc at scene creation.
@@ -245,7 +245,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eDISABLE_CONTACT_REPORT_BUFFER_RESIZE = (1 << 7);
 
     /**
-    \brief Disable contact cache.
+    Disable contact cache.
     
     Contact caches are used internally to provide faster contact generation. You can disable all contact caches
     if memory usage for this feature becomes too high.
@@ -257,7 +257,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eDISABLE_CONTACT_CACHE = (1 << 8);
 
     /**
-    \brief Require scene-level locking
+    Require scene-level locking
 
     When set to true this requires that threads accessing the PxScene use the
     multi-threaded lock methods.
@@ -274,7 +274,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eREQUIRE_RW_LOCK = (1 << 9);
 
     /**
-    \brief Enables additional stabilization pass in solver
+    Enables additional stabilization pass in solver
 
     When set to true, this enables additional stabilization processing to improve that stability of complex interactions between large numbers of bodies.
 
@@ -283,7 +283,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_STABILIZATION = (1 << 10);
 
     /**
-    \brief Enables average points in contact manifolds
+    Enables average points in contact manifolds
 
     When set to true, this enables additional contacts to be generated per manifold to represent the average point in a manifold. This can stabilize stacking when only a small
     number of solver iterations is used.
@@ -293,7 +293,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_AVERAGE_POINT = (1 << 11);
 
     /**
-    \brief Do not report kinematics in list of active actors.
+    Do not report kinematics in list of active actors.
 
     Since the target pose for kinematics is set by the user, an application can track the activity state directly and use
     this flag to avoid that kinematics get added to the list of active actors.
@@ -306,7 +306,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     */
     var eEXCLUDE_KINEMATICS_FROM_ACTIVE_ACTORS = (1 << 12);
 
-    /*\brief Enables the GPU dynamics pipeline
+    /*Enables the GPU dynamics pipeline
 
     When set to true, a CUDA ARCH 3.0 or above-enabled NVIDIA GPU is present and the CUDA context manager has been configured, this will run the GPU dynamics pipelin instead of the CPU dynamics pipeline.
 
@@ -315,7 +315,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_GPU_DYNAMICS = (1 << 13);
 
     /**
-    \brief Provides improved determinism at the expense of performance. 
+    Provides improved determinism at the expense of performance. 
 
     By default, PhysX provides limited determinism guarantees. Specifically, PhysX guarantees that the exact scene (same actors created in the same order) and simulated using the same 
     time-stepping scheme should provide the exact same behaviour.
@@ -338,7 +338,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
     var eENABLE_ENHANCED_DETERMINISM = (1 << 14);
 
     /**
-    \brief Controls processing friction in all solver iterations
+    Controls processing friction in all solver iterations
 
     By default, PhysX processes friction only in the final 3 position iterations, and all velocity
     iterations. This flag enables friction processing in all position and velocity iterations.
@@ -361,7 +361,7 @@ extern enum abstract PxSceneFlag(PxSceneFlagImpl)
 private extern class PxSceneFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxSceneFlag.
+collection of set bits defined in PxSceneFlag.
 
 @see PxSceneFlag
 */
@@ -369,7 +369,7 @@ extern abstract PxSceneFlags(PxSceneFlag) from PxSceneFlag to PxSceneFlag {}
 
 
 /**
-\brief Class used to retrieve limits(e.g. maximum number of bodies) for a scene. The limits
+Class used to retrieve limits(e.g. maximum number of bodies) for a scene. The limits
 are used as a hint to the size of the scene, not as a hard limit (i.e. it will be possible
 to create more objects than specified in the scene limits).
 
@@ -390,13 +390,13 @@ extern class PxSceneLimits
     var	maxNbBroadPhaseOverlaps:PxU32;	//!< Expected maximum number of broad-phase overlaps
 
     /**
-    \brief (re)sets the structure to the default
+    (re)sets the structure to the default
     */
     function setToDefault():Void;
 
     /**
-    \brief Returns true if the descriptor is valid.
-    \return true if the current settings are valid.
+    Returns true if the descriptor is valid.
+    @return true if the current settings are valid.
     */
     function isValid():Bool;
 }
@@ -404,7 +404,7 @@ extern class PxSceneLimits
 
 //`if` PX_SUPPORT_GPU_PHYSX
 /**
-\brief Sizes of pre-allocated buffers use for GPU dynamics
+Sizes of pre-allocated buffers use for GPU dynamics
 */
 @:include("PxSceneDesc.h")
 @:native("::cpp::Struct<physx::PxgDynamicsMemoryConfig>")
@@ -440,7 +440,7 @@ extern abstract PxSceneDesc(PxSceneDescData)
 }
 
 /**
-\brief Descriptor class for scenes. See `PxScene.`
+Descriptor class for scenes. See `PxScene.`
 
 This struct must be initialized with the same PxTolerancesScale values used to initialize PxPhysics.
 
@@ -452,7 +452,7 @@ This struct must be initialized with the same PxTolerancesScale values used to i
 private extern class PxSceneDescData
 {
     /**
-    \brief Gravity vector.
+    Gravity vector.
 
     **Range:** force vector  
     **Default:** Zero
@@ -464,7 +464,7 @@ private extern class PxSceneDescData
     var gravity:PxVec3;
 
     /**
-    \brief Possible notification callback.
+    Possible notification callback.
 
     **Default:** NULL
 
@@ -473,7 +473,7 @@ private extern class PxSceneDescData
     var simulationEventCallback:PxSimulationEventCallback;
 
     /**
-    \brief Possible asynchronous callback for contact modification.
+    Possible asynchronous callback for contact modification.
 
     **Default:** NULL
 
@@ -482,7 +482,7 @@ private extern class PxSceneDescData
     var contactModifyCallback:PxContactModifyCallback;
 
     /**
-    \brief Possible asynchronous callback for contact modification.
+    Possible asynchronous callback for contact modification.
 
     **Default:** NULL
 
@@ -491,7 +491,7 @@ private extern class PxSceneDescData
     var ccdContactModifyCallback:PxCCDContactModifyCallback;
 
     /**
-    \brief Shared global filter data which will get passed into the filter shader.
+    Shared global filter data which will get passed into the filter shader.
 
     **Note:** The provided data will get copied to internal buffers and this copy will be used for filtering calls.
 
@@ -502,7 +502,7 @@ private extern class PxSceneDescData
     var filterShaderData:cpp.ConstPointer<cpp.Void>;
 
     /**
-    \brief Size (in bytes) of the shared global filter data `filterShaderData.`
+    Size (in bytes) of the shared global filter data `filterShaderData.`
 
     **Default:** 0
 
@@ -535,7 +535,7 @@ private extern class PxSceneDescData
     var filterShader:PxSimulationFilterShader;
 
     /**
-    \brief A custom collision filter callback which can be used to implement more complex filtering operations which need
+    A custom collision filter callback which can be used to implement more complex filtering operations which need
     access to the simulation state, for example.
 
     **Default:** NULL
@@ -545,7 +545,7 @@ private extern class PxSceneDescData
     var filterCallback:PxSimulationFilterCallback;
 
     /**
-    \brief Filtering mode for kinematic-kinematic pairs in the broadphase.
+    Filtering mode for kinematic-kinematic pairs in the broadphase.
 
     **Default:** PxPairFilteringMode::eDEFAULT
 
@@ -554,7 +554,7 @@ private extern class PxSceneDescData
     var kineKineFilteringMode:PxPairFilteringMode;
 
     /**
-    \brief Filtering mode for static-kinematic pairs in the broadphase.
+    Filtering mode for static-kinematic pairs in the broadphase.
 
     **Default:** PxPairFilteringMode::eDEFAULT
 
@@ -563,7 +563,7 @@ private extern class PxSceneDescData
     var staticKineFilteringMode:PxPairFilteringMode;
 
     /**
-    \brief Selects the broad-phase algorithm to use.
+    Selects the broad-phase algorithm to use.
 
     **Default:** PxBroadPhaseType::eABP
 
@@ -572,7 +572,7 @@ private extern class PxSceneDescData
     var broadPhaseType:PxBroadPhaseType;
 
     /**
-    \brief Broad-phase callback
+    Broad-phase callback
 
     **Default:** NULL
 
@@ -581,14 +581,14 @@ private extern class PxSceneDescData
     var broadPhaseCallback:PxBroadPhaseCallback;
 
     /**
-    \brief Expected scene limits.
+    Expected scene limits.
 
     @see PxSceneLimits
     */
     var limits:PxSceneLimits;
 
     /**
-    \brief Selects the friction algorithm to use for simulation.
+    Selects the friction algorithm to use for simulation.
 
     **Note:** frictionType cannot be modified after the first call to any of PxScene::simulate, PxScene::solve and PxScene::collide
 
@@ -600,7 +600,7 @@ private extern class PxSceneDescData
     var frictionType:PxFrictionType;
 
     /**
-    \brief Selects the solver algorithm to use.
+    Selects the solver algorithm to use.
 
     **Default:** PxSolverType::ePGS
 
@@ -609,7 +609,7 @@ private extern class PxSceneDescData
     var solverType:PxSolverType;
 
     /**
-    \brief A contact with a relative velocity below this will not bounce. A typical value for simulation.
+    A contact with a relative velocity below this will not bounce. A typical value for simulation.
     stability is about 0.2 * gravity.
 
     **Range:** [0, PX_MAX_F32)  
@@ -620,7 +620,7 @@ private extern class PxSceneDescData
     var bounceThresholdVelocity:PxReal; 
 
     /**
-    \brief A threshold of contact separation distance used to decide if a contact point will experience friction forces.
+    A threshold of contact separation distance used to decide if a contact point will experience friction forces.
 
     **Note:** If the separation distance of a contact point is greater than the threshold then the contact point will not experience friction forces. 
 
@@ -635,7 +635,7 @@ private extern class PxSceneDescData
     var frictionOffsetThreshold:PxReal;
 
     /**
-    \brief A threshold for speculative CCD. Used to control whether bias, restitution or a combination of the two are used to resolve the contacts.
+    A threshold for speculative CCD. Used to control whether bias, restitution or a combination of the two are used to resolve the contacts.
 
     **Note:** This only has any effect on contacting pairs where one of the bodies has PxRigidBodyFlag::eENABLE_SPECULATIVE_CCD raised.
 
@@ -646,7 +646,7 @@ private extern class PxSceneDescData
     var ccdMaxSeparation:PxReal;
 
     /**
-    \brief A slop value used to zero contact offsets from the body's COM on an axis if the offset along that axis is smaller than this threshold. Can be used to compensate
+    A slop value used to zero contact offsets from the body's COM on an axis if the offset along that axis is smaller than this threshold. Can be used to compensate
     for small numerical errors in contact generation.
 
     **Range:** [0, PX_MAX_F32)  
@@ -656,21 +656,21 @@ private extern class PxSceneDescData
     var solverOffsetSlop:PxReal;
 
     /**
-    \brief Flags used to select scene options.
+    Flags used to select scene options.
 
     @see PxSceneFlag PxSceneFlags
     */
     var flags:PxSceneFlags;
 
     /**
-    \brief The CPU task dispatcher for the scene.
+    The CPU task dispatcher for the scene.
 
     See PxCpuDispatcher, PxScene::getCpuDispatcher
     */
     var cpuDispatcher:PxCpuDispatcher;
 
     /**
-    \brief The CUDA context manager for the scene.
+    The CUDA context manager for the scene.
 
     **Platform specific:** Applies to PC GPU only.
 
@@ -679,19 +679,19 @@ private extern class PxSceneDescData
     var cudaContextManager:PxCudaContextManager;
 
     /**
-    \brief Defines the structure used to store static objects.
+    Defines the structure used to store static objects.
 
     **Note:** Only PxPruningStructureType::eSTATIC_AABB_TREE and PxPruningStructureType::eDYNAMIC_AABB_TREE are allowed here.
     */
     var staticStructure:PxPruningStructureType;
 
     /**
-    \brief Defines the structure used to store dynamic objects.
+    Defines the structure used to store dynamic objects.
     */
     var dynamicStructure:PxPruningStructureType;
 
     /**
-    \brief Hint for how much work should be done per simulation frame to rebuild the pruning structure.
+    Hint for how much work should be done per simulation frame to rebuild the pruning structure.
 
     This parameter gives a hint on the distribution of the workload for rebuilding the dynamic AABB tree
     pruning structure `PxPruningStructureType.eDYNAMIC_AABB_TREE.` It specifies the desired number of simulation frames
@@ -710,20 +710,20 @@ private extern class PxSceneDescData
     var dynamicTreeRebuildRateHint:PxU32;
 
     /**
-    \brief Defines the scene query update mode.
+    Defines the scene query update mode.
     **Default:** PxSceneQueryUpdateMode::eBUILD_ENABLED_COMMIT_ENABLED
     */
     var sceneQueryUpdateMode:PxSceneQueryUpdateMode;
 
     /**
-    \brief Will be copied to PxScene::userData.
+    Will be copied to PxScene::userData.
 
     **Default:** NULL
     */
     var userData:physx.hx.PxUserData;
 
     /**
-    \brief Defines the number of actors required to spawn a separate rigid body solver island task chain.
+    Defines the number of actors required to spawn a separate rigid body solver island task chain.
 
     This parameter defines the minimum number of actors required to spawn a separate rigid body solver task chain. Setting a low value 
     will potentially cause more task chains to be generated. This may result in the overhead of spawning tasks can become a limiting performance factor. 
@@ -740,7 +740,7 @@ private extern class PxSceneDescData
     var solverBatchSize:PxU32;
 
     /**
-    \brief Defines the number of articulations required to spawn a separate rigid body solver island task chain.
+    Defines the number of articulations required to spawn a separate rigid body solver island task chain.
 
     This parameter defines the minimum number of articulations required to spawn a separate rigid body solver task chain. Setting a low value
     will potentially cause more task chains to be generated. This may result in the overhead of spawning tasks can become a limiting performance factor.
@@ -757,7 +757,7 @@ private extern class PxSceneDescData
     var solverArticulationBatchSize:PxU32;
 
     /**
-    \brief Setting to define the number of 16K blocks that will be initially reserved to store contact, friction, and contact cache data.
+    Setting to define the number of 16K blocks that will be initially reserved to store contact, friction, and contact cache data.
     This is the number of 16K memory blocks that will be automatically allocated from the user allocator when the scene is instantiated. Further 16k
     memory blocks may be allocated during the simulation up to maxNbContactDataBlocks.
 
@@ -772,7 +772,7 @@ private extern class PxSceneDescData
     var nbContactDataBlocks:PxU32;
 
     /**
-    \brief Setting to define the maximum number of 16K blocks that can be allocated to store contact, friction, and contact cache data.
+    Setting to define the maximum number of 16K blocks that can be allocated to store contact, friction, and contact cache data.
     As the complexity of a scene increases, the SDK may require to allocate new 16k blocks in addition to the blocks it has already 
     allocated. This variable controls the maximum number of blocks that the SDK can allocate.
 
@@ -792,7 +792,7 @@ private extern class PxSceneDescData
     var maxNbContactDataBlocks:PxU32;
 
     /**
-    \brief The maximum bias coefficient used in the constraint solver
+    The maximum bias coefficient used in the constraint solver
 
     When geometric errors are found in the constraint solver, either as a result of shapes penetrating
     or joints becoming separated or violating limits, a bias is introduced in the solver position iterations
@@ -810,7 +810,7 @@ private extern class PxSceneDescData
     var maxBiasCoefficient:PxReal;
 
     /**
-    \brief Size of the contact report stream (in bytes).
+    Size of the contact report stream (in bytes).
     
     The contact report stream buffer is used during the simulation to store all the contact reports. 
     If the size is not sufficient, the buffer will grow by a factor of two.
@@ -825,7 +825,7 @@ private extern class PxSceneDescData
     var contactReportStreamBufferSize:PxU32;
 
     /**
-    \brief Maximum number of CCD passes 
+    Maximum number of CCD passes 
 
     The CCD performs multiple passes, where each pass every object advances to its time of first impact. This value defines how many passes the CCD system should perform.
     
@@ -838,7 +838,7 @@ private extern class PxSceneDescData
     var ccdMaxPasses:PxU32;
 
     /**
-    \brief CCD threshold
+    CCD threshold
 
     CCD performs sweeps against shapes if and only if the relative motion of the shapes is fast-enough that a collision would be missed
     by the discrete contact generation. However, in some circumstances, e.g. when the environment is constructed from large convex shapes, this 
@@ -854,7 +854,7 @@ private extern class PxSceneDescData
     var ccdThreshold:PxReal;
 
     /**
-    \brief The wake counter reset value
+    The wake counter reset value
 
     Calling wakeUp() on objects which support sleeping will set their wake counter value to the specified reset value.
 
@@ -866,7 +866,7 @@ private extern class PxSceneDescData
     var wakeCounterResetValue:PxReal;
 
     /**
-    \brief The bounds used to sanity check user-set positions of actors and articulation links
+    The bounds used to sanity check user-set positions of actors and articulation links
 
     These bounds are used to check the position values of rigid actors inserted into the scene, and positions set for rigid actors
     already within the scene.
@@ -877,12 +877,12 @@ private extern class PxSceneDescData
     var sanityBounds:PxBounds3;
 
     /**
-    \brief The pre-allocations performed in the GPU dynamics pipeline.
+    The pre-allocations performed in the GPU dynamics pipeline.
     */
     var gpuDynamicsConfig:PxgDynamicsMemoryConfig;
 
     /**
-    \brief Limitation for the partitions in the GPU dynamics pipeline.
+    Limitation for the partitions in the GPU dynamics pipeline.
     This variable must be power of 2.
     A value greater than 32 is currently not supported.
     **Range:** (1, 32)  
@@ -890,14 +890,14 @@ private extern class PxSceneDescData
     var gpuMaxNumPartitions:PxU32;
 
     /**
-    \brief Defines which compute version the GPU dynamics should target. DO NOT MODIFY
+    Defines which compute version the GPU dynamics should target. DO NOT MODIFY
     */
     var gpuComputeVersion:PxU32;
     
     /**
-    \brief constructor sets to default.
+    constructor sets to default.
 
-    \param[in] scale scale values for the tolerances in the scene, these must be the same values passed into
+    @param [in]scale scale values for the tolerances in the scene, these must be the same values passed into
     PxCreatePhysics(). The affected tolerances are bounceThresholdVelocity and frictionOffsetThreshold.
 
     @see PxCreatePhysics() PxTolerancesScale bounceThresholdVelocity frictionOffsetThreshold

@@ -5,7 +5,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxIO;
 
 /** 
-\brief default implementation of a memory write stream
+default implementation of a memory write stream
 
 @see PxOutputStream
 */
@@ -20,7 +20,7 @@ extern class PxDefaultMemoryOutputStream extends PxOutputStreamNative
 }
 
 /** 
-\brief default implementation of a memory read stream
+default implementation of a memory read stream
 
 @see PxInputData
 */
@@ -39,7 +39,7 @@ extern class PxDefaultMemoryInputData extends PxInputDataNative
 }
 
 /** 
-\brief default implementation of a file write stream
+default implementation of a file write stream
 
 @see PxOutputStream
 */
@@ -53,7 +53,7 @@ extern class PxDefaultFileOutputStream extends PxOutputStreamNative
 }
 
 /** 
-\brief default implementation of a file read stream
+default implementation of a file read stream
 
 @see PxInputData
 */

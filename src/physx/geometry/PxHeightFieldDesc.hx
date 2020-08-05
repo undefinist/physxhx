@@ -5,7 +5,7 @@ import physx.geometry.PxHeightFieldFlag;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Descriptor class for `PxHeightField.`
+Descriptor class for `PxHeightField.`
 
 **Note:** The heightfield data is *copied* when a PxHeightField object is created from this descriptor. After the call the
 user may discard the height data.
@@ -19,7 +19,7 @@ Construct using `= null`.
 extern class PxHeightFieldDesc
 {
     /**
-	\brief Number of sample rows in the height field samples array.
+	Number of sample rows in the height field samples array.
 
 	**Note:** Local space X-axis corresponds to rows.
 
@@ -29,7 +29,7 @@ extern class PxHeightFieldDesc
 	var nbRows:PxU32;
 
 	/**
-	\brief Number of sample columns in the height field samples array.
+	Number of sample columns in the height field samples array.
 
 	**Note:** Local space Z-axis corresponds to columns.
 
@@ -39,7 +39,7 @@ extern class PxHeightFieldDesc
 	var nbColumns:PxU32;
 
 	/**
-	\brief Format of the sample data.
+	Format of the sample data.
 
 	Currently the only supported format is PxHeightFieldFormat::eS16_TM:
 
@@ -50,7 +50,7 @@ extern class PxHeightFieldDesc
 	var format:PxHeightFieldFormat;
 
 	/**
-	\brief The samples array.
+	The samples array.
 
 	It is copied to the SDK's storage at creation time.
 
@@ -94,7 +94,7 @@ extern class PxHeightFieldDesc
 	var convexEdgeThreshold:PxReal;
 
 	/**
-	\brief Flags bits, combined from values of the enum ::PxHeightFieldFlag.
+	Flags bits, combined from values of the enum ::PxHeightFieldFlag.
 
 	**Default:** 0
 
@@ -103,13 +103,13 @@ extern class PxHeightFieldDesc
 	var flags:PxHeightFieldFlags;
 
 	/**
-	\brief (re)sets the structure to the default.
+	(re)sets the structure to the default.
 	*/
 	function setToDefault():Void;
 
 	/**
-	\brief Returns true if the descriptor is valid.
-	\return True if the current settings are valid.
+	Returns true if the descriptor is valid.
+	@return True if the current settings are valid.
 	*/
 	function isValid():Bool;
 }

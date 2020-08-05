@@ -4,7 +4,7 @@ import physx.foundation.PxTransform;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Collection of flags providing a mechanism to lock motion along/around a specific axis.
+Collection of flags providing a mechanism to lock motion along/around a specific axis.
 
 @see PxRigidDynamic.setRigidDynamicLockFlag(), PxRigidBody.getRigidDynamicLockFlags()
 */
@@ -27,7 +27,7 @@ extern abstract PxRigidDynamicLockFlags(PxRigidDynamicLockFlag) from PxRigidDyna
 
 
 /**
-\brief PxRigidDynamic represents a dynamic rigid simulation object in the physics SDK.
+PxRigidDynamic represents a dynamic rigid simulation object in the physics SDK.
 
 <h3>Creation</h3>
 Instances of this class are created by calling `PxPhysics.createRigidDynamic()` and deleted with `release()`.
@@ -54,7 +54,7 @@ extern class PxRigidDynamic extends PxRigidBody
 */
 
 	/**
-	\brief Moves kinematically controlled dynamic actors through the game world.
+	Moves kinematically controlled dynamic actors through the game world.
 
 	You set a dynamic actor to be kinematic using the PxRigidBodyFlag::eKINEMATIC flag
 	with setRigidBodyFlag().
@@ -73,17 +73,17 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Sleeping:** This call wakes the actor if it is sleeping and will set the wake counter to `PxSceneDesc.wakeCounterResetValue.`
 
-	\param[in] destination The desired pose for the kinematic actor, in the global frame. **Range:** rigid body transform.
+	@param [in]destination The desired pose for the kinematic actor, in the global frame. **Range:** rigid body transform.
 
 	@see getKinematicTarget() PxRigidBodyFlag setRigidBodyFlag()
 	*/
 	function setKinematicTarget(destination:PxTransform):Void;
 
 	/**
-	\brief Get target pose of a kinematically controlled dynamic actor.
+	Get target pose of a kinematically controlled dynamic actor.
 
-	\param[out] target Transform to write the target pose to. Only valid if the method returns true.
-	\return True if the actor is a kinematically controlled dynamic and the target has been set, else False.
+	@param [out]target Transform to write the target pose to. Only valid if the method returns true.
+	@return True if the actor is a kinematically controlled dynamic and the target has been set, else False.
 
 	@see setKinematicTarget() PxRigidBodyFlag setRigidBodyFlag()
 	*/
@@ -95,7 +95,7 @@ extern class PxRigidDynamic extends PxRigidBody
 */
 
 	/**
-	\brief Returns true if this body is sleeping.
+	Returns true if this body is sleeping.
 
 	When an actor does not move for a period of time, it is no longer simulated in order to save time. This state
 	is called sleeping. However, because the object automatically wakes up when it is either touched by an awake object,
@@ -124,7 +124,7 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Note:** It is invalid to use this method if the actor has not been added to a scene already.
 
-	\return True if the actor is sleeping.
+	@return True if the actor is sleeping.
 
 	@see isSleeping() wakeUp() putToSleep()  getSleepThreshold()
 	*/
@@ -132,29 +132,29 @@ extern class PxRigidDynamic extends PxRigidBody
 
 
     /**
-	\brief Sets the mass-normalized kinetic energy threshold below which an actor may go to sleep.
+	Sets the mass-normalized kinetic energy threshold below which an actor may go to sleep.
 
 	Actors whose kinetic energy divided by their mass is below this threshold will be candidates for sleeping.
 
 	**Default:** 5e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
 
-	\param[in] threshold Energy below which an actor may go to sleep. **Range:** [0, PX_MAX_F32)
+	@param [in]threshold Energy below which an actor may go to sleep. **Range:** [0, PX_MAX_F32)
 
 	@see isSleeping() getSleepThreshold() wakeUp() putToSleep() PxTolerancesScale
 	*/
 	function setSleepThreshold(threshold:PxReal):Void;
 
 	/**
-	\brief Returns the mass-normalized kinetic energy below which an actor may go to sleep.
+	Returns the mass-normalized kinetic energy below which an actor may go to sleep.
 
-	\return The energy threshold for sleeping.
+	@return The energy threshold for sleeping.
 
 	@see isSleeping() wakeUp() putToSleep() setSleepThreshold()
 	*/
 	function getSleepThreshold():PxReal;
 
 	 /**
-	\brief Sets the mass-normalized kinetic energy threshold below which an actor may participate in stabilization.
+	Sets the mass-normalized kinetic energy threshold below which an actor may participate in stabilization.
 
 	Actors whose kinetic energy divided by their mass is above this threshold will not participate in stabilization.
 
@@ -162,18 +162,18 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Default:** 1e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
 
-	\param[in] threshold Energy below which an actor may participate in stabilization. **Range:** [0,inf)
+	@param [in]threshold Energy below which an actor may participate in stabilization. **Range:** [0,inf)
 
 	@see  getStabilizationThreshold() PxSceneFlag::eENABLE_STABILIZATION
 	*/
 	function setStabilizationThreshold(threshold:PxReal):Void;
 
 	/**
-	\brief Returns the mass-normalized kinetic energy below which an actor may participate in stabilization.
+	Returns the mass-normalized kinetic energy below which an actor may participate in stabilization.
 
 	Actors whose kinetic energy divided by their mass is above this threshold will not participate in stabilization. 
 
-	\return The energy threshold for participating in stabilization.
+	@return The energy threshold for participating in stabilization.
 
 	@see setStabilizationThreshold() PxSceneFlag::eENABLE_STABILIZATION
 	*/
@@ -181,26 +181,26 @@ extern class PxRigidDynamic extends PxRigidBody
 
 
 	/**
-	\brief Reads the PxRigidDynamic lock flags.
+	Reads the PxRigidDynamic lock flags.
 
 	See the list of flags `PxRigidDynamicLockFlag`
 
-	\return The values of the PxRigidDynamicLock flags.
+	@return The values of the PxRigidDynamicLock flags.
 
 	@see PxRigidDynamicLockFlag setRigidDynamicLockFlag()
 	*/
 	function getRigidDynamicLockFlags():PxRigidDynamicLockFlags;
 
 	/**
-	\brief Raises or clears a particular rigid dynamic lock flag.
+	Raises or clears a particular rigid dynamic lock flag.
 
 	See the list of flags `PxRigidDynamicLockFlag`
 
 	**Default:** no flags are set
 
 
-	\param[in] flag		The PxRigidDynamicLockBody flag to raise(set) or clear. See `PxRigidBodyFlag.`
-	\param[in] value	The new boolean value for the flag.
+	@param [in]flag		The PxRigidDynamicLockBody flag to raise(set) or clear. See `PxRigidBodyFlag.`
+	@param [in]value	The new boolean value for the flag.
 
 	@see PxRigidDynamicLockFlag getRigidDynamicLockFlags()
 	*/
@@ -210,7 +210,7 @@ extern class PxRigidDynamic extends PxRigidBody
 
 
 	/**
-	\brief Sets the wake counter for the actor.
+	Sets the wake counter for the actor.
 
 	The wake counter value determines the minimum amount of time until the body can be put to sleep. Please note
 	that a body will not be put to sleep if the energy is above the specified threshold (see `setSleepThreshold()`)
@@ -225,23 +225,23 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Default:** 0.4 (which corresponds to 20 frames for a time step of 0.02)
 
-	\param[in] wakeCounterValue Wake counter value. **Range:** [0, PX_MAX_F32)
+	@param [in]wakeCounterValue Wake counter value. **Range:** [0, PX_MAX_F32)
 
 	@see isSleeping() getWakeCounter()
 	*/
 	function setWakeCounter(wakeCounterValue:PxReal):Void;
 
 	/**
-	\brief Returns the wake counter of the actor.
+	Returns the wake counter of the actor.
 
-	\return The wake counter of the actor.
+	@return The wake counter of the actor.
 
 	@see isSleeping() setWakeCounter()
 	*/
 	function getWakeCounter():PxReal;
 
 	/**
-	\brief Wakes up the actor if it is sleeping.
+	Wakes up the actor if it is sleeping.
 
 	The actor will get woken up and might cause other touching actors to wake up as well during the next simulation step.
 
@@ -257,7 +257,7 @@ extern class PxRigidDynamic extends PxRigidBody
 	function wakeUp():Void;
 
 	/**
-	\brief Forces the actor to sleep. 
+	Forces the actor to sleep. 
 	
 	The actor will stay asleep during the next simulation step if not touched by another non-sleeping actor.
 	
@@ -275,7 +275,7 @@ extern class PxRigidDynamic extends PxRigidBody
 /************************************************************************************************/
 
     /**
-	\brief Sets the solver iteration counts for the body. 
+	Sets the solver iteration counts for the body. 
 	
 	The solver iteration count determines how accurately joints and contacts are resolved. 
 	If you are having trouble with jointed bodies oscillating and behaving erratically, then
@@ -287,8 +287,8 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Default:** 4 position iterations, 1 velocity iteration
 
-	\param[in] minPositionIters Number of position iterations the solver should perform for this body. **Range:** [1,255]
-	\param[in] minVelocityIters Number of velocity iterations the solver should perform for this body. **Range:** [1,255]
+	@param [in]minPositionIters Number of position iterations the solver should perform for this body. **Range:** [1,255]
+	@param [in]minVelocityIters Number of velocity iterations the solver should perform for this body. **Range:** [1,255]
 
 	@see getSolverIterationCounts()
 	*/
@@ -296,7 +296,7 @@ extern class PxRigidDynamic extends PxRigidBody
     
     @:native("getSolverIterationCounts") private function _getSolverIterationCounts(minPositionIters:cpp.Reference<PxU32>, minVelocityIters:cpp.Reference<PxU32>):Void;
 	/**
-	\brief Retrieves the solver iteration counts.
+	Retrieves the solver iteration counts.
 
 	@see setSolverIterationCounts()
     */
@@ -308,7 +308,7 @@ extern class PxRigidDynamic extends PxRigidBody
     }
 
 	/**
-	\brief Retrieves the force threshold for contact reports.
+	Retrieves the force threshold for contact reports.
 
 	The contact report threshold is a force threshold. If the force between 
 	two actors exceeds this threshold for either of the two actors, a contact report 
@@ -322,18 +322,18 @@ extern class PxRigidDynamic extends PxRigidBody
 
 	**Default:** PX_MAX_F32
 
-	\return Force threshold for contact reports.
+	@return Force threshold for contact reports.
 
 	@see setContactReportThreshold PxPairFlag PxSimulationFilterShader PxSimulationFilterCallback
 	*/
 	function getContactReportThreshold():PxReal;
 
 	/**
-	\brief Sets the force threshold for contact reports.
+	Sets the force threshold for contact reports.
 
 	See `getContactReportThreshold()`.
 
-	\param[in] threshold Force threshold for contact reports. **Range:** [0, PX_MAX_F32)
+	@param [in]threshold Force threshold for contact reports. **Range:** [0, PX_MAX_F32)
 
 	@see getContactReportThreshold PxPairFlag
 	*/

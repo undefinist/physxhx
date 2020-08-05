@@ -103,7 +103,7 @@ extern enum abstract PxActorType(PxActorTypeImpl)
 private extern class PxActorTypeImpl {}
 
 /**
-\brief PxActor is the base class for the main simulation objects in the physics SDK.
+PxActor is the base class for the main simulation objects in the physics SDK.
 
 The actor is owned by and contained in a PxScene.
 
@@ -125,18 +125,18 @@ extern class PxActor extends PxBase
 	function release():Void;
 
 	/**
-	\brief Retrieves the type of actor.
+	Retrieves the type of actor.
 
-	\return The actor type of the actor.
+	@return The actor type of the actor.
 
 	@see PxActorType
 	*/
 	function getType():PxActorType;
 
 	/**
-	\brief Retrieves the scene which this actor belongs to.
+	Retrieves the scene which this actor belongs to.
 
-	\return Owner Scene. NULL if not part of a scene.
+	@return Owner Scene. NULL if not part of a scene.
 
 	@see PxScene
 	*/
@@ -145,12 +145,12 @@ extern class PxActor extends PxBase
 	// Runtime modifications
 
 	/**
-	\brief Sets a name string for the object that can be retrieved with getName().
+	Sets a name string for the object that can be retrieved with getName().
 	
 	This is for debugging and is not used by the SDK. The string is not copied by the SDK, 
 	only the pointer is stored.
 
-	\param[in] name String to set the objects name to.
+	@param [in]name String to set the objects name to.
 
 	**Default:** NULL
 
@@ -159,34 +159,34 @@ extern class PxActor extends PxBase
 	function setName(name:cpp.ConstCharStar):Void;
 
 	/**
-	\brief Retrieves the name string set with setName().
+	Retrieves the name string set with setName().
 
-	\return Name string associated with object.
+	@return Name string associated with object.
 
 	@see setName()
 	*/
 	function getName():cpp.ConstCharStar;
 
 	/**
-	\brief Retrieves the axis aligned bounding box enclosing the actor.
+	Retrieves the axis aligned bounding box enclosing the actor.
 
-	\param[in] inflation  Scale factor for computed world bounds. Box extents are multiplied by this value.
+	@param [in]inflation  Scale factor for computed world bounds. Box extents are multiplied by this value.
 
-	\return The actor's bounding box.
+	@return The actor's bounding box.
 
 	@see PxBounds3
 	*/
 	function getWorldBounds(inflation:Float):PxBounds3;
 
 	/**
-	\brief Raises or clears a particular actor flag.
+	Raises or clears a particular actor flag.
 	
 	See the list of flags `PxActorFlag`
 
 	**Sleeping:** Does **NOT** wake the actor up automatically.
 
-	\param[in] flag  The PxActor flag to raise(set) or clear. See `PxActorFlag.`
-	\param[in] value The boolean value to assign to the flag.
+	@param [in]flag  The PxActor flag to raise(set) or clear. See `PxActorFlag.`
+	@param [in]value The boolean value to assign to the flag.
 
 	**Default:** PxActorFlag::eVISUALIZATION
 
@@ -194,7 +194,7 @@ extern class PxActor extends PxBase
 	*/
 	function setActorFlag(flag:PxActorFlag, value:Bool):Void;
 	/**
-	\brief sets the actor flags
+	sets the actor flags
 	
 	See the list of flags `PxActorFlag`
 	@see PxActorFlag setActorFlag() 
@@ -202,18 +202,18 @@ extern class PxActor extends PxBase
 	function setActorFlags(inFlags:PxActorFlags):Void;
 
 	/**
-	\brief Reads the PxActor flags.
+	Reads the PxActor flags.
 	
 	See the list of flags `PxActorFlag`
 
-	\return The values of the PxActor flags.
+	@return The values of the PxActor flags.
 
 	@see PxActorFlag setActorFlag() 
 	*/
 	function getActorFlags():PxActorFlags;
 
 	/**
-	\brief Assigns dynamic actors a dominance group identifier.
+	Assigns dynamic actors a dominance group identifier.
 	
 	PxDominanceGroup is a 5 bit group identifier (legal range from 0 to 31).
 	
@@ -224,16 +224,16 @@ extern class PxActor extends PxBase
 
 	**Sleeping:** Changing the dominance group does **NOT** wake the actor up automatically.
 
-	\param[in] dominanceGroup The dominance group identifier. **Range:** [0..31]
+	@param [in]dominanceGroup The dominance group identifier. **Range:** [0..31]
 
 	@see getDominanceGroup() PxDominanceGroup PxScene::setDominanceGroupPair()
 	*/
 	function setDominanceGroup(dominanceGroup:PxDominanceGroup):Void;
 	
 	/**
-	\brief Retrieves the value set with setDominanceGroup().
+	Retrieves the value set with setDominanceGroup().
 
-	\return The dominance group of this actor.
+	@return The dominance group of this actor.
 
 	@see setDominanceGroup() PxDominanceGroup PxScene::setDominanceGroupPair()
 	*/
@@ -241,7 +241,7 @@ extern class PxActor extends PxBase
 
 	
 	/**
-	\brief Sets the owner client of an actor.
+	Sets the owner client of an actor.
 
 	This cannot be done once the actor has been placed into a scene.
 
@@ -252,7 +252,7 @@ extern class PxActor extends PxBase
 	function setOwnerClient(inClient:PxClientID):Void;
 
 	/**
-	\brief Returns the owner client that was specified with at creation time.
+	Returns the owner client that was specified with at creation time.
 
 	This value cannot be changed once the object is placed into the scene.
 
@@ -261,9 +261,9 @@ extern class PxActor extends PxBase
 	function getOwnerClient():PxClientID;
 
 	/**
-	\brief Retrieves the aggregate the actor might be a part of.
+	Retrieves the aggregate the actor might be a part of.
 
-	\return The aggregate the actor is a part of, or NULL if the actor does not belong to an aggregate.
+	@return The aggregate the actor is a part of, or NULL if the actor does not belong to an aggregate.
 
 	@see PxAggregate
 	*/

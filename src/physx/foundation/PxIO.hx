@@ -16,7 +16,7 @@ import haxe.io.BytesData;
 
 
 /**
-\brief Input stream class for I/O.
+Input stream class for I/O.
 
 The user needs to supply a PxInputStream implementation to a number of methods to allow the SDK to read data.
 */
@@ -68,7 +68,7 @@ class PxInputStreamHx
 
 
 /**
-\brief Input data class for I/O which provides random read access.
+Input data class for I/O which provides random read access.
 
 The user needs to supply a PxInputData implementation to a number of methods to allow the SDK to read data.
 */
@@ -146,7 +146,7 @@ class PxInputDataHx
 
 
 /**
-\brief Output stream class for I/O.
+Output stream class for I/O.
 
 The user needs to supply a PxOutputStream implementation to a number of methods to allow the SDK to write data.
 */

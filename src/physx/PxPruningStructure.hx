@@ -4,7 +4,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxBase;
 
 /**
-\brief A precomputed pruning structure to accelerate scene queries against newly added actors.
+A precomputed pruning structure to accelerate scene queries against newly added actors.
 
 The pruning structure can be provided to `PxScene.addActors()` in which case it will get merged
 directly into the scene query optimization AABB tree, thus leading to improved performance when
@@ -25,25 +25,25 @@ invalidate the pruning structure. Same happens if shape scene query flags change
 extern class PxPruningStructure extends PxBase
 {
     /**
-	\brief Retrieve rigid actors in the pruning structure.
+	Retrieve rigid actors in the pruning structure.
 
 	You can retrieve the number of rigid actor pointers by calling `getNbRigidActors()`
 
-	\param[out] userBuffer The buffer to store the actor pointers.
-	\param[in] bufferSize Size of provided user buffer.
-	\param[in] startIndex Index of first actor pointer to be retrieved
-	\return Number of rigid actor pointers written to the buffer.
+	@param [out]userBuffer The buffer to store the actor pointers.
+	@param [in]bufferSize Size of provided user buffer.
+	@param [in]startIndex Index of first actor pointer to be retrieved
+	@return Number of rigid actor pointers written to the buffer.
 
 	@see PxRigidActor
 	*/
 	//function getRigidActors(PxRigidActor** userBuffer, PxU32 bufferSize, PxU32 startIndex=0):PxU32;
 
 	/**
-	\brief Returns the number of rigid actors in the pruning structure.
+	Returns the number of rigid actors in the pruning structure.
 
 	You can use `getRigidActors()` to retrieve the rigid actor pointers.
 
-	\return Number of rigid actors in the pruning structure.
+	@return Number of rigid actors in the pruning structure.
 
 	@see PxRigidActor
 	*/

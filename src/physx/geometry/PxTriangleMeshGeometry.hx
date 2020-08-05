@@ -3,7 +3,7 @@ package physx.geometry;
 import physx.common.PxCoreUtilityTypes;
 
 /**
-\brief Flags controlling the simulated behavior of the triangle mesh geometry.
+Flags controlling the simulated behavior of the triangle mesh geometry.
 
 Used in ::PxMeshGeometryFlags.
 */
@@ -23,14 +23,14 @@ extern enum abstract PxMeshGeometryFlag(PxMeshGeometryFlagImpl)
 private extern class PxMeshGeometryFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxMeshGeometryFlag.
+collection of set bits defined in PxMeshGeometryFlag.
 
 @see PxMeshGeometryFlag
 */
 extern abstract PxMeshGeometryFlags(PxMeshGeometryFlag) from PxMeshGeometryFlag to PxMeshGeometryFlag {}
 
 /**
-\brief Triangle mesh geometry class.
+Triangle mesh geometry class.
 
 This class unifies a mesh object with a scaling transform, and 
 lets the combined object be used anywhere a PxGeometry is needed.
@@ -91,9 +91,9 @@ private extern class PxTriangleMeshGeometryData extends PxGeometry
     var triangleMesh:PxTriangleMesh;
 
     /**
-    \brief Returns true if the geometry is valid.
+    Returns true if the geometry is valid.
 
-    \return  True if the current settings are valid for shape creation.
+    @return  True if the current settings are valid for shape creation.
 
     **Note:** A valid triangle mesh has a positive scale value in each direction (scale.scale.x > 0, scale.scale.y > 0, scale.scale.z > 0).
     It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a triangle mesh that has zero extents in any direction.

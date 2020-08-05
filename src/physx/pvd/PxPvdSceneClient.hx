@@ -5,7 +5,7 @@ import physx.foundation.PxVec3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief types of instrumentation that PVD can do.
+types of instrumentation that PVD can do.
 */
 @:build(physx.hx.EnumBuilder.buildFlags("physx::PxPvdSceneFlag", PxU8))
 extern enum abstract PxPvdSceneFlag(PxPvdSceneFlagImpl)
@@ -31,14 +31,14 @@ extern enum abstract PxPvdSceneFlag(PxPvdSceneFlagImpl)
 private extern class PxPvdSceneFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxPvdInstrumentationFlag.
+Bitfield that contains a set of raised flags defined in PxPvdInstrumentationFlag.
 
 @see PxPvdInstrumentationFlag
 */
 extern abstract PxPvdSceneFlags(PxPvdSceneFlag) from PxPvdSceneFlag to PxPvdSceneFlag {}
 
 /**
-\brief Special client for PxScene.
+Special client for PxScene.
 It provides access to the PxPvdSceneFlag.
 It also provides simple user debug services that associated scene position such as immediate rendering and camera updates.
 */
@@ -48,14 +48,14 @@ extern class PxPvdSceneClient
 {
 	/**
 	Sets the PVD flag. See PxPvdSceneFlag.
-	\param flag Flag to set.
-	\param value value the flag gets set to.
+	@param flag Flag to set.
+	@param value value the flag gets set to.
 	*/
 	function setScenePvdFlag(flag:PxPvdSceneFlag, value:Bool):Void;
 
 	/**
 	Sets the PVD flags. See PxPvdSceneFlags.
-	\param flags Flags to set.
+	@param flags Flags to set.
 	*/
 	function setScenePvdFlags(flags:PxPvdSceneFlags):Void;
 

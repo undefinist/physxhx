@@ -141,7 +141,7 @@ extern class PxRigidActor extends PxActor
     inline function getShapes(userBuffer:haxe.ds.Vector<PxShape>, startIndex:PxU32 = 0):PxU32
     {
         return untyped __cpp__("{0}->getShapes(reinterpret_cast<physx::PxShape**>({1}), {2}, {3})",
-            this, cpp.Pointer.ofArray(cast userBuffer), userBuffer.length, startIndex);
+            this, cpp.Pointer.ofArray((userBuffer:Array<PxShape>)).ptr, userBuffer.length, startIndex);
     }
 
 
@@ -154,7 +154,7 @@ extern class PxRigidActor extends PxActor
      * 
      * You can use `getConstraints()` to retrieve the constraint shader pointers.
      * 
-     * \return Number of constraint shaders attached to this actor.
+     * @return Number of constraint shaders attached to this actor.
      * 
      * @see PxConstraint getConstraints()
      */

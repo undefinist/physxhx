@@ -3,7 +3,7 @@ package physx.common;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Class to define the scale at which simulation runs. Most simulation tolerances are
+Class to define the scale at which simulation runs. Most simulation tolerances are
 calculated in terms of the values here. 
 
 **Note:** if you change the simulation scale, you will probablly also wish to change the scene's
@@ -43,8 +43,8 @@ extern class PxTolerancesScaleData
     var speed:PxReal;
 
     /**
-    \brief Returns true if the descriptor is valid.
-    \return true if the current settings are valid (returns always true).
+    Returns true if the descriptor is valid.
+    @return true if the current settings are valid (returns always true).
     */
     function isValid():Bool;
 }

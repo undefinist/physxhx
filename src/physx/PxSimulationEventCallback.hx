@@ -9,7 +9,7 @@ import physx.foundation.PxSimpleTypes;
 
 
 /**
-\brief Extra data item types for contact pairs.
+Extra data item types for contact pairs.
 
 @see PxContactPairExtraDataItem.type
 */
@@ -32,7 +32,7 @@ private extern class PxContactPairExtraDataTypeImpl {}
 
 
 /**
-\brief Base class for items in the extra data stream of contact pairs
+Base class for items in the extra data stream of contact pairs
 
 @see PxContactPairHeader.extraDataStream
 */
@@ -41,14 +41,14 @@ private extern class PxContactPairExtraDataTypeImpl {}
 extern class PxContactPairExtraDataItem
 {
     /**
-    \brief The type of the extra data stream item
+    The type of the extra data stream item
     */
     var type:PxContactPairExtraDataType;
 }
 
 
 /**
-\brief Velocities of the contact pair rigid bodies
+Velocities of the contact pair rigid bodies
 
 This struct is shared by multiple types of extra data items. The `type` field allows to distinguish between them:
 - PxContactPairExtraDataType::ePRE_SOLVER_VELOCITY: see `PxPairFlag.ePRE_SOLVER_VELOCITY`
@@ -63,29 +63,29 @@ This struct is shared by multiple types of extra data items. The `type` field al
 extern class PxContactPairVelocity extends PxContactPairExtraDataItem
 {
     /**
-    \brief The linear velocity of the rigid body 0
+    The linear velocity of the rigid body 0
     */
     @:native("linearVelocity[0]") var linearVelocity0:PxVec3;
     
     /**
-    \brief The linear velocity of the rigid body 1
+    The linear velocity of the rigid body 1
     */
     @:native("linearVelocity[1]") var linearVelocity1:PxVec3;
     
     /**
-    \brief The angular velocity of the rigid body 0
+    The angular velocity of the rigid body 0
     */
     @:native("angularVelocity[0]") var angularVelocity0:PxVec3;
     
     /**
-    \brief The angular velocity of the rigid body 1
+    The angular velocity of the rigid body 1
     */
     @:native("angularVelocity[1]") var angularVelocity1:PxVec3;
 }
 
 
 /**
-\brief World space actor poses of the contact pair rigid bodies
+World space actor poses of the contact pair rigid bodies
 
 @see PxContactPairHeader.extraDataStream PxPairFlag::eCONTACT_EVENT_POSE
 */
@@ -94,19 +94,19 @@ extern class PxContactPairVelocity extends PxContactPairExtraDataItem
 extern class PxContactPairPose extends PxContactPairExtraDataItem
 {
     /**
-    \brief The world space pose of the rigid body 0
+    The world space pose of the rigid body 0
     */
     @:native("globalPose[0]") var globalPose0:PxTransform;
     
     /**
-    \brief The world space pose of the rigid body 1
+    The world space pose of the rigid body 1
     */
     @:native("globalPose[1]") var globalPose1:PxTransform;
 }
 
 
 /**
-\brief Marker for the beginning of a new item set in the extra data stream.
+Marker for the beginning of a new item set in the extra data stream.
 
 If CCD with multiple passes is enabled, then a fast moving object might bounce on and off the same
 object multiple times. Also, different shapes of the same actor might gain and lose contact with an other
@@ -135,14 +135,14 @@ The `index` of PxContactPairIndexA will point to the first entry in the PxContac
 extern class PxContactPairIndex extends PxContactPairExtraDataItem
 {
     /**
-    \brief The next item set in the extra data stream refers to the contact pairs starting at `index` in the reported PxContactPair array.
+    The next item set in the extra data stream refers to the contact pairs starting at `index` in the reported PxContactPair array.
     */
     var index:PxU16;
 }
 
 
 /**
-\brief A class to iterate over a contact pair extra data stream.
+A class to iterate over a contact pair extra data stream.
 
 @see PxContactPairHeader.extraDataStream
 */
@@ -154,7 +154,7 @@ extern class PxContactPairExtraDataIterator
 
 
 /**
-\brief Collection of flags providing information on contact report pairs.
+Collection of flags providing information on contact report pairs.
 
 @see PxContactPairHeader
 */
@@ -172,7 +172,7 @@ extern enum abstract PxContactPairHeaderFlag(PxContactPairHeaderFlagImpl)
 private extern class PxContactPairHeaderFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxContactPairHeaderFlag.
+Bitfield that contains a set of raised flags defined in PxContactPairHeaderFlag.
 
 @see PxContactPairHeaderFlag
 */
@@ -180,7 +180,7 @@ extern abstract PxContactPairHeaderFlags(PxContactPairHeaderFlag) from PxContact
 
 
 /**
-\brief An Instance of this class is passed to PxSimulationEventCallback.onContact().
+An Instance of this class is passed to PxSimulationEventCallback.onContact().
 
 @see PxSimulationEventCallback.onContact()
 */
@@ -189,7 +189,7 @@ extern abstract PxContactPairHeaderFlags(PxContactPairHeaderFlag) from PxContact
 extern class PxContactPairHeader
 {
     /**
-    \brief The first actor of the notification shape pairs.
+    The first actor of the notification shape pairs.
 
     **Note:** The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
           or PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved actors 
@@ -202,7 +202,7 @@ extern class PxContactPairHeader
     @:native("actors[0]") var actor0:PxRigidActor;
     
     /**
-    \brief The second actor of the notification shape pairs.
+    The second actor of the notification shape pairs.
 
     **Note:** The actor pointers might reference deleted actors. This will be the case if PxPairFlag::eNOTIFY_TOUCH_LOST
           or PxPairFlag::eNOTIFY_THRESHOLD_FORCE_LOST events were requested for the pair and one of the involved actors 
@@ -215,7 +215,7 @@ extern class PxContactPairHeader
     @:native("actors[1]") var actor1:PxRigidActor;
 
     /**
-    \brief Stream containing extra data as requested in the PxPairFlag flags of the simulation filter.
+    Stream containing extra data as requested in the PxPairFlag flags of the simulation filter.
 
     This pointer is only valid if any kind of extra data information has been requested for the contact report pair (see `PxPairFlag.ePOST_SOLVER_VELOCITY` etc.),
     else it will be NULL.
@@ -225,31 +225,31 @@ extern class PxContactPairHeader
     var extraDataStream:cpp.ConstPointer<PxU8>;
     
     /**
-    \brief Size of the extra data stream [bytes] 
+    Size of the extra data stream [bytes] 
     */
     var extraDataStreamSize:PxU16;
 
     /**
-    \brief Additional information on the contact report pair.
+    Additional information on the contact report pair.
 
     @see PxContactPairHeaderFlag
     */
     var flags:PxContactPairHeaderFlags;
 
     /**
-    \brief pointer to the contact pairs
+    pointer to the contact pairs
     */
     var pairs:cpp.ConstPointer<PxContactPair>;
 
     /**
-    \brief number of contact pairs
+    number of contact pairs
     */
     var nbPairs:PxU32;
 }
 
 
 /**
-\brief Collection of flags providing information on contact report pairs.
+Collection of flags providing information on contact report pairs.
 
 @see PxContactPair
 */
@@ -257,17 +257,17 @@ extern class PxContactPairHeader
 extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 {
     /**
-    \brief The shape with index 0 has been removed from the actor/scene.
+    The shape with index 0 has been removed from the actor/scene.
     */
     var eREMOVED_SHAPE_0 = (1<<0);
 
     /**
-    \brief The shape with index 1 has been removed from the actor/scene.
+    The shape with index 1 has been removed from the actor/scene.
     */
     var eREMOVED_SHAPE_1 = (1<<1);
 
     /**
-    \brief First actor pair contact.
+    First actor pair contact.
 
     The provided shape pair marks the first contact between the two actors, no other shape pair has been touching prior to the current simulation frame.
 
@@ -276,14 +276,14 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
     var eACTOR_PAIR_HAS_FIRST_TOUCH = (1<<2);
 
     /**
-    \brief All contact between the actor pair was lost.
+    All contact between the actor pair was lost.
 
     All contact between the two actors has been lost, no shape pairs remain touching after the current simulation frame.
     */
     var eACTOR_PAIR_LOST_TOUCH = (1<<3);
 
     /**
-    \brief Internal flag, used by `PxContactPair.extractContacts()`
+    Internal flag, used by `PxContactPair.extractContacts()`
 
     The applied contact impulses are provided for every contact point. 
     This is the case if `PxPairFlag.eSOLVE_CONTACT` has been set for the pair.
@@ -291,7 +291,7 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
     var eINTERNAL_HAS_IMPULSES = (1<<4);
 
     /**
-    \brief Internal flag, used by `PxContactPair.extractContacts()`
+    Internal flag, used by `PxContactPair.extractContacts()`
 
     The provided contact point information is flipped with regards to the shapes of the contact pair. This mainly concerns the order of the internal triangle indices.
     */
@@ -303,7 +303,7 @@ extern enum abstract PxContactPairFlag(PxContactPairFlagImpl)
 private extern class PxContactPairFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxContactPairFlag.
+Bitfield that contains a set of raised flags defined in PxContactPairFlag.
 
 @see PxContactPairFlag
 */
@@ -311,46 +311,46 @@ extern abstract PxContactPairFlags(PxContactPairFlag) from PxContactPairFlag to 
 
 
 /**
-\brief A contact point as used by contact notification
+A contact point as used by contact notification
 */
 @:include("PxSimulationEventCallback.h")
 @:native("physx::PxContactPairPoint")
 extern class PxContactPairPoint
 {
     /**
-    \brief The position of the contact point between the shapes, in world space. 
+    The position of the contact point between the shapes, in world space. 
     */
     var position:PxVec3;
 
     /**
-    \brief The separation of the shapes at the contact point.  A negative separation denotes a penetration.
+    The separation of the shapes at the contact point.  A negative separation denotes a penetration.
     */
     var separation:PxReal;
 
     /**
-    \brief The normal of the contacting surfaces at the contact point. The normal direction points from the second shape to the first shape.
+    The normal of the contacting surfaces at the contact point. The normal direction points from the second shape to the first shape.
     */
     var normal:PxVec3;
 
     /**
-    \brief The surface index of shape 0 at the contact point.  This is used to identify the surface material.
+    The surface index of shape 0 at the contact point.  This is used to identify the surface material.
     */
     var internalFaceIndex0:PxU32;
 
     /**
-    \brief The impulse applied at the contact point, in world space. Divide by the simulation time step to get a force value.
+    The impulse applied at the contact point, in world space. Divide by the simulation time step to get a force value.
     */
     var impulse:PxVec3;
 
     /**
-    \brief The surface index of shape 1 at the contact point.  This is used to identify the surface material.
+    The surface index of shape 1 at the contact point.  This is used to identify the surface material.
     */
     var internalFaceIndex1:PxU32;
 }
 
 
 /**
-\brief Contact report pair information.
+Contact report pair information.
 
 Instances of this class are passed to PxSimulationEventCallback.onContact(). If contact reports have been requested for a pair of shapes (see `PxPairFlag),`
 then the corresponding contact information will be provided through this structure.
@@ -362,7 +362,7 @@ then the corresponding contact information will be provided through this structu
 extern class PxContactPair
 {
     /**
-    \brief The first shape of the pair.
+    The first shape of the pair.
 
     **Note:** The shape pointers might reference deleted shapes. This will be the case if `PxPairFlag.eNOTIFY_TOUCH_LOST`
           or `PxPairFlag.eNOTIFY_THRESHOLD_FORCE_LOST` events were requested for the pair and one of the involved shapes 
@@ -375,7 +375,7 @@ extern class PxContactPair
     @:native("shape[0]") var shape0:PxShape;
     
     /**
-    \brief The second shape of the pair.
+    The second shape of the pair.
 
     **Note:** The shape pointers might reference deleted shapes. This will be the case if `PxPairFlag.eNOTIFY_TOUCH_LOST`
           or `PxPairFlag.eNOTIFY_THRESHOLD_FORCE_LOST` events were requested for the pair and one of the involved shapes 
@@ -388,7 +388,7 @@ extern class PxContactPair
     @:native("shape[1]") var shape1:PxShape;
 
     /**
-    \brief Pointer to first patch header in contact stream containing contact patch data
+    Pointer to first patch header in contact stream containing contact patch data
 
     This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
     Use `extractContacts()` as a reference for the data layout of the stream.
@@ -396,7 +396,7 @@ extern class PxContactPair
     var contactPatches:cpp.ConstPointer<PxU8>;
 
     /**
-    \brief Pointer to first contact point in contact stream containing contact data
+    Pointer to first contact point in contact stream containing contact data
 
     This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
     Use `extractContacts()` as a reference for the data layout of the stream.
@@ -404,7 +404,7 @@ extern class PxContactPair
     var contactPoints:cpp.ConstPointer<PxU8>;
 
     /**
-    \brief Buffer containing applied impulse data.
+    Buffer containing applied impulse data.
 
     This pointer is only valid if contact point information has been requested for the contact report pair (see `PxPairFlag.eNOTIFY_CONTACT_POINTS).`
     Use `extractContacts()` as a reference for the data layout of the stream.
@@ -412,36 +412,36 @@ extern class PxContactPair
     var contactImpulses:cpp.ConstPointer<PxReal>;
 
     /**
-    \brief Size of the contact stream [bytes] including force buffer
+    Size of the contact stream [bytes] including force buffer
     */
     var requiredBufferSize:PxU32;
 
     /**
-    \brief Number of contact points stored in the contact stream
+    Number of contact points stored in the contact stream
     */
     var contactCount:PxU8;
 
     /**
-    \brief Number of contact patches stored in the contact stream
+    Number of contact patches stored in the contact stream
     */
 
     var patchCount:PxU8;
 
     /**
-    \brief Size of the contact stream [bytes] not including force buffer
+    Size of the contact stream [bytes] not including force buffer
     */
 
     var contactStreamSize:PxU16;
 
     /**
-    \brief Additional information on the contact report pair.
+    Additional information on the contact report pair.
 
     @see PxContactPairFlag
     */
     var flags:PxContactPairFlags;
 
     /**
-    \brief Flags raised due to the contact.
+    Flags raised due to the contact.
 
     The events field is a combination of:
 
@@ -468,7 +468,7 @@ extern class PxContactPair
 
     private function _extractContacts(userBuffer:cpp.Pointer<PxContactPairPoint>, bufferSize:PxU32):PxU32;
     /**
-    \brief Extracts the contact points from the stream and stores them in a convenient format.
+    Extracts the contact points from the stream and stores them in a convenient format.
     
     @return Array of contact pair points
 
@@ -483,13 +483,13 @@ extern class PxContactPair
     }
 
     /**
-    \brief Helper method to clone the contact pair and copy the contact data stream into a user buffer.
+    Helper method to clone the contact pair and copy the contact data stream into a user buffer.
     
     The contact data stream is only accessible during the contact report callback. This helper function provides copy functionality
     to buffer the contact stream information such that it can get accessed at a later stage.
 
-    \param[out] newPair The contact pair info will get copied to this instance. The contact data stream pointer of the copy will be redirected to the provided user buffer. Use NULL to skip the contact pair copy operation.
-    \param[out] bufferMemory Memory block to store the contact data stream to. At most `requiredBufferSize` bytes will get written to the buffer.
+    @param [out]newPair The contact pair info will get copied to this instance. The contact data stream pointer of the copy will be redirected to the provided user buffer. Use NULL to skip the contact pair copy operation.
+    @param [out]bufferMemory Memory block to store the contact data stream to. At most `requiredBufferSize` bytes will get written to the buffer.
     */
     function bufferContacts(newPair:cpp.Pointer<PxContactPair>, bufferMemory:cpp.Pointer<PxU8>):Void;
 
@@ -498,7 +498,7 @@ extern class PxContactPair
 
 
 /**
-\brief Collection of flags providing information on trigger report pairs.
+Collection of flags providing information on trigger report pairs.
 
 @see PxTriggerPair
 */
@@ -517,7 +517,7 @@ extern enum abstract PxTriggerPairFlag(PxTriggerPairFlagImpl)
 private extern class PxTriggerPairFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxTriggerPairFlag.
+Bitfield that contains a set of raised flags defined in PxTriggerPairFlag.
 
 @see PxTriggerPairFlag
 */
@@ -525,7 +525,7 @@ extern abstract PxTriggerPairFlags(PxTriggerPairFlag) from PxTriggerPairFlag to 
 
 
 /**
-\brief Descriptor for a trigger pair.
+Descriptor for a trigger pair.
 
 An array of these structs gets passed to the PxSimulationEventCallback::onTrigger() report.
 
@@ -550,7 +550,7 @@ extern class PxTriggerPair
 
 
 /**
-\brief Descriptor for a broken constraint.
+Descriptor for a broken constraint.
 
 An array of these structs gets passed to the PxSimulationEventCallback::onConstraintBreak() report.
 
@@ -626,14 +626,14 @@ class PxSimulationEventCallbackHx
     }
     
 	/**
-	\brief This is called when a breakable constraint breaks.
+	This is called when a breakable constraint breaks.
 	
 	**Note:** The user should not release the constraint shader inside this call!
 
 	**Note:** No event will get reported if the constraint breaks but gets deleted while the time step is still being simulated.
 
-	\param[in] constraints - The constraints which have been broken.
-	\param[in] count       - The number of constraints
+	@param [in]constraints - The constraints which have been broken.
+	@param [in]count       - The number of constraints
 
 	@see PxConstraint PxConstraintDesc.linearBreakForce PxConstraintDesc.angularBreakForce
 	*/
@@ -644,7 +644,7 @@ class PxSimulationEventCallbackHx
     }
 
 	/**
-	\brief This is called with the actors which have just been woken up.
+	This is called with the actors which have just been woken up.
 
 	**Note:** Only supported by rigid bodies yet.
 	**Note:** Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
@@ -654,8 +654,8 @@ class PxSimulationEventCallbackHx
 	**Note:** If an actor gets newly added to a scene with properties such that it is awake and the sleep state does not get changed by 
 	the user or simulation, then an onWake() event will get sent at the next simulate/fetchResults() step.
 
-	\param[in] actors - The actors which just woke up.
-	\param[in] count  - The number of actors
+	@param [in]actors - The actors which just woke up.
+	@param [in]count  - The number of actors
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
@@ -666,7 +666,7 @@ class PxSimulationEventCallbackHx
     }
 
 	/**
-	\brief This is called with the actors which have just been put to sleep.
+	This is called with the actors which have just been put to sleep.
 
 	**Note:** Only supported by rigid bodies yet.
 	**Note:** Only called on actors for which the PxActorFlag eSEND_SLEEP_NOTIFIES has been set.
@@ -677,8 +677,8 @@ class PxSimulationEventCallbackHx
 	**Note:** If an actor gets newly added to a scene with properties such that it is asleep and the sleep state does not get changed by 
 	the user or simulation, then an onSleep() event will get sent at the next simulate/fetchResults() step.
 
-	\param[in] actors - The actors which have just been put to sleep.
-	\param[in] count  - The number of actors
+	@param [in]actors - The actors which have just been put to sleep.
+	@param [in]count  - The number of actors
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxActorFlag PxActor.setActorFlag()
 	*/
@@ -689,7 +689,7 @@ class PxSimulationEventCallbackHx
     }
 
 	/**
-	\brief This is called when certain contact events occur.
+	This is called when certain contact events occur.
 
 	The method will be called for a pair of actors if one of the colliding shape pairs requested contact notification.
 	You request which events are reported using the filter shader/callback mechanism (see `PxSimulationFilterShader,`
@@ -698,9 +698,9 @@ class PxSimulationEventCallbackHx
 	Do not keep references to the passed objects, as they will be 
 	invalid after this function returns.
 
-	\param[in] pairHeader Information on the two actors whose shapes triggered a contact report.
-	\param[in] pairs The contact pairs of two actors for which contact reports have been requested. See `PxContactPair.`
-	\param[in] nbPairs The number of provided contact pairs.
+	@param [in]pairHeader Information on the two actors whose shapes triggered a contact report.
+	@param [in]pairs The contact pairs of two actors for which contact reports have been requested. See `PxContactPair.`
+	@param [in]nbPairs The number of provided contact pairs.
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxContactPair PxPairFlag PxSimulationFilterShader PxSimulationFilterCallback
 	*/
@@ -711,15 +711,15 @@ class PxSimulationEventCallbackHx
     }
 
 	/**
-	\brief This is called with the current trigger pair events.
+	This is called with the current trigger pair events.
 
 	Shapes which have been marked as triggers using PxShapeFlag::eTRIGGER_SHAPE will send events
 	according to the pair flag specification in the filter shader (see `PxPairFlag,` `PxSimulationFilterShader).`
 
 	**Note:** Trigger shapes will no longer send notification events for interactions with other trigger shapes.
 
-	\param[in] pairs - The trigger pair events.
-	\param[in] count - The number of trigger pair events.
+	@param [in]pairs - The trigger pair events.
+	@param [in]count - The number of trigger pair events.
 
 	@see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxPairFlag PxSimulationFilterShader PxShapeFlag PxShape.setFlag()
 	*/
@@ -730,7 +730,7 @@ class PxSimulationEventCallbackHx
     }
 
 	// /**
-	// \brief Provides early access to the new pose of moving rigid bodies.
+	// Provides early access to the new pose of moving rigid bodies.
 
 	// When this call occurs, rigid bodies having the `PxRigidBodyFlag.eENABLE_POSE_INTEGRATION_PREVIEW` 
 	// flag set, were moved by the simulation and their new poses can be accessed through the provided buffers.
@@ -748,9 +748,9 @@ class PxSimulationEventCallbackHx
 	// **Note:** The code in this callback should be lightweight as it can block the simulation, that is, the
 	// `PxScene.fetchResults()` call.
 
-	// \param[in] bodyBuffer The rigid bodies that moved and requested early pose reporting.
-	// \param[in] poseBuffer The integrated rigid body poses of the bodies listed in bodyBuffer.
-	// \param[in] count The number of entries in the provided buffers.
+	// @param [in]bodyBuffer The rigid bodies that moved and requested early pose reporting.
+	// @param [in]poseBuffer The integrated rigid body poses of the bodies listed in bodyBuffer.
+	// @param [in]count The number of entries in the provided buffers.
 
 	// @see PxScene.setSimulationEventCallback() PxSceneDesc.simulationEventCallback PxRigidBodyFlag::eENABLE_POSE_INTEGRATION_PREVIEW
 	// */

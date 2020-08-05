@@ -7,7 +7,7 @@ import physx.foundation.PxSimpleTypes;
 import physx.foundation.PxBase;
 
 /**
-\brief Polygon data
+Polygon data
 
 Plane format: (mPlane0,mPlane1,mPlane2).dot(x) + mPlane3 = 0
 With the normal outward-facing from the hull.
@@ -73,68 +73,68 @@ extern class PxHullPolygon
 extern class PxConvexMesh extends PxBase
 {
     /**
-    \brief Returns the number of vertices.
-    \return	Number of vertices.
+    Returns the number of vertices.
+    @return	Number of vertices.
     @see getVertices()
     */
     function getNbVertices():PxU32;
 
     /**
-    \brief Returns the vertices.
-    \return	Array of vertices.
+    Returns the vertices.
+    @return	Array of vertices.
     @see getNbVertices()
     */
     function getVertices():cpp.ConstPointer<PxVec3>;
 
     /**
-    \brief Returns the index buffer.
-    \return	Index buffer.
+    Returns the index buffer.
+    @return	Index buffer.
     @see getNbPolygons() getPolygonData()
     */
     function getIndexBuffer():cpp.ConstPointer<PxU8>;
 
     /**
-    \brief Returns the number of polygons.
-    \return	Number of polygons.
+    Returns the number of polygons.
+    @return	Number of polygons.
     @see getIndexBuffer() getPolygonData()
     */
     function getNbPolygons():PxU32;
 
     /**
-    \brief Returns the polygon data.
-    \param[in] index	Polygon index in [0 ; getNbPolygons()[.
-    \param[out] data	Polygon data.
-    \return	True if success.
+    Returns the polygon data.
+    @param [in]index	Polygon index in [0 ; getNbPolygons()[.
+    @param [out]data	Polygon data.
+    @return	True if success.
     @see getIndexBuffer() getNbPolygons()
     */
     function getPolygonData(index:PxU32, data:cpp.Reference<PxHullPolygon>):Bool;
 
     /**
-    \brief Decrements the reference count of a convex mesh and releases it if the new reference count is zero.	
+    Decrements the reference count of a convex mesh and releases it if the new reference count is zero.	
     
     @see PxPhysics.createConvexMesh() PxConvexMeshGeometry PxShape
     */
     function release():Void;
 
     /**
-    \brief Returns the reference count of a convex mesh.
+    Returns the reference count of a convex mesh.
 
     At creation, the reference count of the convex mesh is 1. Every shape referencing this convex mesh increments the
     count by 1.	When the reference count reaches 0, and only then, the convex mesh gets destroyed automatically.
 
-    \return the current reference count.
+    @return the current reference count.
     */
     function getReferenceCount():PxU32;
 
     /**
-    \brief Acquires a counted reference to a convex mesh.
+    Acquires a counted reference to a convex mesh.
 
     This method increases the reference count of the convex mesh by 1. Decrement the reference count by calling release()
     */
     function acquireReference():Void;
 
     /**
-    \brief Returns the mass properties of the mesh assuming unit density.
+    Returns the mass properties of the mesh assuming unit density.
 
     The following relationship holds between mass and volume:
 
@@ -145,25 +145,25 @@ extern class PxConvexMesh extends PxBase
     Similarly, to obtain the localInertia of an identically shaped object with a uniform density of d, simply multiply the
     localInertia of the unit density mesh by d.
 
-    \param[out] mass The mass of the mesh assuming unit density.
-    \param[out] localInertia The inertia tensor in mesh local space assuming unit density.
-    \param[out] localCenterOfMass Position of center of mass (or centroid) in mesh local space.
+    @param [out]mass The mass of the mesh assuming unit density.
+    @param [out]localInertia The inertia tensor in mesh local space assuming unit density.
+    @param [out]localCenterOfMass Position of center of mass (or centroid) in mesh local space.
     */
     function getMassInformation(mass:cpp.Reference<PxReal>, localInertia:cpp.Reference<PxMat33>, localCenterOfMass:cpp.Reference<PxVec3>):Void;
 
     /**
-    \brief Returns the local-space (vertex space) AABB from the convex mesh.
+    Returns the local-space (vertex space) AABB from the convex mesh.
 
-    \return	local-space bounds
+    @return	local-space bounds
     */
     function getLocalBounds():PxBounds3;
 
     /**
-    \brief This method decides whether a convex mesh is gpu compatible. If the total number of vertices are more than 64 or any number of vertices in a polygon is more than 32, or
+    This method decides whether a convex mesh is gpu compatible. If the total number of vertices are more than 64 or any number of vertices in a polygon is more than 32, or
     convex hull data was not cooked with GPU data enabled during cooking or was loaded from a serialized collection, the convex hull is incompatible with GPU collision detection. Otherwise
     it is compatible.
 
-    \return True if the convex hull is gpu compatible
+    @return True if the convex hull is gpu compatible
     */
     function isGpuCompatible():Bool;
 }

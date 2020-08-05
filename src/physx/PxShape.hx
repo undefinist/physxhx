@@ -15,7 +15,7 @@ import physx.foundation.PxTransform;
 import physx.PxFiltering;
 
 /**
-\brief Flags which affect the behavior of PxShapes.
+Flags which affect the behavior of PxShapes.
 
 @see PxShape PxShape.setFlag()
 */
@@ -23,7 +23,7 @@ import physx.PxFiltering;
 extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 {
     /**
-    \brief The shape will partake in collision in the physical simulation.
+    The shape will partake in collision in the physical simulation.
 
     **Note:** It is illegal to raise the eSIMULATION_SHAPE and eTRIGGER_SHAPE flags.
     In the event that one of these flags is already raised the sdk will reject any 
@@ -37,12 +37,12 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
     var eSIMULATION_SHAPE = (1<<0);
 
     /**
-    \brief The shape will partake in scene queries (ray casts, overlap tests, sweeps, ...).
+    The shape will partake in scene queries (ray casts, overlap tests, sweeps, ...).
     */
     var eSCENE_QUERY_SHAPE = (1<<1);
 
     /**
-    \brief The shape is a trigger which can send reports whenever other shapes enter/leave its volume.
+    The shape is a trigger which can send reports whenever other shapes enter/leave its volume.
 
     **Note:** Triangle meshes and heightfields can not be triggers. Shape creation will fail in these cases.
 
@@ -64,7 +64,7 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
     var eTRIGGER_SHAPE = (1<<2);
 
     /**
-    \brief Enable debug renderer for this shape
+    Enable debug renderer for this shape
 
     @see PxScene.getRenderBuffer() PxRenderBuffer PxVisualizationParameter
     */
@@ -76,7 +76,7 @@ extern enum abstract PxShapeFlag(PxShapeFlagImpl)
 private extern class PxShapeFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxShapeFlag.
+collection of set bits defined in PxShapeFlag.
 
 @see PxShapeFlag
 */
@@ -84,7 +84,7 @@ extern abstract PxShapeFlags(PxShapeFlag) from PxShapeFlag to PxShapeFlag {}
 
 
 /**
-\brief Abstract class for collision shapes.
+Abstract class for collision shapes.
 
 Shapes are shared, reference counted objects.
 
@@ -104,7 +104,7 @@ PxTriangleMeshGeometry PxHeightFieldGeometry
 extern class PxShape extends PxBase
 {
 	/**
-	\brief Decrements the reference count of a shape and releases it if the new reference count is zero.
+	Decrements the reference count of a shape and releases it if the new reference count is zero.
 
 	Note that in releases prior to PhysX 3.3 this method did not have reference counting semantics and was used to destroy a shape 
 	created with PxActor::createShape(). In PhysX 3.3 and above, this usage is deprecated, instead, use PxRigidActor::detachShape() to detach
@@ -117,39 +117,39 @@ extern class PxShape extends PxBase
 	function release():Void;
 
 	/**
-	\brief Returns the reference count of the shape.
+	Returns the reference count of the shape.
 
 	At creation, the reference count of the shape is 1. Every actor referencing this shape increments the
 	count by 1.	When the reference count reaches 0, and only then, the shape gets destroyed automatically.
 
-	\return the current reference count.
+	@return the current reference count.
 	*/
 	function getReferenceCount():PxU32;
 
 	/**
-	\brief Acquires a counted reference to a shape.
+	Acquires a counted reference to a shape.
 
 	This method increases the reference count of the shape by 1. Decrement the reference count by calling release()
 	*/
 	function acquireReference():Void;
 
 	/**
-	\brief Get the geometry type of the shape.
+	Get the geometry type of the shape.
 
-	\return Type of shape geometry.
+	@return Type of shape geometry.
 
 	@see PxGeometryType
 	*/
 	function getGeometryType():PxGeometryType;
 
 	/**
-	\brief Adjust the geometry of the shape.
+	Adjust the geometry of the shape.
 
 	**Note:** The type of the passed in geometry must match the geometry type of the shape.
 	**Note:** It is not allowed to change the geometry type of a shape.
 	**Note:** This function does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
 
-	\param[in] geometry New geometry of the shape.
+	@param [in]geometry New geometry of the shape.
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
@@ -157,9 +157,9 @@ extern class PxShape extends PxBase
 
 
 	/**
-	\brief Retrieve the geometry from the shape in a PxGeometryHolder wrapper class.
+	Retrieve the geometry from the shape in a PxGeometryHolder wrapper class.
 
-	\return a PxGeometryHolder object containing the geometry;
+	@return a PxGeometryHolder object containing the geometry;
 	
 	@see PxGeometry PxGeometryType getGeometryType() setGeometry()
 	*/
@@ -168,78 +168,78 @@ extern class PxShape extends PxBase
 
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getBoxGeometry(geometry:PxBoxGeometry):Bool;
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getSphereGeometry(geometry:PxSphereGeometry):Bool;
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getCapsuleGeometry(geometry:PxCapsuleGeometry):Bool;
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getPlaneGeometry(geometry:PxPlaneGeometry):Bool;
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getConvexMeshGeometry(geometry:PxConvexMeshGeometry):Bool;
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
@@ -247,22 +247,22 @@ extern class PxShape extends PxBase
 
 
 	/**
-	\brief Fetch the geometry of the shape.
+	Fetch the geometry of the shape.
 
 	**Note:** If the type of geometry to extract does not match the geometry type of the shape
 	then the method will return false and the passed in geometry descriptor is not modified.
 
-	\param[in] geometry The descriptor to save the shape's geometry data to.
-	\return True on success else false
+	@param [in]geometry The descriptor to save the shape's geometry data to.
+	@return True on success else false
 
 	@see PxGeometry PxGeometryType getGeometryType()
 	*/
 	function getHeightFieldGeometry(geometry:PxHeightFieldGeometry):Bool;
 
 	/**
-	\brief Retrieves the actor which this shape is associated with.
+	Retrieves the actor which this shape is associated with.
 
-	\return The actor this shape is associated with, if it is an exclusive shape, else NULL
+	@return The actor this shape is associated with, if it is an exclusive shape, else NULL
 
 	@see PxRigidStatic, PxRigidDynamic, PxArticulationLink
     */
@@ -276,7 +276,7 @@ extern class PxShape extends PxBase
 //@{
 
 	/**
-	\brief Sets the pose of the shape in actor space, i.e. relative to the actors to which they are attached.
+	Sets the pose of the shape in actor space, i.e. relative to the actors to which they are attached.
 	
 	This transformation is identity by default.
 
@@ -289,18 +289,18 @@ extern class PxShape extends PxBase
 
 	**Default:** the identity transform
 
-	\param[in] pose	The new transform from the actor frame to the shape frame. **Range:** rigid body transform
+	@param [in]pose	The new transform from the actor frame to the shape frame. **Range:** rigid body transform
 
 	@see getLocalPose() 
 	*/
 	function setLocalPose(pose:PxTransform):Void;
 
 	/**
-	\brief Retrieves the pose of the shape in actor space, i.e. relative to the actor they are owned by.
+	Retrieves the pose of the shape in actor space, i.e. relative to the actor they are owned by.
 
 	This transformation is identity by default.
 
-	\return Pose of shape relative to the actor's frame.
+	@return Pose of shape relative to the actor's frame.
 
 	@see setLocalPose() 
 	*/
@@ -314,7 +314,7 @@ extern class PxShape extends PxBase
 //@{
 
 	/**
-	\brief Sets the user definable collision filter data.
+	Sets the user definable collision filter data.
 	
 	**Sleeping:** Does wake up the actor if the filter data change causes a formerly suppressed
 	collision pair to be enabled.
@@ -326,14 +326,14 @@ extern class PxShape extends PxBase
 	function setSimulationFilterData(data:PxFilterData):Void;
 
 	/**
-	\brief Retrieves the shape's collision filter data.
+	Retrieves the shape's collision filter data.
 
 	@see setSimulationFilterData() 
 	*/
 	function getSimulationFilterData():PxFilterData;
 
 	/**
-	\brief Sets the user definable query filter data.
+	Sets the user definable query filter data.
 
 	**Default:** (0,0,0,0)
 
@@ -342,7 +342,7 @@ extern class PxShape extends PxBase
 	function setQueryFilterData(data:PxFilterData):Void;
 
 	/**
-	\brief Retrieves the shape's Query filter data.
+	Retrieves the shape's Query filter data.
 
 	@see setQueryFilterData() 
 	*/
@@ -353,12 +353,12 @@ extern class PxShape extends PxBase
 
 	@:native("setMaterials") private function _setMaterials(materials:cpp.RawPointer<cpp.RawConstPointer<PxMaterial>>, materialCount:PxU16):Void;
 	/**
-	\brief Assigns material(s) to the shape.
+	Assigns material(s) to the shape.
 	
 	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] materials List of material pointers to assign to the shape. See `PxMaterial`
-	\param[in] materialCount The number of materials provided.
+	@param [in]materials List of material pointers to assign to the shape. See `PxMaterial`
+	@param [in]materialCount The number of materials provided.
 
 	@see PxPhysics.createMaterial() getMaterials() 
 	*/
@@ -372,27 +372,27 @@ extern class PxShape extends PxBase
 	}
 	
 	/**
-	\brief Returns the number of materials assigned to the shape.
+	Returns the number of materials assigned to the shape.
 
 	You can use `getMaterials()` to retrieve the material pointers.
 
-	\return Number of materials associated with this shape.
+	@return Number of materials associated with this shape.
 
 	@see PxMaterial getMaterials()
 	*/
 	function getNbMaterials():PxU16;
 
 	/**
-	\brief Retrieve all the material pointers associated with the shape.
+	Retrieve all the material pointers associated with the shape.
 
 	You can retrieve the number of material pointers by calling `getNbMaterials()`
 
 	Note: Removing materials with `PxMaterial.release()` will invalidate the pointer of the released material.
 
-	\param[out] userBuffer The buffer to store the material pointers.
-	\param[in] bufferSize Size of provided user buffer.
-	\param[in] startIndex Index of first material pointer to be retrieved
-	\return Number of material pointers written to the buffer.
+	@param [out]userBuffer The buffer to store the material pointers.
+	@param [in]bufferSize Size of provided user buffer.
+	@param [in]startIndex Index of first material pointer to be retrieved
+	@return Number of material pointers written to the buffer.
 
 	@see PxMaterial getNbMaterials() PxMaterial::release()
 	*/
@@ -402,7 +402,7 @@ extern class PxShape extends PxBase
     }
 	
 	/**
-	\brief Retrieve material from given triangle index.
+	Retrieve material from given triangle index.
 
 	The input index is the internal triangle index as used inside the SDK. This is the index
 	returned to users by various SDK functions such as raycasts.
@@ -411,8 +411,8 @@ extern class PxShape extends PxBase
 	materials. For other shapes the function returns the single material associated with the
 	shape, regardless of the index.
 
-	\param[in] faceIndex The internal triangle index whose material you want to retrieve.
-	\return Material from input triangle
+	@param [in]faceIndex The internal triangle index whose material you want to retrieve.
+	@return Material from input triangle
 
 	**Note:** If faceIndex value of 0xFFFFffff is passed as an input for mesh and heightfield shapes, this function will issue a warning and return NULL.
 	**Note:** Scene queries set the value of PxQueryHit::faceIndex to 0xFFFFffff whenever it is undefined or does not apply.
@@ -422,7 +422,7 @@ extern class PxShape extends PxBase
 	function getMaterialFromInternalFaceIndex(faceIndex:PxU32):PxMaterial;
 
 	/**
-	\brief Sets the contact offset.
+	Sets the contact offset.
 
 	Shapes whose distance is less than the sum of their contactOffset values will generate contacts. The contact offset must be positive and
 	greater than the rest offset. Having a contactOffset greater than than the restOffset allows the collision detection system to
@@ -433,23 +433,23 @@ extern class PxShape extends PxBase
 
 	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] contactOffset **Range:** [maximum(0,restOffset), PX_MAX_F32)
+	@param [in]contactOffset **Range:** [maximum(0,restOffset), PX_MAX_F32)
 
 	@see getContactOffset PxTolerancesScale setRestOffset
 	*/
 	function setContactOffset(contactOffset:PxReal):Void;
 
 	/**
-	\brief Retrieves the contact offset. 
+	Retrieves the contact offset. 
 
-	\return The contact offset of the shape.
+	@return The contact offset of the shape.
 
 	@see setContactOffset()
 	*/
 	function getContactOffset():PxReal;
 
 	/**
-	\brief Sets the rest offset. 
+	Sets the rest offset. 
 
 	Two shapes will come to rest at a distance equal to the sum of their restOffset values. If the restOffset is 0, they should converge to touching 
 	exactly.  Having a restOffset greater than zero is useful to have objects slide smoothly, so that they do not get hung up on irregularities of 
@@ -459,16 +459,16 @@ extern class PxShape extends PxBase
 
 	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] restOffset	**Range:** (-PX_MAX_F32, contactOffset)
+	@param [in]restOffset	**Range:** (-PX_MAX_F32, contactOffset)
 
 	@see getRestOffset setContactOffset
 	*/
 	function setRestOffset(restOffset:PxReal):Void;
 
 	/**
-	\brief Retrieves the rest offset. 
+	Retrieves the rest offset. 
 
-	\return The rest offset of the shape.
+	@return The rest offset of the shape.
 
 	@see setRestOffset()
 	*/
@@ -476,52 +476,52 @@ extern class PxShape extends PxBase
 
 
 	/**
-	\brief Sets torsional patch radius.
+	Sets torsional patch radius.
 	
 	This defines the radius of the contact patch used to apply torsional friction. If the radius is 0, no torsional friction
 	will be applied. If the radius is > 0, some torsional friction will be applied. This is proportional to the penetration depth
 	so, if the shapes are separated or penetration is zero, no torsional friction will be applied. It is used to approximate 
 	rotational friction introduced by the compression of contacting surfaces.
 
-	\param[in] radius	**Range:** (0, PX_MAX_F32)
+	@param [in]radius	**Range:** (0, PX_MAX_F32)
 
 	*/
 	function setTorsionalPatchRadius(radius:PxReal):Void;
 
 	/**
-	\brief Gets torsional patch radius.
+	Gets torsional patch radius.
 
 	This defines the radius of the contact patch used to apply torsional friction. If the radius is 0, no torsional friction
 	will be applied. If the radius is > 0, some torsional friction will be applied. This is proportional to the penetration depth
 	so, if the shapes are separated or penetration is zero, no torsional friction will be applied. It is used to approximate
 	rotational friction introduced by the compression of contacting surfaces.
 
-	\return The torsional patch radius of the shape.
+	@return The torsional patch radius of the shape.
 	*/
 	function getTorsionalPatchRadius():PxReal;
 
 	/**
-	\brief Sets minimum torsional patch radius.
+	Sets minimum torsional patch radius.
 
 	This defines the minimum radius of the contact patch used to apply torsional friction. If the radius is 0, the amount of torsional friction
 	that will be applied will be entirely dependent on the value of torsionalPatchRadius. 
 	
 	If the radius is > 0, some torsional friction will be applied regardless of the value of torsionalPatchRadius or the amount of penetration.
 
-	\param[in] radius	**Range:** (0, PX_MAX_F32)
+	@param [in]radius	**Range:** (0, PX_MAX_F32)
 
 	*/
 	function setMinTorsionalPatchRadius(radius:PxReal):Void;
 
 	/**
-	\brief Gets minimum torsional patch radius.
+	Gets minimum torsional patch radius.
 
 	This defines the minimum radius of the contact patch used to apply torsional friction. If the radius is 0, the amount of torsional friction
 	that will be applied will be entirely dependent on the value of torsionalPatchRadius. 
 	
 	If the radius is > 0, some torsional friction will be applied regardless of the value of torsionalPatchRadius or the amount of penetration.
 
-	\return The minimum torsional patch radius of the shape.
+	@return The minimum torsional patch radius of the shape.
 	*/
 	function getMinTorsionalPatchRadius():PxReal;
 
@@ -529,12 +529,12 @@ extern class PxShape extends PxBase
 /************************************************************************************************/
 
 	/**
-	\brief Sets shape flags
+	Sets shape flags
 
 	**Sleeping:** Does **NOT** wake the associated actor up automatically.
 
-	\param[in] flag The shape flag to enable/disable. See `PxShapeFlag.`
-	\param[in] value True to set the flag. False to clear the flag specified in flag.
+	@param [in]flag The shape flag to enable/disable. See `PxShapeFlag.`
+	@param [in]value True to set the flag. False to clear the flag specified in flag.
 
 	**Default:** PxShapeFlag::eVISUALIZATION | PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE
 
@@ -543,45 +543,45 @@ extern class PxShape extends PxBase
 	function setFlag(flag:PxShapeFlag, value:Bool):Void;
 
 	/**
-	\brief Sets shape flags
+	Sets shape flags
 
 	@see PxShapeFlag getFlags()
 	*/
 	function setFlags(inFlags:PxShapeFlags):Void;
 
 	/**
-	\brief Retrieves shape flags.
+	Retrieves shape flags.
 
-	\return The values of the shape flags.
+	@return The values of the shape flags.
 
 	@see PxShapeFlag setFlag()
 	*/
 	function getFlags():PxShapeFlags;
 
 	/**
-	\brief Returns true if the shape is exclusive to an actor.
+	Returns true if the shape is exclusive to an actor.
 	
 	@see PxPhysics::createShape()
 	*/
 	function isExclusive():Bool;
 
 	/**
-	\brief Sets a name string for the object that can be retrieved with `getName()`.
+	Sets a name string for the object that can be retrieved with `getName()`.
 	
 	This is for debugging and is not used by the SDK.
 	The string is not copied by the SDK, only the pointer is stored.
 
 	**Default:** NULL
 	
-	\param[in] name The name string to set the objects name to.
+	@param [in]name The name string to set the objects name to.
 
 	@see getName()
 	*/
 	function setName(name:String):Void;
 
 	/**
-	\brief retrieves the name string set with setName().
-	\return The name associated with the shape.
+	retrieves the name string set with setName().
+	@return The name associated with the shape.
 
 	@see setName()
 	*/

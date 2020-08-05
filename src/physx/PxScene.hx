@@ -24,7 +24,7 @@ import physx.task.PxCpuDispatcher;
 import physx.task.PxTask;
 
 /**
-\brief Expresses the dominance relationship of a contact.
+Expresses the dominance relationship of a contact.
 For the time being only three settings are permitted:
 
 (1, 1), (0, 1), and (1, 0).
@@ -51,7 +51,7 @@ private extern class PxDominanceGroupPairData
 }
 
 /**
-\brief Identifies each type of actor for retrieving actors from a scene.
+Identifies each type of actor for retrieving actors from a scene.
 
 **Note:** `PxArticulationLink` objects are not supported. Use the `PxArticulation` object to retrieve all its links.
 
@@ -76,7 +76,7 @@ extern enum abstract PxActorTypeFlag(PxActorTypeFlagImpl)
 private extern class PxActorTypeFlagImpl {}
 
 /**
-\brief Collection of set bits defined in PxActorTypeFlag.
+Collection of set bits defined in PxActorTypeFlag.
 
 @see PxActorTypeFlag
 */
@@ -120,7 +120,7 @@ extern class PxQueryCache
 
 
 /** 
- \brief A scene is a collection of bodies and constraints which can interact.
+ A scene is a collection of bodies and constraints which can interact.
 
  The scene simulates the behavior of these objects over time. Several scenes may exist 
  at the same time, but each body or constraint is specific to a scene 
@@ -133,7 +133,7 @@ extern class PxQueryCache
 extern class PxScene
 {
     /**
-    \brief Deletes the scene.
+    Deletes the scene.
 
     Removes any actors and constraint shaders from this scene
     (if the user hasn't already done so).
@@ -146,7 +146,7 @@ extern class PxScene
     function release():Void;
 
     /**
-    \brief Sets a scene flag. You can only set one flag at a time.
+    Sets a scene flag. You can only set one flag at a time.
 
     **Note:** Not all flags are mutable and changing some will result in an error. Please check `PxSceneFlag` to see which flags can be changed.
 
@@ -155,46 +155,46 @@ extern class PxScene
     function setFlag(flag:PxSceneFlag, value:Bool):Void;
 
     /**
-    \brief Get the scene flags.
+    Get the scene flags.
 
-    \return The scene flags. See `PxSceneFlag`
+    @return The scene flags. See `PxSceneFlag`
 
     @see PxSceneFlag
     */
     function getFlags():PxSceneFlags;
     
     /**
-    \brief Set new scene limits. 
+    Set new scene limits. 
 
     **Note:** Increase the maximum capacity of various data structures in the scene. The new capacities will be 
     at least as large as required to deal with the objects currently in the scene. Further, these values 
     are for preallocation and do not represent hard limits.
 
-    \param[in] limits Scene limits.
+    @param [in]limits Scene limits.
     @see PxSceneLimits
     */
     function setLimits(limits:PxSceneLimits):Void;
 
     /**
-    \brief Get current scene limits.
-    \return Current scene limits.
+    Get current scene limits.
+    @return Current scene limits.
     @see PxSceneLimits
     */
     function getLimits():PxSceneLimits;
 
     /**
-    \brief Call this method to retrieve the Physics SDK.
+    Call this method to retrieve the Physics SDK.
 
-    \return The physics SDK this scene is associated with.
+    @return The physics SDK this scene is associated with.
 
     @see PxPhysics
     */
     function getPhysics():PxPhysics;
 
     /**
-    \brief Retrieves the scene's internal timestamp, increased each time a simulation step is completed.
+    Retrieves the scene's internal timestamp, increased each time a simulation step is completed.
 
-    \return scene timestamp
+    @return scene timestamp
     */
     function getTimestamp():PxU32;
     
@@ -206,25 +206,25 @@ extern class PxScene
     //@{
 
     /**
-    \brief Adds an articulation to this scene.
+    Adds an articulation to this scene.
 
     **Note:** If the articulation is already assigned to a scene (see `PxArticulation.getScene),` the call is ignored and an error is issued.
 
-    \param[in] articulation Articulation to add to scene. See `PxArticulation`
+    @param [in]articulation Articulation to add to scene. See `PxArticulation`
 
     @see PxArticulation
     */
     function addArticulation(articulation:PxArticulationBase):Void;
 
     /**
-    \brief Removes an articulation from this scene.
+    Removes an articulation from this scene.
 
     **Note:** If the articulation is not part of this scene (see `PxArticulation.getScene),` the call is ignored and an error is issued. 
     
     **Note:** If the articulation is in an aggregate it will be removed from the aggregate.
 
-    \param[in] articulation Articulation to remove from scene. See `PxArticulation`
-    \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types.
+    @param [in]articulation Articulation to remove from scene. See `PxArticulation`
+    @param [in]wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types.
 
     @see PxArticulation, PxAggregate
     */
@@ -236,7 +236,7 @@ extern class PxScene
 
 
     /**
-    \brief Adds an actor to this scene.
+    Adds an actor to this scene.
     
     **Note:** If the actor is already assigned to a scene (see `PxActor.getScene),` the call is ignored and an error is issued.
     **Note:** If the actor has an invalid constraint, in checked builds the call is ignored and an error is issued.
@@ -252,15 +252,15 @@ extern class PxScene
     bounds and then make a local space query against the provided BVH structure, which is in
     actor's local space.
 
-    \param[in] actor Actor to add to scene.
-    \param[in] bvhStructure BVHStructure for actor shapes.
+    @param [in]actor Actor to add to scene.
+    @param [in]bvhStructure BVHStructure for actor shapes.
 
     @see PxActor, PxConstraint::isValid(), PxBVHStructure
     */
     function addActor(actor:PxActor, bvhStructure:PxBVHStructure = null):Void;
 
     /**
-    \brief Adds actors to this scene.	
+    Adds actors to this scene.	
 
     **Note:** If one of the actors is already assigned to a scene (see `PxActor.getScene),` the call is ignored and an error is issued.
 
@@ -272,8 +272,8 @@ extern class PxScene
 
     **Note:** this method is optimized for high performance, and does not support buffering. It may not be called during simulation.
 
-    \param[in] actors Array of actors to add to scene.
-    \param[in] nbActors Number of actors in the array.
+    @param [in]actors Array of actors to add to scene.
+    @param [in]nbActors Number of actors in the array.
 
     @see PxActor, PxConstraint::isValid()
     */
@@ -284,7 +284,7 @@ extern class PxScene
     }
     
     /**
-    \brief Removes an actor from this scene.
+    Removes an actor from this scene.
 
     **Note:** If the actor is not part of this scene (see `PxActor.getScene),` the call is ignored and an error is issued.
 
@@ -294,8 +294,8 @@ extern class PxScene
 
     **Note:** If the actor is in an aggregate it will be removed from the aggregate.
 
-    \param[in] actor Actor to remove from scene.
-    \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
+    @param [in]actor Actor to remove from scene.
+    @param [in]wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
 
     @see PxActor, PxAggregate
     */
@@ -303,7 +303,7 @@ extern class PxScene
     function removeActor(actor:PxActor, wakeOnLostTouch:Bool):Void;
 
     /**
-    \brief Removes actors from this scene.
+    Removes actors from this scene.
 
     **Note:** If some actor is not part of this scene (see `PxActor.getScene),` the actor remove is ignored and an error is issued.
 
@@ -311,9 +311,9 @@ extern class PxScene
 
     **Note:** If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
 
-    \param[in] actors Array of actors to add to scene.
-    \param[in] nbActors Number of actors in the array.
-    \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types.
+    @param [in]actors Array of actors to add to scene.
+    @param [in]nbActors Number of actors in the array.
+    @param [in]wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types.
 
     @see PxActor
     */
@@ -324,28 +324,28 @@ extern class PxScene
     }
 
     /**
-    \brief Adds an aggregate to this scene.
+    Adds an aggregate to this scene.
     
     **Note:** If the aggregate is already assigned to a scene (see `PxAggregate.getScene),` the call is ignored and an error is issued.
     **Note:** If the aggregate contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
 
     **Note:** If the aggregate already contains actors, those actors are added to the scene as well.
 
-    \param[in] aggregate Aggregate to add to scene.
+    @param [in]aggregate Aggregate to add to scene.
     
     @see PxAggregate, PxConstraint::isValid()
     */
     function addAggregate(aggregate:PxAggregate):Void;
 
     /**
-    \brief Removes an aggregate from this scene.
+    Removes an aggregate from this scene.
 
     **Note:** If the aggregate is not part of this scene (see `PxAggregate.getScene),` the call is ignored and an error is issued.
 
     **Note:** If the aggregate contains actors, those actors are removed from the scene as well.
 
-    \param[in] aggregate Aggregate to remove from scene.
-    \param[in] wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
+    @param [in]aggregate Aggregate to remove from scene.
+    @param [in]wakeOnLostTouch Specifies whether touching objects from the previous frame should get woken up in the next frame. Only applies to PxArticulation and PxRigidActor types. Default `true`.
 
     @see PxAggregate
     */
@@ -353,14 +353,14 @@ extern class PxScene
     function removeAggregate(aggregate:PxAggregate, wakeOnLostTouch:Bool):Void;
 
     /**
-    \brief Adds objects in the collection to this scene.
+    Adds objects in the collection to this scene.
 
     This function adds the following types of objects to this scene: PxActor, PxAggregate, PxArticulation. 
     This method is typically used after deserializing the collection in order to populate the scene with deserialized objects.
 
     **Note:** If the collection contains an actor with an invalid constraint, in checked builds the call is ignored and an error is issued.
 
-    \param[in] collection Objects to add to this scene. See `PxCollection`
+    @param [in]collection Objects to add to this scene. See `PxCollection`
 
     @see PxCollection, PxConstraint::isValid()
     */
@@ -374,17 +374,17 @@ extern class PxScene
     //@{
 
     /**
-    \brief Retrieve the number of actors of certain types in the scene.
+    Retrieve the number of actors of certain types in the scene.
 
-    \param[in] types Combination of actor types.
-    \return the number of actors.
+    @param [in]types Combination of actor types.
+    @return the number of actors.
 
     @see getActors()
     */
     function getNbActors(types:PxActorTypeFlags):PxU32;
 
     /**
-    \brief Retrieve an array of all the actors of certain types in the scene.
+    Retrieve an array of all the actors of certain types in the scene.
 
     @param types Combination of actor types to retrieve.
     @return Array of actors.
@@ -402,16 +402,16 @@ extern class PxScene
     }
 
     /**
-    \brief Queries the PxScene for a list of the PxActors whose transforms have been 
+    Queries the PxScene for a list of the PxActors whose transforms have been 
     updated during the previous simulation step
 
     **Note:** PxSceneFlag::eENABLE_ACTIVE_ACTORS must be set.
 
     **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored and NULL will be returned.
 
-    \param[out] nbActorsOut The number of actors returned.
+    @param [out]nbActorsOut The number of actors returned.
 
-    \return A pointer to the list of active PxActors generated during the last call to fetchResults().
+    @return A pointer to the list of active PxActors generated during the last call to fetchResults().
 
     @see PxActor
     */
@@ -423,21 +423,21 @@ extern class PxScene
     }
 
     /**
-    \brief Returns the number of articulations in the scene.
+    Returns the number of articulations in the scene.
 
-    \return the number of articulations in this scene.
+    @return the number of articulations in this scene.
 
     @see getArticulations()
     */
     function getNbArticulations():PxU32;
 
     /**
-    \brief Retrieve all the articulations in the scene.
+    Retrieve all the articulations in the scene.
 
-    \param[out] userBuffer The buffer to receive articulations pointers.
-    \param[in] bufferSize Size of provided user buffer.
-    \param[in] startIndex Index of first articulations pointer to be retrieved
-    \return Number of articulations written to the buffer.
+    @param [out]userBuffer The buffer to receive articulations pointers.
+    @param [in]bufferSize Size of provided user buffer.
+    @param [in]startIndex Index of first articulations pointer to be retrieved
+    @return Number of articulations written to the buffer.
 
     @see getNbArticulations()
     */
@@ -452,21 +452,21 @@ extern class PxScene
     }
 
     /**
-    \brief Returns the number of constraint shaders in the scene.
+    Returns the number of constraint shaders in the scene.
 
-    \return the number of constraint shaders in this scene.
+    @return the number of constraint shaders in this scene.
 
     @see getConstraints()
     */
     function getNbConstraints():PxU32;
 
     /**
-    \brief Retrieve all the constraint shaders in the scene.
+    Retrieve all the constraint shaders in the scene.
 
-    \param[out] userBuffer The buffer to receive constraint shader pointers.
-    \param[in] bufferSize Size of provided user buffer.
-    \param[in] startIndex Index of first constraint pointer to be retrieved
-    \return Number of constraint shaders written to the buffer.
+    @param [out]userBuffer The buffer to receive constraint shader pointers.
+    @param [in]bufferSize Size of provided user buffer.
+    @param [in]startIndex Index of first constraint pointer to be retrieved
+    @return Number of constraint shaders written to the buffer.
 
     @see getNbConstraints()
     */
@@ -482,21 +482,21 @@ extern class PxScene
 
 
     /**
-    \brief Returns the number of aggregates in the scene.
+    Returns the number of aggregates in the scene.
 
-    \return the number of aggregates in this scene.
+    @return the number of aggregates in this scene.
 
     @see getAggregates()
     */
     function getNbAggregates():PxU32;
 
     /**
-    \brief Retrieve all the aggregates in the scene.
+    Retrieve all the aggregates in the scene.
 
-    \param[out] userBuffer The buffer to receive aggregates pointers.
-    \param[in] bufferSize Size of provided user buffer.
-    \param[in] startIndex Index of first aggregate pointer to be retrieved
-    \return Number of aggregates written to the buffer.
+    @param [out]userBuffer The buffer to receive aggregates pointers.
+    @param [in]bufferSize Size of provided user buffer.
+    @param [in]startIndex Index of first aggregate pointer to be retrieved
+    @return Number of aggregates written to the buffer.
 
     @see getNbAggregates()
     */
@@ -518,7 +518,7 @@ extern class PxScene
     //@{
 
     /**
-    \brief Specifies the dominance behavior of contacts between two actors with two certain dominance groups.
+    Specifies the dominance behavior of contacts between two actors with two certain dominance groups.
     
     It is possible to assign each actor to a dominance groups using `PxActor.setDominanceGroup()`.
 
@@ -570,7 +570,7 @@ extern class PxScene
     function setDominanceGroupPair(group1:PxDominanceGroup, group2:PxDominanceGroup, dominance:PxDominanceGroupPair):Void;
 
     /**
-    \brief Samples the dominance matrix.
+    Samples the dominance matrix.
 
     @see setDominanceGroupPair() PxDominanceGroup PxDominanceGroupPair PxActor::setDominanceGroup() PxActor::getDominanceGroup()
     */
@@ -584,14 +584,14 @@ extern class PxScene
     //@{
 
     /**
-    \brief Return the cpu dispatcher that was set in PxSceneDesc::cpuDispatcher when creating the scene with PxPhysics::createScene
+    Return the cpu dispatcher that was set in PxSceneDesc::cpuDispatcher when creating the scene with PxPhysics::createScene
 
     @see PxSceneDesc::cpuDispatcher, PxPhysics::createScene
     */
     function getCpuDispatcher():PxCpuDispatcher;
 
     /**
-    \brief Return the CUDA context manager that was set in PxSceneDesc::cudaContextManager when creating the scene with PxPhysics::createScene
+    Return the CUDA context manager that was set in PxSceneDesc::cudaContextManager when creating the scene with PxPhysics::createScene
 
     **Platform specific:** Applies to PC GPU only.
 
@@ -607,7 +607,7 @@ extern class PxScene
     //@{
         
     /**
-    \brief Reserves a new client ID.
+    Reserves a new client ID.
     
     PX_DEFAULT_CLIENT is always available as the default clientID.
     Additional clients are returned by this function. Clients cannot be released once created. 
@@ -626,74 +626,74 @@ extern class PxScene
     //@{
 
     /**
-    \brief Sets a user notify object which receives special simulation events when they occur.
+    Sets a user notify object which receives special simulation events when they occur.
 
     **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback User notification callback. See `PxSimulationEventCallback.`
+    @param [in]callback User notification callback. See `PxSimulationEventCallback.`
 
     @see PxSimulationEventCallback getSimulationEventCallback
     */
     function setSimulationEventCallback(callback:PxSimulationEventCallback):Void;
 
     /**
-    \brief Retrieves the simulationEventCallback pointer set with setSimulationEventCallback().
+    Retrieves the simulationEventCallback pointer set with setSimulationEventCallback().
 
-    \return The current user notify pointer. See `PxSimulationEventCallback.`
+    @return The current user notify pointer. See `PxSimulationEventCallback.`
 
     @see PxSimulationEventCallback setSimulationEventCallback()
     */
     function getSimulationEventCallback():PxSimulationEventCallback;
 
     /**
-    \brief Sets a user callback object, which receives callbacks on all contacts generated for specified actors.
+    Sets a user callback object, which receives callbacks on all contacts generated for specified actors.
 
     **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback Asynchronous user contact modification callback. See `PxContactModifyCallback.`
+    @param [in]callback Asynchronous user contact modification callback. See `PxContactModifyCallback.`
     */
     function setContactModifyCallback(callback:PxContactModifyCallback):Void;
 
     /**
-    \brief Sets a user callback object, which receives callbacks on all CCD contacts generated for specified actors.
+    Sets a user callback object, which receives callbacks on all CCD contacts generated for specified actors.
 
     **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback Asynchronous user contact modification callback. See `PxCCDContactModifyCallback.`
+    @param [in]callback Asynchronous user contact modification callback. See `PxCCDContactModifyCallback.`
     */
     function setCCDContactModifyCallback(callback:PxCCDContactModifyCallback):Void;
 
     /**
-    \brief Retrieves the PxContactModifyCallback pointer set with setContactModifyCallback().
+    Retrieves the PxContactModifyCallback pointer set with setContactModifyCallback().
 
-    \return The current user contact modify callback pointer. See `PxContactModifyCallback.`
+    @return The current user contact modify callback pointer. See `PxContactModifyCallback.`
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
     function getContactModifyCallback():PxContactModifyCallback;
 
     /**
-    \brief Retrieves the PxCCDContactModifyCallback pointer set with setContactModifyCallback().
+    Retrieves the PxCCDContactModifyCallback pointer set with setContactModifyCallback().
 
-    \return The current user contact modify callback pointer. See `PxContactModifyCallback.`
+    @return The current user contact modify callback pointer. See `PxContactModifyCallback.`
 
     @see PxContactModifyCallback setContactModifyCallback()
     */
     function getCCDContactModifyCallback():PxCCDContactModifyCallback;
 
     /**
-    \brief Sets a broad-phase user callback object.
+    Sets a broad-phase user callback object.
 
     **Note:** Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] callback	Asynchronous broad-phase callback. See `PxBroadPhaseCallback.`
+    @param [in]callback	Asynchronous broad-phase callback. See `PxBroadPhaseCallback.`
     */
     function setBroadPhaseCallback(callback:PxBroadPhaseCallback):Void;
 
     /**
-    \brief Retrieves the PxBroadPhaseCallback pointer set with setBroadPhaseCallback().
+    Retrieves the PxBroadPhaseCallback pointer set with setBroadPhaseCallback().
 
-    \return The current broad-phase callback pointer. See `PxBroadPhaseCallback.`
+    @return The current broad-phase callback pointer. See `PxBroadPhaseCallback.`
 
     @see PxBroadPhaseCallback setBroadPhaseCallback()
     */
@@ -707,7 +707,7 @@ extern class PxScene
     //@{
 
     /**
-    \brief Sets the shared global filter data which will get passed into the filter shader.
+    Sets the shared global filter data which will get passed into the filter shader.
 
     **Note:** It is the user's responsibility to ensure that changing the shared global filter data does not change the filter output value for existing pairs. 
           If the filter output for existing pairs does change nonetheless then such a change will not take effect until the pair gets refiltered. 
@@ -717,53 +717,53 @@ extern class PxScene
 
     **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[in] data The shared global filter shader data.
-    \param[in] dataSize Size of the shared global filter shader data (in bytes).
+    @param [in]data The shared global filter shader data.
+    @param [in]dataSize Size of the shared global filter shader data (in bytes).
 
     @see getFilterShaderData() PxSceneDesc.filterShaderData PxSimulationFilterShader
     */
     function setFilterShaderData(data:cpp.ConstPointer<cpp.Void>, dataSize:PxU32):Void;
 
     /**
-    \brief Gets the shared global filter data in use for this scene.
+    Gets the shared global filter data in use for this scene.
 
     **Note:** The reference points to a copy of the original filter data specified in `PxSceneDesc.filterShaderData` or provided by `setFilterShaderData()`.
 
-    \return Shared filter data for filter shader.
+    @return Shared filter data for filter shader.
 
     @see getFilterShaderDataSize() setFilterShaderData() PxSceneDesc.filterShaderData PxSimulationFilterShader
     */
     function getFilterShaderData():cpp.ConstPointer<cpp.Void>;
 
     /**
-    \brief Gets the size of the shared global filter data (`PxSceneDesc.filterShaderData)`
+    Gets the size of the shared global filter data (`PxSceneDesc.filterShaderData)`
 
-    \return Size of shared filter data [bytes].
+    @return Size of shared filter data [bytes].
 
     @see getFilterShaderData() PxSceneDesc.filterShaderDataSize PxSimulationFilterShader
     */
     function getFilterShaderDataSize():PxU32;
 
     /**
-    \brief Gets the custom collision filter shader in use for this scene.
+    Gets the custom collision filter shader in use for this scene.
 
-    \return Filter shader class that defines the collision pair filtering.
+    @return Filter shader class that defines the collision pair filtering.
 
     @see PxSceneDesc.filterShader PxSimulationFilterShader
     */
     function getFilterShader():PxSimulationFilterShader;
 
     /**
-    \brief Gets the custom collision filter callback in use for this scene.
+    Gets the custom collision filter callback in use for this scene.
 
-    \return Filter callback class that defines the collision pair filtering.
+    @return Filter callback class that defines the collision pair filtering.
 
     @see PxSceneDesc.filterCallback PxSimulationFilterCallback
     */
     function getFilterCallback():PxSimulationFilterCallback;
 
     /**
-    \brief Marks the object to reset interactions and re-run collision filters in the next simulation step.
+    Marks the object to reset interactions and re-run collision filters in the next simulation step.
     
     This call forces the object to remove all existing collision interactions, to search anew for existing contact
     pairs and to run the collision filters again for found collision pairs.
@@ -787,7 +787,7 @@ extern class PxScene
 
     **Sleeping:** Does wake up the actor.
 
-    \param[in] actor The actor for which to re-evaluate interactions.
+    @param [in]actor The actor for which to re-evaluate interactions.
 
     @see PxSimulationFilterShader PxSimulationFilterCallback
     */
@@ -795,16 +795,16 @@ extern class PxScene
 
     @:native("resetFiltering") private function _resetFilteringX(actor:PxRigidActor, shapes:cpp.ConstPointer<PxShape>, shapeCount:PxU32):Void;
     /**
-    \brief Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.
+    Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.
     
     This is a specialization of the resetFiltering(PxActor& actor) method and allows to reset interactions for specific shapes of
     a PxRigidActor.
 
     **Sleeping:** Does wake up the actor.
 
-    \param[in] actor The actor for which to re-evaluate interactions.
-    \param[in] shapes The shapes for which to re-evaluate interactions.
-    \param[in] shapeCount Number of shapes in the list.
+    @param [in]actor The actor for which to re-evaluate interactions.
+    @param [in]shapes The shapes for which to re-evaluate interactions.
+    @param [in]shapeCount Number of shapes in the list.
 
     @see PxSimulationFilterShader PxSimulationFilterCallback
     */
@@ -814,18 +814,18 @@ extern class PxScene
     }
 
     /**
-    \brief Gets the pair filtering mode for kinematic-kinematic pairs.
+    Gets the pair filtering mode for kinematic-kinematic pairs.
 
-    \return Filtering mode for kinematic-kinematic pairs.
+    @return Filtering mode for kinematic-kinematic pairs.
 
     @see PxPairFilteringMode PxSceneDesc
     */
     function getKinematicKinematicFilteringMode():PxPairFilteringMode;
 
     /**
-    \brief Gets the pair filtering mode for static-kinematic pairs.
+    Gets the pair filtering mode for static-kinematic pairs.
 
-    \return Filtering mode for static-kinematic pairs.
+    @return Filtering mode for static-kinematic pairs.
 
     @see PxPairFilteringMode PxSceneDesc
     */
@@ -876,11 +876,11 @@ extern class PxScene
 
 
     /**
-     \brief Performs dynamics phase of the simulation pipeline.
+     Performs dynamics phase of the simulation pipeline.
     
     **Note:** Calls to advance() should follow calls to fetchCollision(). An error message will be issued if this sequence is not followed.
 
-    \param[in] completionTask if non-NULL, this task will have its refcount incremented in advance(), then
+    @param [in]completionTask if non-NULL, this task will have its refcount incremented in advance(), then
     decremented when the scene is ready to have fetchResults called. So the task will not run until the
     application also calls removeReference().
 
@@ -888,19 +888,19 @@ extern class PxScene
     function advance(?completionTask:PxBaseTask):Void;
 
     /**
-    \brief Performs collision detection for the scene over elapsedTime
+    Performs collision detection for the scene over elapsedTime
     
     **Note:** Calls to collide() should be the first method called to simulate a frame.
 
 
-    \param[in] elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. **Range:** (0, PX_MAX_F32)
-    \param[in] completionTask if non-NULL, this task will have its refcount incremented in collide(), then
+    @param [in]elapsedTime Amount of time to advance simulation by. The parameter has to be larger than 0, else the resulting behavior will be undefined. **Range:** (0, PX_MAX_F32)
+    @param [in]completionTask if non-NULL, this task will have its refcount incremented in collide(), then
     decremented when the scene is ready to have fetchResults called. So the task will not run until the
     application also calls removeReference().
-    \param[in] scratchMemBlock a memory region for physx to use for temporary data during simulation. This block may be reused by the application
+    @param [in]scratchMemBlock a memory region for physx to use for temporary data during simulation. This block may be reused by the application
     after fetchResults returns. Must be aligned on a 16-byte boundary
-    \param[in] scratchMemBlockSize the size of the scratch memory block. Must be a multiple of 16K.
-    \param[in] controlSimulation if true, the scene controls its PxTaskManager simulation state. Leave
+    @param [in]scratchMemBlockSize the size of the scratch memory block. Must be a multiple of 16K.
+    @param [in]controlSimulation if true, the scene controls its PxTaskManager simulation state. Leave
     true unless the application is calling the PxTaskManager start/stopSimulation() methods itself.
 
     */
@@ -984,7 +984,7 @@ extern class PxScene
     This is a utility function to make it easier to process callbacks in parallel using the PhysX task system. It can only be used in conjunction with 
     fetchResultsStart(...) and fetchResultsFinish(...)
 
-    \param[in] continuation The task that will be executed once all callbacks have been processed.
+    @param [in]continuation The task that will be executed once all callbacks have been processed.
     */
     function processCallbacks(continuation:PxBaseTask):Void;
 
@@ -996,7 +996,7 @@ extern class PxScene
 
     Note that once fetchResultsFinish() has been called, the contact streams returned in fetchResultsStart() will be invalid.
 
-    \param[out] errorState Used to retrieve hardware error codes. A non zero value indicates an error.
+    @param [out]errorState Used to retrieve hardware error codes. A non zero value indicates an error.
 
     @see simulate() checkResults() fetchResults() fetchResultsStart()
     */
@@ -1004,46 +1004,46 @@ extern class PxScene
 
 
     /**
-    \brief Clear internal buffers and free memory.
+    Clear internal buffers and free memory.
 
     This method can be used to clear buffers and free internal memory without having to destroy the scene. Can be useful if
     the physics data gets streamed in and a checkpoint with a clean state should be created.
 
     **Note:** It is not allowed to call this method while the simulation is running. The call will fail.
     
-    \param[in] sendPendingReports When set to true pending reports will be sent out before the buffers get cleaned up (for instance lost touch contact/trigger reports due to deleted objects).
+    @param [in]sendPendingReports When set to true pending reports will be sent out before the buffers get cleaned up (for instance lost touch contact/trigger reports due to deleted objects).
     */
     function flushSimulation(sendPendingReports:Bool = false):Void;
     
     /**
-    \brief Sets a constant gravity for the entire scene.
+    Sets a constant gravity for the entire scene.
 
     **Sleeping:** Does **NOT** wake the actor up automatically.
 
-    \param[in] vec A new gravity vector(e.g. PxVec3(0.0f,-9.8f,0.0f) ) **Range:** force vector
+    @param [in]vec A new gravity vector(e.g. PxVec3(0.0f,-9.8f,0.0f) ) **Range:** force vector
 
     @see PxSceneDesc.gravity getGravity()
     */
     function setGravity(vec:PxVec3):Void;
 
     /**
-    \brief Retrieves the current gravity setting.
+    Retrieves the current gravity setting.
 
-    \return The current gravity for the scene.
+    @return The current gravity for the scene.
 
     @see setGravity() PxSceneDesc.gravity
     */
     function getGravity():PxVec3;
 
     /**
-    \brief Set the bounce threshold velocity.  Collision speeds below this threshold will not cause a bounce.
+    Set the bounce threshold velocity.  Collision speeds below this threshold will not cause a bounce.
 
     @see PxSceneDesc::bounceThresholdVelocity, getBounceThresholdVelocity
     */
     function setBounceThresholdVelocity(t:PxReal):Void;
 
     /**
-    \brief Return the bounce threshold velocity.
+    Return the bounce threshold velocity.
 
     @see PxSceneDesc.bounceThresholdVelocity, setBounceThresholdVelocity
     */
@@ -1051,9 +1051,9 @@ extern class PxScene
 
 
     /**
-    \brief Sets the maximum number of CCD passes
+    Sets the maximum number of CCD passes
 
-    \param[in] ccdMaxPasses Maximum number of CCD passes
+    @param [in]ccdMaxPasses Maximum number of CCD passes
 
     @see PxSceneDesc.ccdMaxPasses getCCDMaxPasses()
 
@@ -1061,9 +1061,9 @@ extern class PxScene
     function setCCDMaxPasses(ccdMaxPasses:PxU32):Void;
 
     /**
-    \brief Gets the maximum number of CCD passes.
+    Gets the maximum number of CCD passes.
 
-    \return The maximum number of CCD passes.
+    @return The maximum number of CCD passes.
 
     @see PxSceneDesc::ccdMaxPasses setCCDMaxPasses()
 
@@ -1071,20 +1071,20 @@ extern class PxScene
     function getCCDMaxPasses():PxU32;	
 
     /**
-    \brief Return the value of frictionOffsetThreshold that was set in PxSceneDesc when creating the scene with PxPhysics::createScene
+    Return the value of frictionOffsetThreshold that was set in PxSceneDesc when creating the scene with PxPhysics::createScene
 
     @see PxSceneDesc::frictionOffsetThreshold,  PxPhysics::createScene
     */
     function getFrictionOffsetThreshold():PxReal;
 
     /**
-    \brief Set the friction model.
+    Set the friction model.
     @see PxFrictionType, PxSceneDesc::frictionType
     */
     function setFrictionType(frictionType:PxFrictionType):Void;
 
     /**
-    \brief Return the friction model.
+    Return the friction model.
     @see PxFrictionType, PxSceneDesc::frictionType
     */
     function getFrictionType():PxFrictionType;
@@ -1097,23 +1097,23 @@ extern class PxScene
     //@{
 
     /**
-    \brief Function that lets you set debug visualization parameters.
+    Function that lets you set debug visualization parameters.
 
     Returns false if the value passed is out of range for usage specified by the enum.
 
-    \param[in] param	Parameter to set. See `PxVisualizationParameter`
-    \param[in] value	The value to set, see `PxVisualizationParameter` for allowable values. Setting to zero disables visualization for the specified property, setting to a positive value usually enables visualization and defines the scale factor.
-    \return False if the parameter is out of range.
+    @param [in]param	Parameter to set. See `PxVisualizationParameter`
+    @param [in]value	The value to set, see `PxVisualizationParameter` for allowable values. Setting to zero disables visualization for the specified property, setting to a positive value usually enables visualization and defines the scale factor.
+    @return False if the parameter is out of range.
 
     @see getVisualizationParameter PxVisualizationParameter getRenderBuffer()
     */
     function setVisualizationParameter(param:PxVisualizationParameter, value:PxReal):Bool;
 
     /**
-    \brief Function that lets you query debug visualization parameters.
+    Function that lets you query debug visualization parameters.
 
-    \param[in] paramEnum The Parameter to retrieve.
-    \return The value of the parameter.
+    @param [in]paramEnum The Parameter to retrieve.
+    @return The value of the parameter.
 
     @see setVisualizationParameter PxVisualizationParameter
     */
@@ -1121,29 +1121,29 @@ extern class PxScene
 
 
     /**
-    \brief Defines a box in world space to which visualization geometry will be (conservatively) culled. Use a non-empty culling box to enable the feature, and an empty culling box to disable it.
+    Defines a box in world space to which visualization geometry will be (conservatively) culled. Use a non-empty culling box to enable the feature, and an empty culling box to disable it.
     
-    \param[in] box the box to which the geometry will be culled. Empty box to disable the feature.
+    @param [in]box the box to which the geometry will be culled. Empty box to disable the feature.
     @see setVisualizationParameter getVisualizationCullingBox getRenderBuffer()
     */
     function setVisualizationCullingBox(box:PxBounds3):Void;
 
     /**
-    \brief Retrieves the visualization culling box.
+    Retrieves the visualization culling box.
 
-    \return the box to which the geometry will be culled.
+    @return the box to which the geometry will be culled.
     @see setVisualizationParameter setVisualizationCullingBox 
     */
     function getVisualizationCullingBox():PxBounds3;
     
     /**
-    \brief Retrieves the render buffer.
+    Retrieves the render buffer.
     
     This will contain the results of any active visualization for this scene.
 
     **Note:** Do not use this method while the simulation is running. Calls to this method while result in undefined behaviour.
 
-    \return The render buffer.
+    @return The render buffer.
 
     @see PxRenderBuffer
     */
@@ -1151,11 +1151,11 @@ extern class PxScene
     
     @:native("getSimulationStatistics") private function _getSimulationStatistics(stats:cpp.Reference<PxSimulationStatistics>):Void;
     /**
-    \brief Call this method to retrieve statistics for the current simulation step.
+    Call this method to retrieve statistics for the current simulation step.
 
     **Note:** Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
 
-    \param[out] stats Used to retrieve statistics for the current simulation step.
+    @param [out]stats Used to retrieve statistics for the current simulation step.
 
     @see PxSimulationStatistics
     */
@@ -1175,21 +1175,21 @@ extern class PxScene
     //@{
 
     /**
-    \brief Return the value of PxSceneDesc::staticStructure that was set when creating the scene with PxPhysics::createScene
+    Return the value of PxSceneDesc::staticStructure that was set when creating the scene with PxPhysics::createScene
 
     @see PxSceneDesc::staticStructure, PxPhysics::createScene
     */
     function getStaticStructure():PxPruningStructureType;
 
     /**
-    \brief Return the value of PxSceneDesc::dynamicStructure that was set when creating the scene with PxPhysics::createScene
+    Return the value of PxSceneDesc::dynamicStructure that was set when creating the scene with PxPhysics::createScene
 
     @see PxSceneDesc::dynamicStructure, PxPhysics::createScene
     */
     function getDynamicStructure():PxPruningStructureType;
 
     /**
-    \brief Flushes any changes to the scene query representation.
+    Flushes any changes to the scene query representation.
 
     This method updates the state of the scene query representation to match changes in the scene state.
 
@@ -1205,66 +1205,66 @@ extern class PxScene
     function flushQueryUpdates():Void;
 
     // /**
-    // \brief Creates a BatchQuery object. 
+    // Creates a BatchQuery object. 
 
     // Scene queries like raycasts, overlap tests and sweeps are batched in this object and are then executed at once. See `PxBatchQuery.`
 
     // \deprecated The batched query feature has been deprecated in PhysX version 3.4
 
-    // \param[in] desc The descriptor of scene query. Scene Queries need to register a callback. See `PxBatchQueryDesc.`
+    // @param [in]desc The descriptor of scene query. Scene Queries need to register a callback. See `PxBatchQueryDesc.`
 
     // @see PxBatchQuery PxBatchQueryDesc
     // */
     // PX_DEPRECATED virtual	PxBatchQuery*		createBatchQuery(const PxBatchQueryDesc& desc) = 0;
 
     /**
-    \brief Sets the rebuild rate of the dynamic tree pruning structures.
+    Sets the rebuild rate of the dynamic tree pruning structures.
 
-    \param[in] dynamicTreeRebuildRateHint Rebuild rate of the dynamic tree pruning structures.
+    @param [in]dynamicTreeRebuildRateHint Rebuild rate of the dynamic tree pruning structures.
 
     @see PxSceneDesc.dynamicTreeRebuildRateHint getDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
     */
     function setDynamicTreeRebuildRateHint(dynamicTreeRebuildRateHint:PxU32):Void;
 
     /**
-    \brief Retrieves the rebuild rate of the dynamic tree pruning structures.
+    Retrieves the rebuild rate of the dynamic tree pruning structures.
 
-    \return The rebuild rate of the dynamic tree pruning structures.
+    @return The rebuild rate of the dynamic tree pruning structures.
 
     @see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() forceDynamicTreeRebuild()
     */
     function getDynamicTreeRebuildRateHint():Void;
 
     /**
-    \brief Forces dynamic trees to be immediately rebuilt.
+    Forces dynamic trees to be immediately rebuilt.
 
-    \param[in] rebuildStaticStructure	True to rebuild the dynamic tree containing static objects
-    \param[in] rebuildDynamicStructure	True to rebuild the dynamic tree containing dynamic objects
+    @param [in]rebuildStaticStructure	True to rebuild the dynamic tree containing static objects
+    @param [in]rebuildDynamicStructure	True to rebuild the dynamic tree containing dynamic objects
 
     @see PxSceneDesc.dynamicTreeRebuildRateHint setDynamicTreeRebuildRateHint() getDynamicTreeRebuildRateHint()
     */
     function forceDynamicTreeRebuild(rebuildStaticStructure:Bool, rebuildDynamicStructure:Bool):Void;
 
     /**
-    \brief Sets scene query update mode	
+    Sets scene query update mode	
 
-    \param[in] updateMode	Scene query update mode.
+    @param [in]updateMode	Scene query update mode.
 
     @see PxSceneQueryUpdateMode::Enum
     */
     function setSceneQueryUpdateMode(updateMode:PxSceneQueryUpdateMode):Void;
 
     /**
-    \brief Gets scene query update mode	
+    Gets scene query update mode	
 
-    \return Current scene query update mode.
+    @return Current scene query update mode.
 
     @see PxSceneQueryUpdateMode::Enum
     */
     function getSceneQueryUpdateMode():PxSceneQueryUpdateMode;
 
     /**
-    \brief Executes scene queries update tasks.
+    Executes scene queries update tasks.
     This function will refit dirty shapes within the pruner and will execute a task to build a new AABB tree, which is
     build on a different thread. The new AABB tree is built based on the dynamic tree rebuild hint rate. Once
     the new tree is ready it will be commited in next fetchQueries call, which must be called after.
@@ -1272,10 +1272,10 @@ extern class PxScene
     **Note:** If PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED is used, it is required to update the scene queries
     using this function.
 
-    \param[in] completionTask if non-NULL, this task will have its refcount incremented in sceneQueryUpdate(), then
+    @param [in]completionTask if non-NULL, this task will have its refcount incremented in sceneQueryUpdate(), then
     decremented when the scene is ready to have fetchQueries called. So the task will not run until the
     application also calls removeReference().
-    \param[in] controlSimulation if true, the scene controls its PxTaskManager simulation state. Default `true`. Leave
+    @param [in]controlSimulation if true, the scene controls its PxTaskManager simulation state. Default `true`. Leave
     true unless the application is calling the PxTaskManager start/stopSimulation() methods itself.
 
     @see PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED
@@ -1284,13 +1284,13 @@ extern class PxScene
     function sceneQueriesUpdate(?completionTask:PxBaseTask, controlSimulation:Bool):Void;
 
     /**
-    \brief This checks to see if the scene queries update has completed.
+    This checks to see if the scene queries update has completed.
 
     This does not cause the data available for reading to be updated with the results of the scene queries update, it is simply a status check.
     The bool will allow it to either return immediately or block waiting for the condition to be met so that it can return true
     
-    \param[in] block When set to true will block until the condition is met.
-    \return True if the results are available.
+    @param [in]block When set to true will block until the condition is met.
+    @return True if the results are available.
 
     @see sceneQueriesUpdate() fetchResults()
     */
@@ -1302,7 +1302,7 @@ extern class PxScene
 
     If a new AABB tree build finished, then during fetchQueries the current tree within the pruning structure is swapped with the new tree. 
 
-    \param[in] block When set to true will block until the condition is met, which is tree built task must finish running.
+    @param [in]block When set to true will block until the condition is met, which is tree built task must finish running.
     */
     function fetchQueries(block:Bool = false):Bool;
 
@@ -1397,10 +1397,10 @@ extern class PxScene
 
 
     /**
-    \brief Retrieves the scene's internal scene query timestamp, increased each time a change to the
+    Retrieves the scene's internal scene query timestamp, increased each time a change to the
     static scene query structure is performed.
 
-    \return scene query static timestamp
+    @return scene query static timestamp
     */
     function getSceneQueryStaticTimestamp():PxU32;
     
@@ -1413,24 +1413,24 @@ extern class PxScene
     //@{
 
     /**
-    \brief Returns broad-phase type.
+    Returns broad-phase type.
 
-    \return Broad-phase type
+    @return Broad-phase type
     */
     function getBroadPhaseType():PxBroadPhaseType;
 
     /**
-    \brief Gets broad-phase caps.
+    Gets broad-phase caps.
 
-    \param[out]	caps	Broad-phase caps
-    \return True if success
+    @param [out] caps	Broad-phase caps
+    @return True if success
     */
     function getBroadPhaseCaps(caps:PxBroadPhaseCaps):Bool;
 
     /**
-    \brief Returns number of regions currently registered in the broad-phase.
+    Returns number of regions currently registered in the broad-phase.
 
-    \return Number of regions
+    @return Number of regions
     */
     function getNbBroadPhaseRegions():PxU32;
 
@@ -1451,7 +1451,7 @@ extern class PxScene
     }
 
     /**
-    \brief Adds a new broad-phase region.
+    Adds a new broad-phase region.
 
     Note that by default, objects already existing in the SDK that might touch this region will not be automatically
     added to the region. In other words the newly created region will be empty, and will only be populated with new
@@ -1462,14 +1462,14 @@ extern class PxScene
     when the game can not guarantee that all objects within the new region will be added to the simulation after the
     region itself.
 
-    \param[in]	region			User-provided region data
-    \param[in]	populateRegion	Automatically populate new region with already existing objects overlapping it
-    \return Handle for newly created region, or 0xffffffff in case of failure.
+    @param [in] region			User-provided region data
+    @param [in] populateRegion	Automatically populate new region with already existing objects overlapping it
+    @return Handle for newly created region, or 0xffffffff in case of failure.
     */
     function addBroadPhaseRegion(region:PxBroadPhaseRegion, populateRegion:Bool = false):PxU32;
 
     /**
-    \brief Removes a new broad-phase region.
+    Removes a new broad-phase region.
 
     If the region still contains objects, and if those objects do not overlap any region any more, they are not
     automatically removed from the simulation. Instead, the PxBroadPhaseCallback::onObjectOutOfBounds notification
@@ -1478,8 +1478,8 @@ extern class PxScene
 
     If the handle is invalid, or if a valid handle is removed twice, an error message is sent to the error stream.
 
-    \param[in]	handle	Region's handle, as returned by PxScene::addBroadPhaseRegion.
-    \return True if success
+    @param [in] handle	Region's handle, as returned by PxScene::addBroadPhaseRegion.
+    @return True if success
     */
     function removeBroadPhaseRegion(handle:PxU32):Bool;
 
@@ -1492,15 +1492,15 @@ extern class PxScene
     //@{
 
     /**
-    \brief Get the task manager associated with this scene
+    Get the task manager associated with this scene
 
-    \return the task manager associated with the scene
+    @return the task manager associated with the scene
     */
 //virtual PxTaskManager*			getTaskManager() const = 0;
 
 
     /**
-    \brief Lock the scene for reading from the calling thread.
+    Lock the scene for reading from the calling thread.
 
     When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockRead() must be 
     called before any read calls are made on the scene.
@@ -1514,20 +1514,20 @@ extern class PxScene
 
     **Note:** Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
 
-    \param file String representing the calling file, for debug purposes
-    \param line The source file line number, for debug purposes
+    @param file String representing the calling file, for debug purposes
+    @param line The source file line number, for debug purposes
     */
     function lockRead(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
 
     /** 
-    \brief Unlock the scene from reading.
+    Unlock the scene from reading.
 
     **Note:** Each unlockRead() must be paired with a lockRead() from the same thread.
     */
     function unlockRead():Void;
 
     /**
-    \brief Lock the scene for writing from this thread.
+    Lock the scene for writing from this thread.
 
     When the PxSceneFlag::eREQUIRE_RW_LOCK flag is enabled lockWrite() must be 
     called before any write calls are made on the scene.
@@ -1548,13 +1548,13 @@ extern class PxScene
     **Note:** If a thread has already locked the scene for writing then it may call
     lockRead().
 
-    \param file String representing the calling file, for debug purposes
-    \param line The source file line number, for debug purposes
+    @param file String representing the calling file, for debug purposes
+    @param line The source file line number, for debug purposes
     */
     function lockWrite(?file:cpp.ConstCharStar, line:PxU32 = 0):Void;
 
     /**
-    \brief Unlock the scene from writing.
+    Unlock the scene from writing.
 
     **Note:** Each unlockWrite() must be paired with a lockWrite() from the same thread.
     */
@@ -1562,7 +1562,7 @@ extern class PxScene
     
 
     /**
-    \brief set the cache blocks that can be used during simulate(). 
+    set the cache blocks that can be used during simulate(). 
     
     Each frame the simulation requires memory to store contact, friction, and contact cache data. This memory is used in blocks of 16K.
     Each frame the blocks used by the previous frame are freed, and may be retrieved by the application using PxScene::flushSimulation()
@@ -1570,7 +1570,7 @@ extern class PxScene
     This call will force allocation of cache blocks if the numBlocks parameter is greater than the currently allocated number
     of blocks, and less than the max16KContactDataBlocks parameter specified at scene creation time.
 
-    \param[in] numBlocks The number of blocks to allocate.	
+    @param [in]numBlocks The number of blocks to allocate.	
 
     @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() getNbContactDataBlocksUsed getMaxNbContactDataBlocksUsed
     */
@@ -1578,22 +1578,22 @@ extern class PxScene
     
 
     /**
-    \brief get the number of cache blocks currently used by the scene 
+    get the number of cache blocks currently used by the scene 
 
     This function may not be called while the scene is simulating
 
-    \return the number of cache blocks currently used by the scene
+    @return the number of cache blocks currently used by the scene
 
     @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getMaxNbContactDataBlocksUsed()
     */
     function getNbContactDataBlocksUsed():PxU32;
 
     /**
-    \brief get the maximum number of cache blocks used by the scene 
+    get the maximum number of cache blocks used by the scene 
 
     This function may not be called while the scene is simulating
 
-    \return the maximum number of cache blocks everused by the scene
+    @return the maximum number of cache blocks everused by the scene
 
     @see PxSceneDesc.nbContactDataBlocks PxSceneDesc.maxNbContactDataBlocks flushSimulation() setNbContactDataBlocks() getNbContactDataBlocksUsed()
     */
@@ -1601,7 +1601,7 @@ extern class PxScene
 
 
     /**
-    \brief Return the value of PxSceneDesc::contactReportStreamBufferSize that was set when creating the scene with PxPhysics::createScene
+    Return the value of PxSceneDesc::contactReportStreamBufferSize that was set when creating the scene with PxPhysics::createScene
 
     @see PxSceneDesc::contactReportStreamBufferSize, PxPhysics::createScene
     */
@@ -1609,36 +1609,36 @@ extern class PxScene
 
     
     /**
-    \brief Sets the number of actors required to spawn a separate rigid body solver thread.
+    Sets the number of actors required to spawn a separate rigid body solver thread.
 
-    \param[in] solverBatchSize Number of actors required to spawn a separate rigid body solver thread.
+    @param [in]solverBatchSize Number of actors required to spawn a separate rigid body solver thread.
 
     @see PxSceneDesc.solverBatchSize getSolverBatchSize()
     */
     function setSolverBatchSize(solverBatchSize:PxU32):Void;
 
     /**
-    \brief Retrieves the number of actors required to spawn a separate rigid body solver thread.
+    Retrieves the number of actors required to spawn a separate rigid body solver thread.
 
-    \return Current number of actors required to spawn a separate rigid body solver thread.
+    @return Current number of actors required to spawn a separate rigid body solver thread.
 
     @see PxSceneDesc.solverBatchSize setSolverBatchSize()
     */
     function getSolverBatchSize():PxU32;
 
     /**
-    \brief Sets the number of articulations required to spawn a separate rigid body solver thread.
+    Sets the number of articulations required to spawn a separate rigid body solver thread.
 
-    \param[in] solverBatchSize Number of articulations required to spawn a separate rigid body solver thread.
+    @param [in]solverBatchSize Number of articulations required to spawn a separate rigid body solver thread.
 
     @see PxSceneDesc.solverBatchSize getSolverArticulationBatchSize()
     */
     function setSolverArticulationBatchSize(solverBatchSize:PxU32):Void;
 
     /**
-    \brief Retrieves the number of articulations required to spawn a separate rigid body solver thread.
+    Retrieves the number of articulations required to spawn a separate rigid body solver thread.
 
-    \return Current number of articulations required to spawn a separate rigid body solver thread.
+    @return Current number of articulations required to spawn a separate rigid body solver thread.
 
     @see PxSceneDesc.solverBatchSize setSolverArticulationBatchSize()
     */
@@ -1648,16 +1648,16 @@ extern class PxScene
     //@}
 
     /**
-    \brief Returns the wake counter reset value.
+    Returns the wake counter reset value.
 
-    \return Wake counter reset value
+    @return Wake counter reset value
 
     @see PxSceneDesc.wakeCounterResetValue
     */
     function getWakeCounterResetValue():PxReal;
 
     /**
-    \brief Shift the scene origin by the specified vector.
+    Shift the scene origin by the specified vector.
 
     The poses of all objects in the scene and the corresponding data structures will get adjusted to reflect the new origin location
     (the shift vector will get subtracted from all object positions).
@@ -1670,13 +1670,13 @@ extern class PxScene
 
     **Note:** This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
 
-    \param[in] shift Translation vector to shift the origin by.
+    @param [in]shift Translation vector to shift the origin by.
     */
     function shiftOrigin(shift:PxVec3):Void;
 
     /**
-    \brief Returns the Pvd client associated with the scene.
-    \return the client, NULL if no PVD supported.
+    Returns the Pvd client associated with the scene.
+    @return the client, NULL if no PVD supported.
     */
     function getScenePvdClient():PxPvdSceneClient;
 

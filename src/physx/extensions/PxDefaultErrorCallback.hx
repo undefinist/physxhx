@@ -3,7 +3,7 @@ package physx.extensions;
 import physx.foundation.PxErrorCallback;
 
 /**
-\brief default implementation of the error callback
+default implementation of the error callback
 
 This class is provided in order to enable the SDK to be started with the minimum of user code. Typically an application
 will use its own error callback, and log the error to file or otherwise make it visible. Warnings and error messages from

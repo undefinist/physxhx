@@ -1,7 +1,7 @@
 package physx.foundation;
 
 /**
-\brief This is a quaternion class. For more information on quaternion mathematics
+This is a quaternion class. For more information on quaternion mathematics
 consult a mathematics source on complex numbers.
 */
 @:forward
@@ -9,7 +9,7 @@ consult a mathematics source on complex numbers.
 extern abstract PxQuat(PxQuatData)
 {
     /**
-    \brief Creates from angle-axis representation.
+    Creates from angle-axis representation.
 
     Axis must be normalized!
 
@@ -23,7 +23,7 @@ extern abstract PxQuat(PxQuatData)
     }
 
     /**
-    \brief Creates from orientation matrix.
+    Creates from orientation matrix.
 
     @param m Rotation matrix to extract quaternion from.
     */
@@ -47,7 +47,7 @@ extern abstract PxQuat(PxQuatData)
     }
     
     /**
-    \brief returns true if the two quaternions are exactly equal
+    returns true if the two quaternions are exactly equal
     */
     @:op(A == B)
     inline function equals(q:PxQuat):Bool
@@ -139,34 +139,34 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     }
 
     /**
-    \brief returns true if quat is identity
+    returns true if quat is identity
     */
     function isIdentity():Bool;
 
     /**
-    \brief returns true if all elements are finite (not NAN or INF, etc.)
+    returns true if all elements are finite (not NAN or INF, etc.)
     */
     function isFinite():Bool;
 
     /**
-    \brief returns true if finite and magnitude is close to unit
+    returns true if finite and magnitude is close to unit
     */
     function isUnit():Bool;
 
     /**
-    \brief returns true if finite and magnitude is reasonably close to unit to allow for some accumulation of error vs
+    returns true if finite and magnitude is reasonably close to unit to allow for some accumulation of error vs
     isValid
     */
     function isSane():Bool;
 
     /**
-    \brief returns true if the two quaternions are exactly equal
+    returns true if the two quaternions are exactly equal
     */
     function equals(q:PxQuat):Bool;
 
     @:native("toRadiansAndUnitAxis") private function _toRadiansAndUnitAxis(angle:cpp.Reference<cpp.Float32>, axis:cpp.Reference<PxVec3>):Void;
     /**
-    \brief converts this quaternion to angle-axis representation
+    converts this quaternion to angle-axis representation
     */
     inline function toRadiansAndUnitAxis():{angle:cpp.Float32, axis:PxVec3}
     {
@@ -177,7 +177,7 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     }
 
     /**
-    \brief Gets the angle between this quat and the specified `q`, or the identity quaternion if not specified.
+    Gets the angle between this quat and the specified `q`, or the identity quaternion if not specified.
 
     **Unit:** Radians
     */
@@ -185,12 +185,12 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     function getAngle(q:PxQuat):cpp.Float32;
 
     /**
-    \brief This is the squared 4D vector length, should be 1 for unit quaternions.
+    This is the squared 4D vector length, should be 1 for unit quaternions.
     */
     function magnitudeSquared():cpp.Float32;
 
     /**
-    \brief returns the scalar product of this and other.
+    returns the scalar product of this and other.
     */
     function dot(v:PxQuat):cpp.Float32;
 
@@ -200,19 +200,19 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
 
     // modifiers:
     /**
-    \brief converts this PxQuat to a unit quaternion and returns the original magnitude.
+    converts this PxQuat to a unit quaternion and returns the original magnitude.
     */
     function normalize():cpp.Float32;
 
     /*
-    \brief returns the conjugate.
+    returns the conjugate.
 
     **Note:** for unit quaternions, this is the inverse.
     */
     function getConjugate():PxQuat;
 
     /*
-    \brief returns imaginary part.
+    returns imaginary part.
     */
     function getImaginaryPart():PxVec3;
 
@@ -236,7 +236,7 @@ private extern class PxQuatData implements physx.hx.IncludeHelper<"foundation/Px
     function rotateInv(v:PxVec3):PxVec3;
 
     /**
-    \brief Assignment
+    Assignment
     */
     @:native("operator=") function set(p:PxQuat):PxQuat;
 

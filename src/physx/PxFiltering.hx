@@ -3,7 +3,7 @@ package physx;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Collection of flags describing the actions to take for a collision pair.
+Collection of flags describing the actions to take for a collision pair.
 
 @see PxPairFlags PxSimulationFilterShader.filter() PxSimulationFilterCallback
 */
@@ -11,14 +11,14 @@ import physx.foundation.PxSimpleTypes;
 extern enum abstract PxPairFlag(PxPairFlagImpl)
 {
     /**
-    \brief Process the contacts of this collision pair in the dynamics solver.
+    Process the contacts of this collision pair in the dynamics solver.
 
     **Note:** Only takes effect if the colliding actors are rigid bodies.
     */
     var eSOLVE_CONTACT = (1<<0);
 
     /**
-    \brief Call contact modification callback for this collision pair
+    Call contact modification callback for this collision pair
 
     **Note:** Only takes effect if the colliding actors are rigid bodies.
 
@@ -27,7 +27,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eMODIFY_CONTACTS = (1<<1);
 
     /**
-    \brief Call contact report callback or trigger callback when this collision pair starts to be in contact.
+    Call contact report callback or trigger callback when this collision pair starts to be in contact.
 
     If one of the two collision objects is a trigger shape (see `PxShapeFlag.eTRIGGER_SHAPE)` 
     then the trigger callback will get called as soon as the other object enters the trigger volume. 
@@ -43,7 +43,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_TOUCH_FOUND = (1<<2);
 
     /**
-    \brief Call contact report callback while this collision pair is in contact
+    Call contact report callback while this collision pair is in contact
 
     If none of the two collision objects is a trigger shape then the contact report callback will get 
     called while the actors of this collision pair are in contact.
@@ -63,7 +63,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_TOUCH_PERSISTS = (1<<3);
 
     /**
-    \brief Call contact report callback or trigger callback when this collision pair stops to be in contact
+    Call contact report callback or trigger callback when this collision pair stops to be in contact
 
     If one of the two collision objects is a trigger shape (see `PxShapeFlag.eTRIGGER_SHAPE)` 
     then the trigger callback will get called as soon as the other object leaves the trigger volume. 
@@ -81,7 +81,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_TOUCH_LOST = (1<<4);
 
     /**
-    \brief Call contact report callback when this collision pair is in contact during CCD passes.
+    Call contact report callback when this collision pair is in contact during CCD passes.
 
     If CCD with multiple passes is enabled, then a fast moving object might bounce on and off the same
     object multiple times. Hence, the same pair might be in contact multiple times during a simulation step.
@@ -101,7 +101,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_TOUCH_CCD = (1<<5);
 
     /**
-    \brief Call contact report callback when the contact force between the actors of this collision pair exceeds one of the actor-defined force thresholds.
+    Call contact report callback when the contact force between the actors of this collision pair exceeds one of the actor-defined force thresholds.
 
     **Note:** Only takes effect if the colliding actors are rigid bodies.
 
@@ -112,7 +112,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_THRESHOLD_FORCE_FOUND = (1<<6);
 
     /**
-    \brief Call contact report callback when the contact force between the actors of this collision pair continues to exceed one of the actor-defined force thresholds.
+    Call contact report callback when the contact force between the actors of this collision pair continues to exceed one of the actor-defined force thresholds.
 
     **Note:** Only takes effect if the colliding actors are rigid bodies.
 
@@ -126,7 +126,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_THRESHOLD_FORCE_PERSISTS = (1<<7);
 
     /**
-    \brief Call contact report callback when the contact force between the actors of this collision pair falls below one of the actor-defined force thresholds (includes the case where this collision pair stops being in contact).
+    Call contact report callback when the contact force between the actors of this collision pair falls below one of the actor-defined force thresholds (includes the case where this collision pair stops being in contact).
 
     **Note:** Only takes effect if the colliding actors are rigid bodies.
 
@@ -140,7 +140,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_THRESHOLD_FORCE_LOST = (1<<8);
 
     /**
-    \brief Provide contact points in contact reports for this collision pair.
+    Provide contact points in contact reports for this collision pair.
 
     **Note:** Only takes effect if the colliding actors are rigid bodies and if used in combination with the flags eNOTIFY_TOUCH_... or eNOTIFY_THRESHOLD_FORCE_...
 
@@ -151,14 +151,14 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eNOTIFY_CONTACT_POINTS = (1<<9);
 
     /**
-    \brief This flag is used to indicate whether this pair generates discrete collision detection contacts. 
+    This flag is used to indicate whether this pair generates discrete collision detection contacts. 
 
     **Note:** Contacts are only responded to if eSOLVE_CONTACT is enabled.
     */
     var eDETECT_DISCRETE_CONTACT = (1<<10);
     
     /**
-    \brief This flag is used to indicate whether this pair generates CCD contacts. 
+    This flag is used to indicate whether this pair generates CCD contacts. 
 
     **Note:** The contacts will only be responded to if eSOLVE_CONTACT is enabled on this pair.
     **Note:** The scene must have PxSceneFlag::eENABLE_CCD enabled to use this feature.
@@ -172,7 +172,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var eDETECT_CCD_CONTACT = (1<<11);
 
     /**
-    \brief Provide pre solver velocities in contact reports for this collision pair.
+    Provide pre solver velocities in contact reports for this collision pair.
     
     If the collision pair has contact reports enabled, the velocities of the rigid bodies before contacts have been solved
     will be provided in the contact report callback unless the pair lost touch in which case no data will be provided.
@@ -186,7 +186,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var ePRE_SOLVER_VELOCITY = (1<<12);
     
     /**
-    \brief Provide post solver velocities in contact reports for this collision pair.
+    Provide post solver velocities in contact reports for this collision pair.
     
     If the collision pair has contact reports enabled, the velocities of the rigid bodies after contacts have been solved
     will be provided in the contact report callback unless the pair lost touch in which case no data will be provided.
@@ -196,7 +196,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     var ePOST_SOLVER_VELOCITY = (1<<13);
     
     /**
-    \brief Provide rigid body poses in contact reports for this collision pair.
+    Provide rigid body poses in contact reports for this collision pair.
     
     If the collision pair has contact reports enabled, the rigid body poses at the contact event will be provided 
     in the contact report callback unless the pair lost touch in which case no data will be provided.
@@ -214,12 +214,12 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
     //var eNEXT_FREE;
 
     /**
-    \brief Provided default flag to do simple contact processing for this collision pair.
+    Provided default flag to do simple contact processing for this collision pair.
     */
     var eCONTACT_DEFAULT = eSOLVE_CONTACT | eDETECT_DISCRETE_CONTACT;
 
     /**
-    \brief Provided default flag to get commonly used trigger behavior for this collision pair.
+    Provided default flag to get commonly used trigger behavior for this collision pair.
     */
     var eTRIGGER_DEFAULT = eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST | eDETECT_DISCRETE_CONTACT;
 }
@@ -229,7 +229,7 @@ extern enum abstract PxPairFlag(PxPairFlagImpl)
 private extern class PxPairFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxPairFlag.
+Bitfield that contains a set of raised flags defined in PxPairFlag.
 
 @see PxPairFlag
 */
@@ -238,7 +238,7 @@ extern abstract PxPairFlags(PxPairFlag) from PxPairFlag to PxPairFlag {}
 
 
 /**
-\brief Collection of flags describing the filter actions to take for a collision pair.
+Collection of flags describing the filter actions to take for a collision pair.
 
 @see PxFilterFlags PxSimulationFilterShader PxSimulationFilterCallback
 */
@@ -246,7 +246,7 @@ extern abstract PxPairFlags(PxPairFlag) from PxPairFlag to PxPairFlag {}
 extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 {
     /**
-    \brief Ignore the collision pair as long as the bounding volumes of the pair objects overlap.
+    Ignore the collision pair as long as the bounding volumes of the pair objects overlap.
 
     Killed pairs will be ignored by the simulation and won't run through the filter again until one
     of the following occurs:
@@ -259,7 +259,7 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     var eKILL = (1<<0);
 
     /**
-    \brief Ignore the collision pair as long as the bounding volumes of the pair objects overlap or until filtering relevant data changes for one of the collision objects.
+    Ignore the collision pair as long as the bounding volumes of the pair objects overlap or until filtering relevant data changes for one of the collision objects.
 
     Suppressed pairs will be ignored by the simulation and won't make another filter request until one
     of the following occurs:
@@ -272,14 +272,14 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     var eSUPPRESS = (1<<1);
 
     /**
-    \brief Invoke the filter callback (`PxSimulationFilterCallback.pairFound()`) for this collision pair.
+    Invoke the filter callback (`PxSimulationFilterCallback.pairFound()`) for this collision pair.
 
     @see PxSimulationFilterCallback
     */
     var eCALLBACK = (1<<2);
 
     /**
-    \brief Track this collision pair with the filter callback mechanism.
+    Track this collision pair with the filter callback mechanism.
 
     When the bounding volumes of the collision pair lose contact, the filter callback `PxSimulationFilterCallback.pairLost()`
     will be invoked. Furthermore, the filter status of the collision pair can be adjusted through `PxSimulationFilterCallback.statusChange()`
@@ -290,7 +290,7 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
     var eNOTIFY = (1<<3) | eCALLBACK;
 
     /** 
-    \brief Provided default to get standard behavior:
+    Provided default to get standard behavior:
 
     The application configure the pair's collision properties once when bounding volume overlap is found and
     doesn't get asked again about that pair until overlap status or filter properties changes, or re-filtering is requested.
@@ -307,7 +307,7 @@ extern enum abstract PxFilterFlag(PxFilterFlagImpl)
 private extern class PxFilterFlagImpl {}
 
 /**
-\brief Bitfield that contains a set of raised flags defined in PxFilterFlag.
+Bitfield that contains a set of raised flags defined in PxFilterFlag.
 
 @see PxFilterFlag
 */
@@ -316,7 +316,7 @@ extern abstract PxFilterFlags(PxFilterFlag) from PxFilterFlag to PxFilterFlag {}
 
 
 /**
-\brief PxFilterData is user-definable data which gets passed into the collision filtering shader and/or callback.
+PxFilterData is user-definable data which gets passed into the collision filtering shader and/or callback.
 
 @see PxShape.setSimulationFilterData() PxShape.getSimulationFilterData()  PxSimulationFilterShader PxSimulationFilterCallback
 */
@@ -349,7 +349,7 @@ private extern class PxFilterDataData
 
 
 /**
-\brief Identifies each type of filter object.
+Identifies each type of filter object.
 
 @see PxGetFilterObjectType()
 */
@@ -357,19 +357,19 @@ private extern class PxFilterDataData
 extern enum abstract PxFilterObjectType(PxFilterObjectTypeImpl)
 {
     /**
-    \brief A static rigid body
+    A static rigid body
     @see PxRigidStatic
     */
     var eRIGID_STATIC;
 
     /**
-    \brief A dynamic rigid body
+    A dynamic rigid body
     @see PxRigidDynamic
     */
     var eRIGID_DYNAMIC;
 
     /**
-    \brief An articulation
+    An articulation
     @see PxArticulation
     */
     var eARTICULATION;
@@ -387,7 +387,7 @@ private extern class PxFilterObjectTypeImpl {}
 
 
 /**
-\brief Structure which gets passed into the collision filtering shader and/or callback providing additional information on objects of a collision pair
+Structure which gets passed into the collision filtering shader and/or callback providing additional information on objects of a collision pair
 
 @see PxSimulationFilterShader PxSimulationFilterCallback getActorType() PxFilterObjectIsKinematic() PxFilterObjectIsTrigger()
 */
@@ -398,10 +398,10 @@ typedef PxFilterObjectAttributes = PxU32;
 extern class PxFilterObject
 {
     /**
-    \brief Extract filter object type from the filter attributes of a collision pair object
+    Extract filter object type from the filter attributes of a collision pair object
     
-    \param[in] attr The filter attribute of a collision pair object
-    \return The type of the collision pair object.
+    @param [in]attr The filter attribute of a collision pair object
+    @return The type of the collision pair object.
     
     @see PxFilterObjectType
     */
@@ -409,10 +409,10 @@ extern class PxFilterObject
     static function GetType(attr:PxFilterObjectAttributes):PxFilterObjectType;
 
     /**
-    \brief Specifies whether the collision object belongs to a kinematic rigid body
+    Specifies whether the collision object belongs to a kinematic rigid body
 
-    \param[in] attr The filter attribute of a collision pair object
-    \return True if the object belongs to a kinematic rigid body, else false
+    @param [in]attr The filter attribute of a collision pair object
+    @return True if the object belongs to a kinematic rigid body, else false
 
     @see PxRigidBodyFlag::eKINEMATIC
     */
@@ -420,10 +420,10 @@ extern class PxFilterObject
     static function IsKinematic(attr:PxFilterObjectAttributes):Bool;
 
     /**
-    \brief Specifies whether the collision object is a trigger shape
+    Specifies whether the collision object is a trigger shape
 
-    \param[in] attr The filter attribute of a collision pair object
-    \return True if the object is a trigger shape, else false
+    @param [in]attr The filter attribute of a collision pair object
+    @return True if the object is a trigger shape, else false
 
     @see PxShapeFlag::eTRIGGER_SHAPE
     */

@@ -5,7 +5,7 @@ import physx.geometry.PxTriangleMeshGeometry.PxMeshGeometryFlags;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Height field geometry class.
+Height field geometry class.
 
 This class allows to create a scaled height field geometry instance.
 
@@ -17,27 +17,27 @@ There is a minimum allowed value for Y and XZ scaling - PX_MIN_HEIGHTFIELD_XZ_SC
 extern class PxHeightFieldGeometry extends PxGeometry
 {
 	/**
-	\brief The height field data.
+	The height field data.
 	*/
 	var heightField:PxHeightField;
 
 	/**
-	\brief The scaling factor for the height field in vertical direction (y direction in local space).
+	The scaling factor for the height field in vertical direction (y direction in local space).
 	*/
 	var heightScale:PxReal;
 
 	/**
-	\brief The scaling factor for the height field in the row direction (x direction in local space).
+	The scaling factor for the height field in the row direction (x direction in local space).
 	*/
 	var rowScale:PxReal;
 
 	/**
-	\brief The scaling factor for the height field in the column direction (z direction in local space).
+	The scaling factor for the height field in the column direction (z direction in local space).
 	*/
 	var columnScale:PxReal;
 
 	/**
-	\brief Flags to specify some collision properties for the height field.
+	Flags to specify some collision properties for the height field.
 	*/
 	var heightFieldFlags:PxMeshGeometryFlags;
 
@@ -47,9 +47,9 @@ extern class PxHeightFieldGeometry extends PxGeometry
 	var paddingFromFlags:PxPadding3;
 	
 	/**
-	\brief Returns true if the geometry is valid.
+	Returns true if the geometry is valid.
 
-	\return True if the current settings are valid
+	@return True if the current settings are valid
 
 	**Note:** A valid height field has a positive scale value in each direction (heightScale > 0, rowScale > 0, columnScale > 0).
 	It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a height field that has zero extents in any direction.
@@ -85,9 +85,9 @@ extern class PxHeightFieldGeometry extends PxGeometry
 // 		}
 
 // 	/**
-// 	\brief Returns true if the geometry is valid.
+// 	Returns true if the geometry is valid.
 
-// 	\return True if the current settings are valid
+// 	@return True if the current settings are valid
 
 // 	**Note:** A valid height field has a positive scale value in each direction (heightScale > 0, rowScale > 0, columnScale > 0).
 // 	It is illegal to call PxRigidActor::createShape and PxPhysics::createShape with a height field that has zero extents in any direction.

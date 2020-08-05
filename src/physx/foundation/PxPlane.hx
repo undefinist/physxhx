@@ -1,7 +1,7 @@
 package physx.foundation;
 
 /**
-\brief Representation of a plane.
+Representation of a plane.
 
  Plane equation used: n.dot(v) + d = 0
 */
@@ -59,7 +59,7 @@ private extern class PxPlaneData
     @:native("physx::PxPlaneEquationFromTransform") static function fromTransform(transform:PxTransform):PxPlane;
 
     /**
-    \brief returns true if the two planes are exactly equal
+    returns true if the two planes are exactly equal
     */
     @:native("operator==") function equals(p:PxPlane):Bool;
 
@@ -67,17 +67,17 @@ private extern class PxPlaneData
     function contains(p:PxVec3):Bool;
 
     /**
-    \brief projects p into the plane
+    projects p into the plane
     */
     function project(p:PxVec3):PxVec3;
 
     /**
-    \brief find an arbitrary point in the plane
+    find an arbitrary point in the plane
     */
     function pointInPlane():PxVec3;
 
     /**
-    \brief equivalent plane with unit normal
+    equivalent plane with unit normal
     */
     function normalize():Void;
 }

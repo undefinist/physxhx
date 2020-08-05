@@ -10,7 +10,7 @@ eNUM_VALUES, which should be one higher than the maximum value in the enum.
 */
 
 /**
-\brief Debug visualization parameters.
+Debug visualization parameters.
 
 `PxVisualizationParameter.eSCALE` is the master switch for enabling visualization, please read the corresponding documentation
 for further details.
@@ -23,7 +23,7 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 /* RigidBody-related parameters  */
 
     /**
-    \brief This overall visualization scale gets multiplied with the individual scales. Setting to zero ignores all visualizations. Default is 0.
+    This overall visualization scale gets multiplied with the individual scales. Setting to zero ignores all visualizations. Default is 0.
 
     The below settings permit the debug visualization of various simulation properties. 
     The setting is either zero, in which case the property is not drawn. Otherwise it is a scaling factor
@@ -51,21 +51,21 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 
     
     /**
-    \brief Visualize the world axes.
+    Visualize the world axes.
     */
     var eWORLD_AXES;
     
 /* Body visualizations */
 
     /**
-    \brief Visualize a bodies axes.
+    Visualize a bodies axes.
 
     @see PxActor.globalPose PxActor
     */
     var eBODY_AXES;
     
     /**
-    \brief Visualize a body's mass axes.
+    Visualize a body's mass axes.
 
     This visualization is also useful for visualizing the sleep state of bodies. Sleeping bodies are drawn in
     black, while awake bodies are drawn in white. If the body is sleeping and part of a sleeping group, it is
@@ -76,14 +76,14 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
     var eBODY_MASS_AXES;
     
     /**
-    \brief Visualize the bodies linear velocity.
+    Visualize the bodies linear velocity.
 
     @see PxBodyDesc.linearVelocity PxActor
     */
     var eBODY_LIN_VELOCITY;
     
     /**
-    \brief Visualize the bodies angular velocity.
+    Visualize the bodies angular velocity.
 
     @see PxBodyDesc.angularVelocity PxActor
     */
@@ -93,28 +93,28 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 /* Contact visualisations */
 
     /**
-    \brief  Visualize contact points. Will enable contact information.
+     Visualize contact points. Will enable contact information.
     */
     var eCONTACT_POINT;
     
     /**
-    \brief Visualize contact normals. Will enable contact information.
+    Visualize contact normals. Will enable contact information.
     */
     var eCONTACT_NORMAL;
     
     /**
-    \brief  Visualize contact errors. Will enable contact information.
+     Visualize contact errors. Will enable contact information.
     */
     var eCONTACT_ERROR;
     
     /**
-    \brief Visualize Contact forces. Will enable contact information.
+    Visualize Contact forces. Will enable contact information.
     */
     var eCONTACT_FORCE;
 
     
     /**
-    \brief Visualize actor axes.
+    Visualize actor axes.
 
     @see PxRigidStatic PxRigidDynamic PxArticulationLink
     */
@@ -122,80 +122,80 @@ extern enum abstract PxVisualizationParameter(PxVisualizationParameterImpl)
 
     
     /**
-    \brief Visualize bounds (AABBs in world space)
+    Visualize bounds (AABBs in world space)
     */
     var eCOLLISION_AABBS;
     
     /**
-    \brief Shape visualization
+    Shape visualization
 
     @see PxShape
     */
     var eCOLLISION_SHAPES;
     
     /**
-    \brief Shape axis visualization
+    Shape axis visualization
 
     @see PxShape
     */
     var eCOLLISION_AXES;
 
     /**
-    \brief Compound visualization (compound AABBs in world space)
+    Compound visualization (compound AABBs in world space)
     */
     var eCOLLISION_COMPOUNDS;
 
     /**
-    \brief Mesh & convex face normals
+    Mesh & convex face normals
 
     @see PxTriangleMesh PxConvexMesh
     */
     var eCOLLISION_FNORMALS;
     
     /**
-    \brief Active edges for meshes
+    Active edges for meshes
 
     @see PxTriangleMesh
     */
     var eCOLLISION_EDGES;
 
     /**
-    \brief Static pruning structures
+    Static pruning structures
     */
     var eCOLLISION_STATIC;
 
     /**
-    \brief Dynamic pruning structures
+    Dynamic pruning structures
     */
     var eCOLLISION_DYNAMIC;
 
     /**
-    \brief Visualizes pairwise state.
+    Visualizes pairwise state.
     */
     var eDEPRECATED_COLLISION_PAIRS;
 
     /**
-    \brief Joint local axes
+    Joint local axes
     */
     var eJOINT_LOCAL_FRAMES;
 
     /** 
-    \brief Joint limits
+    Joint limits
     */
     var eJOINT_LIMITS;
 
     /**
-    \brief Visualize culling box
+    Visualize culling box
     */
     var eCULL_BOX;
 
     /**
-    \brief MBP regions
+    MBP regions
     */
     var eMBP_REGIONS;
 
     /**
-    \brief This is not a parameter, it just records the current number of parameters (as maximum(PxVisualizationParameter)+1) for use in loops.
+    This is not a parameter, it just records the current number of parameters (as maximum(PxVisualizationParameter)+1) for use in loops.
     */
     var eNUM_VALUES;
 

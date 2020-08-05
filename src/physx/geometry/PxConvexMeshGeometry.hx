@@ -4,7 +4,7 @@ import physx.common.PxCoreUtilityTypes.PxPadding3;
 import physx.foundation.PxSimpleTypes;
 
 /**
-\brief Flags controlling the simulated behavior of the convex mesh geometry.
+Flags controlling the simulated behavior of the convex mesh geometry.
 
 Used in ::PxConvexMeshGeometryFlags.
 */
@@ -22,14 +22,14 @@ extern enum abstract PxConvexMeshGeometryFlag(PxConvexMeshGeometryFlagImpl)
 private extern class PxConvexMeshGeometryFlagImpl {}
 
 /**
-\brief collection of set bits defined in PxConvexMeshGeometryFlag.
+collection of set bits defined in PxConvexMeshGeometryFlag.
 
 @see PxConvexMeshGeometryFlag
 */
 extern abstract PxConvexMeshGeometryFlags(PxConvexMeshGeometryFlag) from PxConvexMeshGeometryFlag to PxConvexMeshGeometryFlag {}
 
 /**
-\brief Convex mesh geometry class.
+Convex mesh geometry class.
 
 This class unifies a convex mesh object with a scaling transform, and 
 lets the combined object be used anywhere a PxGeometry is needed.

@@ -69,14 +69,14 @@ private extern class PxTriangleData
 	}
 
 	/**
-	\brief Compute the area of the triangle.
+	Compute the area of the triangle.
 
-	\return Area of the triangle.
+	@return Area of the triangle.
 	*/
 	function area():PxReal;
 
 	/**
-	\return Computes a point on the triangle from u and v barycentric coordinates.
+	@return Computes a point on the triangle from u and v barycentric coordinates.
 	*/
 	function pointFromUV(u:PxReal, v:PxReal):PxVec3;
 }
