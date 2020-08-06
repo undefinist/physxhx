@@ -92,8 +92,6 @@ void Ext::CpuWorkerThreadHx::execute()
 	int t0 = 0;
 	hx::SetTopOfStack(&t0, false);
 
-	printf("%p", &t0);
-
 	while (!quitIsSignalled())
     {
         mOwner->resetWakeSignal();
