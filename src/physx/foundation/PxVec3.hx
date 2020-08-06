@@ -108,11 +108,10 @@ extern abstract PxVec3(PxVec3Data)
     }
 }
 
-@:include("foundation/Px.h")
 @:include("foundation/PxVec3.h")
 @:native("physx::PxVec3")
 @:structAccess
-private extern class PxVec3Data
+private extern class PxVec3Data implements physx.hx.IncludeHelper<"foundation/Px.h">
 {
     var x:cpp.Float32;
     var y:cpp.Float32;
