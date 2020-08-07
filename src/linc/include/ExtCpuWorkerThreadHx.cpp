@@ -88,10 +88,6 @@ void Ext::CpuWorkerThreadHx::execute()
 {
 	mThreadId = getId();
 
-	// attach thread to Haxe GC. see https://haxe.org/manual/target-cpp-ThreadsAndStacks.html
-	int t0 = 0;
-	hx::SetTopOfStack(&t0, false);
-
 	while (!quitIsSignalled())
     {
         mOwner->resetWakeSignal();
@@ -103,7 +99,15 @@ void Ext::CpuWorkerThreadHx::execute()
 		
 		if (task)
 		{
+			// attach thread to Haxe GC. see https://haxe.org/manual/target-cpp-ThreadsAndStacks.html
+			int t0 = 0;
+			hx::SetTopOfStack(&t0, true);
+
 			mOwner->runTask(*task);
+
+			// detach thread from Haxe GC.
+			hx::SetTopOfStack(0, true);
+
 			task->release();
 		}
 		else
@@ -111,9 +115,6 @@ void Ext::CpuWorkerThreadHx::execute()
 			mOwner->waitForWork();
 		}
 	}
-
-	// detach thread from Haxe GC.
-	hx::SetTopOfStack(0, false);
 
 	quit();
 }
